@@ -15,11 +15,10 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="URL::to('vendor/assets/images/favicon.ico')}}">
+    <link rel="shortcut icon" href="URL::to('vendor/assets/images/logo-atas.png')}}">
 @endpush
 
 @section('content')
-   <div class="content-wrapper">
             <div class="row d-none" id="proBanner">
               <div class="col-12">
                 <span class="d-flex align-items-center purchase-popup">

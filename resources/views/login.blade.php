@@ -16,7 +16,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{URL::to('vendor/assets/images/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{URL::to('vendor/assets/images/logo-atas.png')}}" />
   </head>
   <body>
     <div class="container-scroller">
@@ -25,11 +25,11 @@
           <div class="row flex-grow">
             <div class="col-lg-4 mx-auto">
               <div class="auth-form-light text-left p-5">
-                <div class="brand-logo">
-                  <img src="{{URL::to('vendor/assets/images/logo.svg')}}">
+                <div class="brand-logo text-center">
+                  <img src="{{URL::to('vendor/assets/images/3.svg')}}">
                 </div>
-                <h4>Hello! let's get started</h4>
-                <h6 class="font-weight-light">Sign in to continue.</h6>
+                <h4>Halo! ayo kita mulai</h4>
+                <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6>
                 <form action="{{ route('login') }}" method="post" class="pt-3">
                     @csrf
                   @if(session('errors'))

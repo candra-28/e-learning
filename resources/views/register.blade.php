@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login E-Learning</title>
+    <title>Register E-Learning</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/css/vendor.bundle.base.css')}}">
@@ -16,7 +16,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{URL::to('vendor/assets/images/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{URL::to('vendor/assets/images/logo-atas.png')}}" />
   </head>
   <body>
     <div class="container-scroller">
@@ -25,11 +25,11 @@
           <div class="row flex-grow">
             <div class="col-lg-4 mx-auto">
               <div class="auth-form-light text-left p-5">
-                <div class="brand-logo">
-                  <img src="{{URL::to('vendor/assets/images/logo.svg')}}">
+                <div class="brand-logo text-center">
+                  <img src="{{URL::to('vendor/assets/images/3.svg')}}">
                 </div>
-                <h4>New here?</h4>
-                <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
+                <h4>Baru disini?</h4>
+                <h6 class="font-weight-light">Mendaftar itu mudah. Hanya perlu beberapa langkah</h6>
                 <form action="{{ route('register') }}" method="post" class="pt-3">
                   @csrf
                   @if(session('errors'))
