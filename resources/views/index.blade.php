@@ -15,7 +15,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="URL::to('vendor/assets/images/logo-atas.png')}}">
+    <link rel="shortcut icon" href="{{ URL::to('vendor/assets/images/logo-atas.png')}}">
 @endpush
 
 @section('content')
@@ -46,7 +46,7 @@
               <div class="col-md-4 stretch-card grid-margin">
                 <div class="card bg-gradient-danger card-img-holder text-white">
                   <div class="card-body">
-                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                    <img src="{{ URL::to('vendor/assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image">
                     <h4 class="font-weight-normal mb-3">Weekly Sales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
                     <h2 class="mb-5">$ 15,0000</h2>
@@ -57,7 +57,7 @@
               <div class="col-md-4 stretch-card grid-margin">
                 <div class="card bg-gradient-info card-img-holder text-white">
                   <div class="card-body">
-                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                    <img src="{{ URL::to('vendor/assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image">
                     <h4 class="font-weight-normal mb-3">Weekly Orders <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                     </h4>
                     <h2 class="mb-5">45,6334</h2>
@@ -68,7 +68,7 @@
               <div class="col-md-4 stretch-card grid-margin">
                 <div class="card bg-gradient-success card-img-holder text-white">
                   <div class="card-body">
-                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                    <img src="{{ URL::to('vendor/assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image">
                     <h4 class="font-weight-normal mb-3">Visitors Online <i class="mdi mdi-diamond mdi-24px float-right"></i>
                     </h4>
                     <h2 class="mb-5">95,5741</h2>
@@ -77,8 +77,6 @@
                 </div>
               </div>
             </div>
-          </div>
-
 @push('scripts')
   <script src="{{URL::to('vendor/assets/vendors/js/vendor.bundle.base.js')}}"></script>
     <!-- endinject -->
