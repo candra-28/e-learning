@@ -31,7 +31,7 @@
     <li class="nav-item">
       <a class="nav-link" href="{{ url('roles')}}">
         <span class="menu-title">Role</span>
-        <i class="mdi mdi-account-multiple-outline menu-icon"></i>
+        <i class="mdi mdi-pinterest-box menu-icon"></i>
       </a>
     </li>
 
