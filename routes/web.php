@@ -14,4 +14,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('logout', 'AuthController@logout')->name('logout');
  	
  	Route::get('roles', 'RoleController@index');
+ 	Route::get('announcements','AnnouncementController@index');
+ 	Route::get('create/announcements', 'AnnouncementController@create');
+ 	
 });
