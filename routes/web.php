@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'AuthController@showFormLogin')->name('login');
@@ -16,4 +15,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('roles', 'RoleController@index');
     Route::post('role/create', 'RoleController@store');
+
+    Route::get('announcements', 'AnnouncementController@index');
+    Route::get('create/announcements', 'AnnouncementController@create');
 });
