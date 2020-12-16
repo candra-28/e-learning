@@ -44,36 +44,36 @@
 
     <li class="nav-item">
       <a class="nav-link" href="pages/charts/chartjs.html">
-        <span class="menu-title">Managemet Siswa</span>
+        <span class="menu-title">Kelola Siswa</span>
         <i class="mdi mdi-account-card-details menu-icon"></i>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="pages/charts/chartjs.html">
-        <span class="menu-title">Managemet Guru</span>
+        <span class="menu-title">Kelola Guru</span>
         <i class="mdi mdi-account-card-details menu-icon"></i>
       </a>
     </li>
 
      <li class="nav-item">
           <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-            <span class="menu-title">Announcements</span>
+            <span class="menu-title">Pengumuman</span>
             <i class="menu-arrow"></i>
             <i class="mdi mdi-voice menu-icon"></i>
           </a>
 
           <div class="collapse" id="general-pages">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Announcements </a></li>
-              <li class="nav-item"> <a class="nav-link" href="{{ url('create/announcements')}}"> Create Announcements </a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Pengumuman </a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ url('create/announcements')}}"> Buat Pengumuman </a></li>
             </ul>
           </div>
       </li>
 
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-          <span class="menu-title">Management Tugas</span>
+          <span class="menu-title">Kelola Tugas</span>
           <i class="menu-arrow"></i>
           <i class="mdi mdi-book-open-page-variant menu-icon"></i>
         </a>
@@ -102,16 +102,16 @@
     </li>
      <li class="nav-item">
           <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-            <span class="menu-title">Announcements</span>
+            <span class="menu-title">Pengumuman</span>
             <i class="menu-arrow"></i>
             <i class="mdi mdi-voice menu-icon"></i>
           </a>
 
           <div class="collapse" id="general-pages">
             <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Announcements </a></li>
+              <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Pengumuman </a></li>
               @if($user->role_id == 2)
-              <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Create Announcements </a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Buat Pengumuman </a></li>
               @endif
           </div>
       </li>
@@ -124,7 +124,7 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" href="pages/charts/chartjs.html">
-        <span class="menu-title">Announcements</span>
+        <span class="menu-title">Pengumuman</span>
         <i class="mdi mdi-voice menu-icon"></i>
       </a>
     </li>

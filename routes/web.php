@@ -18,4 +18,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('announcements', 'AnnouncementController@index');
     Route::get('create/announcements', 'AnnouncementController@create');
+
+    Route::get('profiles','UserController@index');
 });
