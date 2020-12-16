@@ -112,8 +112,8 @@
                 </div>
               </a>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-cached mr-2 text-success"></i> Activity Log </a>
+                <a class="dropdown-item" href="{{ url('profiles')}}">
+                  <i class="mdi mdi-account mr-2 text-success"></i> My Profile </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}">
                   <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>

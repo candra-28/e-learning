@@ -53,7 +53,7 @@
                         <input type="password" class="form-control" placeholder="Kata Sandi">
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputConfirmPassword1"> <span class="text-danger">*</span> Ulangi Kata Sandi</label>
+                        <label for="exampleInputConfirmPassword1">Ulangi Kata Sandi <span class="text-danger">*</span></label>
                         <input type="password" class="form-control" placeholder="Ulangi Sandi">
                       </div>
 
@@ -71,15 +71,21 @@
                         </select>
                       </div>
 
-                      <div class="control-group">
-                        <label class="control-label">Jenis Kelamin <span class="text-error">*</span></label>
-                        <div class="form-check">
-                          <label class="form-check-label inline"><input type="radio" name="gender" value="Laki-laki"> Laki-laki</label>
-                        </div>
-                        <div class="form-check">
-                          <label class="form-check-label inline"><input type="radio" name="gender" value="Perempuan"> Perempuan</label>
-                        </div>
-                      </div>
+                      <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Jenis Kelamin <span class="text-danger">*</span></label>
+                            <div class="col-sm-4">
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" name="gender" value="Laki-laki"> Pria <i class="input-helper"></i></label>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" name="gender" value="Perempuan"> Wanita <i class="input-helper"></i></label>
+                              </div>
+                            </div>
+                      </div>  
 
                       <div class="form-group">
                         <label for="name_of_birth">Tempat Lahir</label>
@@ -88,7 +94,7 @@
 
                       <div class="form-group">
                         <label for="name_of_birth">Tanggal, Bulan, Tahun Lahir</label>
-                        <input type="text" class="date form-control" placeholder="Kota Lahir">
+                        <input class="form-control" type="date">
                       </div>
 
                       <div class="form-group">
@@ -134,14 +140,20 @@
                         <input type="password" class="form-control" placeholder="Kata Sandi">
                       </div>
 
-                      <div class="control-group">
-                        <label class="control-label">Jenis Kelamin <span class="text-error">*</span></label>
-                        <div class="form-check">
-                          <label class="form-check-label inline"><input id="membershipRadios1" type="radio" name="gender" value="Laki-laki"> Laki-laki</label>
-                        </div>
-                        <div class="form-check">
-                          <label class="form-check-label inline"><input type="radio" name="gender" value="Perempuan"> Perempuan</label>
-                        </div>
+                      <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Jenis Kelamin <span class="text-danger">*</span></label>
+                            <div class="col-sm-4">
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" name="gender" value="Laki-laki"> Pria <i class="input-helper"></i></label>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input type="radio" class="form-check-input" name="gender" value="Perempuan"> Wanita <i class="input-helper"></i></label>
+                              </div>
+                            </div>
                       </div>
 
                       <div class="form-group">
@@ -149,9 +161,9 @@
                         <input type="text" class="form-control" placeholder="Kota Lahir">
                       </div>
 
-                      <div class="form-group">
+                     <div class="form-group">
                         <label for="name_of_birth">Tanggal, Bulan, Tahun Lahir</label>
-                        <input type="text" class="form-control" placeholder="Kota Lahir">
+                        <input class="form-control" type="date">
                       </div>
 
                       <div class="form-group">

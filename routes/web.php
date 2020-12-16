@@ -22,4 +22,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/announcement/search', 'AnnouncementController@getSlug');
     Route::get('announcement/{id}', 'AnnouncementController@show');
     Route::delete('/announcement/{id}', 'AnnouncementController@destroy');
+
+    Route::get('/profiles', 'UserController@index');
 });

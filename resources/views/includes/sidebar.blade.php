@@ -10,7 +10,6 @@ $user = Auth()->user();
         <div class="nav-profile-image">
           <img src="{{URL::to('vendor/assets/images/faces/avatar-2.png')}}" alt="profile">
           <span class="login-status online"></span>
-          <!--change to offline or busy as needed-->
         </div>
         <div class="nav-profile-text d-flex flex-column">
           <span class="font-weight-bold mb-2">{{ Auth::user()->name }}</span>
@@ -44,14 +43,14 @@ $user = Auth()->user();
 
     <li class="nav-item">
       <a class="nav-link" href="pages/charts/chartjs.html">
-        <span class="menu-title">Managemet Siswa</span>
+        <span class="menu-title">Kelola Siswa</span>
         <i class="mdi mdi-account-card-details menu-icon"></i>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="pages/charts/chartjs.html">
-        <span class="menu-title">Managemet Guru</span>
+        <span class="menu-title">Kelola Guru</span>
         <i class="mdi mdi-account-card-details menu-icon"></i>
       </a>
     </li>
@@ -65,15 +64,15 @@ $user = Auth()->user();
 
       <div class="collapse" id="general-pages">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Announcements </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{{ url('announcement/create')}}"> Create Announcements </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Pengumuman </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ url('announcement/create')}}"> Buat Pengumuman </a></li>
         </ul>
       </div>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#tugas" aria-expanded="false" aria-controls="general-pages">
-        <span class="menu-title">Management Tugas</span>
+        <span class="menu-title">Kelola Tugas</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-book-open-page-variant menu-icon"></i>
       </a>
@@ -86,6 +85,7 @@ $user = Auth()->user();
       </div>
     </li>
 
+
     @elseif($user->role_id == 2)
 
     <li class="nav-item">
@@ -94,12 +94,7 @@ $user = Auth()->user();
         <i class="mdi mdi-home menu-icon"></i>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="pages/charts/chartjs.html">
-        <span class="menu-title">Sidebar Buat Guru</span>
-        <i class="mdi mdi-table-large menu-icon"></i>
-      </a>
-    </li>
+
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
         <span class="menu-title">Announcements</span>
@@ -109,12 +104,13 @@ $user = Auth()->user();
 
       <div class="collapse" id="general-pages">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Announcements </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ url('annoouncements') }}"> Announcements </a></li>
           @if($user->role_id == 2)
-          <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Create Announcements </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ url('announcement/create')}}"> Create Announcements </a></li>
           @endif
       </div>
     </li>
+
     @else
     <li class="nav-item">
       <a class="nav-link" href="/home">
@@ -123,8 +119,8 @@ $user = Auth()->user();
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="pages/charts/chartjs.html">
-        <span class="menu-title">Announcements</span>
+      <a class="nav-link" href="{{ url('announcements')}}">
+        <span class="menu-title">Pengumuman</span>
         <i class="mdi mdi-voice menu-icon"></i>
       </a>
     </li>
