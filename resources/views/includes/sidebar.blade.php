@@ -1,5 +1,5 @@
 <?php
-  $user = Auth()->user();
+$user = Auth()->user();
 ?>
 
 
@@ -56,36 +56,36 @@
       </a>
     </li>
 
-     <li class="nav-item">
-          <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-            <span class="menu-title">Announcements</span>
-            <i class="menu-arrow"></i>
-            <i class="mdi mdi-voice menu-icon"></i>
-          </a>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+        <span class="menu-title">Announcements</span>
+        <i class="menu-arrow"></i>
+        <i class="mdi mdi-voice menu-icon"></i>
+      </a>
 
-          <div class="collapse" id="general-pages">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Announcements </a></li>
-              <li class="nav-item"> <a class="nav-link" href="{{ url('create/announcements')}}"> Create Announcements </a></li>
-            </ul>
-          </div>
-      </li>
+      <div class="collapse" id="general-pages">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Announcements </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ url('announcement/create')}}"> Create Announcements </a></li>
+        </ul>
+      </div>
+    </li>
 
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-          <span class="menu-title">Management Tugas</span>
-          <i class="menu-arrow"></i>
-          <i class="mdi mdi-book-open-page-variant menu-icon"></i>
-        </a>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#tugas" aria-expanded="false" aria-controls="general-pages">
+        <span class="menu-title">Management Tugas</span>
+        <i class="menu-arrow"></i>
+        <i class="mdi mdi-book-open-page-variant menu-icon"></i>
+      </a>
 
-        <div class="collapse" id="general-pages">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Tugas </a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Materi </a></li>
-          </ul>
-        </div>
-      </li>
-      
+      <div class="collapse" id="tugas">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Tugas </a></li>
+          <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Materi </a></li>
+        </ul>
+      </div>
+    </li>
+
     @elseif($user->role_id == 2)
 
     <li class="nav-item">
@@ -100,21 +100,21 @@
         <i class="mdi mdi-table-large menu-icon"></i>
       </a>
     </li>
-     <li class="nav-item">
-          <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-            <span class="menu-title">Announcements</span>
-            <i class="menu-arrow"></i>
-            <i class="mdi mdi-voice menu-icon"></i>
-          </a>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+        <span class="menu-title">Announcements</span>
+        <i class="menu-arrow"></i>
+        <i class="mdi mdi-voice menu-icon"></i>
+      </a>
 
-          <div class="collapse" id="general-pages">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Announcements </a></li>
-              @if($user->role_id == 2)
-              <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Create Announcements </a></li>
-              @endif
-          </div>
-      </li>
+      <div class="collapse" id="general-pages">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Announcements </a></li>
+          @if($user->role_id == 2)
+          <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Create Announcements </a></li>
+          @endif
+      </div>
+    </li>
     @else
     <li class="nav-item">
       <a class="nav-link" href="/home">

@@ -4,8 +4,10 @@ use Illuminate\Database\Seeder;
 use App\Role;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\Announcement;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
@@ -51,5 +53,6 @@ class UsersTableSeeder extends Seeder
 		// 		'name' => $faker->name,
 		// 	]);
 		// }
+
 	}
 }

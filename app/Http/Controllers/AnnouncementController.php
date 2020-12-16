@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Announcement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\User;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\isNull;
 
 class AnnouncementController extends Controller
 {
@@ -14,7 +19,13 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        return view('announcements.index');
+        $announcements = Announcement::join('users', 'announcements.user_id', '=', 'users.id')
+            ->select(
+                'users.*',
+                'announcements.*'
+            )->get();
+        $slug = Announcement::select('slug')->get();
+        return view('announcements.index', ['announcements' => $announcements, 'slug' => $slug]);
     }
 
     /**
@@ -35,7 +46,50 @@ class AnnouncementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'title' => 'required',
+            'description' => 'required',
+        ];
+
+        $customMessages = [
+            'required' => 'Opps.. Kolom Wajib Terisi'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
+        $user = User::findOrFail(Auth::user()->id);
+        // dd($user);
+        // dd($request->file_upload);
+        // dd($request);
+        $announcement = new Announcement;
+        $announcement->title = $request->title;
+        $announcement->slug = Str::slug($request->title);
+        $announcement->description = $request->description;
+        $announcement->user_id = $user->id;
+
+        if ($request->hasFile('upload_type')) {
+            $files = $request->file('upload_type');
+            $path = public_path('announcement' . '/' . $user->name);
+            if (!File::isDirectory($path)) {
+                File::makeDirectory($path, 0777, true, true);
+            }
+            $files_name = $files->getClientOriginalName();
+            $files->move($path, $files_name);
+            $announcement->upload_type = $files_name;
+        }
+
+        $announcement->save();
+
+        return redirect('announcements');
+    }
+
+    public function getSlug(Request $request)
+    {
+        $slug = Str::slug($request->get('slug'));
+
+        $announcements = Announcement::join('users', 'announcements.user_id', '=', 'users.id')->where('slug', 'LIKE', "%{$slug}%")->get();
+        // dd($slug, $announcements);
+        return view('announcements.slug-show', ['announcements' => $announcements]);
     }
 
     /**
@@ -44,9 +98,10 @@ class AnnouncementController extends Controller
      * @param  \App\Announcement  $announcement
      * @return \Illuminate\Http\Response
      */
-    public function show(Announcement $announcement)
+    public function show($announcementID)
     {
-        //
+        $announcement = Announcement::join('users', 'announcements.user_id', '=', 'users.id')->where('announcements.id', $announcementID)->first();
+        return view('announcements.show', ['announcement' => $announcement]);
     }
 
     /**
@@ -78,8 +133,10 @@ class AnnouncementController extends Controller
      * @param  \App\Announcement  $announcement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Announcement $announcement)
+    public function destroy($announcementID)
     {
-        //
+        $announcement = Announcement::find($announcementID);
+        $announcement->delete();
+        return redirect()->back();
     }
 }
