@@ -16,15 +16,15 @@ class UsersTableSeeder extends Seeder
 	public function run()
 	{
 
-		DB::table('class')->insert([
+		DB::table('roles')->insert([
 			'name' => 'Administrator',
 		]);
 
-		DB::table('class')->insert([
+		DB::table('roles')->insert([
 			'name' => 'Guru',
 		]);
 
-		DB::table('class')->insert([
+		DB::table('roles')->insert([
 			'name' => 'Siswa',
 		]);
 
