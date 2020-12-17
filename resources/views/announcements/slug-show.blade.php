@@ -21,14 +21,15 @@
     </h3>
 </div>
 
-<div class="row">
-
-    <nav class="navbar navbar-light bg-light  bg-transparent">
-        <form class="form-inline" method="get" action="{{ url('announcement/search') }}">
-            <input name="slug" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="border-radius: 5px;">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </nav>
+<div class="form-group">
+    <form class="form-inline" method="get" action="{{ url('announcement/search') }}">
+        <div class="input-group">
+          <input name="slug" type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-sm btn-gradient-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <div class="row">
