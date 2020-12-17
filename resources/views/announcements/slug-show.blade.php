@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/css/vendor.bundle.base.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
 <link rel="shortcut icon" href="{{ URL::to('vendor/assets/images/logo-atas.png')}}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 @endpush
 
 @section('content')
@@ -24,9 +23,9 @@
 <div class="form-group">
     <form class="form-inline" method="get" action="{{ url('announcement/search') }}">
         <div class="input-group">
-          <input name="slug" type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+            <input name="slug" type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
-              <button class="btn btn-sm btn-gradient-primary" type="submit">Search</button>
+                <button class="btn btn-sm btn-gradient-primary" type="submit">Search</button>
             </div>
         </div>
     </form>

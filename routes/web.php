@@ -26,6 +26,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('class/create', 'ClassController@store');
     Route::get('class/edit/{id}', 'ClassController@edit');
     Route::post('class/edit/{id}', 'ClassController@update');
-    Route::delete('/announcement/{id}', 'ClassController@destroy');
     Route::get('/profiles', 'UserController@index');
 });

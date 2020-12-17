@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @push('title')
-- Announcement
+- Pengumuman
 @endpush
 
 @push('styles')
@@ -23,14 +23,14 @@
 
 
 <div class="form-group">
-    <form class="form-inline" method="get" action="{{ url('announcement/search') }}">
-        <div class="input-group">
-          <input name="slug" type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-sm btn-gradient-primary" type="submit">Search</button>
-            </div>
-        </div>
-    </form>
+  <form class="form-inline" method="get" action="{{ url('announcement/search') }}">
+    <div class="input-group">
+      <input name="slug" type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-sm btn-gradient-primary" type="submit">Search</button>
+      </div>
+    </div>
+  </form>
 </div>
 
 

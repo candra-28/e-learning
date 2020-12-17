@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @push('title')
-- List Kelas
+- Daftar Kelas
 @endpush
 
 @push('styles')

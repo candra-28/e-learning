@@ -29,7 +29,7 @@
                 <img src="{{ asset('announcement/'.$announcement->name . '/' . $announcement->upload_type) }}" alt="NULL" style="margin-top:10px; margin-bottom: 10px; width: 100%; border-radius:10px;">
                 <h3 style="font-family:Cambria; font-size: 13px;">{{ $announcement->description }}</h3>
 
-                <h3 style="font-family:Cambria; font-size: 13px; float: right;">Oleh: {{ $announcement->name }}</h3>
+                <h3 style="font-family:Cambria; font-size: 13px; float: right;">Di Buat Oleh: {{ $announcement->name }}</h3>
             </div>
         </div>
     </div>

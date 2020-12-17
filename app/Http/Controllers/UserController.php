@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Student;
+use App\Teacher;
 
 class UserController extends Controller
 {
@@ -13,6 +16,11 @@ class UserController extends Controller
      */
     public function index()
     {
+        $user = User::join('roles', 'users.role_id', '=', 'roles.id')
+            ->select('roles.name as role_name', 'roles.*', 'users.id as id_user', 'users.*')
+            ->where('users.id', Auth()->user()->id)->first();
+        dd($user);
+
         return view('users.profile');
     }
 

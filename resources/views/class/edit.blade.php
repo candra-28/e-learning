@@ -30,10 +30,10 @@
             <div class="card-body">
                 <h4 class="card-title">Edit Kelas</h4>
                 <p class="card-description"> Silahkan Ubah jika memang perlu diubah </p>
-                <form class="forms-sample" action="{{ url('class/edit/'.$class->id) }}" method="post">
+                <form class="forms-sample" action="{{ url('class/edit/'.$class->id) }}" method="post" autocomplete="off">
                     @csrf
                     <div class="form-group row">
-                        <label for="name" class="col-sm-3 col-form-label">Email</label>
+                        <label for="name" class="col-sm-3 col-form-label">Nama Kelas</label>
                         <div class="col-sm-9">
                             <input type="text" name="name" value="{{ $class->name }}" class="form-control" id="name" placeholder="Username">
                             @error('name')
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Email</label>
+                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Status</label>
                         <div class="col-sm-9">
                             <select name="is_active" class="form-control">
 

@@ -25,8 +25,7 @@ class AnnouncementController extends Controller
                 'announcements.*',
                 'users.id as id_user'
             )->get();
-        $slug = Announcement::select('slug')->get();
-        return view('announcements.index', ['announcements' => $announcements, 'slug' => $slug]);
+        return view('announcements.index', ['announcements' => $announcements]);
     }
 
     /**
@@ -59,9 +58,7 @@ class AnnouncementController extends Controller
         $this->validate($request, $rules, $customMessages);
 
         $user = User::findOrFail(Auth::user()->id);
-        // dd($user);
-        // dd($request->file_upload);
-        // dd($request);
+
         $announcement = new Announcement;
         $announcement->title = $request->title;
         $announcement->slug = Str::slug($request->title);
@@ -94,7 +91,7 @@ class AnnouncementController extends Controller
                 'users.id as is_users',
                 'announcements.*',
             )->where('slug', 'LIKE', "%{$slug}%")->get();
-        dd($announcements == NULL);
+
         return view('announcements.slug-show', ['announcements' => $announcements]);
     }
 

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @push('title')
-- Create Announcement
+- Buat Pengumuman
 @endpush
 
 @push('styles')
@@ -19,13 +19,6 @@
       <i class="mdi mdi-voice"></i>
     </span> Buat Pengumuman
   </h3>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ url('/home') }}">E - Learning</a></li>
-      <li class="breadcrumb-item"><a href="{{ url('/announcements') }}">Pengumuman</a></a></li>
-      <li class="breadcrumb-item active" aria-current="page">Buat Pengumuman</li>
-    </ol>
-  </nav>
 </div>
 <div class="row">
   <div class="col-12 grid-margin stretch-card">
@@ -54,13 +47,12 @@
           </div>
           <div class="form-group">
             <label for="exampleTextarea1">Deskripsi</label>
-            <textarea name="description" class="form-control" rows="10" placeholder="Masukan Description Pengumuman" value="{{ old('description') }}" id="exampleTextarea1" rows="4"></textarea>
+            <textarea name="description" class="form-control" rows="10" placeholder="Masukan Pesan Pengumuman" value="{{ old('description') }}" id="exampleTextarea1" rows="4"></textarea>
             @error('description')
             <p class="text-danger">{{ $message }}</p>
             @enderror
           </div>
-          <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-          <button type="reset" class="btn btn-gradient-secondary mr-2">Cancel</button>
+          <button type="submit" class="btn btn-gradient-primary mr-2">Simpan</button>
         </form>
       </div>
     </div>
