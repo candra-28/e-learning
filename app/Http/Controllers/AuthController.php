@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
-use Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Validator;
 use App\User;
 use App\Clas;
 use App\Student;
@@ -67,10 +67,6 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         // dd($request);
-        $this->request([
-            'class_id' => 'required'
-        ]);
-        
         $rules = [
             'name'                  => 'required|min:3|max:35',
             'email'                 => 'required|email|unique:users,email',

@@ -21,7 +21,7 @@
   </h3>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ url('dashboard') }}">E - Learning</a></li>
+      <li class="breadcrumb-item"><a href="{{ url('/home') }}">E - Learning</a></li>
       <li class="breadcrumb-item"><a href="{{ url('/announcements') }}">Pengumuman</a></a></li>
       <li class="breadcrumb-item active" aria-current="page">Buat Pengumuman</li>
     </ol>
@@ -60,7 +60,7 @@
             @enderror
           </div>
           <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-          <button type="reset" class="btn btn-light">Cancel</button>
+          <button type="reset" class="btn btn-gradient-secondary mr-2">Cancel</button>
         </form>
       </div>
     </div>

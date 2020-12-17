@@ -13,9 +13,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('home', 'HomeController@index')->name('home');
     Route::get('logout', 'AuthController@logout')->name('logout');
 
-    // Route::get('roles', 'RoleController@index');
-    // Route::post('role/create', 'RoleController@store');
-
     Route::get('announcements', 'AnnouncementController@index');
     Route::get('announcement/create', 'AnnouncementController@create');
     Route::post('announcement/create', 'AnnouncementController@store');
