@@ -28,9 +28,9 @@ $user = Auth()->user();
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="{{ url('roles')}}">
-        <span class="menu-title">Role</span>
-        <i class="mdi mdi-pinterest-box menu-icon"></i>
+      <a class="nav-link" href="{{ url('class')}}">
+        <span class="menu-title">Kelola Kelas</span>
+        <i class="mdi mdi-account-card-details menu-icon"></i>
       </a>
     </li>
 

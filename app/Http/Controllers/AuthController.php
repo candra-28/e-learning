@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Validator;
+use Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\User;
-
+use App\Clas;
+use App\Student;
+use App\Teacher;
 
 class AuthController extends Controller
 {
@@ -58,15 +60,23 @@ class AuthController extends Controller
 
     public function showFormRegister()
     {
-        return view('auth.register');
+        $class = Clas::where('is_active', true)->get();
+        return view('auth.register', ['class' => $class]);
     }
 
     public function register(Request $request)
     {
+        // dd($request);
+        $this->request([
+            'class_id' => 'required'
+        ]);
+        
         $rules = [
             'name'                  => 'required|min:3|max:35',
             'email'                 => 'required|email|unique:users,email',
-            'password'              => 'required|confirmed'
+            'password'              => 'required|confirmed',
+            'entry_year'            => 'required',
+            'gender'                => 'required'
         ];
 
         $messages = [
@@ -77,7 +87,9 @@ class AuthController extends Controller
             'email.email'           => 'Email tidak valid',
             'email.unique'          => 'Email sudah terdaftar',
             'password.required'     => 'Password wajib diisi',
-            'password.confirmed'    => 'Password tidak sama dengan konfirmasi password'
+            'password.confirmed'    => 'Password tidak sama dengan konfirmasi password',
+            'entry_year.required'   => 'Tahun masuk wajib di pilih',
+            'gender.required'       => 'Pilih salah satu jenis kelammin'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -86,20 +98,52 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all);
         }
 
-        $user = new User;
-        $user->name = ucwords(strtolower($request->name));
-        $user->email = strtolower($request->email);
-        $user->password = Hash::make($request->password);
-        $user->email_verified_at = \Carbon\Carbon::now();
-        $user->role_id = 3;
-        $simpan = $user->save();
+        if ($request->role == "siswa") {
+            $user = new User;
+            $user->name = ucwords(strtolower($request->name));
+            $user->email = strtolower($request->email);
+            $user->password = Hash::make($request->password);
+            $user->email_verified_at = \Carbon\Carbon::now();
+            $user->entry_year = $request->entry_year;
+            $user->gender = $request->gender;
+            $user->place_of_birth = $request->place_of_birth;
+            $user->date_of_birth   = $request->date_of_birth;
+            $user->religion = $request->religion;
+            $user->address  = $request->address;
+            $user->is_active = 1;
+            $user->role_id = 3;
+            $userSaved = $user->save();
 
-        if ($simpan) {
-            Session::flash('success', 'Register berhasil! Silahkan login untuk mengakses data');
-            return redirect()->route('login');
+            if ($userSaved) {
+                $student = new Student;
+                $student->user_id = $user->id;
+                $student->class_id = $request->class_id;
+                $student->nis = $request->nis;
+                $student->save();
+                return redirect()->route('login')->with(['success' => 'Register berhasil! Silahkan login']);
+            }
         } else {
-            Session::flash('errors', ['' => 'Register gagal! Silahkan ulangi beberapa saat lagi']);
-            return redirect()->route('register');
+            $user = new User;
+            $user->name = ucwords(strtolower($request->name));
+            $user->email = strtolower($request->email);
+            $user->password = Hash::make($request->password);
+            $user->email_verified_at = \Carbon\Carbon::now();
+            $user->entry_year = $request->entry_year;
+            $user->gender = $request->gender;
+            $user->place_of_birth = $request->place_of_birth;
+            $user->date_of_birth   = $request->date_of_birth;
+            $user->address  = $request->address;
+            $user->is_active = 1;
+            $user->role_id = 2;
+            $userSaved = $user->save();
+
+            if ($userSaved) {
+                $teacher = new Teacher;
+                $teacher->user_id = $user->id;
+                $teacher->nip = $request->nip;
+                $teacher->save();
+                return redirect()->route('login')->with(['success' => 'Register berhasil! Silahkan login']);
+            }
         }
     }
 

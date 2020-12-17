@@ -35,14 +35,18 @@ class UsersTableSeeder extends Seeder
 			'name' => 'candra',
 			'email' => 'candra@gmail.com',
 			'password' => Hash::make('123'),
-			'role_id' => 1
+			'role_id' => 1,
+			'is_active' => 1,
+			'entry_year' => 2020
 		]);
 
 		User::create([
 			'name' => 'ahmad',
 			'email' => 'ahmad@gmail.com',
 			'password' => Hash::make('abc'),
-			'role_id' => 2
+			'role_id' => 2,
+			'is_active' => 1,
+			'entry_year' => 2020
 		]);
 
 		// $faker = Faker::create('id_ID');

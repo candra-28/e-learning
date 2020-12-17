@@ -34,67 +34,92 @@
 
                                 <div class="tab-content">
                                     <div class="tab-pane show active" id="profile" role="tabpanel">
-                                        <form class="forms-sample pt-3">
+                                        <form class="forms-sample pt-3" action="{{ url('register') }}" method="post" autocomplete="off">
+                                            @csrf
 
                                             <div class="form-group">
                                                 <label for="exampleInputUsername1">Nomor Induk Siswa</label>
-                                                <input type="text" class="form-control" placeholder="NIS">
+                                                <input name="nis" value="{{ old('nis') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" type="text" class="form-control" placeholder="NIS">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputUsername1">Nama Lengkap <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" placeholder="Nama">
+                                                <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Nama">
+                                                @error('name')
+                                                <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Alamat Email <span class="text-danger">*</span></label>
-                                                <input type="email" class="form-control" placeholder="Email">
+                                                <input name="email" value="{{ old('email') }}" type="email" class="form-control" placeholder="Email">
+                                                @error('email')
+                                                <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Kata Sandi <span class="text-danger">*</span></label>
-                                                <input type="password" class="form-control" placeholder="Kata Sandi">
+                                                <input type="password" name="password" class="form-control" placeholder="Kata Sandi">
+                                                @error('password')
+                                                <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputConfirmPassword1">Ulangi Kata Sandi <span class="text-danger">*</span></label>
-                                                <input type="password" class="form-control" placeholder="Ulangi Sandi">
+                                                <input type="password" name="password_confirmation" class="form-control" placeholder="Ulangi Sandi">
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Tahun Masuk <span class="text-danger">*</span></label>
-                                                <select name="" id="" class="form-control">
-                                                    <option value="">2020</option>
+                                                <select name="entry_year" class="form-control">
+                                                    <option selected disabled>-- Pilih Tahun Ajaran --</option>
+                                                    <option value="2016">2016</option>
+                                                    <option value="2017">2017</option>
+                                                    <option value="2018">2018</option>
+                                                    <option value="2019">2019</option>
+                                                    <option value="2020">2020</option>
                                                 </select>
+                                                @error('entry_year')
+                                                <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
 
                                             <div class="form-group">
-                                                <label>Kelas <span class="text-danger">*</span></label>
-                                                <select name="" id="" class="form-control">
-                                                    <option value="">XII</option>
+                                                <label>Kelas</label>
+                                                <select name="class_id" class="form-control">
+                                                    <option selected disabled>-- pilih Kelas --</option>
+                                                    @foreach($class as $clas)
+                                                    <option value="{{ $clas->id }}">{{ $clas->name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
 
                                             <div class="form-group row">
                                                 <label class="col-sm-4 col-form-label">Jenis Kelamin <span class="text-danger">*</span></label>
+
                                                 <div class="col-sm-4">
                                                     <div class="form-check">
                                                         <label class="form-check-label">
-                                                            <input type="radio" class="form-check-input" name="gender" value="Laki-laki"> Pria <i class="input-helper"></i></label>
+                                                            <input type="radio" class="form-check-input" name="gender" value="Pria" value="{{ old('gender') }}"> Pria <i class="input-helper"></i></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-check">
                                                         <label class="form-check-label">
-                                                            <input type="radio" class="form-check-input" name="gender" value="Perempuan"> Wanita <i class="input-helper"></i></label>
+                                                            <input type="radio" class="form-check-input" name="gender" value="Perempuan" value="{{ old('gender') }}"> Wanita <i class="input-helper"></i></label>
                                                     </div>
                                                 </div>
+                                                @error('gender')
+                                                <div class="col-sm-12 col-form-label text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name_of_birth">Tempat Lahir</label>
-                                                <input type="text" class="form-control" placeholder="Kota Lahir">
+                                                <label for="place_of_birth">Tempat Lahir</label>
+                                                <input type="text" value="{{ old('place_of_birth') }}" name="place_of_birth" class="form-control" placeholder="Kota Lahir">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="name_of_birth">Tanggal, Bulan, Tahun Lahir</label>
-                                                <input class="form-control" type="date">
+                                                <input name="name_of_birth" value="{{ old('name_of_birth') }}" class="form-control" type="date">
                                             </div>
 
                                             <div class="form-group">
@@ -110,82 +135,112 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name_of_birth">Alamat Lengkap</label>
-                                                <input type="text" class="form-control" placeholder="Alamat">
+                                                <label for="address">Alamat Lengkap</label>
+                                                <input type="text" value="{{ old('address') }}" name="address" class="form-control" placeholder="Alamat">
                                             </div>
-
-
+                                            <input type="hidden" name="role" value="siswa">
                                             <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">DAFTAR</button>
                                         </form>
                                     </div>
 
-
                                     <div class="tab-pane show" id="settings" role="tabpanel">
-                                        <form action="{{ route('login') }}" method="post" class="pt-3">
+                                        <form action="{{ url('register') }}" method="post" class="pt-3" autocomplete="off">
                                             @csrf
                                             <div class="form-group">
-                                                <label for="exampleInputUsername1">Nomor Identitas Pegawai</label>
-                                                <input type="text" class="form-control" placeholder="NIP">
+                                                <label for="nip">Nomor Identitas Pegawai</label>
+                                                <input type="text" name="nip" value="{{ old('nip') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" placeholder="NIP">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputUsername1">Nama Lengkap <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" placeholder="Nama">
+                                                <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Nama">
+                                                @error('name')
+                                                <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Alamat Email <span class="text-danger">*</span></label>
-                                                <input type="email" class="form-control" placeholder="Email">
+                                                <input name="email" value="{{ old('email') }}" type="email" class="form-control" placeholder="Email">
+                                                @error('email')
+                                                <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Kata Sandi <span class="text-danger">*</span></label>
-                                                <input type="password" class="form-control" placeholder="Kata Sandi">
+                                                <input type="password" name="password" class="form-control" placeholder="Kata Sandi">
+                                                @error('password')
+                                                <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputConfirmPassword1">Ulangi Kata Sandi <span class="text-danger">*</span></label>
+                                                <input type="password" name="password_confirmation" class="form-control" placeholder="Ulangi Sandi">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Tahun Masuk <span class="text-danger">*</span></label>
+                                                <select name="entry_year" class="form-control">
+                                                    <option selected disabled>-- Pilih Tahun Ajaran --</option>
+                                                    <option value="2016">2016</option>
+                                                    <option value="2017">2017</option>
+                                                    <option value="2018">2018</option>
+                                                    <option value="2019">2019</option>
+                                                    <option value="2020">2020</option>
+                                                </select>
+                                                @error('entry_year')
+                                                <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
 
                                             <div class="form-group row">
                                                 <label class="col-sm-4 col-form-label">Jenis Kelamin <span class="text-danger">*</span></label>
+
                                                 <div class="col-sm-4">
                                                     <div class="form-check">
                                                         <label class="form-check-label">
-                                                            <input type="radio" class="form-check-input" name="gender" value="Laki-laki"> Pria <i class="input-helper"></i></label>
+                                                            <input type="radio" class="form-check-input" name="gender" value="Pria" value="{{ old('gender') }}"> Pria <i class="input-helper"></i></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-check">
                                                         <label class="form-check-label">
-                                                            <input type="radio" class="form-check-input" name="gender" value="Perempuan"> Wanita <i class="input-helper"></i></label>
+                                                            <input type="radio" class="form-check-input" name="gender" value="Perempuan" value="{{ old('gender') }}"> Wanita <i class="input-helper"></i></label>
                                                     </div>
                                                 </div>
+                                                @error('gender')
+                                                <div class="col-sm-12 col-form-label text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name_of_birth">Tempat Lahir</label>
-                                                <input type="text" class="form-control" placeholder="Kota Lahir">
+                                                <label for="place_of_birth">Tempat Lahir</label>
+                                                <input type="text" value="{{ old('place_of_birth') }}" name="place_of_birth" class="form-control" placeholder="Kota Lahir">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="name_of_birth">Tanggal, Bulan, Tahun Lahir</label>
-                                                <input class="form-control" type="date">
+                                                <input name="name_of_birth" value="{{ old('name_of_birth') }}" class="form-control" type="date">
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name_of_birth">Alamat Lengkap</label>
-                                                <input type="text" class="form-control" placeholder="Alamat">
+                                                <label for="address">Alamat Lengkap</label>
+                                                <input type="text" name="address" value="{{ old('address') }}" class="form-control" placeholder="Alamat">
                                             </div>
-                                            <div class="mt-3">
-                                                <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">DAFTAR</button>
-                                            </div>
-
+                                            <input type="hidden" name="role" value="guru">
+                                            <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">DAFTAR</button>
                                         </form>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="text-center mt-4 font-weight-light"> Anda sudah memiliki akun? <a href="{{ route('login') }}" class="text-primary">Login</a>
-                            </div>
+                        <div class="text-center mt-4 font-weight-light"> Anda sudah memiliki akun? <a href="{{ route('login') }}" class="text-primary">Login</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <script src="{{URL::to('vendor/assets/vendors/js/vendor.bundle.base.js')}}"></script>

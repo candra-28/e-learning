@@ -22,7 +22,8 @@ class AnnouncementController extends Controller
         $announcements = Announcement::join('users', 'announcements.user_id', '=', 'users.id')
             ->select(
                 'users.*',
-                'announcements.*'
+                'announcements.*',
+                'users.id as id_user'
             )->get();
         $slug = Announcement::select('slug')->get();
         return view('announcements.index', ['announcements' => $announcements, 'slug' => $slug]);
@@ -87,8 +88,13 @@ class AnnouncementController extends Controller
     {
         $slug = Str::slug($request->get('slug'));
 
-        $announcements = Announcement::join('users', 'announcements.user_id', '=', 'users.id')->where('slug', 'LIKE', "%{$slug}%")->get();
-        // dd($slug, $announcements);
+        $announcements = Announcement::join('users', 'announcements.user_id', '=', 'users.id')
+            ->select(
+                'users.*',
+                'users.id as is_users',
+                'announcements.*',
+            )->where('slug', 'LIKE', "%{$slug}%")->get();
+        dd($announcements == NULL);
         return view('announcements.slug-show', ['announcements' => $announcements]);
     }
 
@@ -100,6 +106,7 @@ class AnnouncementController extends Controller
      */
     public function show($announcementID)
     {
+
         $announcement = Announcement::join('users', 'announcements.user_id', '=', 'users.id')->where('announcements.id', $announcementID)->first();
         return view('announcements.show', ['announcement' => $announcement]);
     }

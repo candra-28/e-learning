@@ -13,8 +13,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('home', 'HomeController@index')->name('home');
     Route::get('logout', 'AuthController@logout')->name('logout');
 
-    Route::get('roles', 'RoleController@index');
-    Route::post('role/create', 'RoleController@store');
+    // Route::get('roles', 'RoleController@index');
+    // Route::post('role/create', 'RoleController@store');
 
     Route::get('announcements', 'AnnouncementController@index');
     Route::get('announcement/create', 'AnnouncementController@create');
@@ -23,5 +23,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('announcement/{id}', 'AnnouncementController@show');
     Route::delete('/announcement/{id}', 'AnnouncementController@destroy');
 
+
+    Route::get('class', 'ClassController@index');
+    Route::get('class/create', 'ClassController@create');
+    Route::post('class/create', 'ClassController@store');
+    Route::get('class/edit/{id}', 'ClassController@edit');
+    Route::post('class/edit/{id}', 'ClassController@update');
+    Route::delete('/announcement/{id}', 'ClassController@destroy');
     Route::get('/profiles', 'UserController@index');
 });
