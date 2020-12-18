@@ -19,7 +19,7 @@ class UserController extends Controller
         $user = User::join('roles', 'users.role_id', '=', 'roles.id')
             ->select('roles.name as role_name', 'roles.*', 'users.id as id_user', 'users.*')
             ->where('users.id', Auth()->user()->id)->first();
-        dd($user);
+        //dd($user);
 
         return view('users.profile');
     }

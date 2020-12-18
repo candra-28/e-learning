@@ -27,4 +27,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('class/edit/{id}', 'ClassController@edit');
     Route::post('class/edit/{id}', 'ClassController@update');
     Route::get('/profiles', 'UserController@index');
+
+    Route::get('students', 'StudentController@index');
+    Route::get('student/edit/{id}', 'StudentController@edit');
+    Route::post('student/edit/{id}', 'StudentController@update');
+
+    Route::get('teachers', 'TeacherController@index');
+    Route::get('teacher/edit/{id}', 'TeacherController@edit');
+    Route::post('teacher/edit/{id}', 'TeacherController@update');
 });

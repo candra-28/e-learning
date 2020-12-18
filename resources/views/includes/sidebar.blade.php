@@ -25,7 +25,7 @@ $user = User::join('roles', 'users.role_id', '=', 'roles.id')->select('roles.nam
     @if($user->role_id == 1)
     <li class="nav-item">
       <a class="nav-link" href="/home">
-        <span class="menu-title">Dashboard</span>
+        <span class="menu-title">Beranda</span>
         <i class="mdi mdi-home menu-icon"></i>
       </a>
     </li>
@@ -33,9 +33,24 @@ $user = User::join('roles', 'users.role_id', '=', 'roles.id')->select('roles.nam
     <li class="nav-item">
       <a class="nav-link" href="{{ url('class')}}">
         <span class="menu-title">Kelola Kelas</span>
+        <i class="mdi mdi-home-modern menu-icon"></i>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('students')}}">
+        <span class="menu-title">Kelola Siswa</span>
         <i class="mdi mdi-account-card-details menu-icon"></i>
       </a>
     </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('teachers')}}">
+        <span class="menu-title">Kelola Guru</span>
+        <i class="mdi mdi-account-card-details menu-icon"></i>
+      </a>
+    </li>
+
 
     <li class="nav-item">
       <a class="nav-link" href="#">
@@ -45,25 +60,11 @@ $user = User::join('roles', 'users.role_id', '=', 'roles.id')->select('roles.nam
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="#">
-        <span class="menu-title">Kelola Siswa</span>
-        <i class="mdi mdi-account-card-details menu-icon"></i>
-      </a>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <span class="menu-title">Kelola Guru</span>
-        <i class="mdi mdi-account-card-details menu-icon"></i>
-      </a>
-    </li>
-
-    <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
         <span class="menu-title">Pengumuman</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-voice menu-icon"></i>
-      </a>
+    </a>
 
       <div class="collapse" id="general-pages">
         <ul class="nav flex-column sub-menu">
@@ -93,7 +94,7 @@ $user = User::join('roles', 'users.role_id', '=', 'roles.id')->select('roles.nam
 
     <li class="nav-item">
       <a class="nav-link" href="{{ url('home')}}">
-        <span class="menu-title">Dashboard</span>
+        <span class="menu-title">Beranda</span>
         <i class="mdi mdi-home menu-icon"></i>
       </a>
     </li>
@@ -115,7 +116,7 @@ $user = User::join('roles', 'users.role_id', '=', 'roles.id')->select('roles.nam
     @else
     <li class="nav-item">
       <a class="nav-link" href="{{ url('home') }}">
-        <span class="menu-title">Dashboard</span>
+        <span class="menu-title">Beranda</span>
         <i class="mdi mdi-home menu-icon"></i>
       </a>
     </li>
