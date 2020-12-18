@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
 <link rel="shortcut icon" href="{{ URL::to('vendor/assets/images/logo-atas.png')}}">
 
-<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 @endpush
@@ -21,7 +20,7 @@
 <div class="page-header">
     <h3 class="page-title">
         <span class="page-title-icon bg-gradient-primary text-white mr-2">
-            <i class="mdi mdi-account-card-details"></i>
+            <i class="mdi mdi-home-modern"></i>
         </span> Kelas
     </h3>
 </div>

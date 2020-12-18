@@ -64,7 +64,7 @@ $user = User::join('roles', 'users.role_id', '=', 'roles.id')->select('roles.nam
         <span class="menu-title">Pengumuman</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-voice menu-icon"></i>
-    </a>
+      </a>
 
       <div class="collapse" id="general-pages">
         <ul class="nav flex-column sub-menu">
@@ -113,6 +113,20 @@ $user = User::join('roles', 'users.role_id', '=', 'roles.id')->select('roles.nam
       </div>
     </li>
 
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('students')}}">
+        <span class="menu-title">Daftar Siswa</span>
+        <i class="mdi mdi-account-card-details menu-icon"></i>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('teachers')}}">
+        <span class="menu-title">Daftar Guru</span>
+        <i class="mdi mdi-account-card-details menu-icon"></i>
+      </a>
+    </li>
+
     @else
     <li class="nav-item">
       <a class="nav-link" href="{{ url('home') }}">
@@ -124,6 +138,20 @@ $user = User::join('roles', 'users.role_id', '=', 'roles.id')->select('roles.nam
       <a class="nav-link" href="{{ url('announcements')}}">
         <span class="menu-title">Pengumuman</span>
         <i class="mdi mdi-voice menu-icon"></i>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('students')}}">
+        <span class="menu-title">Daftar Siswa</span>
+        <i class="mdi mdi-account-card-details menu-icon"></i>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('teachers')}}">
+        <span class="menu-title">Daftar Guru</span>
+        <i class="mdi mdi-account-card-details menu-icon"></i>
       </a>
     </li>
     @endif

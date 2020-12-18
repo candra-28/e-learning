@@ -31,8 +31,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('students', 'StudentController@index');
     Route::get('student/edit/{id}', 'StudentController@edit');
     Route::post('student/edit/{id}', 'StudentController@update');
+    Route::get('student/{id}', 'StudentController@show');
 
     Route::get('teachers', 'TeacherController@index');
     Route::get('teacher/edit/{id}', 'TeacherController@edit');
     Route::post('teacher/edit/{id}', 'TeacherController@update');
+    Route::get('teacher/{id}', 'TeacherController@show');
 });

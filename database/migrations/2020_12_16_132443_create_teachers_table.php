@@ -17,7 +17,7 @@ class CreateTeachersTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('nip')->unique()->unique();
+            $table->string('nip')->unique()->unique();
             $table->timestamps();
         });
     }

@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
 <link rel="shortcut icon" href="{{ URL::to('vendor/assets/images/logo-atas.png')}}">
 
-<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 @endpush

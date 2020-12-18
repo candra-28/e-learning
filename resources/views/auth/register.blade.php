@@ -118,12 +118,12 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name_of_birth">Tanggal, Bulan, Tahun Lahir</label>
-                                                <input name="name_of_birth" value="{{ old('name_of_birth') }}" class="form-control" type="date">
+                                                <label for="date_of_birth">Tanggal, Bulan, Tahun Lahir</label>
+                                                <input name="date_of_birth" value="{{ old('name_of_birth') }}" class="form-control" type="date">
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name_of_birth">Agama</label>
+                                                <label for="religion">Agama</label>
                                                 <select name="religion" class="form-control">
                                                     <option selected disabled>-- Pilih Agama --</option>
                                                     <option value="Islam">Islam</option>
@@ -217,8 +217,8 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name_of_birth">Tanggal, Bulan, Tahun Lahir</label>
-                                                <input name="name_of_birth" value="{{ old('name_of_birth') }}" class="form-control" type="date">
+                                                <label for="date_of_birth">Tanggal, Bulan, Tahun Lahir</label>
+                                                <input name="date_of_birth" value="{{ old('date_of_birth') }}" class="form-control" type="date">
                                             </div>
 
                                             <div class="form-group">

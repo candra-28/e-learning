@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @push('title')
-- Dashboard
+- Beranda
 @endpush
 
 @push('styles')
