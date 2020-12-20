@@ -21,7 +21,7 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5">
                             <div class="brand-logo text-center">
-                                <img src="{{URL::to('vendor/assets/images/3.svg')}}">
+                                 <a href="{{ url('/') }}"> <img src="{{URL::to('vendor/assets/images/3.svg')}}"></a>
                             </div>
                             <h4>Baru disini?</h4>
                             <h6 class="font-weight-light">Mendaftar itu mudah. Hanya perlu beberapa langkah. Pilihlah salah satu Tab dibawah</h6>
