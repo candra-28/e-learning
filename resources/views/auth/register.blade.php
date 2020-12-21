@@ -14,6 +14,13 @@
 </head>
 
 <body>
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="content-wrapper d-flex align-items-center auth">
@@ -21,7 +28,7 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5">
                             <div class="brand-logo text-center">
-                                 <a href="{{ url('/') }}"> <img src="{{URL::to('vendor/assets/images/3.svg')}}"></a>
+                                <a href="{{ url('/') }}"> <img src="{{URL::to('vendor/assets/images/3.svg')}}"></a>
                             </div>
                             <h4>Baru disini?</h4>
                             <h6 class="font-weight-light">Mendaftar itu mudah. Hanya perlu beberapa langkah. Pilihlah salah satu Tab dibawah</h6>
@@ -247,8 +254,7 @@
     <script src="{{URL::to('vendor/assets/js/off-canvas.js')}}"></script>
     <script src="{{URL::to('vendor/assets/js/hoverable-collapse.js')}}"></script>
     <script src="{{URL::to('vendor/assets/js/misc.js')}}"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="{{ URL::to('vendor/assets/js/preloader.js')}}"></script>
 </body>
 
 </html>

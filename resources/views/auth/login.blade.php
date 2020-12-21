@@ -12,6 +12,14 @@
 </head>
 
 <body>
+
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="content-wrapper d-flex align-items-center auth">
@@ -74,10 +82,11 @@
         </div>
     </div>
 
-    <script src="vendor/assets/vendors/js/vendor.bundle.base.js"></script>
-    <script src="vendor/assets/js/off-canvas.js"></script>
-    <script src="vendor/assets/js/hoverable-collapse.js"></script>
-    <script src="vendor/assets/js/misc.js"></script>
+    <script src="{{ URL::to('vendor/assets/vendors/js/vendor.bundle.base.js')}}"></script>
+    <script src="{{ URL::to('vendor/assets/js/off-canvas.js')}}"></script>
+    <script src="{{ URL::to('vendor/assets/js/hoverable-collapse.js')}}"></script>
+    <script src="{{ URL::to('vendor/assets/js/misc.js')}}"></script>
+    <script src="{{ URL::to('vendor/assets/js/preloader.js')}}"></script>
 </body>
 
 </html>

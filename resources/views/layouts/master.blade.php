@@ -11,6 +11,13 @@
 </head>
 
 <body>
+  <div id="preloader">
+    <div class="sk-three-bounce">
+      <div class="sk-child sk-bounce1"></div>
+      <div class="sk-child sk-bounce2"></div>
+      <div class="sk-child sk-bounce3"></div>
+    </div>
+  </div>
   <div class="container-scroller">
 
     @include ('includes.navbar')
@@ -34,6 +41,7 @@
 
 
     @stack('scripts')
+    <script src="{{ URL::to('vendor/assets/js/preloader.js')}}"></script>
 </body>
 
 </html>
