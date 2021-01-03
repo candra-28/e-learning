@@ -83,6 +83,7 @@ class AnnouncementController extends Controller
 
     public function getSlug(Request $request)
     {
+        // dd($request);
         $slug = Str::slug($request->get('slug'));
 
         $announcements = Announcement::join('users', 'announcements.user_id', '=', 'users.id')

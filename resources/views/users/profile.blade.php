@@ -110,52 +110,51 @@
                 </div>
                 <div class="tab-pane show" id="settings" role="tabpanel">
                     <div class="card-body">
-                        <form class="form-horizontal form-material">
+                        <form class="form-horizontal form-material" method="POST" action="{{ url('profile/update-password') }}">
+                         @csrf
+                            @if ($message = Session::get('success'))
                             <div class="form-group">
-                                <label class="col-md-12">Full Name</label>
                                 <div class="col-md-12">
-                                    <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line">
+                                    <div class="alert alert-success alert-block">
+                                        <button type="button" class="close" data-dismiss="alert">×</button> 
+                                      <small>asd</small>
+                                  </div>
+                                </div>
+                            </div>
+                            @endif
+                            <div class="form-group">
+                                <label class="col-md-12">Kata sandi lama</label>
+                                <div class="col-md-12">
+                                    <input type="password" name="current-password" placeholder="sandi lama" class="form-control form-control-line">
+                                    @error('current-password')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                    @if (Session::has('error'))
+                                    <div class="text-danger">
+                                        {{ Session::get('error') }}
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="example-email" class="col-md-12">Email</label>
+                                <label for="example-email" class="col-md-12">Kata sandi baru</label>
                                 <div class="col-md-12">
-                                    <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email">
+                                    <input type="password" placeholder="sandi baru" class="form-control form-control-line" name="new-password">
+                                    @error('new-password')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-12">Password</label>
+                                <label class="col-md-12">Ulangi kata sandi</label>
                                 <div class="col-md-12">
-                                    <input type="password" value="password" class="form-control form-control-line">
+                                    <input type="password" name="new-password_confirmation" placeholder="ulangi sandi" class="form-control form-control-line">
                                 </div>
                             </div>
+                            
                             <div class="form-group">
-                                <label class="col-md-12">Phone No</label>
-                                <div class="col-md-12">
-                                    <input type="text" placeholder="123 456 7890" class="form-control form-control-line">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12">Message</label>
-                                <div class="col-md-12">
-                                    <textarea rows="5" class="form-control form-control-line"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-12">Select Country</label>
                                 <div class="col-sm-12">
-                                    <select class="form-control form-control-line">
-                                        <option>London</option>
-                                        <option>India</option>
-                                        <option>Usa</option>
-                                        <option>Canada</option>
-                                        <option>Thailand</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <button class="btn btn-success">Update Profile</button>
+                                    <button class="btn btn-primary">simpan</button>
                                 </div>
                             </div>
                         </form>
@@ -164,10 +163,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 </div>
 
 

@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Student;
 use App\Teacher;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+
 
 class UserController extends Controller
 {
@@ -88,5 +92,46 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function updatePassword(Request $request)
+    {
+        // dd($request);
+
+        $request->validate([
+            'current-password'  => 'required'],['current-password.required' => 'Kata sandi lama wajib di isi']);
+
+        // if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+        //     // dd("kesini");
+        //     return redirect()->back()->with('error', 'Kata sandi lama tidak sesuai');
+        // }
+
+        // if (strcmp($request->get('current-password'), $request->get('new-password')) == 0) {
+        //     return redirect()->back();
+        // }
+        // if (!(strcmp($request->get('new-password'), $request->get('new-password_confirmation'))) == 0) {
+        //     return redirect()->back()->with('error', 'Kata sandi');
+        // }
+        //Change Password
+        $input = $request->all();
+        $user = User::find(Auth()->user()->id);
+
+
+        if(!Hash::check($input['current-password'], $user->password)){
+            return redirect()->back()->with('error', 'Kata sandi lama tidak sesuai');
+        }else{
+            $request->validate([
+            'new-password' => 'required|min:8|confirmed'],
+            [
+                'new-password.required'     => 'Kata sandi baru wajib di isi',
+                'new-password.min'          => 'Minimal kata sandi 8 karakter',
+                'new-password.confirmed'    => 'Kata sandi tidak sama dengan kata sandi konfirmasi',
+            ]); 
+        }
+
+        $user->password = Hash::make($request->get('new-password'));
+        $user->update();
+        return redirect()->back()->with('success', 'Kata sandi berhasil di ubah');
+
     }
 }
