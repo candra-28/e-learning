@@ -101,18 +101,6 @@ class UserController extends Controller
         $request->validate([
             'current-password'  => 'required'],['current-password.required' => 'Kata sandi lama wajib di isi']);
 
-        // if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-        //     // dd("kesini");
-        //     return redirect()->back()->with('error', 'Kata sandi lama tidak sesuai');
-        // }
-
-        // if (strcmp($request->get('current-password'), $request->get('new-password')) == 0) {
-        //     return redirect()->back();
-        // }
-        // if (!(strcmp($request->get('new-password'), $request->get('new-password_confirmation'))) == 0) {
-        //     return redirect()->back()->with('error', 'Kata sandi');
-        // }
-        //Change Password
         $input = $request->all();
         $user = User::find(Auth()->user()->id);
 

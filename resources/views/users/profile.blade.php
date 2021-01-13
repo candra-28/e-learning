@@ -29,8 +29,8 @@
                     <input type="file" name="usr_profile_picture" id="preview_gambar" class="img-thumbnail" style="display:none" onchange="document.getElementById('usr_profile_picture').value=this.value" /><br>
 
                     <button type="button" id="usr_profile_picture" class="btn btn-outline-primary btn-sm waves-effect waves-light m-2" onclick="document.getElementById('preview_gambar').click()">Pilih Gambar</button>
-
-
+                    
+<!-- 
                     <h4 class="card-title m-t-10">{{ Auth::user()->name }}</h4>
                     <h6 class="card-subtitle">{{ Auth::user()->role_id }}</h6>
                     <div class="row text-center justify-content-md-center">
@@ -40,13 +40,15 @@
                         <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i>
                                 <font class="font-medium">54</font>
                             </a></div>
-                    </div>
+                    </div> -->
                 </center>
             </div>
-            <div>
+
+            <div class="card-body">
                 <hr>
-            </div>
-            <div class="card-body"> <small class="text-muted">Email address </small>
+                    <h4 class="font-medium m-t-30 text-center" style="font-family: sans-serif;">Akun</h4>
+                <hr>
+             <dt>Email address </dt>
                 <h6><a href="https://www.wrappixel.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ddb5bcb3b3bcbab2abb8af9dbab0bcb4b1f3beb2b0">[email&nbsp;protected]</a></h6> <small class="text-muted p-t-30 db">Phone</small>
                 <h6>+91 654 784 547</h6> <small class="text-muted p-t-30 db">Address</small>
                 <h6>71 Pilgrim Avenue Chevy Chase, MD 20815</h6>
