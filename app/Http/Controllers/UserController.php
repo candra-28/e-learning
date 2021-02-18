@@ -9,7 +9,7 @@ use App\Teacher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
@@ -25,7 +25,7 @@ class UserController extends Controller
             ->where('users.id', Auth()->user()->id)->first();
         //dd($user);
 
-        return view('users.profile');
+        return view('users.profile', compact('user'));
     }
 
     /**
@@ -121,5 +121,23 @@ class UserController extends Controller
         $user->update();
         return redirect()->back()->with('success', 'Kata sandi berhasil di ubah');
 
+    }
+
+    public function changeProfilePicture(Request $request){
+        $user = User::where('id',Auth()->user()->id)->first();
+
+        if ($request->hasFile('profile_picture')) {
+            $files = $request->file('profile_picture');
+            $path = public_path('profile_picture' . '/' . Auth::user()->name);
+            if (!File::isDirectory($path)) {
+                File::makeDirectory($path, 0777, true, true);
+            }
+            $files_name = date('Ymd') . '_' . $files->getClientOriginalName();
+            $files->move($path, $files_name);
+            $user->profile_picture = $files_name;
+            $user->update();
+
+            return redirect()->back();
+        }
     }
 }

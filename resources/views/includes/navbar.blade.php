@@ -104,7 +104,7 @@
        <li class="nav-item nav-profile dropdown">
          <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
            <div class="nav-profile-img">
-             <img src="{{URL::to('vendor/assets/images/faces/avatar-2.png')}}" alt="image">
+             <img src="{{ asset('profile_picture/'.Auth::user()->name.'/'.Auth::user()->profile_picture) }}" alt="null">
              <span class="availability-status online"></span>
            </div>
            <div class="nav-profile-text">

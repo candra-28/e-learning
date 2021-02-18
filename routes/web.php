@@ -29,6 +29,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('class/edit/{id}', 'ClassController@edit');
     Route::post('class/edit/{id}', 'ClassController@update');
     Route::get('/profiles', 'UserController@index');
+    Route::post('/profiles', 'UserController@changeProfilePicture');
+    
     Route::post('/profile/update-password', 'UserController@updatePassword');
 
     Route::get('students', 'StudentController@index');

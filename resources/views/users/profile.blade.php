@@ -25,33 +25,35 @@
         <div class="card">
             <div class="card-body">
 
-                <center class="m-t-30"> <img src="#" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:100px;" />
-                    <input type="file" name="usr_profile_picture" id="preview_gambar" class="img-thumbnail" style="display:none" onchange="document.getElementById('usr_profile_picture').value=this.value" /><br>
+              <div class="text-center">
+                  <form action="" method="post" enctype="multipart/form-data">
+                    @csrf
+                        <img src="{{ url('profile_picture/'.$user->name.'/'.$user->profile_picture) }}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
+                    <input type="file" name="profile_picture" id="preview_gambar" class="img-thumbnail" style="display:none; border-radius: 5px;" onchange="document.getElementById('usr_profile_picture').value=this.value" /><br>
 
-                    <button type="button" id="usr_profile_picture" class="btn btn-outline-primary btn-sm waves-effect waves-light m-2" onclick="document.getElementById('preview_gambar').click()">Pilih Gambar</button>
+                    <button type="button" id="usr_profile_picture" class="btn btn-outline-primary btn-sm m-2" onclick="document.getElementById('preview_gambar').click()">Pilih Gambar</button>
                     
-<!-- 
-                    <h4 class="card-title m-t-10">{{ Auth::user()->name }}</h4>
-                    <h6 class="card-subtitle">{{ Auth::user()->role_id }}</h6>
-                    <div class="row text-center justify-content-md-center">
-                        <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i>
-                                <font class="font-medium">254</font>
-                            </a></div>
-                        <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i>
-                                <font class="font-medium">54</font>
-                            </a></div>
-                    </div> -->
-                </center>
+                    <input type="submit" value="Simpan" class="btn btn-success btn-sm">
+                  </form>   
+              </div>
+                
             </div>
 
             <div class="card-body">
                 <hr>
-                    <h4 class="font-medium m-t-30 text-center" style="font-family: sans-serif;">Akun</h4>
+                    <h4 class="font-medium text-center" style="font-family: sans-serif;">Akun</h4>
                 <hr>
-             <dt>Email address </dt>
-                <h6><a href="https://www.wrappixel.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ddb5bcb3b3bcbab2abb8af9dbab0bcb4b1f3beb2b0">[email&nbsp;protected]</a></h6> <small class="text-muted p-t-30 db">Phone</small>
-                <h6>+91 654 784 547</h6> <small class="text-muted p-t-30 db">Address</small>
-                <h6>71 Pilgrim Avenue Chevy Chase, MD 20815</h6>
+
+              <dt class="col-sm-12">Nama</dt>
+                <dd class="col-sm-12">
+                    <p style="font-family: sans-serif; font-size: 18px;">{{ $user->name }}</p>
+                </dd>
+
+                <dt class="col-sm-12">Email</dt>
+                <dd class="col-sm-12">
+                    <p style="font-family: sans-serif; font-size: 18px;">{{ $user->email }}</p>
+                </dd>
+     
             </div>
         </div>
     </div>
