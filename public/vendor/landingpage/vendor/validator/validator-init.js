@@ -1,4 +1,3 @@
-
 $(function () {
     $(".currency_validate").validate({
         rules: {
@@ -175,6 +174,111 @@ $(function () {
                 minlength: "Your password must be at least 5 characters long"
             },
             email: "Please enter a valid email address"
+        },
+    });
+});
+
+$(function () {
+    $(".login").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true
+            },
+        },
+        messages: {
+            password: {
+                required: "Password wajib di isi"
+            },
+            email: {
+                required: "Email wajib di isi",
+                email: "Email tidak valid"
+            }
+        },
+    });
+});
+
+$(function () {
+    $(".register-student").validate({
+        rules: {
+            name: "required",
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                minlength: 8
+            },
+            password_confirmation: {
+              required: true,
+              equalTo: "#password"
+            },
+            entry_year: "required",
+        },
+        messages: {
+            name: "Nama lengkap wajib di isi",
+            password: {
+                required: "Password wajib di isi"
+            },
+            email: {
+                required: "Email wajib di isi",
+                email: "Email tidak valid"
+            },
+            password:{
+                required: "Kata sandi wajib di isi",
+                minlength: "Minimal 8 digit karakter"
+            },
+            password_confirmation:{
+                required: "Ulangi kata sandi wajib di isi",
+                equalTo: "Ulangi kata sandi wajib sama"
+            },
+            entry_year: "Tahun masuk wajib di isi",
+        },
+    });
+});
+
+$(function () {
+    $(".register-teacher").validate({
+        rules: {
+            nip: "required",
+            teacher_name: "required",
+            teacher_email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                minlength: 8
+            },
+            password_confirmation: {
+              required: true,
+              equalTo: "#password-teacher"
+            },
+            entry_year: "required",
+        },
+        messages: {
+            teacher_name: "Nama lengkap wajib di isi",
+            password: {
+                required: "Password wajib di isi"
+            },
+            teacher_email: {
+                required: "Email wajib di isi",
+                email: "Email tidak valid"
+            },
+            password:{
+                required: "Kata sandi wajib di isi",
+                minlength: "Minimal 8 digit karakter"
+            },
+            password_confirmation:{
+                required: "Ulangi kata sandi wajib di isi",
+                equalTo: "Ulangi kata sandi wajib sama"
+            },
+            entry_year: "Tahun masuk wajib di isi",
+            nip: "NIP wajib di isi"
         },
     });
 });

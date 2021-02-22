@@ -67,34 +67,33 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         // dd($request);
-        $rules = [
-            'name'                  => 'required|min:3|max:35',
-            'email'                 => 'required|email|unique:users,email',
-            'password'              => 'required|confirmed',
-            'entry_year'            => 'required',
-            'gender'                => 'required'
-        ];
-
-        $messages = [
-            'name.required'         => 'Nama Lengkap wajib diisi',
-            'name.min'              => 'Nama lengkap minimal 3 karakter',
-            'name.max'              => 'Nama lengkap maksimal 35 karakter',
-            'email.required'        => 'Email wajib diisi',
-            'email.email'           => 'Email tidak valid',
-            'email.unique'          => 'Email sudah terdaftar',
-            'password.required'     => 'Password wajib diisi',
-            'password.confirmed'    => 'Password tidak sama dengan konfirmasi password',
-            'entry_year.required'   => 'Tahun masuk wajib di pilih',
-            'gender.required'       => 'Pilih salah satu jenis kelammin'
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput($request->all);
-        }
-
         if ($request->role == "siswa") {
+
+            $rules = [
+                'name'                  => 'required|min:3|max:35',
+                'email'                 => 'required|email|unique:users,email',
+                'password'              => 'required|confirmed',
+                'entry_year'            => 'required',
+            ];
+
+            $messages = [
+                'name.required'         => 'Nama Lengkap wajib diisi',
+                'name.min'              => 'Nama lengkap minimal 3 karakter',
+                'name.max'              => 'Nama lengkap maksimal 35 karakter',
+                'email.required'        => 'Email wajib diisi',
+                'email.email'           => 'Email tidak valid',
+                'email.unique'          => 'Email sudah terdaftar',
+                'password.required'     => 'Password wajib diisi',
+                'password.confirmed'    => 'Password tidak sama dengan konfirmasi password',
+                'entry_year.required'   => 'Tahun masuk wajib di pilih',
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput($request->all);
+            }
+
             $user = new User;
             $user->name = ucwords(strtolower($request->name));
             $user->email = strtolower($request->email);
@@ -119,9 +118,36 @@ class AuthController extends Controller
                 return redirect()->route('login')->with(['success' => 'Register berhasil! Silahkan login']);
             }
         } else {
+
+            $rules = [
+                'teacher_name'          => 'required|min:3|max:35',
+                'teacher_email'         => 'required|email|unique:users,email',
+                'password'              => 'required|confirmed',
+                'entry_year'            => 'required',
+            ];
+
+            $messages = [
+                'teacher_name.required'         => 'Nama Lengkap wajib diisi',
+                'teacher_name.min'              => 'Nama lengkap minimal 3 karakter',
+                'teacher_name.max'              => 'Nama lengkap maksimal 35 karakter',
+                'teacher_email.required'        => 'Email wajib diisi',
+                'teacher_email.email'           => 'Email tidak valid',
+                'teacher_email.unique'          => 'Email sudah terdaftar',
+                'password.required'     => 'Password wajib diisi',
+                'password.confirmed'    => 'Password tidak sama dengan konfirmasi password',
+                'entry_year.required'   => 'Tahun masuk wajib di pilih',
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput($request->all);
+            }
+
+
             $user = new User;
-            $user->name = ucwords(strtolower($request->name));
-            $user->email = strtolower($request->email);
+            $user->name = ucwords(strtolower($request->teacher_name));
+            $user->email = strtolower($request->teacher_email);
             $user->password = Hash::make($request->password);
             $user->email_verified_at = \Carbon\Carbon::now();
             $user->entry_year = $request->entry_year;
@@ -146,6 +172,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect('/');
     }
 }

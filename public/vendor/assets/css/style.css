@@ -5129,6 +5129,21 @@ textarea.form-control.is-invalid {
     }
 }
 
+label.error {
+  color: #E82753;
+  margin-top: 5px;
+}
+
+input.error {
+    border: 1px solid red;
+    font-family: "ubuntu-regular", sans-serif;
+}
+select.error{
+        border: 1px solid red;
+    font-family: "ubuntu-regular", sans-serif;
+}
+
+
 .btn {
     display: inline-block;
     font-weight: 400;
@@ -16875,9 +16890,9 @@ code {
 
 select.form-control {
     padding: 0.4375rem 0.75rem;
-    border: 0;
     outline: 1px solid #ebedf2;
-    color: #c9c8c8;
+      color: #495057;
+  background-color: #fff;
 }
 select.form-control:focus {
     outline: 1px solid #ebedf2;

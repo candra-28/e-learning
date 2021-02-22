@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/css/vendor.bundle.base.css')}}">
     <link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
     <link rel="shortcut icon" href="{{URL::to('vendor/assets/images/logo-atas.png')}}" />
+
 </head>
 
 <body>
@@ -31,11 +32,10 @@
                             </div>
                             <h4>Halo! ayo kita mulai</h4>
                             <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6>
-                            <form action="{{ route('login') }}" method="post" class="pt-3">
+                            <form class="login" action="{{ route('login') }}" method="post">
                                 @csrf
                                 @if(session('errors'))
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    Something it's wrong:
+                                <div class="alert alert-danger alert-dismissible fade show " role="alert">
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
@@ -57,7 +57,7 @@
                                 </div>
                                 @endif
                                 <div class="form-group">
-                                    <input type="email" name="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" value="{{old('email')}}">
+                                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email" value="{{old('email')}}">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
@@ -73,7 +73,8 @@
                                     <a href="#" class="auth-link text-black">Lupa kata sandi?</a>
                                 </div>
                             </form>
-                            <div class="text-center mt-4 font-weight-light"> Belum punya akun? <a href="{{ route('register')}}" class="text-primary">Daftar</a>
+                            <div class="text-center mt-4 font-weight-light"> Belum punya akun? <a href="{{ route('register')}}" class="text-primary">Daftar</a> atau
+                            <div class="text-center mt-3 font-weight-light"> Kembali ke halama <a href="{{ url('/') }}" class="text-primary">Awal</a>
                             </div>
                         </div>
                     </div>
@@ -87,6 +88,9 @@
     <script src="{{ URL::to('vendor/assets/js/hoverable-collapse.js')}}"></script>
     <script src="{{ URL::to('vendor/assets/js/misc.js')}}"></script>
     <script src="{{ URL::to('vendor/assets/js/preloader.js')}}"></script>
+
+    <script src="{{URL::to('vendor/landingpage/vendor/validator/jquery.validate.js')}}"></script>
+    <script src="{{URL::to('vendor/landingpage/vendor/validator/validator-init.js')}}"></script>
 </body>
 
 </html>

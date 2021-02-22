@@ -10,7 +10,11 @@
     <link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/css/vendor.bundle.base.css')}}">
     <link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
     <link rel="shortcut icon" href="{{URL::to('vendor/assets/images/logo-atas.png')}}" />
-
+    <style type="text/css">
+        label #gender-error,{
+           margin-top: 100px;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,7 +45,7 @@
 
                                 <div class="tab-content">
                                     <div class="tab-pane show active" id="profile" role="tabpanel">
-                                        <form class="forms-sample pt-3" action="{{ url('register') }}" method="post" autocomplete="off">
+                                        <form class="forms-sample pt-3 register-student" action="{{ url('register') }}" method="post" autocomplete="off">
                                             @csrf
 
                                             <div class="form-group">
@@ -64,7 +68,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Kata Sandi <span class="text-danger">*</span></label>
-                                                <input type="password" name="password" class="form-control" placeholder="Kata Sandi">
+                                                <input type="password" id="password" name="password" class="form-control" placeholder="Kata Sandi">
                                                 @error('password')
                                                 <div class="text-danger">{{ $message }}</div>
                                                 @enderror
@@ -77,12 +81,13 @@
                                             <div class="form-group">
                                                 <label>Tahun Masuk <span class="text-danger">*</span></label>
                                                 <select name="entry_year" class="form-control">
-                                                    <option selected disabled>-- Pilih Tahun Ajaran --</option>
+                                                    <option selected disabled>-- Pilih Tahun Masuk --</option>
                                                     <option value="2016">2016</option>
                                                     <option value="2017">2017</option>
                                                     <option value="2018">2018</option>
                                                     <option value="2019">2019</option>
                                                     <option value="2020">2020</option>
+                                                    <option value="2021">2021</option>   
                                                 </select>
                                                 @error('entry_year')
                                                 <div class="text-danger">{{ $message }}</div>
@@ -100,7 +105,7 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-sm-4 col-form-label">Jenis Kelamin <span class="text-danger">*</span></label>
+                                                <label class="col-sm-4 col-form-label">Jenis Kelamin</label>
 
                                                 <div class="col-sm-4">
                                                     <div class="form-check">
@@ -151,29 +156,29 @@
                                     </div>
 
                                     <div class="tab-pane show" id="settings" role="tabpanel">
-                                        <form action="{{ url('register') }}" method="post" class="pt-3" autocomplete="off">
+                                        <form action="{{ url('register') }}" method="post" class="pt-3 register-teacher" autocomplete="off">
                                             @csrf
                                             <div class="form-group">
-                                                <label for="nip">Nomor Identitas Pegawai</label>
+                                                <label for="nip">Nomor Identitas Pegawai <span class="text-danger">*</span></label>
                                                 <input type="text" name="nip" value="{{ old('nip') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control" placeholder="NIP">
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputUsername1">Nama Lengkap <span class="text-danger">*</span></label>
-                                                <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Nama">
-                                                @error('name')
+                                                <input type="text" name="teacher_name" value="{{ old('teacher_name') }}" class="form-control" placeholder="Nama">
+                                                @error('teacher_name')
                                                 <div class="text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Alamat Email <span class="text-danger">*</span></label>
-                                                <input name="email" value="{{ old('email') }}" type="email" class="form-control" placeholder="Email">
-                                                @error('email')
+                                                <input name="teacher_email" value="{{ old('teacher_email') }}" type="email" class="form-control" placeholder="Email">
+                                                @error('teacher_email')
                                                 <div class="text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Kata Sandi <span class="text-danger">*</span></label>
-                                                <input type="password" name="password" class="form-control" placeholder="Kata Sandi">
+                                                <input type="password" id="password-teacher" name="password" class="form-control" placeholder="Kata Sandi">
                                                 @error('password')
                                                 <div class="text-danger">{{ $message }}</div>
                                                 @enderror
@@ -186,12 +191,13 @@
                                             <div class="form-group">
                                                 <label>Tahun Masuk <span class="text-danger">*</span></label>
                                                 <select name="entry_year" class="form-control">
-                                                    <option selected disabled>-- Pilih Tahun Ajaran --</option>
+                                                    <option selected disabled>-- Pilih Tahun Masuk --</option>
                                                     <option value="2016">2016</option>
                                                     <option value="2017">2017</option>
                                                     <option value="2018">2018</option>
                                                     <option value="2019">2019</option>
                                                     <option value="2020">2020</option>
+                                                    <option value="2021">2021</option>
                                                 </select>
                                                 @error('entry_year')
                                                 <div class="text-danger">{{ $message }}</div>
@@ -199,7 +205,7 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-sm-4 col-form-label">Jenis Kelamin <span class="text-danger">*</span></label>
+                                                <label class="col-sm-4 col-form-label">Jenis Kelamin </label>
 
                                                 <div class="col-sm-4">
                                                     <div class="form-check">
@@ -255,6 +261,10 @@
     <script src="{{URL::to('vendor/assets/js/hoverable-collapse.js')}}"></script>
     <script src="{{URL::to('vendor/assets/js/misc.js')}}"></script>
     <script src="{{ URL::to('vendor/assets/js/preloader.js')}}"></script>
+
+
+    <script src="{{URL::to('vendor/landingpage/vendor/validator/jquery.validate.js')}}"></script>
+    <script src="{{URL::to('vendor/landingpage/vendor/validator/validator-init.js')}}"></script>
 </body>
 
 </html>

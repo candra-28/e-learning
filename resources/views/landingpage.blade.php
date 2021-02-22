@@ -62,10 +62,17 @@
                             </div>
                             <div class="dashboard_log">
                                 <div class="d-flex align-items-center">
-                                    <div class="header_auth">
-                                        <a href="{{ route('login')}}" class="btn btn-outline-primary">Sign In</a>
-                                        <a href="{{ route('register')}}" class="btn btn-outline-primary">Sign Up</a>
-                                    </div>
+                                     @guest                              
+                                            <div class="header_auth">
+                                                <a href="{{ route('login')}}" class="btn btn-outline-primary">Sign In</a>
+                                                <a href="{{ route('register')}}" class="btn btn-outline-primary">Sign Up</a>
+                                            </div>
+                                    @else
+                                        <div class="header_auth">
+                                            <a href="{{ url('home') }}" class="btn btn-outline-primary">Dashboard</a>
+                                        </div>
+                                    @endguest
+
                                 </div>
                             </div>
                         </nav>
