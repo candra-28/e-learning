@@ -12,7 +12,7 @@ Route::post('register', 'AuthController@register');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('home', 'HomeController@index')->name('home');
+    Route::get('dashboard', 'HomeController@index')->name('dashboard');
     Route::get('logout', 'AuthController@logout')->name('logout');
 
     Route::get('announcements', 'AnnouncementController@index');

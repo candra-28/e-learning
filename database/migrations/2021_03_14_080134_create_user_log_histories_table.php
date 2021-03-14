@@ -16,7 +16,7 @@ class CreateUserLogHistoriesTable extends Migration
         Schema::create('user_log_histories', function (Blueprint $table) {
             $table->id('ulh_id');
             $table->bigInteger('ulh_user_id')->unsigned();
-            $table->string('ulh_last_log_ip');
+            $table->string('ulh_last_login_ip');
             $table->timestamp('ulh_date');
         
             $table->bigInteger('ulh_created_by')->unsigned()->nullable();

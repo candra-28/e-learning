@@ -69,7 +69,7 @@
                                             </div>
                                     @else
                                         <div class="header_auth">
-                                            <a href="{{ url('home') }}" class="btn btn-outline-primary">Dashboard</a>
+                                            <a href="{{ url('dashboard') }}" class="btn btn-outline-primary">Dashboard</a>
                                         </div>
                                     @endguest
 

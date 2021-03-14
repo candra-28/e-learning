@@ -98,8 +98,8 @@
                                                 <label>Kelas</label>
                                                 <select name="class_id" class="form-control">
                                                     <option selected disabled>-- pilih Kelas --</option>
-                                                    @foreach($class as $clas)
-                                                    <option value="{{ $clas->id }}">{{ $clas->name }}</option>
+                                                    @foreach($classes as $class)
+                                                    <option value="{{ $class->cls_id }}">{{ $class->cls_name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

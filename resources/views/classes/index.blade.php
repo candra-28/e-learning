@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
 <link rel="shortcut icon" href="{{ URL::to('vendor/assets/images/logo-atas.png')}}">
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 @endpush
 
@@ -38,6 +38,7 @@
                             <tr class="text-white">
                                 <th scope="col" class="sort" data-sort="name">No</th>
                                 <th scope="col" class="sort" data-sort="budget">Name</th>
+                                <th scope="col" class="sort" data-sort="budget">Tahun Ajaran</th>
                                 <th scope="col" class="sort">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -103,9 +104,7 @@
 <script src="{{URL::to('vendor/assets/js/misc.js')}}"></script>
 <script src="{{URL::to('vendor/assets/js/todolist.js')}}"></script>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+<script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -125,14 +124,20 @@
                     searchable: false
                 },
                 {
-                    data: 'name',
-                    name: 'name',
+                    data: 'class_name',
+                    name: 'cls_major_id',
                     orderable: true,
                     searchable: true
                 },
                 {
-                    data: 'is_active',
-                    name: 'is_active',
+                    data: 'scy_name',
+                    name: 'school_years.scy_name',
+                    orderable: false,
+                    searchable: true
+                },
+                {
+                    data: 'cls_is_active',
+                    name: 'cls_is_active',
                     orderable: false,
                     searchable: false
                 },

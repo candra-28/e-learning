@@ -25,6 +25,10 @@ class CreateUserHasRolesTable extends Migration
             $table->foreign('uhs_created_by')->references('usr_id')->on('users')->onDelete('cascade');
             $table->foreign('uhs_updated_by')->references('usr_id')->on('users')->onDelete('cascade');
             $table->foreign('uhs_deleted_by')->references('usr_id')->on('users')->onDelete('cascade');
+
+            $table->foreign('uhs_user_id')->references('usr_id')->on('users')->onDelete('cascade');
+            $table->foreign('uhs_role_id')->references('rol_id')->on('roles')->onDelete('cascade');
+            
             
             $table->timestamp('uhs_created_at')->nullable();
             $table->timestamp('uhs_updated_at')->nullable();

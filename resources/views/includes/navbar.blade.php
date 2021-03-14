@@ -112,7 +112,12 @@
      <li class="nav-item nav-profile dropdown">
        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
          <div class="nav-profile-img">
+          @if(isset(Auth()->user()->usr_profile_picture))
            <img src="{{ asset('profile_picture/'.Auth::user()->name.'/'.Auth::user()->profile_picture) }}" alt="null">
+           @else
+           <img src="{{ asset('profile_picture/avatar-2.png') }}" alt="null">
+           @endif
+
            <span class="availability-status online"></span>
          </div>
          <div class="nav-profile-text">

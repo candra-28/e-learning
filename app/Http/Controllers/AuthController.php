@@ -9,49 +9,42 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Validator;
 use App\User;
-use App\Clas;
+use App\Models\Classes;
 use App\Student;
 use App\Teacher;
+use App\Models\UserLogHistory;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
     public function showFormLogin()
     {
         if (Auth::check()) {
-            return redirect()->route('home');
+            return redirect()->route('dashboard');
         }
         return view('auth.login');
     }
 
     public function login(Request $request)
     {
-        $rules = [
-            'email'                 => 'required|email',
-            'password'              => 'required|string'
-        ];
-
-        $messages = [
-            'email.required'        => 'Email wajib diisi',
-            'email.email'           => 'Email tidak valid',
-            'password.required'     => 'Password wajib diisi',
-            'password.string'       => 'Password harus berupa string'
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput($request->all);
-        }
-
-        $data = [
-            'email'     => $request->input('email'),
+        $user_login = [
+            'usr_email'     => $request->input('email'),
             'password'  => $request->input('password'),
         ];
 
-        Auth::attempt($data);
+        Auth::attempt($user_login);
 
         if (Auth::check()) {
-            return redirect()->route('home');
+            $user_login_history = new UserLogHistory();
+            $user_login_history->ulh_user_id = Auth::user()->usr_id;
+            $user_login_history->ulh_last_login_ip =  $request->ip();
+            $user_login_history->ulh_date = Carbon::now();
+            if ($user_login_history->save()) {
+                return redirect()->route('dashboard');
+            }else{
+                Auth::logout();
+                return redirect()->back()->withErrors(['Terjadi kegagalan sistem']);
+            }
         } else {
             Session::flash('error', 'Email atau password salah');
             return redirect()->route('login');
@@ -60,45 +53,20 @@ class AuthController extends Controller
 
     public function showFormRegister()
     {
-        $class = Clas::where('is_active', true)->get();
-        return view('auth.register', ['class' => $class]);
+        $classes = Classes::where('cls_is_active', true)->get();
+        return view('auth.register', ['classes' => $classes]);
     }
 
     public function register(Request $request)
     {
-        // dd($request);
+        dd($request);
         if ($request->role == "siswa") {
 
-            $rules = [
-                'name'                  => 'required|min:3|max:35',
-                'email'                 => 'required|email|unique:users,email',
-                'password'              => 'required|confirmed',
-                'entry_year'            => 'required',
-            ];
-
-            $messages = [
-                'name.required'         => 'Nama Lengkap wajib diisi',
-                'name.min'              => 'Nama lengkap minimal 3 karakter',
-                'name.max'              => 'Nama lengkap maksimal 35 karakter',
-                'email.required'        => 'Email wajib diisi',
-                'email.email'           => 'Email tidak valid',
-                'email.unique'          => 'Email sudah terdaftar',
-                'password.required'     => 'Password wajib diisi',
-                'password.confirmed'    => 'Password tidak sama dengan konfirmasi password',
-                'entry_year.required'   => 'Tahun masuk wajib di pilih',
-            ];
-
-            $validator = Validator::make($request->all(), $rules, $messages);
-
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput($request->all);
-            }
-
             $user = new User;
-            $user->name = ucwords(strtolower($request->name));
-            $user->email = strtolower($request->email);
+            $user->name = $request->name;
+            $user->email = $request->email;
             $user->password = Hash::make($request->password);
-            $user->email_verified_at = \Carbon\Carbon::now();
+            // $user->email_verified_at = \Carbon\Carbon::now();
             $user->entry_year = $request->entry_year;
             $user->gender = $request->gender;
             $user->place_of_birth = $request->place_of_birth;

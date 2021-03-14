@@ -35,7 +35,7 @@
         <img src="{{ URL::to('vendor/assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image">
         <h4 class="font-weight-normal mb-3">Jumlah Kelas <i class="mdi mdi-home-modern mdi-24px float-right"></i>
         </h4>
-        <h2 class="mb-5">{{$class}}</h2>
+        <h2 class="mb-5">12</h2>
         <h6 class="card-text">SMKS MAHAPUTRA</h6>
       </div>
     </div>
@@ -46,7 +46,7 @@
         <img src="{{ URL::to('vendor/assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image">
         <h4 class="font-weight-normal mb-3">Jumlah Siswa <i class="mdi mdi-account-card-details mdi-24px float-right"></i>
         </h4>
-        <h2 class="mb-5">{{$student}}</h2>
+        <h2 class="mb-5">11</h2>
         <h6 class="card-text">SMKS MAHAPUTRA</h6>
       </div>
     </div>
@@ -57,7 +57,7 @@
         <img src="{{ URL::to('vendor/assets/images/dashboard/circle.svg')}}" class="card-img-absolute" alt="circle-image">
         <h4 class="font-weight-normal mb-3">Jumlah Guru <i class="mdi mdi-account-card-details mdi-24px float-right"></i>
         </h4>
-        <h2 class="mb-5">{{$teacher}}</h2>
+        <h2 class="mb-5">11</h2>
         <h6 class="card-text">SMKS MAHAPUTRA</h6>
       </div>
     </div>

@@ -2,8 +2,9 @@
 
 use App\User;
 
-$user = User::join('roles', 'users.role_id', '=', 'roles.id')->select('roles.name as role_name', 'roles.*', 'users.name as username', 'users.*')->where('users.id', Auth()->user()->id)->first();
-
+$user = User::join('user_has_roles','user_has_roles.uhs_user_id','=','users.usr_id')
+              ->join('roles','user_has_roles.uhs_role_id','=','roles.rol_id')
+              ->where('usr_id',Auth()->user()->usr_id)->first();  
 ?>
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -11,21 +12,25 @@ $user = User::join('roles', 'users.role_id', '=', 'roles.id')->select('roles.nam
     <li class="nav-item nav-profile">
       <a href="{{ url('profiles') }}" class="nav-link">
         <div class="nav-profile-image">
+          @if(isset($user->usr_profile_picture))
           <img src="{{ asset('profile_picture/'.$user->name.'/'.$user->profile_picture)}}" alt="null">
+          @else
+          <img src="{{ asset('profile_picture/avatar-2.png')}}" alt="null">
+          @endif
           <span class="login-status online"></span>
         </div>
         <div class="nav-profile-text d-flex flex-column">
-          <span class="font-weight-bold mb-2">{{ $user->username }}</span>
-          <span class="text-secondary text-small">{{ $user->role_name }}</span>
+          <span class="font-weight-bold mb-2">asd</span>
+          <span class="text-secondary text-small">rol</span>
         </div>
         <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
       </a>
     </li>
 
-    @if($user->role_id == 1)
+    @if($user->rol_id == 1)
     <li class="nav-item">
-      <a class="nav-link" href="/home">
-        <span class="menu-title">Beranda</span>
+      <a class="nav-link" href="{{ url('dashboard') }}">
+        <span class="menu-title">Dashboard</span>
         <i class="mdi mdi-home menu-icon"></i>
       </a>
     </li>
@@ -90,11 +95,11 @@ $user = User::join('roles', 'users.role_id', '=', 'roles.id')->select('roles.nam
     </li>
 
 
-    @elseif($user->role_id == 2)
+    @elseif($user->rol_id == 2)
 
     <li class="nav-item">
-      <a class="nav-link" href="{{ url('home')}}">
-        <span class="menu-title">Beranda</span>
+      <a class="nav-link" href="{{ url('dashboard')}}">
+        <span class="menu-title">Dashboard</span>
         <i class="mdi mdi-home menu-icon"></i>
       </a>
     </li>
@@ -129,8 +134,8 @@ $user = User::join('roles', 'users.role_id', '=', 'roles.id')->select('roles.nam
 
     @else
     <li class="nav-item">
-      <a class="nav-link" href="{{ url('home') }}">
-        <span class="menu-title">Beranda</span>
+      <a class="nav-link" href="{{ url('dashboard') }}">
+        <span class="menu-title">Dashboard</span>
         <i class="mdi mdi-home menu-icon"></i>
       </a>
     </li>

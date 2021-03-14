@@ -9,11 +9,9 @@
     <link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/css/vendor.bundle.base.css')}}">
     <link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
     <link rel="shortcut icon" href="{{URL::to('vendor/assets/images/logo-atas.png')}}" />
-
 </head>
 
 <body>
-
     <div id="preloader">
         <div class="sk-three-bounce">
             <div class="sk-child sk-bounce1"></div>

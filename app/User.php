@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\UserHasRole;
+use App\Models\Role;
 
 class User extends Authenticatable
 {
@@ -20,11 +22,11 @@ class User extends Authenticatable
     //     'name', 'email', 'password',
     // ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    public function getAuthPassword()
+    {
+        return $this->usr_password;
+    }
+
     protected $hidden = [
         'password', 'remember_token',
     ];
@@ -38,4 +40,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     protected $dates = ['date_of_birth'];
+
+    // public function user_has_roles()
+    // {
+    //     return $this->hasMany(UserHasRole::class, 'uhs_user_id', 'usr_id',);
+    // }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_has_roles', 'uhs_user_id', 'uhs_role_id');
+    }
 }
