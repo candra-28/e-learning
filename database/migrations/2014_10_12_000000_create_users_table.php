@@ -14,24 +14,37 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->bigInteger('role_id')->unsigned();
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->boolean('is_active');
-            $table->string('entry_year');
-            $table->string('phone_number')->nullable();
-            $table->string('gender')->nullable();
-            $table->string('profile_picture')->nullable();
-            $table->string('place_of_birth')->nullable();
-            $table->date('date_of_birth')->nullable();
-            $table->string('religion')->nullable();
-            $table->text('address')->nullable();
-            $table->timestamps();
+            $table->id('usr_id');
+            $table->string('usr_name');
+            $table->string('usr_email')->unique();
+            $table->string('usr_phone_number');
+            $table->string('usr_password');
+            $table->integer('usr_code_otp')->nullable();
+            $table->timestamp('usr_otp_verified_at')->nullable();
+            $table->timestamp('usr_start_otp')->nullable();
+            $table->timestamp('usr_expired_otp')->nullable();
+            
+            $table->string('usr_gender')->nullable();
+            $table->string('usr_profile_picture')->nullable();
+            $table->string('usr_place_of_birth')->nullable();
+            $table->date('usr_date_of_birth')->nullable();
+            $table->string('usr_religion')->nullable();
+            $table->text('usr_address')->nullable();
+            $table->boolean('usr_is_active');
+
+            $table->bigInteger('usr_created_by')->unsigned()->nullable();
+            $table->bigInteger('usr_updated_by')->unsigned()->nullable();
+            $table->bigInteger('usr_deleted_by')->unsigned()->nullable();
+
+            $table->foreign('usr_created_by')->references('usr_id')->on('users')->onDelete('cascade');
+            $table->foreign('usr_updated_by')->references('usr_id')->on('users')->onDelete('cascade');
+            $table->foreign('usr_deleted_by')->references('usr_id')->on('users')->onDelete('cascade');
+            
+            $table->timestamp('usr_created_at')->nullable();
+            $table->timestamp('usr_updated_at')->nullable();
+            $table->timestamp('usr_deleted_at')->nullable();
+            $table->string('usr_sys_note')->nullable();
+
         });
     }
 

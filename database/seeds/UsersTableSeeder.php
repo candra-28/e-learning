@@ -5,6 +5,8 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Models\UserHasRole;
+use Carbon\Carbon;
 
 class UsersTableSeeder extends Seeder
 {
@@ -15,35 +17,34 @@ class UsersTableSeeder extends Seeder
 	 */
 	public function run()
 	{
-
-		DB::table('roles')->insert([
-			'name' => 'Administrator',
-		]);
-
-		DB::table('roles')->insert([
-			'name' => 'Guru',
-		]);
-
-		DB::table('roles')->insert([
-			'name' => 'Siswa',
+		User::create([
+			'usr_name' => 'candra',
+			'usr_email' => 'candra@gmail.com',
+			'usr_password' => Hash::make('123'),
+			'usr_phone_number'	=> '082118342147',
+			'usr_otp_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+			'usr_is_active' => 1,
 		]);
 
 		User::create([
-			'name' => 'candra',
-			'email' => 'candra@gmail.com',
-			'password' => Hash::make('123'),
-			'role_id' => 1,
-			'is_active' => 1,
-			'entry_year' => 2020
+			'usr_name' => 'ahmad',
+			'usr_email' => 'ahmad@gmail.com',
+			'usr_password' => Hash::make('abc'),
+			'usr_phone_number'	=> '082118342147',
+			'usr_otp_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
+			'usr_is_active' => 1,
 		]);
 
-		User::create([
-			'name' => 'ahmad',
-			'email' => 'ahmad@gmail.com',
-			'password' => Hash::make('abc'),
-			'role_id' => 2,
-			'is_active' => 1,
-			'entry_year' => 2020
+		UserHasRole::create([
+			'uhs_user_id'	=> 1,
+			'uhs_role_id'	=> 1,
 		]);
+
+		UserHasRole::create([
+			'uhs_user_id'	=> 2,
+			'uhs_role_id'	=> 2,
+		]);
+		
+
 	}
 }

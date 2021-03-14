@@ -14,9 +14,19 @@ class CreateRolesTable extends Migration
     public function up()
     {
         Schema::create('roles', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+            $table->id('rol_id');
+            $table->string('rol_name');
+            $table->boolean('rol_is_active');
+
+            $table->bigInteger('rol_created_by')->unsigned()->nullable();
+            $table->bigInteger('rol_updated_by')->unsigned()->nullable();
+            $table->bigInteger('rol_deleted_by')->unsigned()->nullable();
+
+            $table->timestamp('rol_created_at')->nullable();
+            $table->timestamp('rol_updated_at')->nullable();
+            $table->timestamp('rol_deleted_at')->nullable();
+            $table->string('rol_sys_note')->nullable();
+
         });
     }
 
