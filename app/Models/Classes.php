@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Classes extends Model
 {
     protected $primaryKey = 'cls_id';
+    protected $table = 'classes';
     const CREATED_AT = 'cls_created_at';
     const UPDATED_AT = 'cls_updated_at';
     const DELETED_AT = 'cls_deleted_at';

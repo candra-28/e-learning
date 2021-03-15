@@ -10,10 +10,13 @@ use Illuminate\Support\Facades\Session;
 use Validator;
 use App\User;
 use App\Models\Classes;
-use App\Student;
-use App\Teacher;
+use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\UserLogHistory;
 use Carbon\Carbon;
+use App\Models\SchoolYear;
+use App\Models\UserHasRole;
+use App\Models\StudentClass;
 
 class AuthController extends Controller
 {
@@ -53,85 +56,80 @@ class AuthController extends Controller
 
     public function showFormRegister()
     {
-        $classes = Classes::where('cls_is_active', true)->get();
-        return view('auth.register', ['classes' => $classes]);
+        $classes = Classes::join('grade_levels','classes.cls_grade_level_id','=','grade_levels.grl_id')
+        ->join('majors','classes.cls_major_id','=','majors.mjr_id')->where('cls_is_active', true)->select('cls_id','cls_number','grade_levels.grl_name','majors.mjr_name')->get();
+        $school_years = schoolYear::where('scy_is_active', true)
+        ->get();
+        // dd($classes);
+        return view('auth.register', ['classes' => $classes, 'school_years' => $school_years]);
     }
 
     public function register(Request $request)
     {
-        dd($request);
+        // dd($request);
+        // dd(Auth()->user()->usr_id);
         if ($request->role == "siswa") {
 
             $user = new User;
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->password);
-            // $user->email_verified_at = \Carbon\Carbon::now();
-            $user->entry_year = $request->entry_year;
-            $user->gender = $request->gender;
-            $user->place_of_birth = $request->place_of_birth;
-            $user->date_of_birth   = $request->date_of_birth;
-            $user->religion = $request->religion;
-            $user->address  = $request->address;
-            $user->is_active = 1;
-            $user->role_id = 3;
+            $user->usr_name = $request->name;
+            $user->usr_email = $request->email;
+            $user->usr_phone_number = $request->phone_number;
+            $user->usr_password = Hash::make($request->password);
+            $user->usr_gender = $request->gender;
+            $user->usr_place_of_birth = $request->place_of_birth;
+            $user->usr_date_of_birth   = $request->date_of_birth;
+            $user->usr_religion = $request->religion;
+            $user->usr_address  = $request->address;
+            $user->usr_is_active = 1;
             $userSaved = $user->save();
 
             if ($userSaved) {
                 $student = new Student;
-                $student->user_id = $user->id;
-                $student->class_id = $request->class_id;
-                $student->nis = $request->nis;
+                $student->stu_user_id = $user->usr_id;
+                // $student->stu_class_id = $request->class_id;
+                $student->stu_nis = $request->nis;
+                $student->stu_school_year_id = $request->school_year_id;
+                $student->stu_is_active = 1;
+                $student->stu_created_by = $user->usr_id;
                 $student->save();
+
+                $role = new UserHasRole;
+                $role->uhs_user_id = $user->usr_id;
+                $role->uhs_role_id = $request->user_role;
+                $role->uhs_created_by = $user->usr_id;
+                $role->save();
                 return redirect()->route('login')->with(['success' => 'Register berhasil! Silahkan login']);
             }
         } else {
 
-            $rules = [
-                'teacher_name'          => 'required|min:3|max:35',
-                'teacher_email'         => 'required|email|unique:users,email',
-                'password'              => 'required|confirmed',
-                'entry_year'            => 'required',
-            ];
-
-            $messages = [
-                'teacher_name.required'         => 'Nama Lengkap wajib diisi',
-                'teacher_name.min'              => 'Nama lengkap minimal 3 karakter',
-                'teacher_name.max'              => 'Nama lengkap maksimal 35 karakter',
-                'teacher_email.required'        => 'Email wajib diisi',
-                'teacher_email.email'           => 'Email tidak valid',
-                'teacher_email.unique'          => 'Email sudah terdaftar',
-                'password.required'     => 'Password wajib diisi',
-                'password.confirmed'    => 'Password tidak sama dengan konfirmasi password',
-                'entry_year.required'   => 'Tahun masuk wajib di pilih',
-            ];
-
-            $validator = Validator::make($request->all(), $rules, $messages);
-
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput($request->all);
-            }
-
-
             $user = new User;
-            $user->name = ucwords(strtolower($request->teacher_name));
-            $user->email = strtolower($request->teacher_email);
-            $user->password = Hash::make($request->password);
-            $user->email_verified_at = \Carbon\Carbon::now();
-            $user->entry_year = $request->entry_year;
-            $user->gender = $request->gender;
-            $user->place_of_birth = $request->place_of_birth;
-            $user->date_of_birth   = $request->date_of_birth;
-            $user->address  = $request->address;
-            $user->is_active = 1;
-            $user->role_id = 2;
+            $user->usr_name = $request->teacher_name;
+            $user->usr_email = $request->teacher_email;
+            $user->usr_phone_number = $request->phone_number;
+            $user->usr_password = Hash::make($request->password);
+            // $user->email_verified_at = \Carbon\Carbon::now();
+            // $user->entry_year = $request->entry_year;
+            $user->usr_gender = $request->gender;
+            $user->usr_place_of_birth = $request->place_of_birth;
+            $user->usr_date_of_birth   = $request->date_of_birth;
+            $user->usr_address  = $request->address;
+            $user->usr_is_active = 1;
+            // $user->role_id = 2;
             $userSaved = $user->save();
 
             if ($userSaved) {
                 $teacher = new Teacher;
-                $teacher->user_id = $user->id;
-                $teacher->nip = $request->nip;
+                $teacher->tcr_user_id = $user->usr_id;
+                $teacher->tcr_nip = $request->nip;
+                $teacher->tcr_entry_year = $request->entry_year;
+                $teacher->tcr_is_active = 1;
                 $teacher->save();
+                
+                $role = new UserHasRole;
+                $role->uhs_user_id = $user->usr_id;
+                $role->uhs_role_id = $request->user_role;
+                $role->uhs_created_by = $user->usr_id;
+                $role->save();
                 return redirect()->route('login')->with(['success' => 'Register berhasil! Silahkan login']);
             }
         }

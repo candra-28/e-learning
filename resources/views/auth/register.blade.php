@@ -60,6 +60,13 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
+                                                <label for="exampleInputUsername1">Nomor Telepon <span class="text-danger">*</span></label>
+                                                <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" type="text" name="phone_number" value="{{ old('phone_number') }}" class="form-control" placeholder="Nomor Telepon">
+                                                @error('phone_number')
+                                                <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="exampleInputEmail1">Alamat Email <span class="text-danger">*</span></label>
                                                 <input name="email" value="{{ old('email') }}" type="email" class="form-control" placeholder="Email">
                                                 @error('email')
@@ -79,30 +86,27 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label>Tahun Masuk <span class="text-danger">*</span></label>
-                                                <select name="entry_year" class="form-control">
-                                                    <option selected disabled>-- Pilih Tahun Masuk --</option>
-                                                    <option value="2016">2016</option>
-                                                    <option value="2017">2017</option>
-                                                    <option value="2018">2018</option>
-                                                    <option value="2019">2019</option>
-                                                    <option value="2020">2020</option>
-                                                    <option value="2021">2021</option>   
+                                                <label>Tahun Ajaran <span class="text-danger">*</span></label>
+                                                <select name="school_year_id" class="form-control">
+                                                    <option selected disabled>-- Pilih Tahun Ajaran --</option>
+                                                    @foreach($school_years as $school_year)
+                                                    <option value="{{ $school_year->scy_id }}">{{ $school_year->scy_name }}</option>
+                                                    @endforeach  
                                                 </select>
                                                 @error('entry_year')
                                                 <div class="text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
-
+<!-- 
                                             <div class="form-group">
-                                                <label>Kelas</label>
+                                                <label>Kelas <span class="text-danger">*</span></label>
                                                 <select name="class_id" class="form-control">
                                                     <option selected disabled>-- pilih Kelas --</option>
                                                     @foreach($classes as $class)
-                                                    <option value="{{ $class->cls_id }}">{{ $class->cls_name }}</option>
+                                                    <option value="{{ $class->cls_id }}">{{ $class->grl_name }} {{ $class->mjr_name }} {{ $class->cls_number }}</option>
                                                     @endforeach
                                                 </select>
-                                            </div>
+                                            </div> -->
 
                                             <div class="form-group row">
                                                 <label class="col-sm-4 col-form-label">Jenis Kelamin</label>
@@ -131,7 +135,7 @@
 
                                             <div class="form-group">
                                                 <label for="date_of_birth">Tanggal, Bulan, Tahun Lahir</label>
-                                                <input name="date_of_birth" value="{{ old('name_of_birth') }}" class="form-control" type="date">
+                                                <input  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="date_of_birth" value="{{ old('name_of_birth') }}" class="form-control" type="date">
                                             </div>
 
                                             <div class="form-group">
@@ -151,6 +155,7 @@
                                                 <input type="text" value="{{ old('address') }}" name="address" class="form-control" placeholder="Alamat">
                                             </div>
                                             <input type="hidden" name="role" value="siswa">
+                                            <input type="hidden" name="user_role" value="4">
                                             <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">DAFTAR</button>
                                         </form>
                                     </div>
@@ -166,6 +171,13 @@
                                                 <label for="exampleInputUsername1">Nama Lengkap <span class="text-danger">*</span></label>
                                                 <input type="text" name="teacher_name" value="{{ old('teacher_name') }}" class="form-control" placeholder="Nama">
                                                 @error('teacher_name')
+                                                <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputUsername1">Nomor Telepon <span class="text-danger">*</span></label>
+                                                <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" type="text" name="phone_number" value="{{ old('phone_number') }}" class="form-control" placeholder="Nomor Telepon">
+                                                @error('phone_number')
                                                 <div class="text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
@@ -189,16 +201,8 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label>Tahun Masuk <span class="text-danger">*</span></label>
-                                                <select name="entry_year" class="form-control">
-                                                    <option selected disabled>-- Pilih Tahun Masuk --</option>
-                                                    <option value="2016">2016</option>
-                                                    <option value="2017">2017</option>
-                                                    <option value="2018">2018</option>
-                                                    <option value="2019">2019</option>
-                                                    <option value="2020">2020</option>
-                                                    <option value="2021">2021</option>
-                                                </select>
+                                                <label>Tahun Masuk / <span class="text-danger">*</span></label>
+                                                <input class="form-control year_picker" name="entry_year" placeholder="Masukan tahun masuk">
                                                 @error('entry_year')
                                                 <div class="text-danger">{{ $message }}</div>
                                                 @enderror
@@ -239,6 +243,7 @@
                                                 <input type="text" name="address" value="{{ old('address') }}" class="form-control" placeholder="Alamat">
                                             </div>
                                             <input type="hidden" name="role" value="guru">
+                                            <input type="hidden" name="user_role" value="3">
                                             <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">DAFTAR</button>
                                         </form>
                                     </div>
@@ -265,6 +270,17 @@
 
     <script src="{{URL::to('vendor/landingpage/vendor/validator/jquery.validate.js')}}"></script>
     <script src="{{URL::to('vendor/landingpage/vendor/validator/validator-init.js')}}"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
+    <script>
+    $('.year_picker').datepicker({
+        autoclose: true,
+        minViewMode: 2,
+        format: 'yyyy',
+        orientation: "auto",
+    });
+</script>
 </body>
 
 </html>

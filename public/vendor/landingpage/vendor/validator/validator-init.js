@@ -218,6 +218,11 @@ $(function () {
               equalTo: "#password"
             },
             entry_year: "required",
+            phone_number:{
+                required: true,
+                minlength: 10
+            },
+            class_id: "required",
         },
         messages: {
             name: "Nama lengkap wajib di isi",
@@ -236,7 +241,12 @@ $(function () {
                 required: "Ulangi kata sandi wajib di isi",
                 equalTo: "Ulangi kata sandi wajib sama"
             },
-            entry_year: "Tahun masuk wajib di isi",
+            entry_year: "Tahun ajaran wajib di isi",
+            phone_number:{
+                required: "Nomor telepon wajib di isi",
+                minlength: "Minimal 10 karakter"
+            },
+            class_id: "Kelas harus di pilih",
         },
     });
 });
@@ -258,7 +268,15 @@ $(function () {
               required: true,
               equalTo: "#password-teacher"
             },
-            entry_year: "required",
+            entry_year:{
+                required: true,
+                minlength: 4,
+                maxlength: 4,
+            },
+            phone_number:{
+                required: true,
+                minlength: 10
+            },
         },
         messages: {
             teacher_name: "Nama lengkap wajib di isi",
@@ -277,8 +295,16 @@ $(function () {
                 required: "Ulangi kata sandi wajib di isi",
                 equalTo: "Ulangi kata sandi wajib sama"
             },
-            entry_year: "Tahun masuk wajib di isi",
-            nip: "NIP wajib di isi"
+            entry_year:{
+                required: "Tahun masuk wajib di isi",
+                minlength: "Tahun tidak valid",
+                maxlength: "Tahun tidak valid"
+            },
+            nip: "NIP wajib di isi",
+            phone_number:{
+                required: "Nomor telepon wajib di isi",
+                minlength: "Minimal 10 karakter"
+            },
         },
     });
 });

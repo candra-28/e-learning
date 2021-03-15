@@ -37,7 +37,7 @@ class UsersTableSeeder extends Seeder
 
 		UserHasRole::create([
 			'uhs_user_id'	=> 2,
-			'uhs_role_id'	=> 2,
+			'uhs_role_id'	=> 3,
 		]);
 		
 

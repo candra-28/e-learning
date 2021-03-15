@@ -39,7 +39,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    protected $dates = ['date_of_birth'];
+    protected $dates = ['usr_date_of_birth'];
 
     // public function user_has_roles()
     // {

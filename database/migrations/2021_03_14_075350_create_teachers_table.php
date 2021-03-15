@@ -17,6 +17,7 @@ class CreateTeachersTable extends Migration
             $table->id('tcr_id');
             $table->bigInteger('tcr_user_id')->unsigned();
             $table->string('tcr_nip');
+            $table->integer('tcr_entry_year');
             $table->boolean('tcr_is_active');
             
             $table->bigInteger('tcr_created_by')->unsigned()->nullable();

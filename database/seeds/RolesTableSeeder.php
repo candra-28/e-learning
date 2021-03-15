@@ -17,6 +17,11 @@ class RolesTableSeeder extends Seeder
 		]);
 
 		DB::table('roles')->insert([
+			'rol_name' => 'Admin',
+			'rol_is_active'	=> 1,
+		]);
+
+		DB::table('roles')->insert([
 			'rol_name' => 'Guru',
 			'rol_is_active'	=> 1,
 		]);

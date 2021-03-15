@@ -26,6 +26,8 @@ class CreateUserLogHistoriesTable extends Migration
             $table->foreign('ulh_created_by')->references('usr_id')->on('users')->onDelete('cascade');
             $table->foreign('ulh_updated_by')->references('usr_id')->on('users')->onDelete('cascade');
             $table->foreign('ulh_deleted_by')->references('usr_id')->on('users')->onDelete('cascade');
+            $table->foreign('ulh_user_id')->references('usr_id')->on('users')->onDelete('cascade');
+            
             
             $table->timestamp('ulh_created_at')->nullable();
             $table->timestamp('ulh_updated_at')->nullable();
