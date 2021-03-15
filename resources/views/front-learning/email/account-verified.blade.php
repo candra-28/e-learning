@@ -1,0 +1,1 @@
+INI CODE OTP MU NGAB {{ $user->usr_code_otp }}

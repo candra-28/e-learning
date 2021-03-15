@@ -3,17 +3,21 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function(){
-    return view('landingpage');
+    return view('front-learning.index');
 });
 Route::get('login', 'AuthController@showFormLogin')->name('login');
 Route::post('login', 'AuthController@login');
+Route::get('logout', 'AuthController@logout')->name('logout');
 Route::get('register', 'AuthController@showFormRegister')->name('register');
 Route::post('register', 'AuthController@register');
+Route::get('/waiting-verified', 'AuthController@waitingVerified');
+Route::post('/waiting-verified', 'AuthController@storeWaitingVerified');
+Route::post('/resend-code-otp', 'AuthController@resendCodeOtp');
 
-Route::group(['middleware' => 'auth'], function () {
+
+Route::group(['middleware' => 'accountVerified'], function () {
 
     Route::get('dashboard', 'HomeController@index')->name('dashboard');
-    Route::get('logout', 'AuthController@logout')->name('logout');
 
     Route::get('announcements', 'AnnouncementController@index');
     Route::get('announcement/create', 'AnnouncementController@create');

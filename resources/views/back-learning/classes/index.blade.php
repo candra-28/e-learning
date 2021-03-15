@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('back-learning.layouts.master')
 
 @push('title')
 - Daftar Kelas
@@ -7,10 +7,10 @@
 @push('styles')
 
 
-<link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-<link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/css/vendor.bundle.base.css')}}">
-<link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
-<link rel="shortcut icon" href="{{ URL::to('vendor/assets/images/logo-atas.png')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
+<link rel="shortcut icon" href="{{ URL::to('vendor/be/assets/images/logo-atas.png')}}">
 
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -97,12 +97,12 @@
 
 @push('scripts')
 
-<script src="{{URL::to('vendor/assets/vendors/js/vendor.bundle.base.js')}}"></script>
-<script src="{{URL::to('vendor/assets/vendors/chart.js/Chart.min.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/off-canvas.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/hoverable-collapse.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/misc.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/todolist.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/vendors/chart.js/Chart.min.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
 
 <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 

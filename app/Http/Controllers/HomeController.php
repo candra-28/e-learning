@@ -18,6 +18,6 @@ class HomeController extends Controller
     	$students = Student::count();
     	$teachers = Teacher::count();
     	$classes 	 = Classes::count();
-        return view('dashboard',compact('students','teachers','classes'));
+        return view('back-learning.dashboard',compact('students','teachers','classes'));
     }
 }

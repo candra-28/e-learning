@@ -19,9 +19,9 @@ class ClassController extends Controller
             ->editColumn("cls_is_active", function ($class) {
                 $class_is_active = $class->cls_is_active;
                 if ($class_is_active == "1") {
-                    return 'Aktif <span class="mdi mdi-check-circle"></span>';
+                    return '<label class="badge badge-success">aktif</label>';
                 } elseif ($class_is_active == "0") {
-                    return 'Tidak Aktif <span class="mdi mdi-close-circle"></span>';
+                    return '<label class="badge badge-danger">tidak aktif</label>';
                 } else {
                     return "Tidak punya status aktif";
                 }
@@ -37,7 +37,7 @@ class ClassController extends Controller
             ->rawColumns(['action', 'cls_is_active'])
             ->make(true);
         }
-        return view('classes.index');
+        return view('back-learning.classes.index');
     }
     public function store(Request $request)
     {

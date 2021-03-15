@@ -20,10 +20,10 @@
   </div>
   <div class="container-scroller">
 
-    @include ('includes.navbar')
+    @include ('back-learning.includes.navbar')
     <div class="container-fluid page-body-wrapper">
 
-      @include ('includes.sidebar')
+      @include ('back-learning.includes.sidebar')
 
       <div class="main-panel">
         <div class="content-wrapper">
@@ -41,7 +41,7 @@
 
 
     @stack('scripts')
-    <script src="{{ URL::to('vendor/assets/js/preloader.js')}}"></script>
+    <script src="{{ URL::to('vendor/be/assets/js/preloader.js')}}"></script>
 </body>
 
 </html>

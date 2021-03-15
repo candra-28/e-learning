@@ -20,8 +20,8 @@ $user = User::join('user_has_roles','user_has_roles.uhs_user_id','=','users.usr_
           <span class="login-status online"></span>
         </div>
         <div class="nav-profile-text d-flex flex-column">
-          <span class="font-weight-bold mb-2">asd</span>
-          <span class="text-secondary text-small">rol</span>
+          <span class="font-weight-bold mb-2">{{ Auth()->user()->usr_name }}</span>
+          <span class="text-secondary text-small">TEST</span>
         </div>
         <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
       </a>
@@ -102,7 +102,7 @@ $user = User::join('user_has_roles','user_has_roles.uhs_user_id','=','users.usr_
       </a>
     </li>
 
-    @elseid($user->rol_id == 2)
+    @elseif($user->rol_id == 2)
         <li class="nav-item">
       <a class="nav-link" href="{{ url('dashboard') }}">
         <span class="menu-title">Dashboard</span>

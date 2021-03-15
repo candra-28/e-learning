@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendOTPCode;
 use App\User;
 use App\Models\Classes;
 use App\Models\Student;
@@ -17,6 +19,7 @@ use Carbon\Carbon;
 use App\Models\SchoolYear;
 use App\Models\UserHasRole;
 use App\Models\StudentClass;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -25,13 +28,13 @@ class AuthController extends Controller
         if (Auth::check()) {
             return redirect()->route('dashboard');
         }
-        return view('auth.login');
+        return view('front-learning.auth.login');
     }
 
     public function login(Request $request)
     {
         $user_login = [
-            'usr_email'     => $request->input('email'),
+            'usr_email' => $request->input('email'),
             'password'  => $request->input('password'),
         ];
 
@@ -56,20 +59,22 @@ class AuthController extends Controller
 
     public function showFormRegister()
     {
+         if (Auth::check()) {
+            return redirect()->route('dashboard');
+        }
         $classes = Classes::join('grade_levels','classes.cls_grade_level_id','=','grade_levels.grl_id')
         ->join('majors','classes.cls_major_id','=','majors.mjr_id')->where('cls_is_active', true)->select('cls_id','cls_number','grade_levels.grl_name','majors.mjr_name')->get();
         $school_years = schoolYear::where('scy_is_active', true)
         ->get();
         // dd($classes);
-        return view('auth.register', ['classes' => $classes, 'school_years' => $school_years]);
+        return view('front-learning.auth.register', ['classes' => $classes, 'school_years' => $school_years]);
     }
 
     public function register(Request $request)
     {
         // dd($request);
-        // dd(Auth()->user()->usr_id);
         if ($request->role == "siswa") {
-
+            $request->validate(['email' => 'unique:users,usr_email'],['email.unique'  => 'Alamat Email sudah digunakan']);
             $user = new User;
             $user->usr_name = $request->name;
             $user->usr_email = $request->email;
@@ -81,7 +86,10 @@ class AuthController extends Controller
             $user->usr_religion = $request->religion;
             $user->usr_address  = $request->address;
             $user->usr_is_active = 1;
+            $user->usr_code_otp = substr(str_shuffle('0123456789'), 0, 6);
+            $user->usr_start_otp = Carbon::now()->addMinutes(5)->format('Y-m-d H:i:s');
             $userSaved = $user->save();
+            Mail::to($user['usr_email'])->send(new SendOTPCode($user));
 
             if ($userSaved) {
                 $student = new Student;
@@ -98,25 +106,37 @@ class AuthController extends Controller
                 $role->uhs_role_id = $request->user_role;
                 $role->uhs_created_by = $user->usr_id;
                 $role->save();
-                return redirect()->route('login')->with(['success' => 'Register berhasil! Silahkan login']);
+                $user_login = [
+                    'usr_email' => $request->email,
+                    'password'  => $request->password,
+                ];
+
+                $log_success = Auth::attempt($user_login);
+                if ($log_success) {
+                    $user_login_history = new UserLogHistory();
+                    $user_login_history->ulh_user_id = Auth::user()->usr_id;
+                    $user_login_history->ulh_last_login_ip =  $request->ip();
+                    $user_login_history->ulh_date = Carbon::now();
+                    $user_login_history->save();
+                }
+                return redirect()->route('dashboard');
             }
         } else {
-
+            $request->validate(['teacher_email' => 'unique:users,usr_email'],['teacher_email.unique'  => 'Alamat Email sudah digunakan']);
             $user = new User;
             $user->usr_name = $request->teacher_name;
             $user->usr_email = $request->teacher_email;
             $user->usr_phone_number = $request->phone_number;
             $user->usr_password = Hash::make($request->password);
-            // $user->email_verified_at = \Carbon\Carbon::now();
-            // $user->entry_year = $request->entry_year;
             $user->usr_gender = $request->gender;
             $user->usr_place_of_birth = $request->place_of_birth;
             $user->usr_date_of_birth   = $request->date_of_birth;
             $user->usr_address  = $request->address;
             $user->usr_is_active = 1;
-            // $user->role_id = 2;
+            $user->usr_code_otp = substr(str_shuffle('0123456789'), 0, 6);
+            $user->usr_start_otp = Carbon::now()->addMinutes(5)->format('Y-m-d H:i:s');
             $userSaved = $user->save();
-
+            Mail::to($user['usr_email'])->send(new SendOTPCode($user));
             if ($userSaved) {
                 $teacher = new Teacher;
                 $teacher->tcr_user_id = $user->usr_id;
@@ -130,7 +150,20 @@ class AuthController extends Controller
                 $role->uhs_role_id = $request->user_role;
                 $role->uhs_created_by = $user->usr_id;
                 $role->save();
-                return redirect()->route('login')->with(['success' => 'Register berhasil! Silahkan login']);
+
+                $user_login = [
+                    'usr_email' => $request->teacher_email,
+                    'password'  => $request->password,
+                ];
+                $log_success = Auth::attempt($user_login);
+                if ($log_success) {
+                    $user_login_history = new UserLogHistory();
+                    $user_login_history->ulh_user_id = Auth::user()->usr_id;
+                    $user_login_history->ulh_last_login_ip =  $request->ip();
+                    $user_login_history->ulh_date = Carbon::now();
+                    $user_login_history->save();
+                }
+                return redirect()->route('dashboard');
             }
         }
     }
@@ -139,5 +172,36 @@ class AuthController extends Controller
     {
         Auth::logout();
         return redirect('/');
+    }
+
+    public function waitingVerified(){
+        $user_verified_at = is_null(!Auth()->user()->usr_otp_verified_at);
+        // dd($user_verified_at);
+        return view('front-learning.auth.waiting-verified',compact('user_verified_at'));
+    }
+    public function storeWaitingVerified(Request $request){
+        // dd($request->usr_code_otp, $user->);
+        $user = Auth()->user();
+        if ($user->usr_code_otp == $request->usr_code_otp) {
+            if ($user->usr_start_otp > Carbon::now()->format('Y-m-d H:i:s')) {
+                $user->usr_otp_verified_at = Carbon::now();
+                $user->update();
+                return redirect()->back()->with(['success' => 'Akun anda berhasil di verifikasi']);
+            }else{
+                return redirect()->back()->with(['error' => 'Kode OTP sudah kadaluarsa, Silahkan kirim ulang']);
+            }
+        }
+        return redirect()->back()->with(['error' => 'Kode yang anda masukan salah']);
+    }
+    public function resendCodeOtp(Request $request)
+    {
+        $user = Auth()->user();
+        // dd($user);
+        $user->usr_code_otp = substr(str_shuffle('0123456789'), 0, 6);
+        $user->usr_start_otp = Carbon::now()->addMinutes(5)->format('Y-m-d H:i:s');
+        $user->usr_updated_by = Auth()->user()->usr_id;
+        $user->update();
+        Mail::to($user['usr_email'])->send(new SendOTPCode($user));
+        return redirect()->back()->with(['success' => 'Kode OTP berhasil di kirim ulang']);
     }
 }

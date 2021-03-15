@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>E-Learning - Daftar</title>
 
-    <link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-    <link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/css/vendor.bundle.base.css')}}">
-    <link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
-    <link rel="shortcut icon" href="{{URL::to('vendor/assets/images/logo-atas.png')}}" />
+    <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
+    <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
+    <link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
+    <link rel="shortcut icon" href="{{URL::to('vendor/be/assets/images/logo-atas.png')}}" />
     <style type="text/css">
         label #gender-error,{
            margin-top: 100px;
@@ -32,7 +32,7 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5">
                             <div class="brand-logo text-center">
-                                <a href="{{ url('/') }}"> <img src="{{URL::to('vendor/assets/images/3.svg')}}"></a>
+                                <a href="{{ url('/') }}"> <img src="{{URL::to('vendor/be/assets/images/3.svg')}}"></a>
                             </div>
                             <h4>Baru disini?</h4>
                             <h6 class="font-weight-light">Mendaftar itu mudah. Hanya perlu beberapa langkah. Pilihlah salah satu Tab dibawah</h6>
@@ -97,16 +97,6 @@
                                                 <div class="text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
-<!-- 
-                                            <div class="form-group">
-                                                <label>Kelas <span class="text-danger">*</span></label>
-                                                <select name="class_id" class="form-control">
-                                                    <option selected disabled>-- pilih Kelas --</option>
-                                                    @foreach($classes as $class)
-                                                    <option value="{{ $class->cls_id }}">{{ $class->grl_name }} {{ $class->mjr_name }} {{ $class->cls_number }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div> -->
 
                                             <div class="form-group row">
                                                 <label class="col-sm-4 col-form-label">Jenis Kelamin</label>
@@ -201,7 +191,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label>Tahun Masuk / <span class="text-danger">*</span></label>
+                                                <label>Tahun Masuk <span class="text-danger">*</span></label>
                                                 <input class="form-control year_picker" name="entry_year" placeholder="Masukan tahun masuk">
                                                 @error('entry_year')
                                                 <div class="text-danger">{{ $message }}</div>
@@ -261,15 +251,15 @@
     </div>
     </div>
 
-    <script src="{{URL::to('vendor/assets/vendors/js/vendor.bundle.base.js')}}"></script>
-    <script src="{{URL::to('vendor/assets/js/off-canvas.js')}}"></script>
-    <script src="{{URL::to('vendor/assets/js/hoverable-collapse.js')}}"></script>
-    <script src="{{URL::to('vendor/assets/js/misc.js')}}"></script>
-    <script src="{{ URL::to('vendor/assets/js/preloader.js')}}"></script>
+    <script src="{{URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
+    <script src="{{URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
+    <script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
+    <script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
+    <script src="{{ URL::to('vendor/be/assets/js/preloader.js')}}"></script>
 
 
-    <script src="{{URL::to('vendor/landingpage/vendor/validator/jquery.validate.js')}}"></script>
-    <script src="{{URL::to('vendor/landingpage/vendor/validator/validator-init.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>

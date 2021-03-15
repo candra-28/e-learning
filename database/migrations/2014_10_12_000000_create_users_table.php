@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->integer('usr_code_otp')->nullable();
             $table->timestamp('usr_otp_verified_at')->nullable();
             $table->timestamp('usr_start_otp')->nullable();
-            $table->timestamp('usr_expired_otp')->nullable();
             
             $table->string('usr_gender')->nullable();
             $table->string('usr_profile_picture')->nullable();

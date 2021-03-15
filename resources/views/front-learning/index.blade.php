@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<!-- Mirrored from demo.themefisher.com/tradient/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 18 Dec 2020 11:11:23 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +9,9 @@
     <!-- Favicon icon -->
     <link rel="shortcut icon" href="{{URL::to('vendor/assets/images/logo-atas.png')}}" />
     <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="{{URL::to('vendor/landingpage/vendor/waves/waves.min.css')}}">
-    <link rel="stylesheet" href="{{URL::to('vendor/landingpage/vendor/owlcarousel/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{URL::to('vendor/landingpage/css/style.css')}}">
+    <link rel="stylesheet" href="{{URL::to('vendor/fe/assets/vendor/waves/waves.min.css')}}">
+    <link rel="stylesheet" href="{{URL::to('vendor/fe/assets/vendor/owlcarousel/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{URL::to('vendor/fe/assets/css/style.css')}}">
 </head>
 
 <body>
@@ -166,12 +164,12 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-6 col-md-6">
                                         <div class="customer-img">
-                                            <img class="img-fluid" src="vendor/landingpage/images/testimonial/1.jpg" alt="">
+                                            <img class="img-fluid" src="vendor/fe/assets/images/testimonial/1.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-md-6">
                                         <div class="customer-review">
-                                            <img class="img-fluid" src="vendor/landingpage/images/brand/2.webp" alt="">
+                                            <img class="img-fluid" src="vendor/fe/assets/images/brand/2.webp" alt="">
                                             <p>Integrating Tradient services into Trezor Wallet's exchange has been a
                                                 great success for all parties, especially the users.
                                             </p>
@@ -185,12 +183,12 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-6 col-md-6">
                                         <div class="customer-img">
-                                            <img class="img-fluid" src="vendor/landingpage/images/testimonial/2.jpg" alt="">
+                                            <img class="img-fluid" src="vendor/fe/assets/images/testimonial/2.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-md-6">
                                         <div class="customer-review">
-                                            <img class="img-fluid" src="vendor/landingpage/images/brand/3.webp" alt="">
+                                            <img class="img-fluid" src="vendor/fe/assets/images/brand/3.webp" alt="">
                                             <p>MEW is excited to bring Tradient’s extensive range of crypto assets,
                                                 competitive rates and seamless swap functionality</p>
                                             <div class="customer-info">
@@ -297,7 +295,7 @@
                     </div>
                     <div class="col-xl-7 col-md-6">
                         <div class="portfolio_img">
-                            <img src="vendor/landingpage/images/portfolio.png" alt="" class="img-fluid">
+                            <img src="vendor/fe/assets/images/portfolio.png" alt="" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -321,12 +319,12 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-6 col-md-6">
                                         <div class="customer-img">
-                                            <img class="img-fluid" src="vendor/landingpage/images/testimonial/1.jpg" alt="">
+                                            <img class="img-fluid" src="vendor/fe/assets/images/testimonial/1.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-md-6">
                                         <div class="customer-review">
-                                            <img class="img-fluid" src="vendor/landingpage/images/brand/2.webp" alt="">
+                                            <img class="img-fluid" src="vendor/fe/assets/images/brand/2.webp" alt="">
                                             <p>Integrating Tradient services into Trezor Wallet's exchange has been a
                                                 great success for all parties, especially the users.
                                             </p>
@@ -340,12 +338,12 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-6 col-md-6">
                                         <div class="customer-img">
-                                            <img class="img-fluid" src="vendor/landingpage/images/testimonial/2.jpg" alt="">
+                                            <img class="img-fluid" src="vendor/fe/assets/images/testimonial/2.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-md-6">
                                         <div class="customer-review">
-                                            <img class="img-fluid" src="vendor/landingpage/images/brand/3.webp" alt="">
+                                            <img class="img-fluid" src="vendor/fe/assets/images/brand/3.webp" alt="">
                                             <p>MEW is excited to bring Tradient’s extensive range of crypto assets,
                                                 competitive rates and seamless swap functionality</p>
                                             <div class="customer-info">
@@ -430,7 +428,7 @@
                 <div class="row">
                     <div class="col-xl-6 col-md-6">
                         <div class="footer-link text-left">
-                            <a href="#" class="m_logo"><img src="vendor/landingpage/images/w_logo.png" alt=""></a>
+                            <a href="#" class="m_logo"><img src="vendor/fe/assets/images/w_logo.png" alt=""></a>
                             <a href="about.html">About</a>
                             <a href="privacy-policy.html">Privacy Policy</a>
                             <a href="term-condition.html">Term & Service</a>
@@ -472,26 +470,22 @@
 
     <!-- <div class="bg_icons"></div> -->
 
+    <script src="{{URL::to('vendor/fe/assets/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/vendor/waves/waves.min.js')}}"></script>
 
-
-    <script src="{{URL::to('vendor/landingpage/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{URL::to('vendor/landingpage/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{URL::to('vendor/landingpage/vendor/waves/waves.min.js')}}"></script>
-
-    <script src="{{URL::to('vendor/landingpage/vendor/owlcarousel/js/owl.carousel.min.js')}}"></script>
-    <script src="{{URL::to('vendor/landingpage/js/plugins/owl-carousel-init.js')}}"></script>
-    <script src="{{URL::to('vendor/landingpage/vendor/scrollit/scrollIt.js')}}"></script>
-    <script src="{{URL::to('vendor/landingpage/js/plugins/scrollit-init.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/vendor/owlcarousel/js/owl.carousel.min.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/js/plugins/owl-carousel-init.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/vendor/scrollit/scrollIt.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/js/plugins/scrollit-init.js')}}"></script>
 
     <!-- Chart sparkline plugin files -->
-    <script src="{{URL::to('vendor/landingpage/vendor/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
-    <script src="{{URL::to('vendor/landingpage/js/plugins/sparkline-init.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/vendor/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/js/plugins/sparkline-init.js')}}"></script>
 
-    <script src="{{URL::to('vendor/landingpage/vendor/validator/jquery.validate.js')}}"></script>
-    <script src="{{URL::to('vendor/landingpage/vendor/validator/validator-init.js')}}"></script>
-    <script src="{{URL::to('vendor/landingpage/js/scripts.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/js/scripts.js')}}"></script>
 </body>
 
-
-<!-- Mirrored from demo.themefisher.com/tradient/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 18 Dec 2020 11:11:38 GMT -->
 </html>

@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>E-Learning - Login</title>
-    <link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-    <link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/css/vendor.bundle.base.css')}}">
-    <link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
-    <link rel="shortcut icon" href="{{URL::to('vendor/assets/images/logo-atas.png')}}" />
+    <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
+    <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
+    <link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
+    <link rel="shortcut icon" href="{{URL::to('vendor/be/assets/images/logo-atas.png')}}" />
 </head>
 
 <body>
@@ -26,7 +26,7 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5">
                             <div class="brand-logo text-center">
-                                <a href="{{ url('/') }}"> <img src="{{URL::to('vendor/assets/images/3.svg')}}"></a>
+                                <a href="{{ url('/') }}"> <img src="{{URL::to('vendor/be/assets/images/3.svg')}}"></a>
                             </div>
                             <h4>Halo! ayo kita mulai</h4>
                             <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6>
@@ -81,14 +81,14 @@
         </div>
     </div>
 
-    <script src="{{ URL::to('vendor/assets/vendors/js/vendor.bundle.base.js')}}"></script>
-    <script src="{{ URL::to('vendor/assets/js/off-canvas.js')}}"></script>
-    <script src="{{ URL::to('vendor/assets/js/hoverable-collapse.js')}}"></script>
-    <script src="{{ URL::to('vendor/assets/js/misc.js')}}"></script>
-    <script src="{{ URL::to('vendor/assets/js/preloader.js')}}"></script>
+    <script src="{{ URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
+    <script src="{{ URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
+    <script src="{{ URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
+    <script src="{{ URL::to('vendor/be/assets/js/misc.js')}}"></script>
+    <script src="{{ URL::to('vendor/be/assets/js/preloader.js')}}"></script>
 
-    <script src="{{URL::to('vendor/landingpage/vendor/validator/jquery.validate.js')}}"></script>
-    <script src="{{URL::to('vendor/landingpage/vendor/validator/validator-init.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
+    <script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
 </body>
 
 </html>

@@ -217,12 +217,11 @@ $(function () {
               required: true,
               equalTo: "#password"
             },
-            entry_year: "required",
             phone_number:{
                 required: true,
                 minlength: 10
             },
-            class_id: "required",
+            school_year_id: "required",
         },
         messages: {
             name: "Nama lengkap wajib di isi",
@@ -246,7 +245,7 @@ $(function () {
                 required: "Nomor telepon wajib di isi",
                 minlength: "Minimal 10 karakter"
             },
-            class_id: "Kelas harus di pilih",
+            school_year_id: "Tahun ajaran harus di pilih",
         },
     });
 });
@@ -305,6 +304,17 @@ $(function () {
                 required: "Nomor telepon wajib di isi",
                 minlength: "Minimal 10 karakter"
             },
+        },
+    });
+});
+
+$(function () {
+    $(".abc").validate({
+        rules: {
+            usr_code_otp: "required"
+        },
+        messages: {
+            usr_code_otp: "Kode OTP harus di isi"
         },
     });
 });
