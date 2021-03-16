@@ -56,10 +56,10 @@ class User extends Authenticatable
         return 'usr_remember_token';
     }
 
-    // public function user_has_roles()
-    // {
-    //     return $this->hasMany(UserHasRole::class, 'uhs_user_id', 'usr_id',);
-    // }
+    public function user_has_roles()
+    {
+        return $this->hasMany(UserHasRole::class, 'uhs_user_id', 'usr_id',);
+    }
 
     public function roles()
     {

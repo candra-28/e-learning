@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use App\Student;
-use App\Teacher;
+use App\Models\User;
+use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -20,12 +20,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::join('roles', 'users.role_id', '=', 'roles.id')
-            ->select('roles.name as role_name', 'roles.*', 'users.id as id_user', 'users.*')
-            ->where('users.id', Auth()->user()->id)->first();
-        //dd($user);
+        $user = User::with('roles')->where('usr_id', Auth()->user()->usr_id)->first();
 
-        return view('users.profile', compact('user'));
+        $role = User::find($user->usr_id)->roles()->first();
+        // dd($role->rol_id);
+        return view('back-learning.users.profile', compact('user','role'));
     }
 
     /**

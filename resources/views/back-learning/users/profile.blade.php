@@ -1,14 +1,13 @@
-@extends('layouts.master')
+@extends('back-learning.layouts.master')
 
 @push('title')
 - Profile
 @endpush
 
 @push('styles')
-<link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-<link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/css/vendor.bundle.base.css')}}">
-<link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
-<link rel="shortcut icon" href="{{ URL::to('vendor/assets/images/logo-atas.png')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
 @endpush
 
 @section('content')
@@ -24,34 +23,54 @@
     <div class="col-lg-4 col-xlg-3 col-md-5">
         <div class="card">
             <div class="card-body">
-
-              <div class="text-center">
+                <div class="text-center">
+                     @if(isset($user->usr_profile_picture))
+                     <img src="{{ url('profile_picture/'.$user->name.'/'.$user->profile_picture) }}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
+                    @else
+                    <img src="{{ asset('profile_picture/avatar-2.png')}}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
+                    @endif
+                </div>
+             <!--  <div class="text-center">
                   <form action="" method="post" enctype="multipart/form-data">
                     @csrf
-                        <img src="{{ url('profile_picture/'.$user->name.'/'.$user->profile_picture) }}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
+                    @if(isset($user->usr_profile_picture))
+                     <img src="{{ url('profile_picture/'.$user->name.'/'.$user->profile_picture) }}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
+                    @else
+                    <img src="{{ asset('profile_picture/avatar-2.png')}}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
+                    @endif
+                   
                     <input type="file" name="profile_picture" id="preview_gambar" class="img-thumbnail" style="display:none; border-radius: 5px;" onchange="document.getElementById('usr_profile_picture').value=this.value" /><br>
 
                     <button type="button" id="usr_profile_picture" class="btn btn-outline-primary btn-sm m-2" onclick="document.getElementById('preview_gambar').click()">Pilih Gambar</button>
                     
-                    <input type="submit" value="Simpan" class="btn btn-success btn-sm">
+                    <input type="submit" value="Simpan" class="btn btn-outline-success btn-sm">
                   </form>   
-              </div>
+              </div> -->
                 
             </div>
 
             <div class="card-body">
-                <hr>
+<!--                 <hr>
                     <h4 class="font-medium text-center" style="font-family: sans-serif;">Akun</h4>
                 <hr>
-
+ -->
               <dt class="col-sm-12">Nama</dt>
                 <dd class="col-sm-12">
-                    <p style="font-family: sans-serif; font-size: 18px;">{{ $user->name }}</p>
+                    <p style="font-family: sans-serif; font-size: 18px;">{{ $user->usr_name }}</p>
                 </dd>
 
                 <dt class="col-sm-12">Email</dt>
                 <dd class="col-sm-12">
-                    <p style="font-family: sans-serif; font-size: 18px;">{{ $user->email }}</p>
+                    <p style="font-family: sans-serif; font-size: 18px;">{{ $user->usr_email }}</p>
+                </dd>
+
+                <dt class="col-sm-12">Status akun</dt>
+                <dd class="col-sm-12">
+                    @if($user->usr_is_active == 1)
+                    <p style="font-family: sans-serif; font-size: 18px;">aktif</p>
+                    @else
+                    <p style="font-family: sans-serif; font-size: 18px;">tidak aktif</p>
+                    @endif
                 </dd>
      
             </div>
@@ -65,7 +84,12 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs profile-tab" role="tablist">
                 <li class="nav-item"> <a class="nav-link show" data-toggle="tab" href="#profile" role="tab" aria-selected="true">Profile</a> </li>
-                <li class="nav-item"> <a class="nav-link show" data-toggle="tab" href="#settings" role="tab" aria-selected="false">Ubah Kata sandi</a> </li>
+
+                <li class="nav-item"> <a class="nav-link show" data-toggle="tab" href="#setting_profile" role="tab" aria-selected="false">Ubah data profile</a> </li>
+
+                <li class="nav-item"> <a class="nav-link show" data-toggle="tab" href="#setting_email" role="tab" aria-selected="true">Ubah alamat email</a> </li>
+
+                <li class="nav-item"> <a class="nav-link show" data-toggle="tab" href="#setting_password" role="tab" aria-selected="false">Ubah Kata sandi</a> </li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
@@ -73,46 +97,112 @@
                 <div class="tab-pane active show" id="profile" role="tabpanel">
                     <div class="card-body">
                         <div class="row">
-                            <dt class="col-sm-3">Tanggal Beli</dt>
-                            <dd class="col-sm-9">
-                                <p>asdasdas</p>
+                            <dt class="col-sm-4">Nomor Telepon</dt>
+                            <dd class="col-sm-7">
+                                <p>{{ $user->usr_phone_number }}</p>
                             </dd>
 
-                            <dt class="col-sm-3">Name Pembeli</dt>
-                            <dd class="col-sm-9">
-                                <p>asdasdasd</p>
+                            <dt class="col-sm-4">Jenis Kelamin</dt>
+                            <dd class="col-sm-7">
+                                <p>{{ $user->usr_gender }}</p>
                             </dd>
 
-                            <dt class="col-sm-3">Email Pembeli</dt>
-                            <dd class="col-sm-9">
-                                <p>asdasdsd</p>
+                            <dt class="col-sm-4">Tempat Lahir</dt>
+                            <dd class="col-sm-7">
+                                <p>{{ $user->usr_place_of_birth }}</p>
                             </dd>
 
-                            <dt class="col-sm-3">Nama Makanan</dt>
-                            <dd class="col-sm-9">
-                                <p>asdasd</p>
+                            <dt class="col-sm-4">Tanggal Lahir</dt>
+                            <dd class="col-sm-7">
+                                <p>{{ $user->usr_date_of_birth }}</p>
                             </dd>
 
-                            <dt class="col-sm-3">Harga Makanan</dt>
-                            <dd class="col-sm-9">
-                                <p>asdasdasd</p>
+                            <dt class="col-sm-4">Agama</dt>
+                            <dd class="col-sm-7">
+                                <p>{{ $user->usr_religion }}</p>
                             </dd>
 
-                            <dt class="col-sm-3">Jumlah Beli</dt>
-                            <dd class="col-sm-9">
-                                <p>sadasd</p>
+                            <dt class="col-sm-4">Alamat</dt>
+                            <dd class="col-sm-7">
+                                <p>{{ $user->usr_address }}</p>
                             </dd>
                         </div>
-                        <hr>
-                        <h4 class="font-medium m-t-30">Deskripsi Tentang Saya</h4>
-                        <hr>
-                        <p class="m-t-30">PPPPPPPPPPPPPPPPPPPPPPP.</p>
-                        <p>AAAAAAAAAAAAAAAAAAAAA </p>
-                        <p>CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC.</p>
+                    @if($role->rol_id == 4)
+                    <hr>
+                    <h4 class="font-medium m-t-30">Riwayat Kelas</h4>
+                    <hr>
+
+                    <table class="table table-hover">
+                      <thead class="text-upercase" style="background-color: #00FFFF;">
+                        <tr>
+                          <th>No</th>
+                          <th>Kelas</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>X Multimedia 1</td>
+                          <td><label class="badge badge-danger">tidak aktif</label></td>
+                        </tr>
+
+                        <tr>
+                          <td>2</td>
+                          <td>XI Multimedia 1</td>
+                          <td><label class="badge badge-success">aktif</label></td>
+                        </tr>
+ 
+                      </tbody>
+                    </table>
+                    @elseif($role->rol_id == 3)
+                    <hr>
+                    <h4 class="font-medium m-t-30">Riwayat Mengajar pelajaran</h4>
+                    <hr>
+
+                    <table class="table table-hover">
+                      <thead class="text-upercase" style="background-color: #00FFFF;">
+                        <tr>
+                          <th>No</th>
+                          <th>Mata pelajaran</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Bahasa Indonesia</td>
+                          <td><label class="badge badge-success">aktif</label></td>
+                        </tr>
+
+                        <tr>
+                          <td>2</td>
+                          <td>Bahasa Inggris</td>
+                          <td><label class="badge badge-success">aktif</label></td>
+                        </tr>
+ 
+                      </tbody>
+                    </table>
+                    @else
+                    @endif
 
                     </div>
                 </div>
-                <div class="tab-pane show" id="settings" role="tabpanel">
+                <div class="tab-pane show" id="setting_profile" role="tabpanel">
+                    <div class="card-body">
+                        
+                    </div>
+                </div>
+
+                <div class="tab-pane show" id="setting_email" role="tabpanel">
+                    <div class="card-body">
+                        
+                    </div>
+                </div>
+
+
+
+                <div class="tab-pane show" id="setting_password" role="tabpanel">
                     <div class="card-body">
                         <form class="form-horizontal form-material" method="POST" action="{{ url('profile/update-password') }}">
                          @csrf
@@ -164,20 +254,21 @@
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 
-
-
 @push('scripts')
-<script src="{{URL::to('vendor/assets/vendors/js/vendor.bundle.base.js')}}"></script>
-<script src="{{URL::to('vendor/assets/vendors/chart.js/Chart.min.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/off-canvas.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/hoverable-collapse.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/misc.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/todolist.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/vendors/chart.js/Chart.min.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
+<script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
+<script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
 <script>
     function bacaGambar(input) {
         if (input.files && input.files[0]) {

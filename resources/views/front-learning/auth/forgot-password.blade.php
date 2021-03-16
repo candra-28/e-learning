@@ -7,9 +7,11 @@
             <div class="col-xl-4 col-md-6">
                 <div class="auth-form card">
                     <div class="card-header justify-content-center">
-                        <h4 class="card-title">Lupa Kata Sandi</h4>
+                          <h4 class="card-title text-center"><img src="{{URL::to('vendor/be/assets/images/3.svg')}}" style="width: 50%;"></h4>
                     </div>
                     <div class="card-body">
+                        <h4>Lupa kata sandi</h4>
+                        <p class="font-weight-light">Masuk alamat email anda disini.</p>
                         @if (Session::has('success'))
                         <div class="alert alert-success">
                             {{ Session::get('success') }}

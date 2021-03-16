@@ -38,11 +38,11 @@
                                     <label class="toggle">
                                         <input class="toggle-checkbox" name="remember" type="checkbox">
                                         <div class="toggle-switch"></div>
-                                        <span class="toggle-label">Ingatkan saya</span>
+                                        <span class="toggle-label">Tetap login</span>
                                     </label>
                                 </div>
                                 <div class="form-group mb-0">
-                                    <a href="{{ url('forgot-password') }}">Lupa kata sandi?</a>
+                                    <span>Lupa sandi?</span><a href="{{ url('forgot-password') }}" class="text-primary"> klik disini</a>
                                 </div>
                             </div>
                             <div class="text-center">

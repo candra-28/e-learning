@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('back-learning.layouts.master')
 
 @push('title')
 - My Profile
@@ -7,15 +7,7 @@
 @push('styles')
 <link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/css/vendor.bundle.base.css')}}">
-<!-- endinject -->
-<!-- Plugin css for this page -->
-<!-- End plugin css for this page -->
-<!-- inject:css -->
-<!-- endinject -->
-<!-- Layout styles -->
 <link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
-<!-- End layout styles -->
-<link rel="shortcut icon" href="{{ URL::to('vendor/assets/images/logo-atas.png')}}">
 @endpush
 
 @section('content')
