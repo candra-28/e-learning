@@ -309,12 +309,54 @@ $(function () {
 });
 
 $(function () {
-    $(".abc").validate({
+    $(".otp-verified").validate({
         rules: {
             usr_code_otp: "required"
         },
         messages: {
             usr_code_otp: "Kode OTP harus di isi"
+        },
+    });
+});
+
+$(function () {
+    $(".forgot-password").validate({
+        rules: {
+            usr_email: {
+                required: true,
+                email: true
+            }
+        },
+        messages: {
+            usr_email: {
+                required: "Alamat email harus di isi",
+                email: "Alamat email tidak valid"
+            }
+        },
+    });
+});
+
+$(function () {
+    $(".reset-password").validate({
+        rules: {
+            usr_password: {
+                required: true,
+                minlength: 8
+            },
+            usr_retype_password:{
+                required: true,
+                equalTo: "#usr_password"
+            }
+        },
+        messages: {
+            usr_password: {
+                required: "Kata sandi harus di isi",
+                minlength: "Kata sandi minimal 8 karakter"
+            },
+            usr_retype_password:{
+                required: "Ulangi kata sandi harus di isi",
+                equalTo: "Ulangi kata sandi harus sama dengan yang awal"
+            }
         },
     });
 });

@@ -13,7 +13,10 @@ Route::post('register', 'AuthController@register');
 Route::get('/waiting-verified', 'AuthController@waitingVerified');
 Route::post('/waiting-verified', 'AuthController@storeWaitingVerified');
 Route::post('/resend-code-otp', 'AuthController@resendCodeOtp');
-
+Route::get('/forgot-password', 'AuthController@forgotPassword');
+Route::post('/forgot-password', 'AuthController@storeForgotPassword');
+Route::get('reset-password/{token}/{userID}', 'AuthController@verifyTokenForgotPassword');
+Route::post('reset-password', 'AuthController@storeResetPassword');
 
 Route::group(['middleware' => 'accountVerified'], function () {
 

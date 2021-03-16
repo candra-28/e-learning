@@ -7889,7 +7889,7 @@ h6 {
   right: 0;
   top: 0;
   bottom: 0;
-  background: url("../images/background/bg_icons.jpg");
+  background: url("../images/background/bg.jpg");
   background-size: cover;
   background-position: center; }
   .bg_icons:after {
@@ -8053,6 +8053,8 @@ h6 {
   z-index: 999;
   transition: all 0.3s ease-in;
   background: transparent; }
+
+  
   .header.dashboard {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     background: #2F2CD8;
@@ -8062,6 +8064,9 @@ h6 {
       background: #2F2CD8; }
   .header.landing_page {
     background: transparent; }
+
+  .header.auth_page {
+    background: #8a2be2; }
   .header .navbar-brand {
     margin-right: 30px;
     display: flex;
@@ -8547,6 +8552,19 @@ label.error {
   margin-bottom: -22px;
   font-size: 12px;
   font-weight: 400; }
+/*label.error {
+  color: #E82753;
+  margin-top: 5px;
+}*/
+
+input.error {
+    border: 1px solid red;
+    font-family: "ubuntu-regular", sans-serif;
+}
+select.error{
+        border: 1px solid red;
+    font-family: "ubuntu-regular", sans-serif;
+}
 
 .btn {
   padding: 5px 30px;

@@ -85,8 +85,7 @@
     <script src="{{ URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
     <script src="{{ URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
     <script src="{{ URL::to('vendor/be/assets/js/misc.js')}}"></script>
-    <script src="{{ URL::to('vendor/be/assets/js/preloader.js')}}"></script>
-
+     <script src="{{ URL::to('vendor/be/assets/js/preloader.js')}}"></script>
     <script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
     <script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
 </body>

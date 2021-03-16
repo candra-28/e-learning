@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Session;
 use Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendOTPCode;
-use App\User;
+use App\Mail\ForgotPassword;
+use App\Models\User;
 use App\Models\Classes;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -20,6 +21,7 @@ use App\Models\SchoolYear;
 use App\Models\UserHasRole;
 use App\Models\StudentClass;
 use Illuminate\Support\Str;
+use DB;
 
 class AuthController extends Controller
 {
@@ -175,12 +177,14 @@ class AuthController extends Controller
     }
 
     public function waitingVerified(){
-        $user_verified_at = is_null(!Auth()->user()->usr_otp_verified_at);
-        // dd($user_verified_at);
-        return view('front-learning.auth.waiting-verified',compact('user_verified_at'));
+        if (Auth::check()) {
+            $user_verified_at = is_null(!Auth()->user()->usr_otp_verified_at);
+            return view('front-learning.auth.waiting-verified',compact('user_verified_at'));
+        }
+        return view('front-learning.auth.login');
+       
     }
     public function storeWaitingVerified(Request $request){
-        // dd($request->usr_code_otp, $user->);
         $user = Auth()->user();
         if ($user->usr_code_otp == $request->usr_code_otp) {
             if ($user->usr_start_otp > Carbon::now()->format('Y-m-d H:i:s')) {
@@ -203,5 +207,50 @@ class AuthController extends Controller
         $user->update();
         Mail::to($user['usr_email'])->send(new SendOTPCode($user));
         return redirect()->back()->with(['success' => 'Kode OTP berhasil di kirim ulang']);
+    }
+    public function forgotPassword()
+    {
+        if (Auth::check()) {
+            return redirect()->back();
+        }
+        return view('front-learning.auth.forgot-password');
+    }
+    public function storeForgotPassword(Request $request)
+    {
+        $users = User::where('usr_email', $request->usr_email)->first();
+        if ($users == false) {
+            return redirect()->back()->with(['error' => 'Email tidak terdaftar']);
+        } elseif ($users->usr_otp_verified_at == false) {
+            return redirect()->back()->with(['error' => 'Akun belum di verifikasi']);
+        }
+
+        DB::table('password_resets')->insert([
+            'pwr_email' => $request->usr_email,
+            'pwr_token' => str_replace('/', '', Hash::make(Str::random(12))),
+            'pwr_created_at' => Carbon::now(),
+        ]);
+
+        $tokenData = DB::table('password_resets')->where('pwr_email', $request->usr_email)->first();
+
+        Mail::to($tokenData->pwr_email)->send(new ForgotPassword($tokenData->pwr_token, $users));
+        return redirect()->back()->with(['success' => 'Alamat link Reset Password berhasil di Kirim ke Email']);
+    }
+    public function verifyTokenForgotPassword($token, $userID)
+    {
+        $resetPassword = DB::table('password_resets')->where('pwr_token', $token)->first();
+        if (!$resetPassword) {
+            return redirect('forgot-password')->with(['errors', 'Maaf alamat link sudah digunakan']);
+        }
+        return view('front-learning.auth.reset-password', compact('resetPassword'));
+    }
+    public function storeResetPassword(Request $request)
+    {
+        $user = User::where('usr_email', $request->pwr_email)->first();
+        $user->usr_password = Hash::make($request->usr_password);
+        $user->update();
+
+        DB::table('password_resets')->where(['pwr_email' => $request->pwr_email])->delete();
+
+        return redirect('/login')->with(['success' => 'Password Anda Berhasil di setel ulang']);
     }
 }

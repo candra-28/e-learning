@@ -20,10 +20,10 @@
   </div>
   <div class="container-scroller">
 
-    @include ('back-learning.includes.navbar')
+    @include('back-learning.includes.navbar')
     <div class="container-fluid page-body-wrapper">
 
-      @include ('back-learning.includes.sidebar')
+      @include('back-learning.includes.sidebar')
 
       <div class="main-panel">
         <div class="content-wrapper">

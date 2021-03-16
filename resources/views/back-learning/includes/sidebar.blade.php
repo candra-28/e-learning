@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\Models\User;
 
 $user = User::join('user_has_roles','user_has_roles.uhs_user_id','=','users.usr_id')
               ->join('roles','user_has_roles.uhs_role_id','=','roles.rol_id')
