@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->integer('usr_code_otp')->nullable();
             $table->timestamp('usr_otp_verified_at')->nullable();
             $table->timestamp('usr_start_otp')->nullable();
-            
+            $table->string('usr_remember_token')->nullable();
             $table->string('usr_gender')->nullable();
             $table->string('usr_profile_picture')->nullable();
             $table->string('usr_place_of_birth')->nullable();

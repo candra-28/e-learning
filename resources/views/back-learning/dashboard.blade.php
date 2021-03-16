@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
-<link rel="shortcut icon" href="{{ URL::to('vendor/be/assets/images/logo-atas.png')}}">
 @endpush
 
 @section('content')

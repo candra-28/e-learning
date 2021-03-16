@@ -18,7 +18,7 @@ Route::post('/forgot-password', 'AuthController@storeForgotPassword');
 Route::get('reset-password/{token}/{userID}', 'AuthController@verifyTokenForgotPassword');
 Route::post('reset-password', 'AuthController@storeResetPassword');
 
-Route::group(['middleware' => 'accountVerified'], function () {
+Route::group(['middleware' => ['accountVerified', 'auth']], function () {
 
     Route::get('dashboard', 'HomeController@index')->name('dashboard');
 

@@ -28,19 +28,20 @@ class AuthController extends Controller
     public function showFormLogin()
     {
         if (Auth::check()) {
-            return redirect()->route('dashboard');
+            return redirect('dashboard');
         }
         return view('front-learning.auth.login');
     }
 
     public function login(Request $request)
     {
+        // dd($request);
         $user_login = [
             'usr_email' => $request->input('email'),
             'password'  => $request->input('password'),
         ];
 
-        Auth::attempt($user_login);
+        Auth::attempt($user_login, $request->filled('remember'));
 
         if (Auth::check()) {
             $user_login_history = new UserLogHistory();
@@ -61,8 +62,8 @@ class AuthController extends Controller
 
     public function showFormRegister()
     {
-         if (Auth::check()) {
-            return redirect()->route('dashboard');
+        if (Auth::check()) {
+            return redirect('dashboard');
         }
         $classes = Classes::join('grade_levels','classes.cls_grade_level_id','=','grade_levels.grl_id')
         ->join('majors','classes.cls_major_id','=','majors.mjr_id')->where('cls_is_active', true)->select('cls_id','cls_number','grade_levels.grl_name','majors.mjr_name')->get();

@@ -4,8 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ env('APP_NAME') }} @stack('title')</title>
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('vendor\fe\assets\images/favicon.png')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{ URL::to('vendor/be/assets/images/logo-atas.png')}}">
     <link rel="stylesheet" href="{{ url('vendor/fe/assets/css/style.css')}}">
     <style type="text/css">
         .header.fixed {

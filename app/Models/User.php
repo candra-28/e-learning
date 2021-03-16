@@ -28,7 +28,7 @@ class User extends Authenticatable
     }
 
     protected $hidden = [
-        'password', 'remember_token',
+        'usr_password', 'usr_remember_token',
     ];
 
     /**
@@ -37,9 +37,24 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'usr_otp_verified_at' => 'datetime',
     ];
     protected $dates = ['usr_date_of_birth'];
+
+    public function getRememberToken()
+    {
+        return $this->usr_remember_token;
+    }
+
+    public function setRememberToken($value)
+    {
+        $this->usr_remember_token = $value;
+    }
+
+    public function getRememberTokenName()
+    {
+        return 'usr_remember_token';
+    }
 
     // public function user_has_roles()
     // {
