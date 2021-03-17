@@ -35,6 +35,8 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::post('class/create', 'ClassController@store');
     Route::get('class/edit/{id}', 'ClassController@edit');
     Route::post('class/edit/{id}', 'ClassController@update');
+    Route::post('class/edit-status/{classID}', 'ClassController@updateStatusClass');
+
     Route::get('/profiles', 'UserController@index');
     Route::post('/profiles', 'UserController@changeProfilePicture');
     

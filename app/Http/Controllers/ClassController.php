@@ -28,10 +28,12 @@ class ClassController extends Controller
             })
             ->addIndexColumn()
             ->addColumn('action', function ($class) {
-                $edit = '<a href="' . url('class/edit', $class->id) . '"  type="button" data-toggle="tooltip" data-original-title="Edit" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
-                return $edit;
+                $edit = '<a href="' . url('class/edit', $class->cls_id) . '"  type="button" data-toggle="tooltip" data-original-title="Edit" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
+                $status = ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$class->cls_id.'" data-original-title="Delete" class="btn btn-danger btn-sm status_class"><i class="mdi mdi-information-outline"></i></a>';
+
+                return $edit . '&nbsp' . $status;
             })
-              ->filterColumn('cls_major_id', function($query, $keyword) {
+            ->filterColumn('cls_major_id', function($query, $keyword) {
                 $query->whereRaw("CONCAT(grade_levels.grl_name,'-',majors.mjr_name,'-', classes.cls_number ) like ?", ["%{$keyword}%"]);
             })
             ->rawColumns(['action', 'cls_is_active'])
@@ -78,5 +80,17 @@ class ClassController extends Controller
         $class->is_active = $request->is_active;
         $class->update();
         return redirect('/class');
+    }
+
+    public function updateStatusClass($classID)
+    {
+            $class = Classes::findOrFail($classID)->first();
+            if ($class->cls_is_active == false) {
+                $class->cls_is_active = 1;
+            }else{
+                $class->cls_is_active = 0;
+            }
+            $class->update();
+            return response()->json(['code'=>200, 'message'=>'Kelas status berhasil di ubah','data' => $class], 200);
     }
 }

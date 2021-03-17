@@ -6,7 +6,7 @@
 
 @push('styles')
 
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
@@ -14,6 +14,9 @@
 
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
+
 @endpush
 
 @section('content')
@@ -33,7 +36,7 @@
                     <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><i class="mdi mdi-plus-box"></i></button>
                 </div>
                 <div class="table-responsive">
-                    <table class="table align-items-center table-flush" id="example" style="width:100%">
+                    <table class="table align-items-center table-flush" id="classes" style="width:100%">
                         <thead class="text-uppercase" style="background-color:  #BF00FF;">
                             <tr class="text-white">
                                 <th scope="col" class="sort" data-sort="name">No</th>
@@ -105,53 +108,9 @@
 <script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
 
 <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="{{ URL::to('vendor/be/assets/dataTable/dataTable.js') }}"></script>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        var table = $('#example').dataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ url('class')}}",
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'class_name',
-                    name: 'cls_major_id',
-                    orderable: true,
-                    searchable: true
-                },
-                {
-                    data: 'scy_name',
-                    name: 'school_years.scy_name',
-                    orderable: false,
-                    searchable: true
-                },
-                {
-                    data: 'cls_is_active',
-                    name: 'cls_is_active',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        });
-    });
-</script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $('#exampleModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
