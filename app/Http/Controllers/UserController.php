@@ -24,6 +24,7 @@ class UserController extends Controller
 
         $role = User::find($user->usr_id)->roles()->first();
         // dd($role->rol_id);
+
         return view('back-learning.users.profile', compact('user','role'));
     }
 
@@ -97,26 +98,15 @@ class UserController extends Controller
     {
         // dd($request);
 
-        $request->validate([
-            'current-password'  => 'required'],['current-password.required' => 'Kata sandi lama wajib di isi']);
+        // $input = $request->all();
+        $user = User::find(Auth()->user()->usr_id);
 
-        $input = $request->all();
-        $user = User::find(Auth()->user()->id);
-
-
-        if(!Hash::check($input['current-password'], $user->password)){
+        if(!Hash::check($request->current_password, $user->usr_password)){
             return redirect()->back()->with('error', 'Kata sandi lama tidak sesuai');
-        }else{
-            $request->validate([
-            'new-password' => 'required|min:8|confirmed'],
-            [
-                'new-password.required'     => 'Kata sandi baru wajib di isi',
-                'new-password.min'          => 'Minimal kata sandi 8 karakter',
-                'new-password.confirmed'    => 'Kata sandi tidak sama dengan kata sandi konfirmasi',
-            ]); 
         }
 
-        $user->password = Hash::make($request->get('new-password'));
+        $user->usr_password = Hash::make($request->new_password);
+        $user->usr_updated_by = Auth()->user()->usr_id;
         $user->update();
         return redirect()->back()->with('success', 'Kata sandi berhasil di ubah');
 

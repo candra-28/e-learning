@@ -184,8 +184,8 @@
                       </tbody>
                     </table>
                     @else
-                    @endif
 
+                    @endif
                     </div>
                 </div>
                 <div class="tab-pane show" id="setting_profile" role="tabpanel">
@@ -200,49 +200,44 @@
                     </div>
                 </div>
 
-
-
                 <div class="tab-pane show" id="setting_password" role="tabpanel">
                     <div class="card-body">
-                        <form class="form-horizontal form-material" method="POST" action="{{ url('profile/update-password') }}">
+                        <form class="form-horizontal form-material edit-password" method="POST" action="{{ url('profile/update-password') }}">
                          @csrf
-                            @if ($message = Session::get('success'))
+                           @if (Session::has('success'))
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <div class="alert alert-success alert-block">
-                                        <button type="button" class="close" data-dismiss="alert">×</button> 
-                                      <small>asd</small>
-                                  </div>
+                                    <div class="alert alert-success col-md-12">
+                                        {{ Session::get('success') }}
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                            @if (Session::has('error'))
+                             <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="alert alert-danger col-md-12">
+                                        {{ Session::get('error') }}
+                                    </div>
                                 </div>
                             </div>
                             @endif
                             <div class="form-group">
                                 <label class="col-md-12">Kata sandi lama</label>
                                 <div class="col-md-12">
-                                    <input type="password" name="current-password" placeholder="sandi lama" class="form-control form-control-line">
-                                    @error('current-password')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                    @if (Session::has('error'))
-                                    <div class="text-danger">
-                                        {{ Session::get('error') }}
-                                    </div>
-                                    @endif
+                                    <input type="password" name="current_password" placeholder="sandi lama" class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="example-email" class="col-md-12">Kata sandi baru</label>
                                 <div class="col-md-12">
-                                    <input type="password" placeholder="sandi baru" class="form-control form-control-line" name="new-password">
-                                    @error('new-password')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                    <input type="password" id="new_password" placeholder="sandi baru" class="form-control form-control-line" name="new_password">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12">Ulangi kata sandi</label>
                                 <div class="col-md-12">
-                                    <input type="password" name="new-password_confirmation" placeholder="ulangi sandi" class="form-control form-control-line">
+                                    <input type="password" name="new_password_confirmation" placeholder="ulangi sandi" class="form-control form-control-line">
                                 </div>
                             </div>
                             
@@ -267,8 +262,10 @@
 <script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
+
 <script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
 <script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
+
 <script>
     function bacaGambar(input) {
         if (input.files && input.files[0]) {

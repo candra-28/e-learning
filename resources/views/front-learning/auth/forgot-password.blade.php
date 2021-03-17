@@ -1,5 +1,9 @@
 @extends('front-learning.layouts.auth-master')
 
+@push('title')
+- Lupa kata sandi
+@endpush
+
 @section('content')
 <div class="authincation section-padding">
     <div class="container h-100">

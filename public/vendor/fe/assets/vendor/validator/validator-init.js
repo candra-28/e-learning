@@ -180,3 +180,30 @@ $(function () {
         },
     });
 });
+
+$(function () {
+    $(".edit-password").validate({
+        rules: {
+            current_password: {
+                required: true,
+            },
+            new_password:{
+                required: true,
+                minlength: 8
+            },
+            new_password_confirmation:{
+                equalTo: "#new_password"
+            },
+        },
+        messages: {
+            current_password: "Kata sandi lama harus di isi",
+            new_password: {
+                required: "Kata sandi baru harus di isi",
+                minlength: "Minimal 8 karakter"
+            },
+            new_password_confirmation:{
+                equalTo: "Ulangi kata sandi harus sama dengan sandi baru"
+            }
+        },
+    });
+});
