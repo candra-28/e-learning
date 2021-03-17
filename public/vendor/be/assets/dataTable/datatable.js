@@ -41,14 +41,12 @@ $(document).ready(function() {
             },
         ],
         "language": {
-            // "processing": "Mohon tunggu",
             "processing": '<h4 style="font-family: arial;">Mohon Tunggu</h4>',
             "search": "Cari:",
-            // "processing": "Mohon tunggu",
-            "zeroRecords": "Daftar Siswa tidak tersedia",
+            "zeroRecords": "Daftar kelas tidak tersedia",
             "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
-            "infoEmpty": "Tidak ada daftar Siswa",
-            "infoFiltered": "(pencarian dari _MAX_ daftar Siswa)",
+            "infoEmpty": "Tidak ada daftar kelas",
+            "infoFiltered": "(pencarian dari _MAX_ daftar kelas)",
             "infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
             "lengthMenu": "Tampilkan _MENU_ baris",
             "paginate": {

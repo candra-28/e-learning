@@ -43,10 +43,6 @@ class AuthController extends Controller
 
         Auth::attempt($user_login, $request->filled('remember'));
         
-        if (Auth()->user()->usr_is_active == false) {
-            Auth::logout();
-            return redirect()->route('login')->with('error', 'Akun anda telah di nonaktifkan');
-        }
         if (Auth::check()) {
             $user_login_history = new UserLogHistory();
             $user_login_history->ulh_user_id = Auth::user()->usr_id;
