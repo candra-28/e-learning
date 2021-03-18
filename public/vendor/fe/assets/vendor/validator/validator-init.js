@@ -211,12 +211,18 @@ $(function () {
 $(function () {
     $(".add-class").validate({
         rules: {
-            name: {
+            cls_grade_level_id: {
                 required: true,
             },
+            cls_major_id: "required",
+            cls_school_year_id: "required",
+            cls_number: "required",
         },
         messages: {
-            name: "Kata sandi lama harus di isi",
+            cls_grade_level_id: "Tingkatan kelas harus di isi",
+            cls_major_id: "Jurusan harus di isi",
+            cls_school_year_id: "Tahun ajaran harus di isi",
+            cls_number: "Nomor kelas harus di isi",
         },
     });
 });

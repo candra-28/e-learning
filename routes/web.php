@@ -30,7 +30,7 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::delete('/announcement/{id}', 'AnnouncementController@destroy');
 
 
-    Route::get('class', 'ClassController@index');
+    Route::get('classes', 'ClassController@index');
     Route::get('class/create', 'ClassController@create');
     Route::post('class/create', 'ClassController@store');
     Route::get('class/edit/{id}', 'ClassController@edit');

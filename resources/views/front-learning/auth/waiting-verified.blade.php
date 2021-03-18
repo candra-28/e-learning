@@ -2,7 +2,7 @@
 
 @section('content')
 @if(is_null(Auth()->user()->usr_otp_verified_at))
-<div class="authincation section-padding">
+<div class="auth section-padding">
     <div class="container h-100">
         <div class="row justify-content-center h-100 align-items-center">
             <div class="col-xl-4 col-md-6">

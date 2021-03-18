@@ -36,7 +36,7 @@ $user = User::join('user_has_roles','user_has_roles.uhs_user_id','=','users.usr_
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="{{ url('class')}}">
+      <a class="nav-link" href="{{ url('classes')}}">
         <span class="menu-title">Kelola Kelas</span>
         <i class="mdi mdi-home-modern menu-icon"></i>
       </a>
@@ -111,7 +111,7 @@ $user = User::join('user_has_roles','user_has_roles.uhs_user_id','=','users.usr_
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="{{ url('class')}}">
+      <a class="nav-link" href="{{ url('classes')}}">
         <span class="menu-title">Kelola Kelas</span>
         <i class="mdi mdi-home-modern menu-icon"></i>
       </a>

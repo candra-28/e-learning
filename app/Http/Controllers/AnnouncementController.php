@@ -35,7 +35,7 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
-        return view('announcements.create');
+        return view('back-learning.announcements.create');
     }
 
     /**

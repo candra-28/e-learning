@@ -7,7 +7,7 @@ $(document).ready(function() {
     var table = $('#classes').dataTable({
         processing: true,
         serverSide: true,
-        ajax: "class",
+        ajax: "classes",
         lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "semua"]],
         columns: [{
                 data: 'DT_RowIndex',
@@ -41,7 +41,8 @@ $(document).ready(function() {
             },
         ],
         "language": {
-            "processing": '<h4 style="font-family: arial;">Mohon Tunggu</h4>',
+            // "processing": '<h4 style="font-family: arial;">Mohon Tunggu</h4>',
+            "processing": '<img src="../../../vendor/be/assets/images/3.svg" style="width="20px; height="20px;">',
             "search": "Cari:",
             "zeroRecords": "Daftar kelas tidak tersedia",
             "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
@@ -71,7 +72,6 @@ $(document).ready(function() {
         })
         .then((willDelete) => {
           if (willDelete) {
-            console.log(cls_id)
             $.ajax({
               type: 'POST',
               url: 'class/edit-status/' + cls_id,
@@ -80,7 +80,6 @@ $(document).ready(function() {
                 _token: _token 
               },
               success: function(data) {
-                console.log(data)
                 if (data.status != false) {
                   swal(data.message, {
                     button: false,
