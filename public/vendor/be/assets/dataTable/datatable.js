@@ -71,6 +71,7 @@ $(document).ready(function() {
         })
         .then((willDelete) => {
           if (willDelete) {
+            console.log(cls_id)
             $.ajax({
               type: 'POST',
               url: 'class/edit-status/' + cls_id,

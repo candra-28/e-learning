@@ -27,7 +27,7 @@
                         {{ Session::get('error') }}
                     </div>
                     @endif
-                        <form method="post" name="myform" class="login" action="{{ url('login') }}" novalidate="novalidate" autocomplete="off">
+                        <form method="post" class="login" action="{{ url('login') }}" novalidate="novalidate" autocomplete="off">
                             @csrf
                             <div class="form-group">
                                 <label>Alamat Email</label>

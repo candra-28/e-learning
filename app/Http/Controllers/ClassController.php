@@ -84,12 +84,14 @@ class ClassController extends Controller
 
     public function updateStatusClass($classID)
     {
-            $class = Classes::findOrFail($classID)->first();
+            $class = Classes::findOrFail($classID);
+            // dd($class);
             if ($class->cls_is_active == false) {
                 $class->cls_is_active = 1;
             }else{
                 $class->cls_is_active = 0;
             }
+            $class->cls_updated_by = Auth()->user()->usr_id;
             $class->update();
             return response()->json(['code'=>200, 'message'=>'Kelas status berhasil di ubah','data' => $class], 200);
     }

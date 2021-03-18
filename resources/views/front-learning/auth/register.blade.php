@@ -1,43 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('front-learning.layouts.auth-master')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>E-Learning - Daftar</title>
+@push('title')
+- Login
+@endpush
 
-    <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-    <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
-    <link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
-    <link rel="shortcut icon" href="{{URL::to('vendor/be/assets/images/logo-atas.png')}}" />
-    <style type="text/css">
-        label #gender-error,{
-           margin-top: 100px;
-        }
-    </style>
-</head>
+@section('content')
 
-<body>
-    <div id="preloader">
-        <div class="sk-three-bounce">
-            <div class="sk-child sk-bounce1"></div>
-            <div class="sk-child sk-bounce2"></div>
-            <div class="sk-child sk-bounce3"></div>
-        </div>
-    </div>
-    <div class="container-scroller">
-        <div class="container-fluid page-body-wrapper full-page-wrapper">
-            <div class="content-wrapper d-flex align-items-center auth">
-                <div class="row flex-grow">
-                    <div class="col-lg-4 mx-auto">
-                        <div class="auth-form-light text-left p-5">
-                            <div class="brand-logo text-center">
-                                <a href="{{ url('/') }}"> <img src="{{URL::to('vendor/be/assets/images/3.svg')}}"></a>
-                            </div>
-                            <h4>Baru disini?</h4>
-                            <h6 class="font-weight-light">Mendaftar itu mudah. Hanya perlu beberapa langkah. Pilihlah salah satu Tab dibawah</h6>
-
-                            <div class="card">
+<div class="auth section-padding" data-scroll-index="0">
+    <div class="container h-100">
+        <div class="row justify-content-center h-100 align-items-center">
+            <div class="col-xl-4 col-md-6">
+                <div class="auth-form card">
+                    <div class="card-header justify-content-center">
+                        <h4 class="card-title text-center"><img src="{{URL::to('vendor/be/assets/images/3.svg')}}" style="width: 50%;"></h4>
+                    </div>
+                    <div class="card-body">
+                    <h4>Baru disini?</h4>
+                    <p class="font-weight-light">Mendaftar itu mudah. Hanya perlu beberapa langkah. Pilihlah salah satu Tab dibawah</p>
+                    @if (Session::has('success'))
+                    <div class="alert alert-success">
+                        {{ Session::get('success') }}
+                    </div>
+                    @endif
+                    @if (Session::has('error'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('error') }}
+                    </div>
+                    @endif
+                        <div class="card">
                                 <ul class="nav nav-tabs profile-tab" role="tablist">
                                     <li class="nav-item"> <a class="nav-link show active" data-toggle="tab" href="#profile" role="tab" aria-selected="false">Siswa</a> </li>
                                     <li class="nav-item"> <a class="nav-link show" data-toggle="tab" href="#settings" role="tab" aria-selected="true">Guru</a> </li>
@@ -125,7 +115,7 @@
 
                                             <div class="form-group">
                                                 <label for="date_of_birth">Tanggal, Bulan, Tahun Lahir</label>
-                                                <input  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="date_of_birth" value="{{ old('name_of_birth') }}" class="form-control" type="date">
+                                                <input name="date_of_birth" value="{{ old('name_of_birth') }}" class="form-control" type="date">
                                             </div>
 
                                             <div class="form-group">
@@ -146,7 +136,7 @@
                                             </div>
                                             <input type="hidden" name="role" value="siswa">
                                             <input type="hidden" name="user_role" value="4">
-                                            <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">DAFTAR</button>
+                                            <button type="submit" class="btn btn-success btn-block waves-effect">DAFTAR</button>
                                         </form>
                                     </div>
 
@@ -236,41 +226,25 @@
                                             <input type="hidden" name="user_role" value="3">
                                             <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">DAFTAR</button>
                                         </form>
-                                    </div>
-                                    </form>
+                                       </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="text-center mt-4 font-weight-light"> Anda sudah memiliki akun? <a href="{{ route('login') }}" class="text-primary">Login</a>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+</div>
+@endsection
+@push('bg')
+<div class="bg_icons"></div>
+@endpush
 
-    <script src="{{URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
-    <script src="{{URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
-    <script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
-    <script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
-    <script src="{{ URL::to('vendor/be/assets/js/preloader.js')}}"></script>
-
-
+@push('js')
+    <script src="{{ URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
+    <script src="{{ URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
+    <script src="{{ URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
+    <script src="{{ URL::to('vendor/be/assets/js/misc.js')}}"></script>
     <script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
     <script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
-    <script>
-    $('.year_picker').datepicker({
-        autoclose: true,
-        minViewMode: 2,
-        format: 'yyyy',
-        orientation: "auto",
-    });
-</script>
-</body>
-
-</html>
+@endpush

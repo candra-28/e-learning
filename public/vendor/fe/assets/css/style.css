@@ -8243,7 +8243,8 @@ h6 {
 
 .footer {
   padding: 20px 0;
-  background: #8a2be2; }
+  background: #8a2be2;
+     }
   .footer.dashboard {
     background: #fff;
     border-top: 1px solid #E3E3F0; }
@@ -8552,18 +8553,14 @@ label.error {
   margin-bottom: -22px;
   font-size: 12px;
   font-weight: 400; }
-/*label.error {
-  color: #E82753;
-  margin-top: 5px;
-}*/
 
 input.error {
     border: 1px solid red;
-    font-family: "ubuntu-regular", sans-serif;
+    font-family: inherit;
 }
 select.error{
-        border: 1px solid red;
-    font-family: "ubuntu-regular", sans-serif;
+    border: 1px solid red;
+    font-family: inherit;
 }
 
 .btn {
@@ -9248,6 +9245,28 @@ select.error{
 
 .authincation {
   height: 100vh; }
+
+.auth {
+  position: relative;
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  z-index: 1; }
+  .auth:after {
+    z-index: -1;
+    content: '';
+    position: absolute !important;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+ }
+
 
 .auth-form .page-back {
   display: inline-block;

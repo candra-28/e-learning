@@ -5,18 +5,12 @@
 @endpush
 
 @push('styles')
-
-<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
-<link rel="shortcut icon" href="{{ URL::to('vendor/be/assets/images/logo-atas.png')}}">
 
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="{{ URL::to('vendor/be/assets/dataTable/jquery_dataTable.min.css') }}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
-<link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
-
 @endpush
 
 @section('content')
@@ -80,11 +74,11 @@
                 </div>
                 @endif
 
-                <form action="{{ url('class/create') }}" class="needs-validation" novalidate method="post" autocomplete="off">
+                <form action="{{ url('class/sdf') }}" class="add-class" method="post" autocomplete="off">
                     @csrf
                     <div class="form-group">
                         <label class="col-form-label">Nama Kelas:</label>
-                        <input type="text" name="name" id="validationCustom03" class="form-control">
+                        <input type="text" name="name" placeholder="Masukan nama" class="form-control">
                     </div>
             </div>
             <div class="modal-footer">
@@ -106,11 +100,13 @@
 <script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
+<script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
+<script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
 
-<script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="{{ URL::to('vendor/be/assets/dataTable/jquery_dataTable.min.js') }}"></script>
 <script src="{{ URL::to('vendor/be/assets/dataTable/dataTable.js') }}"></script>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
 <script>
     $('#exampleModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)

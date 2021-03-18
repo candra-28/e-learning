@@ -207,3 +207,16 @@ $(function () {
         },
     });
 });
+
+$(function () {
+    $(".add-class").validate({
+        rules: {
+            name: {
+                required: true,
+            },
+        },
+        messages: {
+            name: "Kata sandi lama harus di isi",
+        },
+    });
+});
