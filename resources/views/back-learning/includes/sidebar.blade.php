@@ -2,9 +2,9 @@
 
 use App\Models\User;
 
-$user = User::join('user_has_roles','user_has_roles.uhs_user_id','=','users.usr_id')
-              ->join('roles','user_has_roles.uhs_role_id','=','roles.rol_id')
-              ->where('usr_id',Auth()->user()->usr_id)->first();  
+$user = User::join('user_has_roles', 'user_has_roles.uhs_user_id', '=', 'users.usr_id')
+  ->join('roles', 'user_has_roles.uhs_role_id', '=', 'roles.rol_id')
+  ->where('usr_id', Auth()->user()->usr_id)->first();
 ?>
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -37,21 +37,21 @@ $user = User::join('user_has_roles','user_has_roles.uhs_user_id','=','users.usr_
 
     <li class="nav-item">
       <a class="nav-link" href="{{ url('classes')}}">
-        <span class="menu-title">Kelola Kelas</span>
+        <span class="menu-title">Kelas</span>
         <i class="mdi mdi-home-modern menu-icon"></i>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="{{ url('students')}}">
-        <span class="menu-title">Kelola Siswa</span>
+        <span class="menu-title">Siswa</span>
         <i class="mdi mdi-account-card-details menu-icon"></i>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="{{ url('teachers')}}">
-        <span class="menu-title">Kelola Guru</span>
+        <span class="menu-title">Guru</span>
         <i class="mdi mdi-account-card-details menu-icon"></i>
       </a>
     </li>
@@ -81,7 +81,7 @@ $user = User::join('user_has_roles','user_has_roles.uhs_user_id','=','users.usr_
 
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#tugas" aria-expanded="false" aria-controls="general-pages">
-        <span class="menu-title">Kelola Tugas</span>
+        <span class="menu-title">Tugas</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-book-open-page-variant menu-icon"></i>
       </a>
@@ -103,7 +103,7 @@ $user = User::join('user_has_roles','user_has_roles.uhs_user_id','=','users.usr_
     </li>
 
     @elseif($user->rol_id == 2)
-        <li class="nav-item">
+    <li class="nav-item">
       <a class="nav-link" href="{{ url('dashboard') }}">
         <span class="menu-title">Dashboard</span>
         <i class="mdi mdi-home menu-icon"></i>
@@ -112,21 +112,21 @@ $user = User::join('user_has_roles','user_has_roles.uhs_user_id','=','users.usr_
 
     <li class="nav-item">
       <a class="nav-link" href="{{ url('classes')}}">
-        <span class="menu-title">Kelola Kelas</span>
+        <span class="menu-title">Kelas</span>
         <i class="mdi mdi-home-modern menu-icon"></i>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="{{ url('students')}}">
-        <span class="menu-title">Kelola Siswa</span>
+        <span class="menu-title">Siswa</span>
         <i class="mdi mdi-account-card-details menu-icon"></i>
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link" href="{{ url('teachers')}}">
-        <span class="menu-title">Kelola Guru</span>
+        <span class="menu-title">Guru</span>
         <i class="mdi mdi-account-card-details menu-icon"></i>
       </a>
     </li>
@@ -156,7 +156,7 @@ $user = User::join('user_has_roles','user_has_roles.uhs_user_id','=','users.usr_
 
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#tugas" aria-expanded="false" aria-controls="general-pages">
-        <span class="menu-title">Kelola Tugas</span>
+        <span class="menu-title">Tugas</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-book-open-page-variant menu-icon"></i>
       </a>

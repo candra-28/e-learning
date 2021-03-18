@@ -15,7 +15,7 @@
 <div class="page-header">
   <h3 class="page-title">
     <span class="page-title-icon bg-gradient-primary text-white mr-2">
-      <i class="mdi mdi-voice"></i>
+      <i class="mdi mdi-home-modern"></i>
     </span> Buat Kelas
   </h3>
 </div>

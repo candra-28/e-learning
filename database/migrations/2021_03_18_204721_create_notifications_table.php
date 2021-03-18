@@ -14,7 +14,7 @@ class CreateNotificationsTable extends Migration
     public function up()
     {
         Schema::create('notifications', function (Blueprint $table) {
-            $table->id('not');
+            $table->id('not_id');
             $table->bigInteger('not_to_role_id')->unsigned();
             $table->string('not_title');
             $table->text('not_message');

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Classes;
 
 class Major extends Model
 {
@@ -11,4 +12,9 @@ class Major extends Model
     const UPDATED_AT = 'mjr_updated_at';
     const DELETED_AT = 'mjr_deleted_at';
     protected $guarded = [];
+
+    public function class()
+    {
+        $this->belongsTo(Classes::class, 'cls_major_id', 'mjr_id');
+    }
 }

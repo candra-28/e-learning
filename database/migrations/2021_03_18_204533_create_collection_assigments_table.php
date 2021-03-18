@@ -16,6 +16,7 @@ class CreateCollectionAssigmentsTable extends Migration
         Schema::create('collection_assigments', function (Blueprint $table) {
             $table->id('coa_id');
             $table->bigInteger('coa_student_id')->unsigned();
+            $table->text('coa_message')->nullable();
             $table->integer('coa_score');
             $table->bigInteger('coa_assigment_id')->unsigned();
 

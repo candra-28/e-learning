@@ -67,7 +67,7 @@ class ClassController extends Controller
             $class->cls_school_year_id = $request->cls_school_year_id;
             $class->cls_number = $request->cls_number;
             $class->cls_is_active = 1;
-            $class->cls_created_by = Auth()->user()->id;
+            $class->cls_created_by = Auth()->user()->usr_id;
             $class->save();
             return redirect('classes')->with('success', 'Kelas berhasil di tambahkan');
         } else {
@@ -76,28 +76,30 @@ class ClassController extends Controller
     }
     public function edit($classID)
     {
-        $class = Clas::find($classID);
-        return view('class.edit', ['class' => $class]);
+        $class = Classes::where('cls_id', $classID)->firstOrFail();
+        $grades = GradeLevel::select('grl_id', 'grl_name')->get();
+        $majors = Major::where('mjr_is_active', true)->select('mjr_id', 'mjr_name')->get();
+        $school_years = SchoolYear::where('scy_is_active', true)->select('scy_id', 'scy_name')->get();
+        return view('back-learning.classes.edit', compact('class', 'grades', 'majors', 'school_years'));
     }
     public function update(Request $request, $classID)
     {
-        $request->validate(
-            [
-                'name'  => 'required',
-                'is_active' => 'required'
-            ],
-
-            $message = [
-                'name.required' => 'Nama Kelas Tidak Boleh Kosong',
-                'is_active.required'     => 'Pilih salah satu sebelum di simpan'
-            ]
-        );
-
-        $class = Clas::where('id', $classID)->first();
-        $class->name = $request->name;
-        $class->is_active = $request->is_active;
-        $class->update();
-        return redirect('/class');
+        $class_check = Classes::where('cls_grade_level_id', $request->cls_grade_level_id)
+            ->where('cls_major_id', $request->cls_major_id)
+            ->where('cls_school_year_id', $request->cls_school_year_id)
+            ->where('cls_number', $request->cls_number)->count();
+        if ($class_check == 0) {
+            $class = Classes::where('cls_id', $classID)->firstOrFail();
+            $class->cls_grade_level_id = $request->cls_grade_level_id;
+            $class->cls_major_id = $request->cls_major_id;
+            $class->cls_school_year_id = $request->cls_school_year_id;
+            $class->cls_number = $request->cls_number;
+            $class->cls_updated_by = Auth()->user()->usr_id;
+            $class->update();
+            return redirect('classes')->with('success', 'Kelas berhasil di ubah');
+        } else {
+            return redirect()->back()->with('error', 'Kelas sudah digunakan');
+        }
     }
 
     public function updateStatusClass($classID)

@@ -226,3 +226,22 @@ $(function () {
         },
     });
 });
+
+$(function () {
+    $(".edit-class").validate({
+        rules: {
+            cls_grade_level_id: "required",
+            cls_major_id: "required",
+            cls_school_year_id: "required",
+            cls_number: "required",
+            cls_is_active: "required",
+        },
+        messages: {
+            cls_grade_level_id: "Tingkatan kelas harus di isi",
+            cls_major_id: "Jurusan harus di isi",
+            cls_school_year_id: "Tahun ajaran harus di isi",
+            cls_number: "Nomor kelas harus di isi",
+            cls_is_active: "Status kelas harus di isi",
+        },
+    });
+});
