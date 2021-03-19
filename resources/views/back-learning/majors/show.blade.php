@@ -1,7 +1,7 @@
 @extends('back-learning.layouts.master')
 
 @push('title')
-- Buat Jurusan
+- Detail Jurusan
 @endpush
 
 @push('styles')
@@ -16,7 +16,7 @@
     <h3 class="page-title">
         <span class="page-title-icon bg-gradient-primary text-white mr-2">
             <i class="mdi mdi-school"></i>
-        </span> Buat Jurusan
+        </span> Detail Jurusan
     </h3>
 </div>
 <div class="row">
@@ -33,30 +33,51 @@
                     {{ Session::get('error') }}
                 </div>
                 @endif
-                <h4 class="card-title">Buat Jurusan Baru</h4>
-                <p class="card-description"> Masukan jurusan yang akan anda buat</p>
-                <form action="{{ url('major/create') }}" method="post" autocomplete="off" class="add-major" enctype="multipart/form-data">
-                    @csrf
-                    <div class="row mt-3">
-                        <div class="col-12 mb-4">
-                            <div class="tect-center mb-2">
-                                <img id="tampil_picture" style="object-fit: cover; height: 200px; width:230px; text-align:center;">
-                            </div>
-                            <input accept="image/x-png,image/gif,image/jpeg" type="file" name="mjr_thumnail" id="preview_gambar" onchange="document.getElementById('usr_profile_picture').value=this.value" /><br>
+                <h4 class="card-title text-center">Detail Jurusan </h4>
+
+
+                <!-- <div class="row mt-3">
+                    <div class="col-12 mb-4">
+                        <div class="tect-center mb-2">
+                            <img id="tampil_picture" src="{{ asset($major->mjr_thumnail) }}" style="object-fit: cover; height: 200px; width:230px; text-align:center;">
                         </div>
+                        <input accept="image/x-png,image/gif,image/jpeg" value="{{ $major->mjr_thumnail }}" type="file" name="mjr_thumnail" id="preview_gambar" style="border-radius: 5px;" onchange="document.getElementById('usr_profile_picture').value=this.value" /><br>
                     </div>
+                </div> -->
 
-                    <div class="form-group">
-                        <label>Nama Jurusan</label>
-                        <input type="text" name="mjr_name" class="form-control" placeholder="Masukan nama jurusan">
-                    </div>
-                    <div class="form-group">
-                        <label>Deskripsi Jurusan</label>
-                        <textarea name="mjr_description" class="texteditor"></textarea>
-                    </div>
+                <p>Thumnail Jurusan</p>
+                <div class="row mt-3">
+                    <div class="col-6 pl-1" style="left: 25%;">
+                        <img src="{{ asset($major->mjr_thumnail) }}" class="mb-2 mw-100 w-100 rounded" alt="image">
 
-                    <button type="submit" class="btn btn-gradient-primary mr-2">Simpan</button>
-                </form>
+                    </div>
+                </div>
+
+                <dt class="col-sm-12">Nama Jurusan</dt>
+                <dd class="col-sm-12">
+                    <p style="font-family: sans-serif; font-size: 18px;">{{ $major->mjr_name }}</p>
+                </dd>
+
+                <dt class="col-sm-12">Deskripsi Jurusan</dt>
+                <dd class="col-sm-12">
+                    <p style="font-family: sans-serif; font-size: 18px;">{!! $major->mjr_description !!}</p>
+                </dd>
+
+                <dt class="col-sm-12">Dibuat Oleh</dt>
+                <dd class="col-sm-12">
+                    <p style="font-family: sans-serif; font-size: 18px;">{{ $major->user->usr_name }}</p>
+                </dd>
+
+                <dt class="col-sm-12">Tanggal di buat</dt>
+                <dd class="col-sm-12">
+                    <p style="font-family: sans-serif; font-size: 18px;">{{ getDateFormat($major->mjr_created_at) }}</p>
+                </dd>
+
+
+                <dd class="col-sm-12">
+                    <p style="font-family: sans-serif; font-size: 18px;"><a href="{{ url('majors') }}" class="btn btn-gradient-primary btn-sm">Kembali</a></p>
+                </dd>
+
             </div>
         </div>
     </div>

@@ -78,4 +78,9 @@ class MajorController extends Controller
         $major->update();
         return redirect('majors')->with('success', 'Jurusan berhasil di ubah');
     }
+    public function show($majorID)
+    {
+        $major = Major::where('mjr_id', $majorID)->firstOrFail();
+        return view('back-learning.majors.show', ['major' => $major]);
+    }
 }

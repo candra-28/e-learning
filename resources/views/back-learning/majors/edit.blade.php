@@ -1,7 +1,7 @@
 @extends('back-learning.layouts.master')
 
 @push('title')
-- Buat Jurusan
+- Edit Jurusan
 @endpush
 
 @push('styles')
@@ -16,7 +16,7 @@
     <h3 class="page-title">
         <span class="page-title-icon bg-gradient-primary text-white mr-2">
             <i class="mdi mdi-school"></i>
-        </span> Buat Jurusan
+        </span> Edit Jurusan
     </h3>
 </div>
 <div class="row">
@@ -33,8 +33,8 @@
                     {{ Session::get('error') }}
                 </div>
                 @endif
-                <h4 class="card-title">Buat Jurusan Baru</h4>
-                <p class="card-description"> Masukan jurusan yang akan anda buat</p>
+                <h4 class="card-title">Edit Jurusan</h4>
+                <p class="card-description"> Edit jurusan jike ada yang perlu di ubah</p>
                 <form action="{{ url('major/edit/'.$major->mjr_id) }}" method="post" autocomplete="off" class="edit-major" enctype="multipart/form-data">
                     @csrf
                     <div class="row mt-3">
@@ -42,7 +42,7 @@
                             <div class="tect-center mb-2">
                                 <img id="tampil_picture" src="{{ asset($major->mjr_thumnail) }}" style="object-fit: cover; height: 200px; width:230px; text-align:center;">
                             </div>
-                            <input accept="image/x-png,image/gif,image/jpeg" value="{{ $major->mjr_thumnail }}" type="file" name="mjr_thumnail" id="preview_gambar" style="border-radius: 5px;" onchange="document.getElementById('usr_profile_picture').value=this.value" /><br>
+                            <input accept="image/x-png,image/gif,image/jpeg" value="{{ $major->mjr_thumnail }}" type="file" name="mjr_thumnail" id="preview_gambar" onchange="document.getElementById('usr_profile_picture').value=this.value" /><br>
                         </div>
                     </div>
 

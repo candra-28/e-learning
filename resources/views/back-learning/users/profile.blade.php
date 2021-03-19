@@ -24,13 +24,13 @@
         <div class="card">
             <div class="card-body">
                 <div class="text-center">
-                     @if(isset($user->usr_profile_picture))
-                     <img src="{{ url('profile_picture/'.$user->name.'/'.$user->profile_picture) }}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
+                    @if(isset($user->usr_profile_picture))
+                    <img src="{{ url('profile_picture/'.$user->name.'/'.$user->profile_picture) }}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
                     @else
                     <img src="{{ asset('profile_picture/avatar-2.png')}}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
                     @endif
                 </div>
-             <!--  <div class="text-center">
+                <!--  <div class="text-center">
                   <form action="" method="post" enctype="multipart/form-data">
                     @csrf
                     @if(isset($user->usr_profile_picture))
@@ -46,15 +46,15 @@
                     <input type="submit" value="Simpan" class="btn btn-outline-success btn-sm">
                   </form>   
               </div> -->
-                
+
             </div>
 
             <div class="card-body">
-<!--                 <hr>
+                <!--                 <hr>
                     <h4 class="font-medium text-center" style="font-family: sans-serif;">Akun</h4>
                 <hr>
  -->
-              <dt class="col-sm-12">Nama</dt>
+                <dt class="col-sm-12">Nama</dt>
                 <dd class="col-sm-12">
                     <p style="font-family: sans-serif; font-size: 18px;">{{ $user->usr_name }}</p>
                 </dd>
@@ -72,7 +72,7 @@
                     <p style="font-family: sans-serif; font-size: 18px;">tidak aktif</p>
                     @endif
                 </dd>
-     
+
             </div>
         </div>
     </div>
@@ -127,84 +127,84 @@
                                 <p>{{ $user->usr_address }}</p>
                             </dd>
                         </div>
-                    @if($role->rol_id == 4)
-                    <hr>
-                    <h4 class="font-medium m-t-30">Riwayat Kelas</h4>
-                    <hr>
+                        @if($role->rol_id == 4)
+                        <hr>
+                        <h4 class="font-medium m-t-30">Riwayat Kelas</h4>
+                        <hr>
 
-                    <table class="table table-hover">
-                      <thead class="text-upercase" style="background-color: #00FFFF;">
-                        <tr>
-                          <th>No</th>
-                          <th>Kelas</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>X Multimedia 1</td>
-                          <td><label class="badge badge-danger">tidak aktif</label></td>
-                        </tr>
+                        <table class="table table-hover">
+                            <thead class="text-upercase" style="background-color: #00FFFF;">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Kelas</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>X Multimedia 1</td>
+                                    <td><label class="badge badge-danger">tidak aktif</label></td>
+                                </tr>
 
-                        <tr>
-                          <td>2</td>
-                          <td>XI Multimedia 1</td>
-                          <td><label class="badge badge-success">aktif</label></td>
-                        </tr>
- 
-                      </tbody>
-                    </table>
-                    @elseif($role->rol_id == 3)
-                    <hr>
-                    <h4 class="font-medium m-t-30">Riwayat Mengajar pelajaran</h4>
-                    <hr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>XI Multimedia 1</td>
+                                    <td><label class="badge badge-success">aktif</label></td>
+                                </tr>
 
-                    <table class="table table-hover">
-                      <thead class="text-upercase" style="background-color: #00FFFF;">
-                        <tr>
-                          <th>No</th>
-                          <th>Mata pelajaran</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Bahasa Indonesia</td>
-                          <td><label class="badge badge-success">aktif</label></td>
-                        </tr>
+                            </tbody>
+                        </table>
+                        @elseif($role->rol_id == 3)
+                        <hr>
+                        <h4 class="font-medium m-t-30">Riwayat Mengajar pelajaran</h4>
+                        <hr>
 
-                        <tr>
-                          <td>2</td>
-                          <td>Bahasa Inggris</td>
-                          <td><label class="badge badge-success">aktif</label></td>
-                        </tr>
- 
-                      </tbody>
-                    </table>
-                    @else
+                        <table class="table table-hover">
+                            <thead class="text-upercase" style="background-color: #00FFFF;">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Mata pelajaran</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Bahasa Indonesia</td>
+                                    <td><label class="badge badge-success">aktif</label></td>
+                                </tr>
 
-                    @endif
+                                <tr>
+                                    <td>2</td>
+                                    <td>Bahasa Inggris</td>
+                                    <td><label class="badge badge-success">aktif</label></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        @else
+
+                        @endif
                     </div>
                 </div>
                 <div class="tab-pane show" id="setting_profile" role="tabpanel">
                     <div class="card-body">
-                        
+
                     </div>
                 </div>
 
                 <div class="tab-pane show" id="setting_email" role="tabpanel">
                     <div class="card-body">
-                        
+
                     </div>
                 </div>
 
                 <div class="tab-pane show" id="setting_password" role="tabpanel">
                     <div class="card-body">
                         <form class="form-horizontal form-material edit-password" method="POST" action="{{ url('profile/update-password') }}">
-                         @csrf
-                           @if (Session::has('success'))
+                            @csrf
+                            @if (Session::has('success'))
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <div class="alert alert-success col-md-12">
@@ -214,7 +214,7 @@
                             </div>
                             @endif
                             @if (Session::has('error'))
-                             <div class="form-group">
+                            <div class="form-group">
                                 <div class="col-md-12">
                                     <div class="alert alert-danger col-md-12">
                                         {{ Session::get('error') }}
@@ -240,7 +240,7 @@
                                     <input type="password" name="new_password_confirmation" placeholder="ulangi sandi" class="form-control form-control-line">
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <button class="btn btn-primary">simpan</button>

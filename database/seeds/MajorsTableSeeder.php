@@ -12,17 +12,17 @@ class MajorsTableSeeder extends Seeder
     public function run()
     {
         DB::table('majors')->insert([
-			'mjr_name' => 'Multimedia',
-			'mjr_is_active'	=> 1,
+            'mjr_name' => 'Multimedia',
+            'mjr_is_active'    => 1,
             'mjr_description' => 'Multimedia adalah jurusan desaign',
-            'mjr_thumnail'  => 'major/images/mm.jpeg',
-		]);
+            'mjr_thumnail'  => 'vendor/be/assets/images/majors/mm.jpeg',
+        ]);
 
         DB::table('majors')->insert([
-			'mjr_name' => 'Rekayasa Perangkat Lunak',
-			'mjr_is_active'	=> 1,
+            'mjr_name' => 'Rekayasa Perangkat Lunak',
+            'mjr_is_active'    => 1,
             'mjr_description'   => 'Rekayasa Perangkat Lunak adalah jurusan dengan semua logika dan coding',
-            'mjr_thumnail'  => 'major/images/rpl.jpeg',
-		]);
+            'mjr_thumnail'  => 'vendor/be/assets/images/majors/rpl.jpeg',
+        ]);
     }
 }
