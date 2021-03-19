@@ -7,7 +7,7 @@ $(document).ready(function() {
     var table = $('#classes').dataTable({
         processing: true,
         serverSide: true,
-        ajax: "majors",
+        ajax: "classes",
         lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "semua"]],
         columns: [{
                 data: 'DT_RowIndex',

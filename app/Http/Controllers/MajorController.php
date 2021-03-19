@@ -57,4 +57,25 @@ class MajorController extends Controller
         $major->save();
         return redirect('majors')->with('success', 'Jurusan berhasil di tambahkan');
     }
+    public function edit($majorID)
+    {
+        $major = Major::where('mjr_id', $majorID)->firstOrFail();
+        return view('back-learning.majors.edit', ['major' => $major]);
+    }
+    public function update(Request $request, $majorID)
+    {
+        $major = Major::where('mjr_id', $majorID)->firstOrFail();
+        $major->mjr_name = $request->mjr_name;
+        $major->mjr_description = $request->mjr_description;
+        if ($request->hasFile('mjr_thumnail')) {
+            $files = $request->file('mjr_thumnail');
+            $path = public_path('vendor/be/assets/images/majors');
+            $files_name = 'vendor' . '/' . 'be' . '/' . 'assets' . '/' . 'images' . '/' . 'majors' . '/' . date('Ymd') . '_' . $files->getClientOriginalName();
+            $files->move($path, $files_name);
+            $major->mjr_thumnail = $files_name;
+        }
+        $major->mjr_updated_by = Auth()->user()->usr_id;
+        $major->update();
+        return redirect('majors')->with('success', 'Jurusan berhasil di ubah');
+    }
 }

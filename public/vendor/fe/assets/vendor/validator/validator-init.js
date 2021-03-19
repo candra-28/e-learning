@@ -260,3 +260,18 @@ $(function () {
         },
     });
 });
+
+$(function () {
+    $(".edit-major").validate({
+        rules: {
+            mjr_name: "required",
+            
+            mjr_description: "required",
+        },
+        messages: {
+            mjr_name: "Nama jursan harus di isi",
+
+            mjr_description: "Deskripsi Jurusan harus di isi harus di isi",
+        },
+    });
+});
