@@ -15,7 +15,7 @@ class MajorsTableSeeder extends Seeder
             'mjr_name' => 'Multimedia',
             'mjr_is_active'    => 1,
             'mjr_description' => 'Multimedia adalah jurusan desaign',
-            'mjr_thumnail'  => 'vendor/be/assets/images/majors/mm.jpeg',
+            'mjr_thumnail'  => 'vendor/be/assets/images/majors/mm.jpg',
             'mjr_created_by' => 1
         ]);
 
@@ -23,7 +23,7 @@ class MajorsTableSeeder extends Seeder
             'mjr_name' => 'Rekayasa Perangkat Lunak',
             'mjr_is_active'    => 1,
             'mjr_description'   => 'Rekayasa Perangkat Lunak adalah jurusan dengan semua logika dan coding',
-            'mjr_thumnail'  => 'vendor/be/assets/images/majors/rpl.jpeg',
+            'mjr_thumnail'  => 'vendor/be/assets/images/majors/rpl.jpg',
             'mjr_created_by' => 1
         ]);
     }

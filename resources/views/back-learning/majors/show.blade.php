@@ -60,7 +60,20 @@
 
                 <dt class="col-sm-12">Deskripsi Jurusan</dt>
                 <dd class="col-sm-12">
+                    @if(isset($major->mjr_description))
                     <p style="font-family: sans-serif; font-size: 18px;">{!! $major->mjr_description !!}</p>
+                    @else
+                    <p style="font-family: sans-serif; font-size: 18px;">Tidak ada deskripsi</p>
+                    @endif
+                </dd>
+
+                <dt class="col-sm-12">Status Jurusan</dt>
+                <dd class="col-sm-12">
+                    @if($major->mjr_is_active == 0)
+                    <p><label class="badge badge-gradient-danger">AKTIF</label></p>
+                    @else
+                    <p><label class="badge badge-gradient-success">TIDAK AKTIF</label></p>
+                    @endif
                 </dd>
 
                 <dt class="col-sm-12">Dibuat Oleh</dt>
@@ -73,9 +86,8 @@
                     <p style="font-family: sans-serif; font-size: 18px;">{{ getDateFormat($major->mjr_created_at) }}</p>
                 </dd>
 
-
                 <dd class="col-sm-12">
-                    <p style="font-family: sans-serif; font-size: 18px;"><a href="{{ url('majors') }}" class="btn btn-gradient-primary btn-sm">Kembali</a></p>
+                    <p style="font-family: sans-serif; font-size: 18px;"><a href="{{ url('majors') }}" class="btn btn-gradient-primary">Kembali</a></p>
                 </dd>
 
             </div>

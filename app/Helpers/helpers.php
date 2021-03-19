@@ -8,3 +8,10 @@ function getDateFormat($datetime)
         return Carbon::parse($datetime)->translatedFormat('l, d F Y');
     }
 }
+
+function getDateBirthday($datetime)
+{
+    if (isset($datetime)) {
+        return Carbon::parse($datetime)->format('d/m/Y');
+    }
+}

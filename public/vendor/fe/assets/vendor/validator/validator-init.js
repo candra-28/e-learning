@@ -275,3 +275,22 @@ $(function () {
         },
     });
 });
+
+$(function () {
+    $(".update-profile").validate({
+        rules: {
+            usr_name: "required",
+            usr_phone_number:{
+                required: true,
+                minlength: 10
+            }
+        },
+        messages: {
+            usr_name: "Nama tidak boleh kosong",
+            usr_phone_number: {
+                required: "Nomor tidak boleh kosong",
+                minlength: "Minimal 10 digit"
+            },
+        },
+    });
+});

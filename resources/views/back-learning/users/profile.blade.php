@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
+<link href="{{ URL::to('vendor/be/assets/vendors/datepicker/datepicker.css') }}" rel="stylesheet" />
 @endpush
 
 @section('content')
@@ -25,35 +26,14 @@
             <div class="card-body">
                 <div class="text-center">
                     @if(isset($user->usr_profile_picture))
-                    <img src="{{ url('profile_picture/'.$user->name.'/'.$user->profile_picture) }}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
+                    <img src="{{ url($user->usr_profile_picture) }}" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
                     @else
-                    <img src="{{ asset('profile_picture/avatar-2.png')}}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
+                    <img src="{{ asset('vendor/be/assets/images/profile_picture/avatar-2.png')}}" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
                     @endif
                 </div>
-                <!--  <div class="text-center">
-                  <form action="" method="post" enctype="multipart/form-data">
-                    @csrf
-                    @if(isset($user->usr_profile_picture))
-                     <img src="{{ url('profile_picture/'.$user->name.'/'.$user->profile_picture) }}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
-                    @else
-                    <img src="{{ asset('profile_picture/avatar-2.png')}}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
-                    @endif
-                   
-                    <input type="file" name="profile_picture" id="preview_gambar" class="img-thumbnail" style="display:none; border-radius: 5px;" onchange="document.getElementById('usr_profile_picture').value=this.value" /><br>
-
-                    <button type="button" id="usr_profile_picture" class="btn btn-outline-primary btn-sm m-2" onclick="document.getElementById('preview_gambar').click()">Pilih Gambar</button>
-                    
-                    <input type="submit" value="Simpan" class="btn btn-outline-success btn-sm">
-                  </form>   
-              </div> -->
-
             </div>
 
             <div class="card-body">
-                <!--                 <hr>
-                    <h4 class="font-medium text-center" style="font-family: sans-serif;">Akun</h4>
-                <hr>
- -->
                 <dt class="col-sm-12">Nama</dt>
                 <dd class="col-sm-12">
                     <p style="font-family: sans-serif; font-size: 18px;">{{ $user->usr_name }}</p>
@@ -114,7 +94,7 @@
 
                             <dt class="col-sm-4">Tanggal Lahir</dt>
                             <dd class="col-sm-7">
-                                <p>{{ $user->usr_date_of_birth }}</p>
+                                <p>{{ getDateFormat($user->usr_date_of_birth) }}</p>
                             </dd>
 
                             <dt class="col-sm-4">Agama</dt>
@@ -190,7 +170,112 @@
                 </div>
                 <div class="tab-pane show" id="setting_profile" role="tabpanel">
                     <div class="card-body">
+                        <form class="form-horizontal form-material update-profile" method="POST" action="{{ url('profile/profile-update') }}" enctype="multipart/form-data">
+                            @csrf
+                            @if (Session::has('success'))
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="alert alert-success col-md-12">
+                                        {{ Session::get('success') }}
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                            @if (Session::has('error'))
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="alert alert-danger col-md-12">
+                                        {{ Session::get('error') }}
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
 
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @if(isset($user->usr_profile_picture))
+                                    <div class="mb-0">
+                                        <img src="{{ asset($user->usr_profile_picture) }}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
+                                    </div>
+                                    @else
+                                    <div class="mb-0">
+                                        <img src="{{ asset('vendor/be/assets/images/profile_picture/avatar-2.png') }}" id="tampil_picture" style="object-fit: cover; height: 200px; width: 200px; border-radius:5px;" />
+                                    </div>
+                                    @endif
+                                    <br class="mb-2">
+                                    <input type="file" name="usr_profile_picture" id="preview_gambar" onchange="document.getElementById('usr_profile_picture').value=this.value" /><br>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Nama</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="usr_name" value="{{ $user->usr_name }}" class="form-control form-control-line">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="example-email" class="col-md-12">Nomor Telepon</label>
+                                <div class="col-md-12">
+                                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="{{ $user->usr_phone_number }}" class="form-control form-control-line" name="usr_phone_number">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-12">Jenis Kelamin</label>
+                                <div class="col-sm-6">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" value="Pria" class="form-check-input" name="usr_gender" id="usr_gender" {{ $user->usr_gender=='Pria'?'checked':'' }}> Pria <i class="input-helper"></i></label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" value="Perempuan" class="form-check-input" name="usr_gender" id="usr_gender" {{ $user->usr_gender=='Perempuan'?'checked':'' }}> Perempuan <i class="input-helper"></i></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-12">Tempat lahir</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="usr_place_of_birth" value="{{ $user->usr_place_of_birth }}" class="form-control form-control-line">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-12">Tanggal Lahir</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="usr_date_of_birth" value="{{ getDateBirthday($user->usr_date_of_birth) }}" class="form-control form-control-line date_picker">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-12">Agama</label>
+                                <div class="col-md-12">
+                                    <select name="usr_religion" class="form-control">
+                                        <option selected>{{ $user->usr_religion }}</option>
+                                        <option value="Islam">Islam</option>
+                                        <option value="Kristen">Kristen</option>
+                                        <option value="Katolik">Katolik</option>
+                                        <option value="Hindu">Hindu</option>
+                                        <option value="Budha">Budha</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-12">Alamat</label>
+                                <div class="col-md-12">
+                                    <textarea name="usr_address" cols="30" rows="10" class="form-control">{{ $user->usr_address }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-primary">simpan</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
 
@@ -265,7 +350,7 @@
 
 <script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
 <script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
-
+<script src="{{ URL::to('vendor/be/assets/vendors/datepicker/datepicker.js') }}"></script>
 <script>
     function bacaGambar(input) {
         if (input.files && input.files[0]) {
@@ -280,6 +365,12 @@
     }
     $("#preview_gambar").change(function() {
         bacaGambar(this);
+    });
+</script>
+<script>
+    $('.date_picker').datepicker({
+        autoclose: true,
+        todayHighlight: true
     });
 </script>
 @endpush

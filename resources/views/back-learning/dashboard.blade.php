@@ -6,11 +6,11 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-<link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
 @endpush
 
 @section('content')
+
 @if($role->rol_id == 4)
 @if(is_null($student_class))
 <div class="row" id="proBanner">
@@ -72,7 +72,7 @@
 <script src="{{URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
-<script src="{{URL::to('vendor/be/assets/js/dashboard.js')}}"></script>
+
 <script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
 @endpush
 @endsection

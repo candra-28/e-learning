@@ -86,7 +86,6 @@ class MajorController extends Controller
     public function updateStatusMajor($majorID)
     {
         $major = Major::findOrFail($majorID);
-        // dd($class);
         if ($major->mjr_is_active == false) {
             $major->mjr_is_active = 1;
         } else {

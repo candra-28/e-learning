@@ -39,10 +39,13 @@
                     @csrf
                     <div class="row mt-3">
                         <div class="col-12 mb-4">
-                            <div class="tect-center mb-2">
+                            <div class="text-center mb-2">
                                 <img id="tampil_picture" style="object-fit: cover; height: 200px; width:230px; text-align:center;">
                             </div>
-                            <input accept="image/x-png,image/gif,image/jpeg" type="file" name="mjr_thumnail" id="preview_gambar" onchange="document.getElementById('usr_profile_picture').value=this.value" /><br>
+                            <div class="text-center">
+                                <input accept="image/x-png,image/gif,image/jpeg" type="file" name="mjr_thumnail" id="preview_gambar" onchange="document.getElementById('usr_profile_picture').value=this.value" /><br>
+
+                            </div>
                         </div>
                     </div>
 

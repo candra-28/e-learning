@@ -13,7 +13,7 @@ $user = User::join('user_has_roles', 'user_has_roles.uhs_user_id', '=', 'users.u
       <a href="{{ url('profiles') }}" class="nav-link">
         <div class="nav-profile-image">
           @if(isset($user->usr_profile_picture))
-          <img src="{{ asset('profile_picture/'.$user->name.'/'.$user->profile_picture)}}" alt="null">
+          <img src="{{ asset($user->usr_profile_picture)}}" alt="null">
           @else
           <img src="{{ asset('profile_picture/avatar-2.png')}}" alt="null">
           @endif
