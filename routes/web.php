@@ -35,7 +35,7 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::get('major/edit/{majorID}', 'MajorController@edit');
     Route::post('major/edit/{majorID}', 'MajorController@update');
     Route::get('major/{majorID}', 'MajorController@show');
-    Route::post('major/edit-status/{majorID}', 'MajorController@updateStatusClass');
+    Route::post('major/edit-status/{majorID}', 'MajorController@updateStatusMajor');
 
     Route::get('classes', 'ClassController@index');
     Route::get('class/create', 'ClassController@create');

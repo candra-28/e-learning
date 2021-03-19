@@ -16,6 +16,7 @@ class MajorsTableSeeder extends Seeder
             'mjr_is_active'    => 1,
             'mjr_description' => 'Multimedia adalah jurusan desaign',
             'mjr_thumnail'  => 'vendor/be/assets/images/majors/mm.jpeg',
+            'mjr_created_by' => 1
         ]);
 
         DB::table('majors')->insert([
@@ -23,6 +24,7 @@ class MajorsTableSeeder extends Seeder
             'mjr_is_active'    => 1,
             'mjr_description'   => 'Rekayasa Perangkat Lunak adalah jurusan dengan semua logika dan coding',
             'mjr_thumnail'  => 'vendor/be/assets/images/majors/rpl.jpeg',
+            'mjr_created_by' => 1
         ]);
     }
 }

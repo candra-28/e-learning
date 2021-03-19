@@ -160,4 +160,54 @@ $(document).ready(function() {
           }
       }
   });
+
+  $('body').on('click', '.status_major', function () {
+
+    var mjr_id = $(this).data("id");
+    let _token = $('meta[name="csrf-token"]').attr('content');
+
+    swal({
+      title: "Status Jurusan",
+      text: 'Apakah anda yakin ingin mengubah status jurusan?',
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+      closeOnClickOutside: false,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        $.ajax({
+          type: 'POST',
+          url: 'major/edit-status/' + mjr_id,
+          data: {
+            mjr_id: mjr_id,
+            _token: _token 
+          },
+          success: function(data) {
+            if (data.status != false) {
+              swal(data.message, {
+                button: false,
+                icon: "success",
+                timer: 1000
+              });
+            } else {
+              swal(data.message, {
+                button: false,
+                icon: "error",
+                timer: 1000
+              });
+            }
+            $('#majors').DataTable().ajax.reload()
+          },
+          error: function(error) {
+            swal('Terjadi kegagalan sistem', {
+              button: false,
+              icon: "error",
+              timer: 1000
+            });
+          }
+        });
+      }
+    });
+});
 });

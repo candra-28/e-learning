@@ -83,4 +83,17 @@ class MajorController extends Controller
         $major = Major::where('mjr_id', $majorID)->firstOrFail();
         return view('back-learning.majors.show', ['major' => $major]);
     }
+    public function updateStatusMajor($majorID)
+    {
+        $major = Major::findOrFail($majorID);
+        // dd($class);
+        if ($major->mjr_is_active == false) {
+            $major->mjr_is_active = 1;
+        } else {
+            $major->mjr_is_active = 0;
+        }
+        $major->mjr_updated_by = Auth()->user()->usr_id;
+        $major->update();
+        return response()->json(['code' => 200, 'message' => 'Kelas status berhasil di ubah', 'data' => $major], 200);
+    }
 }
