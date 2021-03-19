@@ -34,4 +34,27 @@ class MajorController extends Controller
         }
         return view('back-learning.majors.index');
     }
+
+    public function create()
+    {
+        return view('back-learning.majors.create');
+    }
+    public function store(Request $request)
+    {
+        // dd($request);
+        $major = new Major;
+        $major->mjr_name = $request->mjr_name;
+        $major->mjr_description = $request->mjr_description;
+        if ($request->hasFile('mjr_thumnail')) {
+            $files = $request->file('mjr_thumnail');
+            $path = public_path('vendor/be/assets/images/majors');
+            $files_name = 'vendor' . '/' . 'be' . '/' . 'assets' . '/' . 'images' . '/' . 'majors' . '/' . date('Ymd') . '_' . $files->getClientOriginalName();
+            $files->move($path, $files_name);
+            $major->mjr_thumnail = $files_name;
+        }
+        $major->mjr_created_by = Auth()->user()->usr_id;
+        $major->mjr_is_active = 1;
+        $major->save();
+        return redirect('majors')->with('success', 'Jurusan berhasil di tambahkan');
+    }
 }

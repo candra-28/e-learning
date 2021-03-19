@@ -245,3 +245,18 @@ $(function () {
         },
     });
 });
+
+$(function () {
+    $(".add-major").validate({
+        rules: {
+            mjr_name: "required",
+            mjr_thumnail: "required",
+            mjr_description: "required",
+        },
+        messages: {
+            mjr_name: "Nama jursan harus di isi",
+            mjr_thumnail: "Thumnail harus di isi",
+            mjr_description: "Deskripsi Jurusan harus di isi harus di isi",
+        },
+    });
+});
