@@ -43,6 +43,13 @@ $user = User::join('user_has_roles', 'user_has_roles.uhs_user_id', '=', 'users.u
     </li>
 
     <li class="nav-item">
+      <a class="nav-link" href="{{ url('majors')}}">
+        <span class="menu-title">Jurusan</span>
+        <i class="mdi mdi-school menu-icon"></i>
+      </a>
+    </li>
+
+    <li class="nav-item">
       <a class="nav-link" href="{{ url('students')}}">
         <span class="menu-title">Siswa</span>
         <i class="mdi mdi-account-card-details menu-icon"></i>

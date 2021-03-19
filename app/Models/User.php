@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\UserHasRole;
 use App\Models\Role;
+use App\Models\Student;
+use App\Models\StudentClass;
 
 class User extends Authenticatable
 {
@@ -64,5 +66,10 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'user_has_roles', 'uhs_user_id', 'uhs_role_id');
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class, 'stu_user_id', 'usr_id');
     }
 }

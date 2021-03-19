@@ -17,4 +17,9 @@ class Major extends Model
     {
         $this->belongsTo(Classes::class, 'cls_major_id', 'mjr_id');
     }
+    public static function getListMajors($request)
+    {
+        $majors = Major::select('mjr_id', 'mjr_name', 'mjr_is_active');
+        return $majors;
+    }
 }

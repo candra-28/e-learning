@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function(){
+Route::get('/', function () {
     return view('front-learning.index');
 });
 Route::get('login', 'AuthController@showFormLogin')->name('login');
@@ -29,6 +29,13 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::get('announcement/{id}', 'AnnouncementController@show');
     Route::delete('/announcement/{id}', 'AnnouncementController@destroy');
 
+    Route::get('majors', 'MajorController@index');
+    Route::get('major/create', 'MajorController@create');
+    Route::post('major/create', 'MajorController@store');
+    Route::get('major/edit/{majorID}', 'MajorController@edit');
+    Route::post('major/edit/{majorID}', 'MajorController@update');
+    Route::get('major/{majorID}', 'MajorController@show');
+    Route::post('major/edit-status/{majorID}', 'MajorController@updateStatusClass');
 
     Route::get('classes', 'ClassController@index');
     Route::get('class/create', 'ClassController@create');
@@ -39,7 +46,7 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
 
     Route::get('/profiles', 'UserController@index');
     Route::post('/profiles', 'UserController@changeProfilePicture');
-    
+
     Route::post('/profile/update-password', 'UserController@updatePassword');
 
     Route::get('students', 'StudentController@index');
