@@ -26,8 +26,8 @@ class StudentController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function ($student) {
-                    $detail = '<a href="' . url('major', $student->stu_id) . '"  type="button" data-toggle="tooltip" data-original-title="Detail" class="btn btn-warning btn-sm"><i class="mdi mdi-mdi mdi mdi-eye"></i></a>';
-                    $edit = '<a href="' . url('major/edit', $student->stu_id) . '"  type="button" data-toggle="tooltip" data-original-title="Edit" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
+                    $detail = '<a href="' . url('student', $student->stu_id) . '"  type="button" data-toggle="tooltip" data-original-title="Detail" class="btn btn-warning btn-sm"><i class="mdi mdi-mdi mdi mdi-eye"></i></a>';
+                    $edit = '<a href="' . url('student/edit', $student->stu_id) . '"  type="button" data-toggle="tooltip" data-original-title="Edit" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
                     $status = ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $student->stu_id . '" data-original-title="Delete" class="btn btn-danger btn-sm status_student"><i class="mdi mdi-information-outline"></i></a>';
                     return $detail . '&nbsp' . $edit . '&nbsp' . $status;
                 })->rawColumns(['action', 'stu_is_active'])
