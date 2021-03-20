@@ -15,3 +15,10 @@ function getDateBirthday($datetime)
         return Carbon::parse($datetime)->format('d-m-Y');
     }
 }
+
+function getDateFormatLDFYHIS($datetime)
+{
+    if (isset($datetime)) {
+        return Carbon::parse($datetime)->translatedFormat('l, d F Y H:i:s');
+    }
+}

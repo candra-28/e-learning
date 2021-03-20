@@ -63,4 +63,6 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::get('teacher/edit/{id}', 'TeacherController@edit');
     Route::post('teacher/edit/{id}', 'TeacherController@update');
     Route::get('teacher/{id}', 'TeacherController@show');
+
+    Route::get('log-histories', 'UserLogHistoryController@index');
 });

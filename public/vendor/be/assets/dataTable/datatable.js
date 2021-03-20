@@ -279,8 +279,6 @@ $(document).ready(function() {
           }
       }
     });
-
-    
   $('body').on('click', '.status_student', function () {
 
     var stu_id = $(this).data("id");
@@ -331,5 +329,110 @@ $(document).ready(function() {
       }
     });
   });
+});
+
+
+$(document).ready(function() {
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+  var table = $('#user_log_histories').dataTable({
+      processing: true,
+      serverSide: true,
+      ajax: "log-histories",
+      columns: [{
+              data: 'DT_RowIndex',
+              name: 'DT_RowIndex',
+              orderable: false,
+              searchable: false
+          },
+          {
+              data: 'usr_name',
+              name: 'users.usr_name',
+              orderable: true,
+              searchable: true
+          },
+          {
+              data: 'ulh_last_login_ip',
+              name: 'ulh_last_login_ip',
+              orderable: true,
+              searchable: true
+          },
+          {
+              data: 'ulh_date',
+              name: 'ulh_date',
+              orderable: false,
+              searchable: false
+          },
+      ],
+      "language": {
+        // "processing": '<h4 style="font-family: arial;">Mohon Tunggu</h4>',
+        "processing": '<img src="../../../vendor/be/assets/images/3.svg" style="width="20px; height="20px;">',
+        "search": "Cari:",
+        "zeroRecords": "Daftar pengguna login tidak tersedia",
+        "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
+        "infoEmpty": "Tidak ada daftar pengguna login",
+        "infoFiltered": "(pencarian dari _MAX_ daftar pengguna login)",
+        "infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "lengthMenu": "Tampilkan _MENU_ baris",
+        "paginate": {
+            "previous": "sebelumnya",
+            "next": "selanjutnya"
+        }
+    }
+  });
+
+// $('body').on('click', '.status_student', function () {
+
+//   var stu_id = $(this).data("id");
+//   console.log(stu_id)
+//   let _token = $('meta[name="csrf-token"]').attr('content');
+
+//   swal({
+//     title: "Status Siswa",
+//     text: 'Apakah anda yakin ingin mengubah status siswa?',
+//     icon: "warning",
+//     buttons: true,
+//     dangerMode: true,
+//     closeOnClickOutside: false,
+//   })
+//   .then((willDelete) => {
+//     if (willDelete) {
+//       $.ajax({
+//         type: 'POST',
+//         url: 'student/edit-status/' + stu_id,
+//         data: {
+//           stu_id: stu_id,
+//           _token: _token 
+//         },
+//         success: function(data) {
+//           if (data.status != false) {
+//             swal(data.message, {
+//               button: false,
+//               icon: "success",
+//               timer: 1000
+//             });
+//           } else {
+//             swal(data.message, {
+//               button: false,
+//               icon: "error",
+//               timer: 1000
+//             });
+//           }
+//           $('#students').DataTable().ajax.reload()
+//         },
+//         error: function(error) {
+//           swal('Terjadi kegagalan sistem', {
+//             button: false,
+//             icon: "error",
+//             timer: 1000
+//           });
+//         }
+//       });
+//     }
+//   });
+// });
 });
 

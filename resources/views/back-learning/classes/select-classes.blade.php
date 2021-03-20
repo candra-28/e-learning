@@ -35,7 +35,7 @@
                 <h4 class="font-weight-normal mb-3 text-center">{{ $class->grade_level->grl_name }} {{ $class->major->mjr_name }} {{ $class->cls_number }}
                 </h4>
                 <h6 class="text-center">{{ $class->school_year->scy_name }}</h6>
-                <a; href="javascript:void(0)" data-toggle="tooltip" data-id="{{ $class->cls_id }}" class="btn btn-success btn-block btn-sm select_class"><span>Pilih kelas </span><i class="mdi mdi-pin"></i></a; <a href="" style="max-width: 100%;" class="btn btn-success btn-block"></a>
+                <a href="javascript:void(0)" data-toggle="tooltip" data-id="{{ $class->cls_id }}" class="btn btn-success btn-block btn-sm select_class"><span>Pilih kelas </span><i class="mdi mdi-pin"></i></a <a href="" style="max-width: 100%;" class="btn btn-success btn-block"></a>
 
             </div>
         </div>
