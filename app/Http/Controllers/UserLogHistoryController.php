@@ -22,4 +22,15 @@ class UserLogHistoryController extends Controller
         }
         return view('back-learning.user_log_histories.index');
     }
+
+    public function reset(Request $request)
+    {
+        if ($request->ajax()) {
+            if (UserLogHistory::truncate()) {
+                return response()->json(['code' => 200, 'message' => 'Semua data log berhasil tereset'], 200);
+            } else {
+                return response()->json(['code' => 400, 'message' => 'Terjadi kesalahan, Data gagal direset'], 400);
+            }
+        }
+    }
 }

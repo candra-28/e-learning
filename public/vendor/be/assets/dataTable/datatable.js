@@ -282,7 +282,6 @@ $(document).ready(function() {
   $('body').on('click', '.status_student', function () {
 
     var stu_id = $(this).data("id");
-    console.log(stu_id)
     let _token = $('meta[name="csrf-token"]').attr('content');
 
     swal({
@@ -384,55 +383,51 @@ $(document).ready(function() {
     }
   });
 
-// $('body').on('click', '.status_student', function () {
+$('body').on('click', '.reset_log_histories', function () {
+  let _token = $('meta[name="csrf-token"]').attr('content');
 
-//   var stu_id = $(this).data("id");
-//   console.log(stu_id)
-//   let _token = $('meta[name="csrf-token"]').attr('content');
-
-//   swal({
-//     title: "Status Siswa",
-//     text: 'Apakah anda yakin ingin mengubah status siswa?',
-//     icon: "warning",
-//     buttons: true,
-//     dangerMode: true,
-//     closeOnClickOutside: false,
-//   })
-//   .then((willDelete) => {
-//     if (willDelete) {
-//       $.ajax({
-//         type: 'POST',
-//         url: 'student/edit-status/' + stu_id,
-//         data: {
-//           stu_id: stu_id,
-//           _token: _token 
-//         },
-//         success: function(data) {
-//           if (data.status != false) {
-//             swal(data.message, {
-//               button: false,
-//               icon: "success",
-//               timer: 1000
-//             });
-//           } else {
-//             swal(data.message, {
-//               button: false,
-//               icon: "error",
-//               timer: 1000
-//             });
-//           }
-//           $('#students').DataTable().ajax.reload()
-//         },
-//         error: function(error) {
-//           swal('Terjadi kegagalan sistem', {
-//             button: false,
-//             icon: "error",
-//             timer: 1000
-//           });
-//         }
-//       });
-//     }
-//   });
-// });
+  swal({
+    title: "History Login Pengguna",
+    text: 'Apakah anda yakin ingin mengubah status siswa?',
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+    closeOnClickOutside: false,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      $.ajax({
+        type: 'POST',
+        url: 'log-histories',
+        data: {
+          _token: _token 
+        },
+        success: function(data) {
+          if (data.status != false) {
+            swal(data.message, {
+              button: false,
+              icon: "success",
+              timer: 1000
+            });
+          } else {
+            swal(data.message, {
+              button: false,
+              icon: "error",
+              timer: 1000
+            });
+          }
+          $('#user_log_histories').DataTable().ajax.reload()
+        },
+        error: function(error) {
+          swal('Terjadi kegagalan sistem', {
+            button: false,
+            icon: "error",
+            timer: 1000
+          });
+        }
+      });
+    }
+  });
+});
 });
 

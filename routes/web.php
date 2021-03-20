@@ -65,4 +65,5 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::get('teacher/{id}', 'TeacherController@show');
 
     Route::get('log-histories', 'UserLogHistoryController@index');
+    Route::post('log-histories', 'UserLogHistoryController@reset');
 });

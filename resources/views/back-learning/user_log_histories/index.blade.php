@@ -1,7 +1,7 @@
 @extends('back-learning.layouts.master')
 
 @push('title')
-- Daftar Histori login pengguna
+- Daftar History login pengguna
 @endpush
 
 @push('styles')
@@ -19,14 +19,14 @@
     <h3 class="page-title">
         <span class="page-title-icon bg-gradient-primary text-white mr-2">
             <i class="mdi mdi mdi-responsive"></i>
-        </span> Histori login pengguna
+        </span> History login pengguna
     </h3>
 </div>
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Histori login pengguna</h4>
+                <h4 class="card-title">History login pengguna</h4>
                 <div class="text-left">
                     <a href="javascript:void(0)" data-toggle="tooltip" data-id="" class="btn btn-outline-danger btn-sm mb-2 reset_log_histories"><span>Reset </span><i class="mdi mdi-reload btn-icon-prepend"></i></a>
                 </div>
