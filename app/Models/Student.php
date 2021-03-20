@@ -17,4 +17,9 @@ class Student extends Model
     {
         return $this->hasMany(StudentClass::class, 'stc_student_id')->where('stc_is_active', 1);
     }
+    public static function getListStudents($request)
+    {
+        $students = Student::join('users', 'students.stu_user_id', '=', 'users.usr_id')->select('users.usr_name', 'stu_id', 'stu_nis');
+        return $students;
+    }
 }

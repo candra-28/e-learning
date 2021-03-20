@@ -209,5 +209,51 @@ $(document).ready(function() {
         });
       }
     });
+  });
 });
+
+
+$(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    var table = $('#example').dataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "students",
+        columns: [{
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'stu_nis',
+                name: 'stu_nis',
+                orderable: true,
+                searchable: true
+            },
+            {
+                data: 'usr_name',
+                name: 'usr_name',
+                orderable: true,
+                searchable: true
+            },
+            {
+                data: 'stu_is_active',
+                name: 'stu_is_active',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
+            },
+        ]
+    });
 });
+

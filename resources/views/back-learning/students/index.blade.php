@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('back-learning.layouts.master')
 
 @push('title')
 - Daftar Siswa
@@ -7,13 +7,13 @@
 @push('styles')
 
 
-<link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-<link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/css/vendor.bundle.base.css')}}">
-<link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
-<link rel="shortcut icon" href="{{ URL::to('vendor/assets/images/logo-atas.png')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
+<link rel="shortcut icon" href="{{ URL::to('vendor/be/assets/images/logo-atas.png')}}">
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ URL::to('vendor/be/assets/dataTable/jquery_dataTable.min.css') }}">
+<script src="{{ URL::to('vendor/be/assets/dataTable/ajax_jquery.js') }}"></script>
 @endpush
 
 @section('content')
@@ -29,7 +29,9 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Daftar Siswa</h4>
-
+                <div class="text-right">
+                    <a href="{{ url('student/create') }}" type="button" class="btn btn-primary btn-sm mb-2"><i class="mdi mdi-plus-box"></i></a>
+                </div>
                 <div class="table-responsive">
                     <table class="table align-items-center table-flush" id="example" style="width:100%">
                         <thead class="text-uppercase" style="background-color:  #BF00FF;">
@@ -37,8 +39,6 @@
                                 <th scope="col" class="sort" data-sort="name">No</th>
                                 <th scope="col" class="sort" data-sort="budget">Nis</th>
                                 <th scope="col" class="sort" data-sort="budget">Name</th>
-                                <th scope="col" class="sort" data-sort="budget">Kelas</th>
-                                <th scope="col" class="sort" data-sort="budget">Tahun Masuk</th>
                                 <th scope="col" class="sort">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -62,67 +62,9 @@
 <script src="{{URL::to('vendor/assets/js/misc.js')}}"></script>
 <script src="{{URL::to('vendor/assets/js/todolist.js')}}"></script>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ URL::to('vendor/be/assets/dataTable/jquery_dataTable.min.js') }}"></script>
+<script src="{{ URL::to('vendor/be/assets/dataTable/dataTable.js') }}"></script>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        var table = $('#example').dataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ url('students')}}",
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex',
-                    orderable: true,
-                    searchable: false
-                },
-                {
-                    data: 'nis',
-                    name: 'nis',
-                    orderable: true,
-                    searchable: true
-                },
-                {
-                    data: 'name',
-                    name: 'name',
-                    orderable: true,
-                    searchable: true
-                },
-                {
-                    data: 'class_name',
-                    name: 'class_name',
-                    orderable: false,
-                    searchable: true
-                },
-                {
-                    data: 'entry_year',
-                    name: 'entry_year',
-                    orderable: false,
-                    searchable: true
-                },
-                {
-                    data: 'is_active',
-                    name: 'is_active',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        });
-    });
-</script>
-    
+<script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
 @endpush
 @endsection

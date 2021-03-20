@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Student;
-use App\User;
+use App\Models\Student;
+use App\Models\User;
 use DataTables;
 
 class StudentController extends Controller
@@ -12,42 +12,26 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $students = Student::join('users', 'students.user_id', '=', 'users.id')
-                ->join('class', 'students.class_id', '=', 'class.id')->select(
-                    'users.*',
-                    'students.*',
-                    'class.*',
-                    'students.id as id_student',
-                    'students.nis',
-                    'users.name',
-                    'class.name as class_name',
-                    'users.entry_year',
-                    'users.is_active as user_is_active'
-                )->get();
+            $students = Student::getListStudents($request->query());
             return Datatables::of($students)
-                ->editColumn("is_active", function ($row) {
-                    $user_is_active = $row->user_is_active;
-                    if ($user_is_active == "1") {
-                        return 'Aktif <span class="mdi mdi-check-circle"></span>';
-                    } elseif ($class_is_active == "0") {
-                        return 'Tidak Aktif <span class="mdi mdi-close-circle"></span>';
+                ->editColumn("stu_is_active", function ($student) {
+
+                    if ($student->stu_is_active == "1") {
+                        return '<label class="badge badge-success">aktif</label>';
+                    } elseif ($student->stu_is_active == "0") {
+                        return '<label class="badge badge-danger">tidak aktif</label>';
                     } else {
                         return "Tidak punya status aktif";
                     }
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $detail = '<a href="' . url('student', $row->id_student) . '"  type="button" data-toggle="tooltip" data-original-title="DETAIL" class="btn btn-primary btn-sm"><i class="mdi mdi-eye"></i></a>';
-                    if (Auth()->user()->role_id == 1)
-                        $edit = '<a href="' . url('student/edit', $row->id_student) . '"  type="button" data-toggle="tooltip" data-original-title="EDIT" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
-                    else {
-                        return $detail;
-                    }
-                    return $edit . '&nbsp' . $detail;
-                })->rawColumns(['action', 'is_active'])
+                    $detail = '<a href="' . url('student', $row->stu_id) . '"  type="button" data-toggle="tooltip" data-original-title="DETAIL" class="btn btn-primary btn-sm"><i class="mdi mdi-eye"></i></a>';
+                    return  $detail;
+                })->rawColumns(['action', 'stu_is_active'])
                 ->make(true);
         }
-        return view('students.index');
+        return view('back-learning.students.index');
     }
     public function edit($studentID)
     {
