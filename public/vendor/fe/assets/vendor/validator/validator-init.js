@@ -286,10 +286,33 @@ $(function () {
             }
         },
         messages: {
-            usr_name: "Nama tidak boleh kosong",
+            usr_name: "Nama harus di isi",
             usr_phone_number: {
-                required: "Nomor tidak boleh kosong",
+                required: "Nomor Telepon harus di isi",
                 minlength: "Minimal 10 digit"
+            },
+        },
+    });
+});
+
+$(function () {
+    $(".edit-email").validate({
+        rules: {
+            new_usr_email:{
+                required: true,
+                email: true,
+            },
+            usr_password:{
+                required: true,
+            }
+        },
+        messages: {
+            new_usr_email: {
+                required: "Alamat email harus di isi",
+                email: "Alamat email tidak valid"
+            },
+            usr_password: {
+                required: "Kata sandi harus di isi",
             },
         },
     });

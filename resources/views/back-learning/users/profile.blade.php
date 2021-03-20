@@ -20,6 +20,35 @@
     </h3>
 </div>
 
+@if (Session::has('success'))
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-success col-md-12">
+            {{ Session::get('success') }}
+        </div>
+    </div>
+</div>
+@endif
+@if (Session::has('error'))
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-danger col-md-12">
+            {{ Session::get('error') }}
+        </div>
+    </div>
+</div>
+@endif
+
+@error('new_usr_email')
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-danger col-md-12">
+            {{ $message }}
+        </div>
+    </div>
+</div>
+@enderror
+
 <div class="row">
     <div class="col-lg-4 col-xlg-3 col-md-5">
         <div class="card">
@@ -170,27 +199,8 @@
                 </div>
                 <div class="tab-pane show" id="setting_profile" role="tabpanel">
                     <div class="card-body">
-                        <form class="form-horizontal form-material update-profile" method="POST" action="{{ url('profile/profile-update') }}" enctype="multipart/form-data">
+                        <form autocomplete="off" class="form-horizontal form-material update-profile" method="POST" action="{{ url('profile/profile-update') }}" enctype="multipart/form-data">
                             @csrf
-                            @if (Session::has('success'))
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <div class="alert alert-success col-md-12">
-                                        {{ Session::get('success') }}
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
-                            @if (Session::has('error'))
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <div class="alert alert-danger col-md-12">
-                                        {{ Session::get('error') }}
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
-
                             <div class="form-group">
                                 <div class="col-md-12">
                                     @if(isset($user->usr_profile_picture))
@@ -281,7 +291,55 @@
 
                 <div class="tab-pane show" id="setting_email" role="tabpanel">
                     <div class="card-body">
+                        <form class="form-horizontal form-material edit-email" autocomplete="off" method="POST" action="{{ url('profile/update-email') }}">
+                            @csrf
+                            <div class="row" id="proBanner">
+                                <div class="col-12">
+                                    <span class="d-flex align-items-center purchase-popup">
+                                        <p style="color:orangered">Peringatan! Jika anda ingin mengubah alamat email, gunakan alamat email aktif!</p>
 
+                                        <i class="mdi mdi-close" style="float: right;" id="bannerClose"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Alamat Email</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="usr_email" value="{{ $user->usr_email }}" disabled class="form-control form-control-line">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-12">Email Baru</label>
+                                <div class="col-md-12">
+                                    <input type="email" name="new_usr_email" placeholder="Masukan alamat email baru" class="form-control form-control-line">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 stretch-card grid-margin">
+                                <div class="card bg-gradient-info card-img-holder text-white">
+                                    <div class="card-body text-center">
+                                        <h3>{{ $recaptha }}</h3>
+                                        <input name="recaptha" type="hidden" value="{{ $recaptha }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-12">Kode Verifikasi</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="usr_verify" placeholder="Masukan kode di atas" class="form-control form-control-line">
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-primary">simpan</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
 
@@ -289,24 +347,6 @@
                     <div class="card-body">
                         <form class="form-horizontal form-material edit-password" method="POST" action="{{ url('profile/update-password') }}">
                             @csrf
-                            @if (Session::has('success'))
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <div class="alert alert-success col-md-12">
-                                        {{ Session::get('success') }}
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
-                            @if (Session::has('error'))
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <div class="alert alert-danger col-md-12">
-                                        {{ Session::get('error') }}
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
                             <div class="form-group">
                                 <label class="col-md-12">Kata sandi lama</label>
                                 <div class="col-md-12">
@@ -346,6 +386,7 @@
 <script src="{{URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
+<script src="{{ URL::to('vendor/be/assets/js/dashboard.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
 
 <script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
@@ -370,7 +411,8 @@
 <script>
     $('.date_picker').datepicker({
         autoclose: true,
-        todayHighlight: true
+        todayHighlight: true,
+        format: 'dd-mm-yyyy'
     });
 </script>
 @endpush

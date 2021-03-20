@@ -46,8 +46,7 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
 
     Route::get('/profiles', 'UserController@index');
     Route::post('/profile/profile-update', 'UserController@updateProfile');
-
-    Route::post('/profile/update-password', 'UserController@updatePassword');
+    Route::post('/profile/update-email', 'UserController@updateEmail');
 
     Route::get('students', 'StudentController@index');
     Route::get('student/edit/{id}', 'StudentController@edit');

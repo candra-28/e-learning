@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -24,8 +25,9 @@ class UserController extends Controller
 
         $role = User::find($user->usr_id)->roles()->first();
         // dd($role->rol_id);
-
-        return view('back-learning.users.profile', compact('user', 'role'));
+        $recaptha = Str::random(6);
+        // dd($recaptha);
+        return view('back-learning.users.profile', compact('user', 'role', 'recaptha'));
     }
 
     /**
@@ -151,6 +153,19 @@ class UserController extends Controller
         $user->usr_updated_by = Auth()->user()->usr_id;
 
         $user->update();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Profile berhasil di ubah');
+    }
+    public function updateEmail(Request $request)
+    {
+        $request->validate(['new_usr_email' => 'unique:users,usr_email'], ['new_usr_email.unique' => 'Alamat email sudah digunakan']);
+        $user = User::where('usr_id', Auth()->user()->usr_id)->firstOrFail();
+        // dd($request);
+        if ($request->recaptha == $request->usr_verify) {
+            $user->usr_email = $request->new_usr_email;
+            $user->usr_updated_by = Auth()->user()->usr_id;
+            $user->update();
+            return redirect()->back()->with('success', 'Alamat email berhasil di ubah');
+        }
+        return redirect()->back()->with('error', 'Kode verifikasi yang anda masukan salah');
     }
 }

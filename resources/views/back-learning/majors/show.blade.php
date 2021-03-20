@@ -70,9 +70,9 @@
                 <dt class="col-sm-12">Status Jurusan</dt>
                 <dd class="col-sm-12">
                     @if($major->mjr_is_active == 0)
-                    <p><label class="badge badge-gradient-danger">AKTIF</label></p>
+                    <p><label class="badge badge-gradient-danger">TIDAK AKTIF</label></p>
                     @else
-                    <p><label class="badge badge-gradient-success">TIDAK AKTIF</label></p>
+                    <p><label class="badge badge-gradient-success">AKTIF</label></p>
                     @endif
                 </dd>
 

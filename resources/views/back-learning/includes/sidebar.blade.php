@@ -15,7 +15,7 @@ $user = User::join('user_has_roles', 'user_has_roles.uhs_user_id', '=', 'users.u
           @if(isset($user->usr_profile_picture))
           <img src="{{ asset($user->usr_profile_picture)}}" alt="null">
           @else
-          <img src="{{ asset('profile_picture/avatar-2.png')}}" alt="null">
+          <img src="{{ asset('vendor/be/assets/images/profile_picture/avatar-2.png')}}" alt="null">
           @endif
           <span class="login-status online"></span>
         </div>
