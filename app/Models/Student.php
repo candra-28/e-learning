@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Classes;
+use App\Models\SchoolYear;
+use App\Models\User;
 
 class Student extends Model
 {
@@ -21,5 +22,13 @@ class Student extends Model
     {
         $students = Student::join('users', 'students.stu_user_id', '=', 'users.usr_id')->select('users.usr_name', 'users.usr_profile_picture', 'stu_id', 'stu_nis', 'stu_is_active');
         return $students;
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'stu_user_id');
+    }
+    public function school_year()
+    {
+        return $this->belongsTo(SchoolYear::class, 'stu_school_year_id');
     }
 }

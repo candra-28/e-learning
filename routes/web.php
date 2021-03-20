@@ -66,4 +66,6 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
 
     Route::get('log-histories', 'UserLogHistoryController@index');
     Route::post('log-histories', 'UserLogHistoryController@reset');
+
+    Route::get('/get/classes/{school_yearID}', 'StudentController@getClasses');
 });

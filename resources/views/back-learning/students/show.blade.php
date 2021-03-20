@@ -1,19 +1,16 @@
-@extends('layouts.master')
+@extends('back-learning.layouts.master')
 
 @push('title')
-- Daftar Siswa
+- Detail Siswa
 @endpush
 
 @push('styles')
 
 
-<link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-<link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/css/vendor.bundle.base.css')}}">
-<link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
-<link rel="shortcut icon" href="{{ URL::to('vendor/assets/images/logo-atas.png')}}">
-
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
+<link rel="shortcut icon" href="{{ URL::to('vendor/be/assets/images/logo-atas.png')}}">
 @endpush
 
 @section('content')
@@ -29,75 +26,79 @@
         <div class="card">
             <div class="card-body">
                 <div class="card-title" style="padding: 10px"><a href="{{ url('students') }}" class="btn btn-success btn-sm">Kembali <i class="mdi mdi-arrow-left-bold-circle-outline"></i></a></div>
+                <div class="row mt-3">
+                    <div class="col-12 mb-4">
+                        <dt class="text-center mb-2">Profile Siswa</dt>
+                        <div class="text-center mb-2">
+                            <img src="{{ asset($student->user->usr_profile_picture) }}" style="object-fit: cover; height: 200px; width:230px; text-align:center; border-radius: 10px;" alt="tidak ada profile">
+                        </div>
+                    </div>
+                </div>
+
                 <dl class="row">
                     <dt class="col-sm-3">Nama Siswa</dt>
                     <dd class="col-sm-9">
-                        <p>{{ $student->name }}</p>
+                        <p>{{ $student->user->usr_name }}</p>
                     </dd>
 
                     <dt class="col-sm-3">Alamat Email</dt>
                     <dd class="col-sm-9">
-                        <p>{{ $student->email }}</p>
+                        <p>{{ $student->user->usr_email }}</p>
                     </dd>
 
                     <dt class="col-sm-3">Nomor Induk Siswa</dt>
                     <dd class="col-sm-9">
-                        <p>{{ $student->nis }}</p>
+                        <p>{{ $student->stu_nis }}</p>
                     </dd>
 
                     <dt class="col-sm-3">Kelas</dt>
                     <dd class="col-sm-9">
-                        <p>{{ $student->class_name }}</p>
+                        <p>{{ $student_class->grade_level->grl_name }} {{ $student_class->major->mjr_name }} {{ $student_class->cls_number }}</p>
                     </dd>
 
                     <dt class="col-sm-3">Tahun Masuk</dt>
                     <dd class="col-sm-9">
-                        <p>{{ $student->entry_year }}</p>
+                        <p>{{ $student->school_year->scy_name }}</p>
                     </dd>
 
                     <dt class="col-sm-3">Nomor Telepon</dt>
                     <dd class="col-sm-9">
-                        <p>{{ $student->phone_number }}</p>
+                        <p>{{ $student->user->usr_phone_number }}</p>
                     </dd>
 
                     <dt class="col-sm-3">Jenis Kelamin</dt>
                     <dd class="col-sm-9">
-                        <p>{{ $student->gender }}</p>
+                        <p>{{ $student->user->usr_gender }}</p>
                     </dd>
 
                     <dt class="col-sm-3">Tempat Lahir</dt>
                     <dd class="col-sm-9">
-                        <p>{{ $student->place_of_birth }}</p>
+                        <p>{{ $student->user->usr_place_of_birth }}</p>
                     </dd>
 
                     <dt class="col-sm-3">Tanggal, Bulan, Tahun Lahir</dt>
                     <dd class="col-sm-9">
-                        @if($student->date_of_birth == null)
-                        <p></p>
-                        @else
-                        <p>{{ $student->date_of_birth->format("d F, Y") }}</p>
-                        @endif
+                        <p>{{ getDateFormat($student->user->usr_date_of_birth) }}</p>
                     </dd>
 
                     <dt class="col-sm-3">Agama</dt>
                     <dd class="col-sm-9">
-                        <p>{{ $student->religion }}</p>
+                        <p>{{ $student->user->usr_religion }}</p>
                     </dd>
 
                     <dt class="col-sm-3">Alamat</dt>
                     <dd class="col-sm-9">
-                        <p>{{ $student->address }}</p>
+                        <p>{{ $student->user->usr_address }}</p>
                     </dd>
 
 
                     <dt class="col-sm-3">Status</dt>
                     <dd class="col-sm-9">
-                        @if($student->is_active = true)
-                        <p>Aktif <span class="mdi mdi-check-circle"></span></p>
+                        @if($student->stu_is_active == true)
+                        <p><label class="badge badge-success">aktif</label></p>
                         @else
-                        <p>Tidak Aktif <span class="mdi mdi-close-circle"></span></p>
+                        <p><label class="badge badge-danger">tidak aktif</label></p>
                         @endif
-
                     </dd>
                 </dl>
 
@@ -109,13 +110,11 @@
 
 @push('scripts')
 
-<script src="{{URL::to('vendor/assets/vendors/js/vendor.bundle.base.js')}}"></script>
-<script src="{{URL::to('vendor/assets/vendors/chart.js/Chart.min.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/off-canvas.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/hoverable-collapse.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/misc.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/todolist.js')}}"></script>
-
-
+<script src="{{URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/vendors/chart.js/Chart.min.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
 @endpush
 @endsection

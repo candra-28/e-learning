@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Symfony\Component\Console\Input\Input;
+use App\Models\SchoolYear;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\User;
 use DataTables;
+use App\Models\Classes;
+use Illuminate\Http\Response;
+use App\Models\Major;
+use App\Models\StudentClass;
 
 class StudentController extends Controller
 {
@@ -38,8 +44,18 @@ class StudentController extends Controller
 
     public function create()
     {
-        return view('back-learning.students.create');
+        $classes = Classes::where('cls_is_active', true)->get();
+        $majors = Major::get();
+        $school_years = SchoolYear::where('scy_is_active', true)->get();
+        return view('back-learning.students.create', compact('classes', 'school_years', 'majors'));
     }
+
+    public function getClasses($school_yearID) // Tanpa (Request $request, $id)
+    {
+        $classes = Classes::where('cls_school_year_id', $school_yearID)->get(); // Sesuaikan dg nama Model Subcategory
+        return response()->json(compact('classes'));
+    }
+
     public function store(Request $request)
     {
         dd($request);
@@ -88,9 +104,12 @@ class StudentController extends Controller
     }
     public function show($studentID)
     {
-        $student = Student::join('users', 'students.user_id', '=', 'users.id')->join('class', 'students.class_id', '=', 'class.id')
-            ->select('class.name as class_name', 'users.*', 'students.*')->where('students.id', $studentID)->first();
-        return view('students.show', ['student' => $student]);
+        $student = Student::where('stu_id', $studentID)->first();
+        $student_class = Classes::join('student_classes', 'student_classes.stc_class_id', '=', 'classes.cls_id')
+            ->join('students', 'student_classes.stc_student_id', '=', 'students.stu_id')
+            ->where('students.stu_id', $student->stu_id)->select('classes.cls_grade_level_id', 'classes.cls_major_id', 'classes.cls_number')->first();
+        // dd($student_class);
+        return view('back-learning.students.show', ['student' => $student, 'student_class' => $student_class]);
     }
 
     public function updateStatusStudent($studentID)

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Classes;
 
 class StudentClass extends Model
 {
@@ -12,4 +13,9 @@ class StudentClass extends Model
     const UPDATED_AT = 'stc_updated_at';
     const DELETED_AT = 'stc_deleted_at';
     protected $guarded = [];
+
+    public function classes()
+    {
+        return $this->belongsToMany(Classes::class, 'stc_class_id');
+    }
 }
