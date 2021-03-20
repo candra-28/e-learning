@@ -93,6 +93,6 @@ class MajorController extends Controller
         }
         $major->mjr_updated_by = Auth()->user()->usr_id;
         $major->update();
-        return response()->json(['code' => 200, 'message' => 'Kelas status berhasil di ubah', 'data' => $major], 200);
+        return response()->json(['code' => 200, 'message' => 'Status jurusan berhasil di ubah', 'data' => $major], 200);
     }
 }

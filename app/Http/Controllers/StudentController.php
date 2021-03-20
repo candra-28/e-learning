@@ -25,13 +25,24 @@ class StudentController extends Controller
                     }
                 })
                 ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-                    $detail = '<a href="' . url('student', $row->stu_id) . '"  type="button" data-toggle="tooltip" data-original-title="DETAIL" class="btn btn-primary btn-sm"><i class="mdi mdi-eye"></i></a>';
-                    return  $detail;
+                ->addColumn('action', function ($student) {
+                    $detail = '<a href="' . url('major', $student->stu_id) . '"  type="button" data-toggle="tooltip" data-original-title="Detail" class="btn btn-warning btn-sm"><i class="mdi mdi-mdi mdi mdi-eye"></i></a>';
+                    $edit = '<a href="' . url('major/edit', $student->stu_id) . '"  type="button" data-toggle="tooltip" data-original-title="Edit" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
+                    $status = ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $student->stu_id . '" data-original-title="Delete" class="btn btn-danger btn-sm status_student"><i class="mdi mdi-information-outline"></i></a>';
+                    return $detail . '&nbsp' . $edit . '&nbsp' . $status;
                 })->rawColumns(['action', 'stu_is_active'])
                 ->make(true);
         }
         return view('back-learning.students.index');
+    }
+
+    public function create()
+    {
+        return view('back-learning.students.create');
+    }
+    public function store(Request $request)
+    {
+        dd($request);
     }
     public function edit($studentID)
     {
@@ -80,5 +91,18 @@ class StudentController extends Controller
         $student = Student::join('users', 'students.user_id', '=', 'users.id')->join('class', 'students.class_id', '=', 'class.id')
             ->select('class.name as class_name', 'users.*', 'students.*')->where('students.id', $studentID)->first();
         return view('students.show', ['student' => $student]);
+    }
+
+    public function updateStatusStudent($studentID)
+    {
+        $student = Student::findOrFail($studentID);
+        if ($student->stu_is_active == false) {
+            $student->stu_is_active = 1;
+        } else {
+            $student->stu_is_active = 0;
+        }
+        $student->stu_updated_by = Auth()->user()->usr_id;
+        $student->update();
+        return response()->json(['code' => 200, 'message' => 'Status siswa berhasil di ubah', 'data' => $student], 200);
     }
 }

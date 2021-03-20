@@ -219,7 +219,7 @@ $(document).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    var table = $('#example').dataTable({
+    var table = $('#students').dataTable({
         processing: true,
         serverSide: true,
         ajax: "students",
@@ -228,6 +228,15 @@ $(document).ready(function() {
                 name: 'DT_RowIndex',
                 orderable: false,
                 searchable: false
+            },
+            {
+              data: 'usr_profile_picture', 
+              name:'usr_profile_picture', 
+              render: function(data, type, full, meta){
+                  return "<img src=\"" + data + "\"height=\"50\"/>";
+              },
+              orderable: true,
+              searchable: true
             },
             {
                 data: 'stu_nis',
@@ -253,7 +262,74 @@ $(document).ready(function() {
                 orderable: false,
                 searchable: false
             },
-        ]
+        ],
+        "language": {
+          // "processing": '<h4 style="font-family: arial;">Mohon Tunggu</h4>',
+          "processing": '<img src="../../../vendor/be/assets/images/3.svg" style="width="20px; height="20px;">',
+          "search": "Cari:",
+          "zeroRecords": "Daftar siswa tidak tersedia",
+          "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
+          "infoEmpty": "Tidak ada daftar siswa",
+          "infoFiltered": "(pencarian dari _MAX_ daftar siswa)",
+          "infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+          "lengthMenu": "Tampilkan _MENU_ baris",
+          "paginate": {
+              "previous": "sebelumnya",
+              "next": "selanjutnya"
+          }
+      }
     });
+
+    
+  $('body').on('click', '.status_student', function () {
+
+    var stu_id = $(this).data("id");
+    console.log(stu_id)
+    let _token = $('meta[name="csrf-token"]').attr('content');
+
+    swal({
+      title: "Status Siswa",
+      text: 'Apakah anda yakin ingin mengubah status siswa?',
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+      closeOnClickOutside: false,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        $.ajax({
+          type: 'POST',
+          url: 'student/edit-status/' + stu_id,
+          data: {
+            stu_id: stu_id,
+            _token: _token 
+          },
+          success: function(data) {
+            if (data.status != false) {
+              swal(data.message, {
+                button: false,
+                icon: "success",
+                timer: 1000
+              });
+            } else {
+              swal(data.message, {
+                button: false,
+                icon: "error",
+                timer: 1000
+              });
+            }
+            $('#students').DataTable().ajax.reload()
+          },
+          error: function(error) {
+            swal('Terjadi kegagalan sistem', {
+              button: false,
+              icon: "error",
+              timer: 1000
+            });
+          }
+        });
+      }
+    });
+  });
 });
 

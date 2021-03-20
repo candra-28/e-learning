@@ -113,6 +113,6 @@ class ClassController extends Controller
         }
         $class->cls_updated_by = Auth()->user()->usr_id;
         $class->update();
-        return response()->json(['code' => 200, 'message' => 'Kelas status berhasil di ubah', 'data' => $class], 200);
+        return response()->json(['code' => 200, 'message' => 'Status kelas berhasil di ubah', 'data' => $class], 200);
     }
 }

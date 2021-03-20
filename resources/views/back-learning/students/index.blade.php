@@ -33,10 +33,11 @@
                     <a href="{{ url('student/create') }}" type="button" class="btn btn-primary btn-sm mb-2"><i class="mdi mdi-plus-box"></i></a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table align-items-center table-flush" id="example" style="width:100%">
-                        <thead class="text-uppercase" style="background-color:  #BF00FF;">
+                    <table class="table align-items-center table-flush" id="students" style="width:100%">
+                        <thead class="text-uppercase" style="background-color: #BF00FF;">
                             <tr class="text-white">
                                 <th scope="col" class="sort" data-sort="name">No</th>
+                                <th scope="col" class="sort" data-sort="budget">Avatar</th>
                                 <th scope="col" class="sort" data-sort="budget">Nis</th>
                                 <th scope="col" class="sort" data-sort="budget">Name</th>
                                 <th scope="col" class="sort">Status</th>
@@ -55,12 +56,12 @@
 
 @push('scripts')
 
-<script src="{{URL::to('vendor/assets/vendors/js/vendor.bundle.base.js')}}"></script>
-<script src="{{URL::to('vendor/assets/vendors/chart.js/Chart.min.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/off-canvas.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/hoverable-collapse.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/misc.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/todolist.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/vendors/chart.js/Chart.min.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
 
 <script src="{{ URL::to('vendor/be/assets/dataTable/jquery_dataTable.min.js') }}"></script>
 <script src="{{ URL::to('vendor/be/assets/dataTable/dataTable.js') }}"></script>

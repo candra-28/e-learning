@@ -19,7 +19,7 @@ class Student extends Model
     }
     public static function getListStudents($request)
     {
-        $students = Student::join('users', 'students.stu_user_id', '=', 'users.usr_id')->select('users.usr_name', 'stu_id', 'stu_nis');
+        $students = Student::join('users', 'students.stu_user_id', '=', 'users.usr_id')->select('users.usr_name', 'users.usr_profile_picture', 'stu_id', 'stu_nis', 'stu_is_active');
         return $students;
     }
 }

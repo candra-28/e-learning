@@ -49,9 +49,13 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::post('/profile/update-email', 'UserController@updateEmail');
 
     Route::get('students', 'StudentController@index');
+    Route::get('student/create', 'StudentController@create');
+    Route::post('student/create', 'StudentController@store');
+
     Route::get('student/edit/{id}', 'StudentController@edit');
     Route::post('student/edit/{id}', 'StudentController@update');
     Route::get('student/{id}', 'StudentController@show');
+    Route::post('student/edit-status/{studentID}', 'StudentController@updateStatusStudent');
 
     Route::get('teachers', 'TeacherController@index');
     Route::get('teacher/edit/{id}', 'TeacherController@edit');
