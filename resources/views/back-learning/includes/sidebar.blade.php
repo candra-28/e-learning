@@ -1,10 +1,15 @@
 <?php
 
 use App\Models\User;
+use App\Models\StudentClass;
 
 $user = User::join('user_has_roles', 'user_has_roles.uhs_user_id', '=', 'users.usr_id')
   ->join('roles', 'user_has_roles.uhs_role_id', '=', 'roles.rol_id')
   ->where('usr_id', Auth()->user()->usr_id)->first();
+
+$student_class = StudentClass::join('students', 'student_classes.stc_student_id', '=', 'students.stu_id')
+  ->where('students.stu_user_id', Auth()->user()->usr_id)->first();
+// dd($student_class);
 ?>
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -245,6 +250,15 @@ $user = User::join('user_has_roles', 'user_has_roles.uhs_user_id', '=', 'users.u
       <a class="nav-link" href="{{ url('teachers')}}">
         <span class="menu-title">Daftar Guru</span>
         <i class="mdi mdi-account-card-details menu-icon"></i>
+      </a>
+    </li>
+    @endif
+    @if($student_class == null)
+    @else
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('class')}}">
+        <span class="menu-title">Kelas Ku</span>
+        <i class="mdi mdi-school menu-icon"></i>
       </a>
     </li>
     @endif

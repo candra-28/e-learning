@@ -297,7 +297,7 @@
                                 <div class="col-12">
                                     <span class="d-flex align-items-center purchase-popup">
                                         <p style="color:orangered">Peringatan! Jika anda ingin mengubah alamat email, gunakan alamat email aktif!</p>
-
+                                        <a class="purchase-button ml-auto"></a>
                                         <i class="mdi mdi-close" style="float: right;" id="bannerClose"></i>
                                     </span>
                                 </div>
@@ -331,8 +331,6 @@
                                     <input type="text" name="usr_verify" placeholder="Masukan kode di atas" class="form-control form-control-line">
                                 </div>
                             </div>
-
-
 
                             <div class="form-group">
                                 <div class="col-sm-12">

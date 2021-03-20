@@ -17,7 +17,7 @@
   <div class="col-12">
     <span class="d-flex align-items-center purchase-popup">
       <p>Anda belum memiliki kelas, silahkan klik tombol di kanan untuk memilih kelas!</p>
-      <a href="{{ url('#') }}" class="btn download-button purchase-button ml-auto">Kelas</a>
+      <a href="{{ url('select-classes') }}" class="btn download-button purchase-button ml-auto">Kelas</a>
       <i class="mdi mdi-close" id="bannerClose"></i>
     </span>
   </div>
