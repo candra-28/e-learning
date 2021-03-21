@@ -6,12 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>E-Learning @stack('title')</title>
-
   @stack('styles')
-  <link rel="shortcut icon" href="{{ URL::to('vendor/assets/images/logo-atas.png')}}">
+  <link rel="shortcut icon" href="{{ asset('vendor/be/assets/images/logo-atas.png')}}">
 </head>
 
 <body>
+
+  <div id="preloader">
+    <div class="sk-three-bounce">
+      <div class="sk-child sk-bounce1"></div>
+      <div class="sk-child sk-bounce2"></div>
+      <div class="sk-child sk-bounce3"></div>
+    </div>
+  </div>
 
   <div class="container-scroller">
 
@@ -33,7 +40,6 @@
         <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates </a> from Bootstrapdash.com</span>
       </div>
     </footer>
-
 
     @stack('scripts')
     <script src="{{ URL::to('vendor/be/assets/js/tooltip.js')}}"></script>

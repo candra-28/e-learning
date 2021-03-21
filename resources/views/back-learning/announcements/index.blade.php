@@ -5,11 +5,10 @@
 @endpush
 
 @push('styles')
-<link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-<link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/css/vendor.bundle.base.css')}}">
-<link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
-<link rel="shortcut icon" href="{{ URL::to('vendor/assets/images/logo-atas.png')}}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
+<link rel="shortcut icon" href="{{ URL::to('vendor/be/assets/images/logo-atas.png')}}">
 @endpush
 
 @section('content')
@@ -33,66 +32,38 @@
   </form>
 </div>
 
-
-
-<div class="wrapper">
-  <div class="carousel owl-carousel">
-    @foreach($announcements as $announcement)
-    <div class="grid-margin stretch-card">
-      <div class="card" style="height: 400px;">
-        <div class="card-body">
-          <h4 class="card-title text-center">{{ $announcement->title }}
-            <img src="{{ asset('announcement/'.$announcement->name . '/' . $announcement->upload_type) }}" alt="NULL" style="margin-top: 20px; border-radius: 5px;">
+<div class="row">
+  @foreach($announcements as $announcement)
+  <div class="col-md-4 stretch-card grid-margin">
+    <div class="card bg-gradient-danger card-img-holder">
+      <div class="card-body">
+        <h2 class="font-weight-normal mb-3 text-center">{{ $announcement->acm_title }}</i>
           </h4>
-          <form action="{{ url('announcement/'.$announcement->id )}}" method="post">
-            <a href="{{ url('announcement/'.$announcement->id) }}" class="btn btn-primary btn-sm">Selengkapnya</a>
-            @if(Auth()->user()->role_id == 1)
-            {{ csrf_field() }}
-            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-            <input type="hidden" name="_method" value="DELETE">
-            @else
-            @endif
-          </form>
-        </div>
+          <h2 class="text-center mb-5"><img src="{{ asset('vendor/be/assets/images/announcements/test.jpg') }}" style="border-radius: 10px; max-width: 100%; width: 200px; height: 200px;" alt="null"></h2>
+          <div class="btn-group-vertical" role="group" aria-label="Basic example">
+            <div class="btn-group text-center">
+              <button type="button" style="left: 30%;" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Opsi </button>
+              <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 44px, 0px);">
+                <a class="dropdown-item">Selengkapnya</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item">Edit Pengumuman</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item">Ubah Status</a>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
-    @endforeach
   </div>
+  @endforeach
 </div>
 
 @push('scripts')
-<script src="{{URL::to('vendor/assets/vendors/js/vendor.bundle.base.js')}}"></script>
-<script src="{{URL::to('vendor/assets/vendors/chart.js/Chart.min.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/off-canvas.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/hoverable-collapse.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/misc.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/todolist.js')}}"></script>
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
-<script>
-  $(".carousel").owlCarousel({
-    margin: 20,
-    loop: true,
-    autoplay: true,
-    autoplayTimeout: 2000,
-    autoplayHoverPause: true,
-    responsive: {
-      0: {
-        items: 1,
-        nav: false
-      },
-      600: {
-        items: 2,
-        nav: false
-      },
-      1000: {
-        items: 3,
-        nav: false
-      }
-    }
-  });
-</script>
+<script src="{{URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/vendors/chart.js/Chart.min.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
 @endpush
 @endsection

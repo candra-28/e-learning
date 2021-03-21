@@ -33,7 +33,7 @@ class ClassController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($class) {
                     $edit = '<a href="' . url('class/edit', $class->cls_id) . '"  type="button" data-toggle="tooltip" data-original-title="Edit" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
-                    $status = ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $class->cls_id . '" data-original-title="Delete" class="btn btn-danger btn-sm status_class"><i class="mdi mdi-information-outline"></i></a>';
+                    $status = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $class->cls_id . '" data-original-title="Delete" class="btn btn-danger btn-sm status_class"><i class="mdi mdi-information-outline"></i></a>';
 
                     return $edit . '&nbsp' . $status;
                 })

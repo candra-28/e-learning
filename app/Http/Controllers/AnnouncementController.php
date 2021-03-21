@@ -5,34 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isNull;
 
 class AnnouncementController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $announcements = Announcement::join('users', 'announcements.user_id', '=', 'users.id')
-            ->select(
-                'users.*',
-                'announcements.*',
-                'users.id as id_user'
-            )->get();
-        return view('announcements.index', ['announcements' => $announcements]);
+        $announcements = Announcement::where('acm_is_active', true)->get();
+        return view('back-learning.announcements.index', ['announcements' => $announcements]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('back-learning.announcements.create');

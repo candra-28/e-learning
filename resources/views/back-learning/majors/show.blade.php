@@ -45,7 +45,7 @@
                     </div>
                 </div> -->
 
-                <p>Thumnail Jurusan</p>
+                <dt>Thumnail Jurusan</dt>
                 <div class="row mt-3">
                     <div class="col-6 pl-1" style="left: 25%;">
                         <img src="{{ asset($major->mjr_thumnail) }}" class="mb-2 mw-100 w-100 rounded" alt="image">
