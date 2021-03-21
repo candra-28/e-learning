@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>E-Learning @stack('title')</title>
-  <link rel="shortcut icon" href="{{ URL::to('vendor/be/assets/images/logo-atas.png')}}">
+
   @stack('styles')
+  <link rel="shortcut icon" href="{{ URL::to('vendor/assets/images/logo-atas.png')}}">
 </head>
 
 <body>

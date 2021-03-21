@@ -223,6 +223,7 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         ajax: "students",
+        lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "semua"]],
         columns: [{
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex',
@@ -341,6 +342,7 @@ $(document).ready(function() {
       processing: true,
       serverSide: true,
       ajax: "log-histories",
+      lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "semua"]],
       columns: [{
               data: 'DT_RowIndex',
               name: 'DT_RowIndex',
@@ -429,5 +431,80 @@ $('body').on('click', '.reset_log_histories', function () {
     }
   });
 });
+});
+
+$(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    var table = $('#teachers').dataTable({
+        processing: true,
+        serverSide: true,
+        ajax: 'teachers',
+        lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "semua"]],
+        columns: [{
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex',
+                orderable: false,
+                searchable: false
+            },
+            {
+              data: 'usr_profile_picture', 
+              name:'usr_profile_picture', 
+              render: function(data, type, full, meta){
+                  return "<img src=\"" + data + "\"height=\"50\"/>";
+              },
+              orderable: true,
+              searchable: true
+            },
+            {
+                data: 'tcr_nip',
+                name: 'tcr_nip',
+                orderable: true,
+                searchable: true
+            },
+            {
+                data: 'usr_name',
+                name: 'usr_name',
+                orderable: true,
+                searchable: true
+            },
+            {
+                data: 'tcr_entry_year',
+                name: 'tcr_entry_year',
+                orderable: true,
+                searchable: true
+            },
+            {
+                data: 'tcr_is_active',
+                name: 'tcr_is_active',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
+            },
+        ],
+        "language": {
+          // "processing": '<h4 style="font-family: arial;">Mohon Tunggu</h4>',
+          "processing": '<img src="../../../vendor/be/assets/images/3.svg" style="width="20px; height="20px;">',
+          "search": "Cari:",
+          "zeroRecords": "Daftar guru tidak tersedia",
+          "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
+          "infoEmpty": "Tidak ada daftar guru",
+          "infoFiltered": "(pencarian dari _MAX_ daftar guru)",
+          "infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+          "lengthMenu": "Tampilkan _MENU_ baris",
+          "paginate": {
+              "previous": "sebelumnya",
+              "next": "selanjutnya"
+          }
+      }
+    });
 });
 

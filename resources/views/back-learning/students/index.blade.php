@@ -33,7 +33,7 @@
                     <a href="{{ url('student/create') }}" type="button" class="btn btn-primary btn-sm mb-2"><i class="mdi mdi-plus-box"></i></a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table align-items-center table-flush" id="students" style="width:100%">
+                    <table class="table align-items-center table-flush table-hover" id="students" style="width:100%">
                         <thead class="text-uppercase" style="background-color: #BF00FF;">
                             <tr class="text-white">
                                 <th scope="col" class="sort" data-sort="name">No</th>

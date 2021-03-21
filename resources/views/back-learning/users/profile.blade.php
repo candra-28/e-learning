@@ -140,58 +140,60 @@
                         <hr>
                         <h4 class="font-medium m-t-30">Riwayat Kelas</h4>
                         <hr>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="text-upercase" style="background-color: #00FFFF;">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Kelas</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>X Multimedia 1</td>
+                                        <td><label class="badge badge-danger">tidak aktif</label></td>
+                                    </tr>
 
-                        <table class="table table-hover">
-                            <thead class="text-upercase" style="background-color: #00FFFF;">
-                                <tr>
-                                    <th>No</th>
-                                    <th>Kelas</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>X Multimedia 1</td>
-                                    <td><label class="badge badge-danger">tidak aktif</label></td>
-                                </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>XI Multimedia 1</td>
+                                        <td><label class="badge badge-success">aktif</label></td>
+                                    </tr>
 
-                                <tr>
-                                    <td>2</td>
-                                    <td>XI Multimedia 1</td>
-                                    <td><label class="badge badge-success">aktif</label></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                         @elseif($role->rol_id == 3)
                         <hr>
                         <h4 class="font-medium m-t-30">Riwayat Mengajar pelajaran</h4>
                         <hr>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="text-upercase" style="background-color: #00FFFF;">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Mata pelajaran</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Bahasa Indonesia</td>
+                                        <td><label class="badge badge-success">aktif</label></td>
+                                    </tr>
 
-                        <table class="table table-hover">
-                            <thead class="text-upercase" style="background-color: #00FFFF;">
-                                <tr>
-                                    <th>No</th>
-                                    <th>Mata pelajaran</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Bahasa Indonesia</td>
-                                    <td><label class="badge badge-success">aktif</label></td>
-                                </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Bahasa Inggris</td>
+                                        <td><label class="badge badge-success">aktif</label></td>
+                                    </tr>
 
-                                <tr>
-                                    <td>2</td>
-                                    <td>Bahasa Inggris</td>
-                                    <td><label class="badge badge-success">aktif</label></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                         @else
 
                         @endif

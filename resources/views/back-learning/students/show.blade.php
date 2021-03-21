@@ -51,11 +51,6 @@
                         <p>{{ $student->stu_nis }}</p>
                     </dd>
 
-                    <dt class="col-sm-3">Kelas</dt>
-                    <dd class="col-sm-9">
-                        <p>{{ $student_class->grade_level->grl_name }} {{ $student_class->major->mjr_name }} {{ $student_class->cls_number }}</p>
-                    </dd>
-
                     <dt class="col-sm-3">Tahun Masuk</dt>
                     <dd class="col-sm-9">
                         <p>{{ $student->school_year->scy_name }}</p>
@@ -101,7 +96,33 @@
                         @endif
                     </dd>
                 </dl>
-
+                <dt class="mb-2">Riwaya Kelas</dt>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-upercase" style="background-color: #00FFFF;">
+                            <tr>
+                                <th>No</th>
+                                <th>Kelas</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($classes as $no => $class)
+                            <tr>
+                                <td>{{ $no+1 }}</td>
+                                <td>{{ $class->grade_level->grl_name}} {{ $class->major->mjr_name }} {{ $class->cls_number }}</td>
+                                <td>
+                                    @if($class->stc_is_active == true)
+                                    <label class="badge badge-success">aktif</label>
+                                    @else
+                                    <label class="badge badge-danger">tidak aktif</label>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

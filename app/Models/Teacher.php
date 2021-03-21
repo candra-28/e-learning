@@ -11,4 +11,10 @@ class Teacher extends Model
     const UPDATED_AT = 'tcr_updated_at';
     const DELETED_AT = 'tcr_deleted_at';
     protected $guarded = [];
+
+    public static function getListTeachers($request)
+    {
+        $teachers = Teacher::join('users', 'teachers.tcr_user_id', '=', 'users.usr_id');
+        return $teachers;
+    }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Teacher;
+use App\Models\Teacher;
 use DataTables;
 use App\User;
 
@@ -12,39 +12,27 @@ class TeacherController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $teachers = Teacher::join('users', 'teachers.user_id', '=', 'users.id')
-                ->select(
-                    'users.*',
-                    'teachers.id as id_teacher',
-                    'users.name',
-                    'users.entry_year',
-                    'users.is_active as user_is_active',
-                    'teachers.*',
-                )->get();
+            $teachers = Teacher::getListTeachers($request->query());
             return Datatables::of($teachers)
-                ->editColumn("is_active", function ($row) {
-                    $user_is_active = $row->user_is_active;
-                    if ($user_is_active == "1") {
-                        return 'Aktif <span class="mdi mdi-check-circle"></span>';
-                    } elseif ($class_is_active == "0") {
-                        return 'Tidak Aktif <span class="mdi mdi-close-circle"></span>';
+                ->editColumn("tcr_is_active", function ($teacher) {
+                    if ($teacher->tcr_is_active == "1") {
+                        return '<label class="badge badge-success">aktif</label>';
+                    } elseif ($teacher->tcr_is_active == "0") {
+                        return '<label class="badge badge-danger">tidak aktif</label>';
                     } else {
                         return "Tidak punya status aktif";
                     }
                 })
                 ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-                    $detail = '<a href="' . url('teacher', $row->id_teacher) . '"  type="button" data-toggle="tooltip" data-original-title="DETAIL" class="btn btn-primary btn-sm"><i class="mdi mdi-eye"></i></a>';
-                    if (Auth()->user()->role_id == 1) {
-                        $edit = '<a href="' . url('teacher/edit', $row->id_teacher) . '"  type="button" data-toggle="tooltip" data-original-title="EDIT" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
-                    } else {
-                        return $detail;
-                    }
-                    return $edit . '&nbsp' . $detail;
-                })->rawColumns(['action', 'is_active'])
+                ->addColumn('action', function ($teacher) {
+                    $detail = '<a href="' . url('teacher', $teacher->tcr_id) . '"  type="button" data-toggle="tooltip" data-original-title="Detail" class="btn btn-warning btn-sm"><i class="mdi mdi-mdi mdi mdi-eye"></i></a>';
+                    $edit = '<a href="' . url('teacher/edit', $teacher->tcr_id) . '"  type="button" data-toggle="tooltip" data-original-title="Edit" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
+                    $status = ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $teacher->tcr_id . '" data-original-title="Delete" class="btn btn-danger btn-sm status_teacher"><i class="mdi mdi-information-outline"></i></a>';
+                    return $detail . '&nbsp' . $edit . '&nbsp' . $status;
+                })->rawColumns(['action', 'tcr_is_active'])
                 ->make(true);
         }
-        return view('teachers.index');
+        return view('back-learning.teachers.index');
     }
     public function edit($teacherID)
     {

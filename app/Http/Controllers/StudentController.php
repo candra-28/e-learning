@@ -105,11 +105,8 @@ class StudentController extends Controller
     public function show($studentID)
     {
         $student = Student::where('stu_id', $studentID)->first();
-        $student_class = Classes::join('student_classes', 'student_classes.stc_class_id', '=', 'classes.cls_id')
-            ->join('students', 'student_classes.stc_student_id', '=', 'students.stu_id')
-            ->where('students.stu_id', $student->stu_id)->select('classes.cls_grade_level_id', 'classes.cls_major_id', 'classes.cls_number')->first();
-        // dd($student_class);
-        return view('back-learning.students.show', ['student' => $student, 'student_class' => $student_class]);
+        $classes = Classes::join('student_classes', 'student_classes.stc_class_id', '=', 'classes.cls_id')->get();
+        return view('back-learning.students.show', ['student' => $student, 'classes' => $classes]);
     }
 
     public function updateStatusStudent($studentID)
