@@ -59,7 +59,7 @@
             <div class="btn-group text-center">
               <button type="button" style="left: 30%;" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Opsi </button>
               <div class="dropdown-menu" x-placement="bottom-start" style="cursor:default; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 44px, 0px);">
-                <a class="dropdown-item">Selengkapnya</a>
+                <a href="{{ url('announcement/'.$announcement->acm_id) }}" class="dropdown-item">Selengkapnya</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item">Edit Pengumuman</a>
                 <div class="dropdown-divider"></div>

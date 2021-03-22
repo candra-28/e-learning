@@ -86,9 +86,8 @@ class AnnouncementController extends Controller
      */
     public function show($announcementID)
     {
-
-        $announcement = Announcement::join('users', 'announcements.user_id', '=', 'users.id')->where('announcements.id', $announcementID)->first();
-        return view('announcements.show', ['announcement' => $announcement]);
+        $announcement = Announcement::where('acm_id', $announcementID)->firstOrFail();
+        return view('back-learning.announcements.show', ['announcement' => $announcement]);
     }
 
     /**
