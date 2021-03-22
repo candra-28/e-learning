@@ -66,16 +66,11 @@ class AnnouncementController extends Controller
     public function getSlug(Request $request)
     {
         // dd($request);
-        $slug = Str::slug($request->get('slug'));
+        $slug = Str::slug($request->get('acm_slug'));
 
-        $announcements = Announcement::join('users', 'announcements.user_id', '=', 'users.id')
-            ->select(
-                'users.*',
-                'users.id as is_users',
-                'announcements.*',
-            )->where('slug', 'LIKE', "%{$slug}%")->get();
+        $announcements = Announcement::where('acm_slug', 'LIKE', "%{$slug}%")->get();
 
-        return view('announcements.slug-show', ['announcements' => $announcements]);
+        return view('back-learning.announcements.slug-show', ['announcements' => $announcements]);
     }
 
     /**

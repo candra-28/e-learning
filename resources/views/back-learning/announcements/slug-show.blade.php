@@ -1,14 +1,14 @@
-@extends('layouts.master')
+@extends('back-learning.layouts.master')
 
 @push('title')
-- Announcement
+- Pencarian Pengumuman
 @endpush
 
 @push('styles')
-<link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-<link rel="stylesheet" href="{{URL::to('vendor/assets/vendors/css/vendor.bundle.base.css')}}">
-<link rel="stylesheet" href="{{URL::to('vendor/assets/css/style.css')}}">
-<link rel="shortcut icon" href="{{ URL::to('vendor/assets/images/logo-atas.png')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
+<link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
+<link rel="shortcut icon" href="{{ URL::to('vendor/be/assets/images/logo-atas.png')}}">
 @endpush
 
 @section('content')
@@ -21,9 +21,9 @@
 </div>
 
 <div class="form-group">
-    <form class="form-inline" method="get" action="{{ url('announcement/search') }}">
+    <form class="form-inline" method="GET" action="{{ url('announcement/search') }}">
         <div class="input-group">
-            <input name="slug" type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+            <input name="acm_slug" type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <button class="btn btn-sm btn-gradient-primary" type="submit">Search</button>
             </div>
@@ -34,41 +34,43 @@
 <div class="row">
     @if($announcements == true)
     @foreach($announcements as $announcement)
-    <div class="col-md-4 grid-margin stretch-card">
-        <div class="card" style="height: 400px;">
+    <div class="col-md-4 stretch-card grid-margin announcement">
+        <div class="card bg-gradient-danger card-img-holder">
             <div class="card-body">
-                <h4 class="card-title">{{ $announcement->title }}
-                    <img src="{{ asset('announcement/'.$announcement->name . '/' . $announcement->upload_type) }}" alt="NULL" style="margin-top: 20px; border-radius: 5px; width: 200px; height: 200px;">
-                </h4>
-                <form action="{{ url('announcement/'.$announcement->id )}}">
-                    <a href="{{ url('announcement/'.$announcement->id) }}" class="btn btn-primary btn-sm">Selengkapnya</a>
-                    @if(Auth()->user()->role_id == 1)
-                    {{ csrf_field() }}
-                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                    <input type="hidden" name="_method" value="DELETE">
-                    @else
-                    @endif
-                </form>
+                <h2 class="font-weight-normal mb-3 text-center">{{ $announcement->acm_title }}</i>
+                    </h4>
+                    <h2 class="text-center mb-5"><img src="{{ asset($announcement->acm_upload_file) }}" style="border-radius: 10px; max-width: 100%; width: 200px; height: 200px;" alt="null"></h2>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic example">
+                        <div class="btn-group text-center">
+                            <button type="button" style="left: 30%;" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Opsi </button>
+                            <div class="dropdown-menu" x-placement="bottom-start" style="cursor:default; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 44px, 0px);">
+                                <a href="{{ url('announcement/'.$announcement->acm_id) }}" class="dropdown-item">Selengkapnya</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item">Edit Pengumuman</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item">Ubah Status</a>
+                            </div>
 
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
-</div>
 
-@endforeach
-@else
+    @endforeach
+    @else
 
-<h2>No Announcement found</h2>
+    <h2>No Announcement found</h2>
 
-@endif
+    @endif
 </div>
 
 @push('scripts')
-<script src="{{URL::to('vendor/assets/vendors/js/vendor.bundle.base.js')}}"></script>
-<script src="{{URL::to('vendor/assets/vendors/chart.js/Chart.min.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/off-canvas.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/hoverable-collapse.js')}}"></script>
-<script src="{{URL::to('vendor/assets/js/misc.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/vendors/chart.js/Chart.min.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
+<script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
 
 @endpush
 @endsection

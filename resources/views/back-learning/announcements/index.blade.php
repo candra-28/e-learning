@@ -33,9 +33,9 @@
 @endif
 
 <div class="form-group">
-  <form class="form-inline" method="get" action="{{ url('announcement/search') }}">
+  <form class="form-inline" method="GET" action="{{ url('announcement/search') }}">
     <div class="input-group">
-      <input name="slug" type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+      <input name="acm_slug" type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
       <div class="input-group-append">
         <button class="btn btn-sm btn-gradient-primary" type="submit">Search</button>
       </div>
@@ -47,7 +47,7 @@
   <a href="{{ url('announcement/create') }}" type="button" data-toggle="tooltip" data-placement="left" title="Tambah Pengumuman" class="btn btn-primary btn-sm mb-2"><i class="mdi mdi-plus-box"></i></a>
 </div>
 
-<div class="row" id="announcement">
+<div class="row">
   @foreach($announcements as $announcement)
   <div class="col-md-4 stretch-card grid-margin announcement">
     <div class="card bg-gradient-danger card-img-holder">

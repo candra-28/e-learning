@@ -1,7 +1,7 @@
 @extends('back-learning.layouts.master')
 
 @push('title')
-- Announcement Detail
+- Detail Pengumuman
 @endpush
 
 @push('styles')
