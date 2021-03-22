@@ -19,10 +19,10 @@ class CreateAnnouncementsTable extends Migration
             $table->bigInteger('acm_user_id')->unsigned();
             $table->text('acm_description');
             $table->string('acm_slug');
-            $table->string('acm_upload_type');
+            $table->string('acm_upload_file');
             $table->timestamp('acm_date')->nullable();
             $table->boolean('acm_is_active');
-            
+
             $table->bigInteger('acm_created_by')->unsigned()->nullable();
             $table->bigInteger('acm_updated_by')->unsigned()->nullable();
             $table->bigInteger('acm_deleted_by')->unsigned()->nullable();
@@ -31,12 +31,11 @@ class CreateAnnouncementsTable extends Migration
             $table->foreign('acm_updated_by')->references('usr_id')->on('users')->onDelete('cascade');
             $table->foreign('acm_deleted_by')->references('usr_id')->on('users')->onDelete('cascade');
             $table->foreign('acm_user_id')->references('usr_id')->on('users')->onDelete('cascade');
-            
+
             $table->timestamp('acm_created_at')->nullable();
             $table->timestamp('acm_updated_at')->nullable();
             $table->timestamp('acm_deleted_at')->nullable();
             $table->string('acm_sys_note')->nullable();
-
         });
     }
 

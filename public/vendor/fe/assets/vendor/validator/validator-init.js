@@ -317,3 +317,24 @@ $(function () {
         },
     });
 });
+
+$(function () {
+    $(".add-announcement").validate({
+        rules: {
+            acm_title:{
+                required: true,
+            },
+            acm_upload_file:{
+                required: true,
+            }
+        },
+        messages: {
+            acm_title: {
+                required: "Judul pengumuman harus di isi",
+            },
+            acm_upload_file: {
+                required: "Upload pengumuman harus di isi",
+            },
+        },
+    });
+});

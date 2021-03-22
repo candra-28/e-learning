@@ -12,58 +12,55 @@ use function PHPUnit\Framework\isNull;
 
 class AnnouncementController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $announcements = Announcement::where('acm_is_active', true)->get();
+        $announcements = Announcement::where('acm_is_active', true)->paginate(3);
+        // dd($announcements);
+        if ($request->ajax()) {
+            $announcement = Announcement::where('acm_is_active', true)->simplePaginate(3);
+            return view('back-learning.announcements.index', ['announcement' => $announcement])->render();
+        }
         return view('back-learning.announcements.index', ['announcements' => $announcements]);
     }
 
+    public function fetch(Request $request)
+    {
+    }
     public function create()
     {
         return view('back-learning.announcements.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $rules = [
-            'title' => 'required',
-            'description' => 'required',
-        ];
+        $request->validate([
+            'acm_description'   => 'required'
+        ], [
+            'acm_description.required'  => "Deskripsi pengumuman harus di isi"
+        ]);
 
-        $customMessages = [
-            'required' => 'Opps.. Kolom Wajib Terisi'
-        ];
+        $user = User::findOrFail(Auth::user()->usr_id);
+        $announcement_check = Announcement::where('acm_title', $request->acm_title)
+            ->where('acm_description', $request->acm_description)->count();
+        if ($announcement_check == 0) {
+            $announcement = new Announcement;
+            $announcement->acm_title = $request->acm_title;
+            $announcement->acm_slug = Str::slug($request->acm_title);
+            $announcement->acm_description = $request->acm_description;
+            $announcement->acm_user_id = $user->usr_id;
+            $announcement->acm_created_by = $user->usr_id;
 
-        $this->validate($request, $rules, $customMessages);
-
-        $user = User::findOrFail(Auth::user()->id);
-
-        $announcement = new Announcement;
-        $announcement->title = $request->title;
-        $announcement->slug = Str::slug($request->title);
-        $announcement->description = $request->description;
-        $announcement->user_id = $user->id;
-
-        if ($request->hasFile('upload_type')) {
-            $files = $request->file('upload_type');
-            $path = public_path('announcement' . '/' . $user->name);
-            if (!File::isDirectory($path)) {
-                File::makeDirectory($path, 0777, true, true);
+            if ($request->hasFile('acm_upload_file')) {
+                $files = $request->file('acm_upload_file');
+                $path = public_path('vendor/be/assets/images/announcements');
+                $files_name = 'vendor' . '/' . 'be' . '/' . 'assets' . '/' . 'images' . '/' . 'announcements' . '/' . date('Ymd') . '_' . $files->getClientOriginalName();
+                $files->move($path, $files_name);
+                $announcement->acm_upload_file = $files_name;
             }
-            $files_name = $files->getClientOriginalName();
-            $files->move($path, $files_name);
-            $announcement->upload_type = $files_name;
+            $announcement->acm_is_active = 1;
+            $announcement->save();
+            return redirect('announcements')->with('success', 'Pengumuman berhasil di tambahkan');
         }
-
-        $announcement->save();
-
-        return redirect('announcements');
+        return back()->with('error', 'Pengumuman sudah tersedia');
     }
 
     public function getSlug(Request $request)
