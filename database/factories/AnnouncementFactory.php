@@ -13,6 +13,6 @@ $factory->define(Announcement::class, function (Faker $faker) {
         'acm_slug'  => str::slug($faker->name),
         'acm_description' => $faker->address,
         'acm_is_active' => 1,
-        'acm_upload_type' => 'vendor/be/assets/images/announcements/test.jpg',
+        'acm_upload_file' => 'vendor/be/assets/images/announcements/test.jpg',
     ];
 });

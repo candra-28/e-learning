@@ -68,52 +68,31 @@ class AnnouncementController extends Controller
         // dd($request);
         $slug = Str::slug($request->get('acm_slug'));
 
-        $announcements = Announcement::where('acm_slug', 'LIKE', "%{$slug}%")->get();
+        $announcements = Announcement::where('acm_is_active', true)->where('acm_slug', 'LIKE', "%{$slug}%")->get();
 
         return view('back-learning.announcements.slug-show', ['announcements' => $announcements]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Announcement  $announcement
-     * @return \Illuminate\Http\Response
-     */
     public function show($announcementID)
     {
         $announcement = Announcement::where('acm_id', $announcementID)->firstOrFail();
         return view('back-learning.announcements.show', ['announcement' => $announcement]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Announcement  $announcement
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Announcement $announcement)
+    public function updateStatusAnnouncement($announcementID)
     {
-        //
+        $announcement = Announcement::findOrFail($announcementID);
+        // dd($class);
+        if ($announcement->acm_is_active == false) {
+            $announcement->acm_is_active = 1;
+        } else {
+            $announcement->acm_is_active = 0;
+        }
+        $announcement->acm_updated_by = Auth()->user()->usr_id;
+        $announcement->update();
+        return response()->json(['code' => 200, 'message' => 'Status pengumuman berhasil di ubah', 'data' => $announcement], 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Announcement  $announcement
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Announcement $announcement)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Announcement  $announcement
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($announcementID)
     {
         $announcement = Announcement::find($announcementID);

@@ -49,7 +49,7 @@
 
 <div class="row">
   @foreach($announcements as $announcement)
-  <div class="col-md-4 stretch-card grid-margin announcement">
+  <div class="col-md-4 stretch-card grid-margin">
     <div class="card bg-gradient-danger card-img-holder">
       <div class="card-body">
         <h2 class="font-weight-normal mb-3 text-center">{{ $announcement->acm_title }}</i>
@@ -63,7 +63,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item">Edit Pengumuman</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item">Ubah Status</a>
+                <a href="javascript:void(0)" data-id="{{ $announcement->acm_id }}" class="dropdown-item status_announcement">Ubah status</a>';
               </div>
 
             </div>
@@ -73,7 +73,7 @@
   </div>
   @endforeach
 </div>
-{{ $announcements->links() }}
+{{ $announcements->onEachSide(5)->links() }}
 
 @push('scripts')
 <script src="{{URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
@@ -82,7 +82,9 @@
 <script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
+<script src="{{ URL::to('vendor/be/assets/dataTable/dataTable.js') }}"></script>
 
+<script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
 <!-- <script type="text/javascript">
   $(window).on('hashchange', function() {
     if (window.location.hash) {
