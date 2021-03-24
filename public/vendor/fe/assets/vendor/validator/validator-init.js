@@ -338,3 +338,18 @@ $(function () {
         },
     });
 });
+
+$(function () {
+    $(".edit-announcement").validate({
+        rules: {
+            acm_title:{
+                required: true,
+            },
+        },
+        messages: {
+            acm_title: {
+                required: "Judul pengumuman harus di isi",
+            },
+        },
+    });
+});

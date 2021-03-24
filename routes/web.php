@@ -25,9 +25,12 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::get('announcements', 'AnnouncementController@index');
     Route::get('announcement/create', 'AnnouncementController@create');
     Route::post('announcement/create', 'AnnouncementController@store');
+    Route::get('announcement/edit/{announcementID}', 'AnnouncementController@edit');
+    Route::post('announcement/edit/{announcementID}', 'AnnouncementController@update');
+
     Route::get('/announcement/search', 'AnnouncementController@getSlug');
-    Route::get('announcement/{id}', 'AnnouncementController@show');
-    Route::delete('/announcement/{id}', 'AnnouncementController@destroy');
+    Route::get('announcement/{announcementID}', 'AnnouncementController@show');
+    Route::delete('/announcement/{announcementID}', 'AnnouncementController@destroy');
     Route::post('announcement/edit-status/{announcementID}', 'AnnouncementController@updateStatusAnnouncement');
 
     Route::get('majors', 'MajorController@index');

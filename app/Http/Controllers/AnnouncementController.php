@@ -99,4 +99,40 @@ class AnnouncementController extends Controller
         $announcement->delete();
         return redirect()->back();
     }
+    public function edit($announcementID)
+    {
+        $announcement = Announcement::find($announcementID);
+        return view('back-learning.announcements.edit', compact('announcement'));
+    }
+    public function update(Request $request, $announcementID)
+    {
+        $request->validate([
+            'acm_description'   => 'required'
+        ], [
+            'acm_description.required'  => "Deskripsi pengumuman harus di isi"
+        ]);
+
+        $user = User::findOrFail(Auth::user()->usr_id);
+        $announcement_check = Announcement::where('acm_title', $request->acm_title)
+            ->where('acm_description', $request->acm_description)->where('acm_upload_file', $request->file('acm_upload_file'))->count();
+        if ($announcement_check == 0) {
+            $announcement = Announcement::where('acm_id', $announcementID)->firstOrFail();
+            $announcement->acm_title = $request->acm_title;
+            $announcement->acm_slug = Str::slug($request->acm_title);
+            $announcement->acm_description = $request->acm_description;
+            $announcement->acm_user_id = $user->usr_id;
+            $announcement->acm_updated_by = $user->usr_id;
+
+            if ($request->hasFile('acm_upload_file')) {
+                $files = $request->file('acm_upload_file');
+                $path = public_path('vendor/be/assets/images/announcements');
+                $files_name = 'vendor' . '/' . 'be' . '/' . 'assets' . '/' . 'images' . '/' . 'announcements' . '/' . date('Ymd') . '_' . $files->getClientOriginalName();
+                $files->move($path, $files_name);
+                $announcement->acm_upload_file = $files_name;
+            }
+            $announcement->update();
+            return redirect('announcements')->with('success', 'Pengumuman berhasil di ubah');
+        }
+        return back()->with('error', 'Pengumuman sudah tersedia');
+    }
 }

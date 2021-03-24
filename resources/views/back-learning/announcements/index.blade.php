@@ -61,9 +61,9 @@
               <div class="dropdown-menu" x-placement="bottom-start" style="cursor:default; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 44px, 0px);">
                 <a href="{{ url('announcement/'.$announcement->acm_id) }}" class="dropdown-item">Selengkapnya</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item">Edit Pengumuman</a>
+                <a href="{{ url('announcement/edit/'.$announcement->acm_id) }}" class="dropdown-item">Edit Pengumuman</a>
                 <div class="dropdown-divider"></div>
-                <a href="javascript:void(0)" data-id="{{ $announcement->acm_id }}" class="dropdown-item status_announcement">Ubah status</a>';
+                <a href="javascript:void(0)" data-id="{{ $announcement->acm_id }}" class="dropdown-item status_announcement">Ubah status</a>
               </div>
 
             </div>
@@ -85,58 +85,8 @@
 <script src="{{ URL::to('vendor/be/assets/dataTable/dataTable.js') }}"></script>
 
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
-<!-- <script type="text/javascript">
-  $(window).on('hashchange', function() {
-    if (window.location.hash) {
-      var page = window.location.hash.replace('#', '');
-      if (page == Number.NaN || page <= 0) {
-        return false;
-      } else {
-        getData(page);
-      }
-    }
-  });
+<script>
 
-  $(window).on('paginate a', function() {
-    if (window.location.hash) {
-      var page = window.location.hash.replace('#', '');
-      console.log(page)
-      if (page == Number.NaN || page <= 0) {
-        return false;
-      } else {
-        getData(page);
-      }
-    }
-  });
-
-  $(document).ready(function() {
-    $(document).on('click', '.pagination a', function(event) {
-      // console.log('ahmad')
-      event.preventDefault();
-      // console.log(event.preventDefault())
-      $('li').removeClass('active');
-      $(this).parent('li').addClass('active');
-
-      var myurl = $(this).attr('href');
-      // console.log(myurl)
-      var page = $(this).attr('href').split('page=')[1];
-      // console.log(page)
-      getData(page);
-    });
-
-  });
-
-  function getData(page) {
-    console.log(page)
-    $.ajax({
-      url: '?page=' + page,
-      type: "GET",
-      datatype: "html"
-    }).done(function(data) {
-      $("#announcement").empty().html(data);
-      location.hash = page;
-    });
-  }
-</script> -->
+</script>
 @endpush
 @endsection
