@@ -46,4 +46,16 @@ class NotificationController extends Controller
         return Response::json($notification);
         //return view('users.show',compact('user'));
     }
+    public function updateStatusNotification($notificationID)
+    {
+        $notification = Notification::findOrFail($notificationID);
+        if ($notification->not_is_active == false) {
+            $notification->not_is_active = 1;
+        } else {
+            $notification->not_is_active = 0;
+        }
+        $notification->not_updated_by = Auth()->user()->usr_id;
+        $notification->update();
+        return response()->json(['code' => 200, 'message' => 'Status Notifikasi berhasil di ubah', 'data' => $notification], 200);
+    }
 }

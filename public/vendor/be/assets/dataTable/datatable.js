@@ -508,7 +508,6 @@ $(document).ready(function() {
     });
 });
 
-
 $('body').on('click', '.status_announcement', function () {
   let _token = $('meta[name="csrf-token"]').attr('content');
   var acm_id = $(this).data("id");
@@ -557,8 +556,6 @@ $('body').on('click', '.status_announcement', function () {
     }
   });
 });
-
-
 
 $(document).ready(function() {
   $.ajaxSetup({
@@ -624,5 +621,71 @@ $(document).ready(function() {
         }
     }
   });
+
+    $('body').on('click', '#show-user', function() {
+      var not_id = $(this).data('id');
+      $.get('notification/' + not_id, function(data) {
+
+          $('#from_name').html(data.user.usr_name);
+          $('#title').html(data.not_title);
+          $('#message').html(data.not_message);
+          $('#to_name').html(data.to_role.rol_name);
+          $('#created_at').html(data.not_created_at);
+
+      })
+      $('#userCrudModal-show').html("User Details");
+      $('#crud-modal-show').modal('show');
+  });
+
+  
+$('body').on('click', '.status_notification', function () {
+  let _token = $('meta[name="csrf-token"]').attr('content');
+  var not_id = $(this).data("id");
+
+  swal({
+    title: "Notifikasi",
+    text: 'Apakah anda yakin ingin mengubah status notifikasi?',
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+    closeOnClickOutside: false,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      $.ajax({
+        type: 'POST',
+        url: 'notification/edit-status/' + not_id,
+        data: {
+          not_id: not_id,
+          _token: _token 
+        },
+        success: function(data) {
+          if (data.status != false) {
+            swal(data.message, {
+              button: false,
+              icon: "success",
+              timer: 1000
+            });
+          } else {
+            swal(data.message, {
+              button: false,
+              icon: "error",
+              timer: 1000
+            });
+          }
+          $('#notification').DataTable().ajax.reload()
+        },
+        error: function(error) {
+          swal('Terjadi kegagalan sistem', {
+            button: false,
+            icon: "error",
+            timer: 1000
+          });
+        }
+      });
+    }
+  });
+});
+
 });
 
