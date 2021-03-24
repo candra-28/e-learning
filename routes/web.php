@@ -76,4 +76,5 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::get('/notifications', 'NotificationController@index');
     Route::get('/notification/{announcementID}', 'NotificationController@show');
     Route::post('/notification/edit-status/{notificationID}', 'NotificationController@updateStatusNotification');
+    Route::post('/notification/create', 'NotificationController@store');
 });

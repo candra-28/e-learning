@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DataTables;
 use App\Models\Notification;
 use Response;
+use Illuminate\Support\Carbon;
 
 class NotificationController extends Controller
 {
@@ -26,7 +27,7 @@ class NotificationController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function ($notification) {
-                    $detail = '<a class="btn btn-warning btn-sm" id="show-user" data-toggle="modal" data-id=' . $notification->not_id . '><i class="mdi mdi-eye"></i></a>';
+                    $detail = '<a class="btn btn-warning btn-sm" id="show-notification" data-toggle="modal" data-id=' . $notification->not_id . '><i class="mdi mdi-eye"></i></a>';
                     $edit = '<a href="' . url('notification/edit', $notification->not_id) . '"  type="button" data-toggle="tooltip" data-original-title="Edit" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
                     $status = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $notification->not_id . '" data-original-title="Delete" class="btn btn-danger btn-sm status_notification"><i class="mdi mdi-information-outline"></i></a>';
 
@@ -57,5 +58,24 @@ class NotificationController extends Controller
         $notification->not_updated_by = Auth()->user()->usr_id;
         $notification->update();
         return response()->json(['code' => 200, 'message' => 'Status Notifikasi berhasil di ubah', 'data' => $notification], 200);
+    }
+
+    public function store(Request $request)
+    {
+        // dd($request);
+        $request->validate([
+            'not_title'   => 'required|max:255',
+            'not_message' => 'required',
+        ]);
+
+        $notification = Notification::updateOrCreate(['acm' => $request->not_id], [
+            'not_title' => $request->not_title,
+            'not_to_role_id'    => $request->not_to_role_id,
+            'not_message' => $request->not_message,
+            'not_user_id'   => $request->not_message,
+            'not_date'  => Carbon::now(),
+        ]);
+
+        return response()->json(['code' => 200, 'message' => 'Notifikasi Berhasil', 'data' => $notification], 200);
     }
 }

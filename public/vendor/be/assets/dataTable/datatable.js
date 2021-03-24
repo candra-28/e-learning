@@ -622,7 +622,7 @@ $(document).ready(function() {
     }
   });
 
-    $('body').on('click', '#show-user', function() {
+    $('body').on('click', '#show-notification', function() {
       var not_id = $(this).data('id');
       $.get('notification/' + not_id, function(data) {
 

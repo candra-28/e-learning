@@ -353,3 +353,18 @@ $(function () {
         },
     });
 });
+
+$(function () {
+    $(".abc").validate({
+        rules: {
+            not_title:{
+                required: true,
+            },
+        },
+        messages: {
+            not_title: {
+                required: "Judul notifikasi harus di isi",
+            },
+        },
+    });
+});

@@ -60,7 +60,7 @@
 <script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
 
-<script src="{{ URL::to('vendor/be/assets/dataTable/jquery_dataTable.min.js') }}"></script>
+<script src="{{ URL::to('vendor/be/assets/dataTable/jquery_datatable.min.js') }}"></script>
 <script src="{{ URL::to('vendor/be/assets/dataTable/dataTable.js') }}"></script>
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
 @endpush

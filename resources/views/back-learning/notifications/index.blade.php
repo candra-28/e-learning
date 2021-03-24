@@ -37,7 +37,7 @@
                 @endif
                 <h4 class="card-title">Daftar Notifikasi</h4>
                 <div class="text-right">
-                    <a href="{{ url('notification/create') }}" type="button" class="btn btn-primary btn-sm mb-2"><i class="mdi mdi-plus-box"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-success mb-3" id="create-new-post" onclick="addPost()">Add Post</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center table-flush" id="notification" style="width:100%">
@@ -60,6 +60,47 @@
     </div>
 </div>
 
+<div class="modal fade" id="post-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal abc">
+                    <input type="hidden" name="not_user_id" id="not_user_id">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2">title</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="not_title" name="not_title" placeholder="Enter title">
+                            <span id="not_titleError" class="alert-message text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2">Tujuan</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" value="1" id="not_to_role_id" name="not_to_role_id" placeholder="Enter title">
+                            <span id="not_to_role_idError" class="alert-message text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2">Description</label>
+                        <div class="col-sm-12">
+                            <textarea class="form-control" id="not_message" name="not_message" placeholder="Enter description" rows="4" cols="50">
+                        </textarea>
+                            <span id="not_messageError" class="alert-message text-danger"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="createPost()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="crud-modal-show" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -114,13 +155,15 @@
 <script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
 <script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
 
-<script src="{{ URL::to('vendor/be/assets/dataTable/jquery_dataTable.min.js') }}"></script>
+<script src="{{ URL::to('vendor/be/assets/dataTable/jquery_datatable.min.js') }}"></script>
 <script src="{{ URL::to('vendor/be/assets/dataTable/dataTable.js') }}"></script>
 
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
-
 <script>
-
+    function addPost() {
+        $("#post_id").val('');
+        $('#post-modal').modal('show');
+    }
 </script>
 @endpush
 @endsection
