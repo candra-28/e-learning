@@ -1,7 +1,7 @@
 @extends('back-learning.layouts.master')
 
 @push('title')
-- Buat Pengumuman
+- Edit Pengumuman
 @endpush
 
 @push('styles')
@@ -17,7 +17,7 @@
     <h3 class="page-title">
         <span class="page-title-icon bg-gradient-primary text-white mr-2">
             <i class="mdi mdi-voice"></i>
-        </span> Buat Pengumuman
+        </span> Edit Pengumuman
     </h3>
 </div>
 <div class="row">
@@ -34,8 +34,8 @@
                     {{ Session::get('error') }}
                 </div>
                 @endif
-                <h4 class="card-title">Buat Pengumuman</h4>
-                <p class="card-description"> Masukan Pengumuman Yang Akan Anda Buat </p>
+                <h4 class="card-title">Edit Pengumuman</h4>
+                <p class="card-description"> Ubah Pengumuman jika memang ada kesalahan </p>
                 <form class="edit-announcement" action="{{ url('announcement/edit/'.$announcement->acm_id) }}" method="post" autocomplete="off" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">

@@ -19,7 +19,9 @@
           <span class="count-symbol bg-danger"></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-          <h6 class="p-3 mb-0">Notifications</h6>
+          <h6 class="p-3 mb-0">Notifications <a href="{{ url('notifications')}}" style="float: right;" data-toggle="tooltip" data-placement="right" title="" data-original-title="Selengkapnya"><i class="mdi mdi-notification-clear-all"></i></a> </h6>
+          <span class="count-symbol bg-danger"></span>
+          </a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item preview-item">
             <div class="preview-thumbnail">

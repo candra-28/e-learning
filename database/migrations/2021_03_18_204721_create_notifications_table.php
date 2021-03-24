@@ -15,10 +15,12 @@ class CreateNotificationsTable extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id('not_id');
+            $table->bigInteger('not_user_id')->unsigned();
             $table->bigInteger('not_to_role_id')->unsigned();
             $table->string('not_title');
             $table->text('not_message');
             $table->timestamp('not_date')->nullable();
+            $table->boolean('not_is_active');
 
             $table->bigInteger('not_created_by')->unsigned()->nullable();
             $table->bigInteger('not_updated_by')->unsigned()->nullable();
@@ -28,6 +30,7 @@ class CreateNotificationsTable extends Migration
             $table->foreign('not_updated_by')->references('usr_id')->on('users')->onDelete('cascade');
             $table->foreign('not_deleted_by')->references('usr_id')->on('users')->onDelete('cascade');
             $table->foreign('not_to_role_id')->references('rol_id')->on('roles')->onDelete('cascade');
+            $table->foreign('not_user_id')->references('usr_id')->on('users')->onDelete('cascade');
 
             $table->timestamp('not_created_at')->nullable();
             $table->timestamp('not_updated_at')->nullable();

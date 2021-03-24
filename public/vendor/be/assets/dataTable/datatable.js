@@ -557,3 +557,72 @@ $('body').on('click', '.status_announcement', function () {
     }
   });
 });
+
+
+
+$(document).ready(function() {
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+  var table = $('#notification').dataTable({
+      processing: true,
+      serverSide: true,
+      ajax: 'notifications',
+      columnDefs: [
+        {
+            targets: 2,
+            className: 'd-flex text-wrap',
+        }
+      ],
+      lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "semua"]],
+      columns: [{
+              data: 'DT_RowIndex',
+              name: 'DT_RowIndex',
+              orderable: false,
+              searchable: false
+          },
+          {
+            data: 'not_title', 
+            name:'not_title', 
+            orderable: true,
+            searchable: true
+          },
+          {
+              data: 'not_message',
+              name: 'not_message',
+              orderable: true,
+              searchable: true
+          },
+          {
+              data: 'not_is_active',
+              name: 'not_is_active',
+              orderable: false,
+              searchable: false
+          },
+          {
+              data: 'action',
+              name: 'action',
+              orderable: false,
+              searchable: false
+          },
+      ],
+      "language": {
+        // "processing": '<h4 style="font-family: arial;">Mohon Tunggu</h4>',
+        "processing": '<img src="../../../vendor/be/assets/images/3.svg" style="width="20px; height="20px;">',
+        "search": "Cari:",
+        "zeroRecords": "Daftar guru tidak tersedia",
+        "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
+        "infoEmpty": "Tidak ada daftar guru",
+        "infoFiltered": "(pencarian dari _MAX_ daftar guru)",
+        "infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+        "lengthMenu": "Tampilkan _MENU_ baris",
+        "paginate": {
+            "previous": "sebelumnya",
+            "next": "selanjutnya"
+        }
+    }
+  });
+});
+
