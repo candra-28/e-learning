@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Announcement;
 use Illuminate\Http\Request;
 use DataTables;
 use App\Models\Notification;
+use Response;
 
 class NotificationController extends Controller
 {
@@ -24,7 +26,7 @@ class NotificationController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function ($notification) {
-                    $detail = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $notification->not_id . '" data-original-title="Detail" class="btn btn-warning btn-sm notification_detail"><i class="mdi mdi-eye"></i></a>';
+                    $detail = '<a class="btn btn-warning btn-sm" id="show-user" data-toggle="modal" data-id=' . $notification->not_id . '><i class="mdi mdi-eye"></i></a>';
                     $edit = '<a href="' . url('notification/edit', $notification->not_id) . '"  type="button" data-toggle="tooltip" data-original-title="Edit" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
                     $status = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $notification->not_id . '" data-original-title="Delete" class="btn btn-danger btn-sm status_notification"><i class="mdi mdi-information-outline"></i></a>';
 
@@ -34,5 +36,14 @@ class NotificationController extends Controller
                 ->make(true);
         }
         return view('back-learning.notifications.index');
+    }
+
+    public function show($notificationID)
+    {
+        // $where = array('not_id' => $announcementID);
+        // $notification = Notification::where($where)->first();
+        $notification = Notification::where('not_id', $notificationID)->with('user')->with('toRole')->first();
+        return Response::json($notification);
+        //return view('users.show',compact('user'));
     }
 }

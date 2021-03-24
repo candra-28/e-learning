@@ -60,6 +60,49 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="crud-modal-show" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+
+                    <table class="table">
+                        <tr height="50px">
+                            <td><strong>Pembuat:</strong></td>
+                            <td id="from_name"></td>
+                        </tr>
+                        <tr height="50px">
+                            <td><strong>Judul:</strong></td>
+                            <td id="title"></td>
+                        </tr>
+                        <tr height="50px">
+                            <td><strong>Pesan:</strong></td>
+                            <td class="text-wrap" id="message"></td>
+                        </tr>
+                        <tr height="50px">
+                            <td><strong>Ditujukan Pada:</strong></td>
+                            <td id="to_name"></td>
+                        </tr>
+                        <tr height="50px">
+                            <td><strong>Dibuat Pada:</strong></td>
+                            <td id="created_at"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Kembali</button>
+            </div>
+        </div>
+    </div>
+</div>
 @push('scripts')
 
 <script src="{{URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
@@ -75,5 +118,22 @@
 <script src="{{ URL::to('vendor/be/assets/dataTable/dataTable.js') }}"></script>
 
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
+
+<script>
+    $('body').on('click', '#show-user', function() {
+        var not_id = $(this).data('id');
+        $.get('notification/' + not_id, function(data) {
+
+            $('#from_name').html(data.user.usr_name);
+            $('#title').html(data.not_title);
+            $('#message').html(data.not_message);
+            $('#to_name').html(data.to_role.rol_name);
+            $('#created_at').html(data.not_created_at);
+
+        })
+        $('#userCrudModal-show').html("User Details");
+        $('#crud-modal-show').modal('show');
+    });
+</script>
 @endpush
 @endsection

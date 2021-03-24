@@ -74,4 +74,5 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::get('/get/classes/{school_yearID}', 'StudentController@getClasses');
 
     Route::get('/notifications', 'NotificationController@index');
+    Route::get('/notification/{announcementID}', 'NotificationController@show');
 });
