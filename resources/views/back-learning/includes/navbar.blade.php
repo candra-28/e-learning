@@ -1,3 +1,11 @@
+<?php
+
+use App\Models\UserNotification;
+
+$user_notifications = UserNotification::getNotification();
+// dd($user_notification);
+?>
+
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
     <a class="navbar-brand brand-logo" href="{{ url('dashboard')}}"><img src="{{URL::to('vendor/be/assets/images/3.svg')}}" alt="logo" /></a>
@@ -19,46 +27,27 @@
           <span class="count-symbol bg-danger"></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-          <h6 class="p-3 mb-0">Notifications <a href="{{ url('notifications')}}" style="float: right;" data-toggle="tooltip" data-placement="right" title="" data-original-title="Selengkapnya"><i class="mdi mdi-notification-clear-all"></i></a> </h6>
+          <h6 class="p-3 mb-0">Notifikasi</h6>
           <span class="count-symbol bg-danger"></span>
           </a>
+          
+          @foreach($user_notifications as $user_notification)
           <div class="dropdown-divider"></div>
           <a class="dropdown-item preview-item">
             <div class="preview-thumbnail">
               <div class="preview-icon bg-success">
-                <i class="mdi mdi-calendar"></i>
+                <i class="mdi mdi-bell-outline"></i>
               </div>
             </div>
+            
             <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-              <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
-              <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>
+              <h6 class="preview-subject font-weight-normal mb-1">{{ $user_notification->not_title }}</h6>
+              <p class="text-gray ellipsis mb-0"> {{ $user_notification->not_message }} </p>
             </div>
           </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-warning">
-                <i class="mdi mdi-settings"></i>
-              </div>
-            </div>
-            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-              <h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
-              <p class="text-gray ellipsis mb-0"> Update dashboard </p>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-info">
-                <i class="mdi mdi-link-variant"></i>
-              </div>
-            </div>
-            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-              <h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
-              <p class="text-gray ellipsis mb-0"> New admin wow! </p>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
+          @endforeach
+  
           <h6 class="p-3 mb-0 text-center">See all notifications</h6>
         </div>
       </li>

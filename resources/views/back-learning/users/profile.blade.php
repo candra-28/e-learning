@@ -215,7 +215,7 @@
                                     </div>
                                     @endif
                                     <br class="mb-2">
-                                    <input type="file" name="usr_profile_picture" id="preview_gambar" onchange="document.getElementById('usr_profile_picture').value=this.value" /><br>
+                                    <input type="file" accept="image/x-png,image/gif,image/jpeg" name="usr_profile_picture" id="preview_gambar" onchange="document.getElementById('usr_profile_picture').value=this.value" /><br>
                                 </div>
                             </div>
                             <div class="form-group">

@@ -3,13 +3,12 @@
 use App\Models\User;
 use App\Models\StudentClass;
 
-$user = User::join('user_has_roles', 'user_has_roles.uhs_user_id', '=', 'users.usr_id')
-  ->join('roles', 'user_has_roles.uhs_role_id', '=', 'roles.rol_id')
-  ->where('usr_id', Auth()->user()->usr_id)->first();
-
 $student_class = StudentClass::join('students', 'student_classes.stc_student_id', '=', 'students.stu_id')
   ->where('students.stu_user_id', Auth()->user()->usr_id)->first();
 // dd($student_class);
+
+$role = User::getRoles();
+
 ?>
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -17,8 +16,8 @@ $student_class = StudentClass::join('students', 'student_classes.stc_student_id'
     <li class="nav-item nav-profile">
       <a href="{{ url('profiles') }}" class="nav-link">
         <div class="nav-profile-image">
-          @if(isset($user->usr_profile_picture))
-          <img src="{{ asset($user->usr_profile_picture)}}" alt="null">
+          @if(isset(Auth()->user()->usr_profile_picture))
+          <img src="{{ asset(Auth()->user()->usr_profile_picture)}}" alt="null">
           @else
           <img src="{{ asset('vendor/be/assets/images/profile_picture/avatar-2.png')}}" alt="null">
           @endif
@@ -32,7 +31,7 @@ $student_class = StudentClass::join('students', 'student_classes.stc_student_id'
       </a>
     </li>
 
-    @if($user->rol_id == 1)
+    @if($role->rol_name == "Administrator")
     <li class="nav-item">
       <a class="nav-link" href="{{ url('dashboard') }}">
         <span class="menu-title">Dashboard</span>
@@ -106,7 +105,6 @@ $student_class = StudentClass::join('students', 'student_classes.stc_student_id'
       </div>
     </li>
 
-
     <li class="nav-item">
       <a class="nav-link" href="{{ url('log-histories') }}">
         <span class="menu-title">History Login Pengguna</span>
@@ -114,7 +112,14 @@ $student_class = StudentClass::join('students', 'student_classes.stc_student_id'
       </a>
     </li>
 
-    @elseif($user->rol_id == 2)
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('notifications') }}">
+        <span class="menu-title">Notifikasi</span>
+        <i class="mdi mdi-bell-outline menu-icon"></i>
+      </a>
+    </li>
+
+    @elseif($role->rol_name == "Admin")
     <li class="nav-item">
       <a class="nav-link" href="{{ url('dashboard') }}">
         <span class="menu-title">Dashboard</span>
@@ -181,14 +186,21 @@ $student_class = StudentClass::join('students', 'student_classes.stc_student_id'
       </div>
     </li>
 
-
     <li class="nav-item">
       <a class="nav-link" href="{{ url('log-histories') }}">
         <span class="menu-title">History Login Pengguna</span>
         <i class="mdi mdi mdi-responsive menu-icon"></i>
       </a>
     </li>
-    @elseif($user->rol_id == 3)
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('notifications') }}">
+        <span class="menu-title">Notifikasi</span>
+        <i class="mdi mdi-bell-outline menu-icon"></i>
+      </a>
+    </li>
+
+    @elseif($role->rol_name == "Guru")
 
     <li class="nav-item">
       <a class="nav-link" href="{{ url('dashboard')}}">

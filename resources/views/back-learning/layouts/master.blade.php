@@ -12,13 +12,13 @@
 
 <body>
 
-  <div id="preloader">
+  <!-- <div id="preloader">
     <div class="sk-three-bounce">
       <div class="sk-child sk-bounce1"></div>
       <div class="sk-child sk-bounce2"></div>
       <div class="sk-child sk-bounce3"></div>
     </div>
-  </div>
+  </div> -->
 
   <div class="container-scroller">
 
@@ -36,8 +36,8 @@
 
     <footer class="footer">
       <div class="container-fluid clearfix">
-        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © E -Learning 2021</span>
-        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates </a> from Bootstrapdash.com</span>
+        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © E -Learning {{ year() }}</span>
+        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Template by Bootstrapdash</span>
       </div>
     </footer>
 

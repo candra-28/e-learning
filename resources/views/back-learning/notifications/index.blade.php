@@ -17,7 +17,7 @@
 <div class="page-header">
     <h3 class="page-title">
         <span class="page-title-icon bg-gradient-primary text-white mr-2">
-            <i class="mdi mdi-notification-clear-all"></i>
+            <i class="mdi mdi-bell-outline"></i>
         </span> Notifikasi
     </h3>
 </div>
@@ -72,7 +72,7 @@
                     <div class="form-group">
                         <label for="name" class="col-sm-2">Judul</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="not_title" name="not_title" placeholder="Enter title">
+                            <input type="text" class="form-control" id="not_title" name="not_title" placeholder="Masukan judul">
                         </div>
                     </div>
 

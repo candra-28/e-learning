@@ -31,10 +31,9 @@ class NotificationController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($notification) {
                     $detail = '<a class="btn btn-warning btn-sm" id="show-notification" data-toggle="modal" data-id=' . $notification->not_id . '><i class="mdi mdi-eye"></i></a>';
-                    $edit = '<a href="' . url('notification/edit', $notification->not_id) . '"  type="button" data-toggle="tooltip" data-original-title="Edit" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
                     $status = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $notification->not_id . '" data-original-title="Delete" class="btn btn-danger btn-sm status_notification"><i class="mdi mdi-information-outline"></i></a>';
 
-                    return $detail . '&nbsp' . $edit . '&nbsp' . $status;
+                    return $detail . '&nbsp' . '&nbsp' . $status;
                 })
                 ->rawColumns(['action', 'not_is_active'])
                 ->make(true);
@@ -119,7 +118,6 @@ class NotificationController extends Controller
         } else {
             return back()->with('error', 'Notifikasi gagal di buat');
         }
-
         return redirect()->back()->with('success', 'Notifikasi berhasil dibuat');
     }
 }

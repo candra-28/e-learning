@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\UserHasRole;
 use App\Models\Role;
 use App\Models\Student;
 use App\Models\StudentClass;
@@ -58,11 +57,6 @@ class User extends Authenticatable
         return 'usr_remember_token';
     }
 
-    public function user_has_roles()
-    {
-        return $this->hasMany(UserHasRole::class, 'uhs_user_id', 'usr_id',);
-    }
-
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'user_has_roles', 'uhs_user_id', 'uhs_role_id');
@@ -73,8 +67,13 @@ class User extends Authenticatable
         return $this->hasOne(Student::class, 'stu_user_id', 'usr_id');
     }
 
-    public function role()
+    public static function getRoles()
     {
-        return $this->user_has_roles->belongsTo(Role::class);
+        $user = User::join('user_has_roles', 'user_has_roles.uhs_user_id', '=', 'users.usr_id')
+            ->join('roles', 'user_has_roles.uhs_role_id', '=', 'roles.rol_id')
+            ->select('rol_name')
+            ->where('usr_id', Auth()->user()->usr_id)->first();
+
+        return $user;
     }
 }
