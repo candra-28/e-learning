@@ -19,7 +19,6 @@ class CreateNotificationsTable extends Migration
             $table->bigInteger('not_to_role_id')->unsigned();
             $table->string('not_title');
             $table->text('not_message');
-            $table->timestamp('not_date')->nullable();
             $table->boolean('not_is_active');
 
             $table->bigInteger('not_created_by')->unsigned()->nullable();

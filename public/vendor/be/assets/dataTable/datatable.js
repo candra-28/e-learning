@@ -625,15 +625,13 @@ $(document).ready(function() {
     $('body').on('click', '#show-notification', function() {
       var not_id = $(this).data('id');
       $.get('notification/' + not_id, function(data) {
-
           $('#from_name').html(data.user.usr_name);
           $('#title').html(data.not_title);
           $('#message').html(data.not_message);
           $('#to_name').html(data.to_role.rol_name);
           $('#created_at').html(data.not_created_at);
-
+          $('#is_active').html(data.not_is_active);
       })
-      $('#userCrudModal-show').html("User Details");
       $('#crud-modal-show').modal('show');
   });
 

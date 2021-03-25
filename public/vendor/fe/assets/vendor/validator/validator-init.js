@@ -360,11 +360,15 @@ $(function () {
             not_title:{
                 required: true,
             },
+            not_to_role_id: "required",
+            not_message: "required"
         },
         messages: {
             not_title: {
                 required: "Judul notifikasi harus di isi",
             },
+            not_to_role_id: "Tujuan notifikasi harus di pilih",
+            not_message: "Pesan notifikasi harus di isi"
         },
     });
 });

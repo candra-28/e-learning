@@ -20,6 +20,7 @@ class AnnouncementController extends Controller
             $announcement = Announcement::where('acm_is_active', true)->simplePaginate(3);
             return view('back-learning.announcements.index', ['announcement' => $announcement])->render();
         }
+
         return view('back-learning.announcements.index', ['announcements' => $announcements]);
     }
 

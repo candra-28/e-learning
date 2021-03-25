@@ -5143,6 +5143,11 @@ select.error {
     font-family: "ubuntu-regular", sans-serif;
 }
 
+textarea.error{
+    border: 1px solid red;
+    font-family: "ubuntu-regular", sans-serif;
+}
+
 .btn {
     display: inline-block;
     font-weight: 400;

@@ -37,7 +37,7 @@
                 @endif
                 <h4 class="card-title">Daftar Notifikasi</h4>
                 <div class="text-right">
-                    <a href="javascript:void(0)" class="btn btn-success mb-3" id="create-new-post" onclick="addPost()">Add Post</a>
+                    <a href="javascript:void(0)" class="btn btn-primary btn-sm mb-3" id="create-new-notification" onclick="addNotification()"><i class="mdi mdi-plus-box"></i></a></a>
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center table-flush" id="notification" style="width:100%">
@@ -67,37 +67,38 @@
                 <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal abc">
-                    <input type="hidden" name="not_user_id" id="not_user_id">
+                <form action="{{ url('notification/create') }}" class="form-horizontal abc" method="POST">
+                    @csrf
                     <div class="form-group">
-                        <label for="name" class="col-sm-2">title</label>
+                        <label for="name" class="col-sm-2">Judul</label>
                         <div class="col-sm-12">
                             <input type="text" class="form-control" id="not_title" name="not_title" placeholder="Enter title">
-                            <span id="not_titleError" class="alert-message text-danger"></span>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="name" class="col-sm-2">Tujuan</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" value="1" id="not_to_role_id" name="not_to_role_id" placeholder="Enter title">
-                            <span id="not_to_role_idError" class="alert-message text-danger"></span>
+                            <select name="not_to_role_id" class="form-control">
+                                <option selected disabled>-- pilih --</option>
+                                @foreach($roles as $role)
+                                <option value="{{ $role->rol_id }}">{{ $role->rol_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2">Description</label>
+                        <label class="col-sm-2">Pesan</label>
                         <div class="col-sm-12">
-                            <textarea class="form-control" id="not_message" name="not_message" placeholder="Enter description" rows="4" cols="50">
-                        </textarea>
-                            <span id="not_messageError" class="alert-message text-danger"></span>
+                            <textarea name="not_message" cols="30" rows="10" placeholder="Masukan pesan notifikasi" class="form-control"></textarea>
                         </div>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="createPost()">Save</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -113,7 +114,6 @@
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-
                     <table class="table">
                         <tr height="50px">
                             <td><strong>Pembuat:</strong></td>
@@ -134,6 +134,10 @@
                         <tr height="50px">
                             <td><strong>Dibuat Pada:</strong></td>
                             <td id="created_at"></td>
+                        </tr>
+                        <tr height="50px">
+                            <td><strong>Status Notifikasi:</strong></td>
+                            <td id="is_active"></td>
                         </tr>
                     </table>
                 </div>
@@ -156,12 +160,12 @@
 <script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
 
 <script src="{{ URL::to('vendor/be/assets/dataTable/jquery_datatable.min.js') }}"></script>
-<script src="{{ URL::to('vendor/be/assets/dataTable/dataTable.js') }}"></script>
+<script src="{{ URL::to('vendor/be/assets/dataTable/datatable.js') }}"></script>
 
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
 <script>
-    function addPost() {
-        $("#post_id").val('');
+    function addNotification() {
+
         $('#post-modal').modal('show');
     }
 </script>

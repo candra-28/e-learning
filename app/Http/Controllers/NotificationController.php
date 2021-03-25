@@ -8,6 +8,9 @@ use DataTables;
 use App\Models\Notification;
 use Response;
 use Illuminate\Support\Carbon;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\UserNotification;
 
 class NotificationController extends Controller
 {
@@ -36,7 +39,8 @@ class NotificationController extends Controller
                 ->rawColumns(['action', 'not_is_active'])
                 ->make(true);
         }
-        return view('back-learning.notifications.index');
+        $roles = Role::select('rol_id', 'rol_name')->where('rol_name', '!=', 'Administrator')->get();
+        return view('back-learning.notifications.index', compact('roles'));
     }
 
     public function show($notificationID)
@@ -63,19 +67,59 @@ class NotificationController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        $request->validate([
-            'not_title'   => 'required|max:255',
-            'not_message' => 'required',
-        ]);
 
-        $notification = Notification::updateOrCreate(['acm' => $request->not_id], [
-            'not_title' => $request->not_title,
-            'not_to_role_id'    => $request->not_to_role_id,
-            'not_message' => $request->not_message,
-            'not_user_id'   => $request->not_message,
-            'not_date'  => Carbon::now(),
-        ]);
+        $notification = new Notification;
+        $notification->not_title = $request->not_title;
+        $notification->not_user_id = Auth()->user()->usr_id;
+        $notification->not_to_role_id = $request->not_to_role_id;
+        $notification->not_message = $request->not_message;
+        $notification->not_created_by = Auth()->user()->usr_id;
+        $notification->not_is_active = 1;
+        if ($notification->save()) {
+            if ($request->not_to_role_id == 4) {
+                $all_user_student = User::join('user_has_roles', 'user_has_roles.uhs_user_id', '=', 'users.usr_id')
+                    ->join('roles', 'user_has_roles.uhs_role_id', '=', 'roles.rol_id')
+                    ->select('usr_id', 'usr_name', 'rol_id', 'rol_name', 'uhs_id', 'uhs_role_id', 'uhs_user_id')->where('rol_name', '=', 'Siswa')
+                    ->get();
+                foreach ($all_user_student as $user_student) {
+                    $user_notification = new UserNotification;
+                    $user_notification->usn_notification_id = $notification->not_id;
+                    $user_notification->usn_user_id = $user_student->usr_id;
+                    $user_notification->usn_is_read = 0;
+                    $user_notification->usn_created_by = Auth()->user()->usr_id;
+                    $user_notification->save();
+                }
+            } elseif ($request->not_to_role_id == 3) {
+                $all_user_teacher = User::join('user_has_roles', 'user_has_roles.uhs_user_id', '=', 'users.usr_id')
+                    ->join('roles', 'user_has_roles.uhs_role_id', '=', 'roles.rol_id')
+                    ->select('usr_id', 'usr_name', 'rol_id', 'rol_name', 'uhs_id', 'uhs_role_id', 'uhs_user_id')->where('rol_name', '=', 'Guru')
+                    ->get();
+                foreach ($all_user_teacher as $user_teacher) {
+                    $user_notification = new UserNotification;
+                    $user_notification->usn_notification_id = $notification->not_id;
+                    $user_notification->usn_user_id = $user_teacher->usr_id;
+                    $user_notification->usn_is_read = 0;
+                    $user_notification->usn_created_by = Auth()->user()->usr_id;
+                    $user_notification->save();
+                }
+            } else {
+                $all_user_admin = User::join('user_has_roles', 'user_has_roles.uhs_user_id', '=', 'users.usr_id')
+                    ->join('roles', 'user_has_roles.uhs_role_id', '=', 'roles.rol_id')
+                    ->select('usr_id', 'usr_name', 'rol_id', 'rol_name', 'uhs_id', 'uhs_role_id', 'uhs_user_id')->where('rol_name', '=', 'Admin')
+                    ->get();
+                foreach ($all_user_admin as $user_admin) {
+                    $user_notification = new UserNotification;
+                    $user_notification->usn_notification_id = $notification->not_id;
+                    $user_notification->usn_user_id = $user_admin->usr_id;
+                    $user_notification->usn_is_read = 0;
+                    $user_notification->usn_created_by = Auth()->user()->usr_id;
+                    $user_notification->save();
+                }
+            }
+        } else {
+            return back()->with('error', 'Notifikasi gagal di buat');
+        }
 
-        return response()->json(['code' => 200, 'message' => 'Notifikasi Berhasil', 'data' => $notification], 200);
+        return redirect()->back()->with('success', 'Notifikasi berhasil dibuat');
     }
 }

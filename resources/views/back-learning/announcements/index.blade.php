@@ -44,6 +44,7 @@
 </div>
 
 <div class="text-right">
+  @if(
   <a href="{{ url('announcement/create') }}" type="button" data-toggle="tooltip" data-placement="left" title="Tambah Pengumuman" class="btn btn-primary btn-sm mb-2"><i class="mdi mdi-plus-box"></i></a>
 </div>
 
