@@ -78,3 +78,16 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::post('/notification/edit-status/{notificationID}', 'NotificationController@updateStatusNotification');
     Route::post('/notification/create', 'NotificationController@store');
 });
+
+Route::get('asdf', function () {
+    abort(503);
+});
+
+
+Route::get('b', function () {
+    abort(403);
+});
+
+Route::get('c', function () {
+    abort(419);
+});

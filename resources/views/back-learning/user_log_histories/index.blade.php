@@ -51,17 +51,19 @@
 
 
 @push('scripts')
-
 <script src="{{URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/vendors/chart.js/Chart.min.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
-
 <script src="{{ URL::to('vendor/be/assets/dataTable/jquery_dataTable.min.js') }}"></script>
 <script src="{{ URL::to('vendor/be/assets/dataTable/datatable.js') }}"></script>
-
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        user_log_histories()
+    });
+</script>
 @endpush
 @endsection

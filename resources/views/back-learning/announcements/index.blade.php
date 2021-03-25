@@ -44,7 +44,6 @@
 </div>
 
 <div class="text-right">
-  @if(
   <a href="{{ url('announcement/create') }}" type="button" data-toggle="tooltip" data-placement="left" title="Tambah Pengumuman" class="btn btn-primary btn-sm mb-2"><i class="mdi mdi-plus-box"></i></a>
 </div>
 
@@ -84,10 +83,11 @@
 <script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
 <script src="{{ URL::to('vendor/be/assets/dataTable/datatable.js') }}"></script>
-
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
 <script>
-
+  $(document).ready(function() {
+    announcements()
+  });
 </script>
 @endpush
 @endsection

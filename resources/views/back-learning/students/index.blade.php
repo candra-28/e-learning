@@ -62,10 +62,13 @@
 <script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
-
 <script src="{{ URL::to('vendor/be/assets/dataTable/jquery_datatable.min.js') }}"></script>
 <script src="{{ URL::to('vendor/be/assets/dataTable/datatable.js') }}"></script>
-
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        students()
+    });
+</script>
 @endpush
 @endsection
