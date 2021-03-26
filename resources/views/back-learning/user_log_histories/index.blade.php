@@ -29,7 +29,7 @@
                     <a href="javascript:void(0)" data-toggle="tooltip" data-id="" class="btn btn-outline-danger btn-sm mb-2 reset_log_histories"><span>Reset </span><i class="mdi mdi-reload btn-icon-prepend"></i></a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table align-items-center table-flush" id="user_log_histories" style="width:100%">
+                    <table class="table align-items-center table-flush table-hover" id="user_log_histories" style="width:100%">
                         <thead class="text-uppercase" style="background-color: #BF00FF;">
                             <tr class="text-white">
                                 <th scope="col" class="sort" data-sort="name">No</th>

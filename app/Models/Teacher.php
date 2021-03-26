@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Teacher extends Model
 {
@@ -16,5 +17,9 @@ class Teacher extends Model
     {
         $teachers = Teacher::join('users', 'teachers.tcr_user_id', '=', 'users.usr_id');
         return $teachers;
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'tcr_user_id');
     }
 }

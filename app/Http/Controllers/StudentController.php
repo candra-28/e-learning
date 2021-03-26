@@ -114,8 +114,16 @@ class StudentController extends Controller
         $student = Student::findOrFail($studentID);
         if ($student->stu_is_active == false) {
             $student->stu_is_active = 1;
+            $user = $student->user;
+            $user->usr_is_active = 1;
+            $user->usr_updated_by = Auth()->user()->usr_id;
+            $user->update();
         } else {
             $student->stu_is_active = 0;
+            $user = $student->user;
+            $user->usr_is_active = 0;
+            $user->usr_updated_by = Auth()->user()->usr_id;
+            $user->update();
         }
         $student->stu_updated_by = Auth()->user()->usr_id;
         $student->update();

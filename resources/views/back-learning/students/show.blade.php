@@ -5,8 +5,6 @@
 @endpush
 
 @push('styles')
-
-
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
@@ -30,7 +28,11 @@
                     <div class="col-12 mb-4">
                         <dt class="text-center mb-2">Profile Siswa</dt>
                         <div class="text-center mb-2">
+                            @if(isset($student->user->usr_profile_picture))
                             <img src="{{ asset($student->user->usr_profile_picture) }}" style="object-fit: cover; height: 200px; width:230px; text-align:center; border-radius: 10px;" alt="tidak ada profile">
+                            @else
+                            <img src="{{ asset('vendor/be/assets/images/profile_picture/avatar-2.png') }}" style="object-fit: cover; height: auto; width:230px; text-align:center; border-radius: 10px;" alt="tidak ada profile">
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -40,7 +40,7 @@
                     <a href="javascript:void(0)" class="btn btn-primary btn-sm mb-3" id="create-new-notification" onclick="addNotification()"><i class="mdi mdi-plus-box"></i></a></a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table align-items-center table-flush" id="notification" style="width:100%">
+                    <table class="table align-items-center table-flush table-hover" id="notification" style="width:100%">
                         <thead class="text-uppercase" style="background-color: #BF00FF;">
                             <tr class="text-white">
                                 <th scope="col" class="sort" data-sort="name">No</th>

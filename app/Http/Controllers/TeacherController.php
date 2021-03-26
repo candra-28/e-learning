@@ -74,16 +74,26 @@ class TeacherController extends Controller
     }
     public function show($teacherID)
     {
-        $teacher = Teacher::join('users', 'teachers.user_id', '=', 'users.id')->where('teachers.id', $teacherID)->first();
-        return view('teachers.show', ['teacher' => $teacher]);
+        $teacher = Teacher::findOrFail($teacherID);
+        // $teacher->user->usr_is_active;
+        // dd($teacher);
+        return view('back-learning.teachers.show', compact('teacher'));
     }
     public function updateStatusTeacher($teacherID)
     {
         $teacher = Teacher::findOrFail($teacherID);
         if ($teacher->tcr_is_active == false) {
             $teacher->tcr_is_active = 1;
+            $user = $teacher->user;
+            $user->usr_is_active = 1;
+            $user->usr_updated_by = Auth()->user()->usr_id;
+            $user->update();
         } else {
             $teacher->tcr_is_active = 0;
+            $user = $teacher->user;
+            $user->usr_is_active = 0;
+            $user->usr_updated_by = Auth()->user()->usr_id;
+            $user->update();
         }
         $teacher->tcr_updated_by = Auth()->user()->usr_id;
         $teacher->update();

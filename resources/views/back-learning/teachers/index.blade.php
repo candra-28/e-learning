@@ -27,7 +27,7 @@
                 <h4 class="card-title">Daftar Guru</h4>
 
                 <div class="table-responsive">
-                    <table class="table align-items-center table-flush" id="teachers" style="width:100%">
+                    <table class="table align-items-center table-flush table-hover" id="teachers" style="width:100%">
                         <thead class="text-uppercase" style="background-color: #BF00FF;">
                             <tr class="text-white">
                                 <th scope="col" class="sort" data-sort="name">No</th>
