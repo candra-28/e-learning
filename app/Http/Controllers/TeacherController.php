@@ -73,9 +73,20 @@ class TeacherController extends Controller
         return redirect('/teachers');
     }
     public function show($teacherID)
-    { {
-            $teacher = Teacher::join('users', 'teachers.user_id', '=', 'users.id')->where('teachers.id', $teacherID)->first();
-            return view('teachers.show', ['teacher' => $teacher]);
+    {
+        $teacher = Teacher::join('users', 'teachers.user_id', '=', 'users.id')->where('teachers.id', $teacherID)->first();
+        return view('teachers.show', ['teacher' => $teacher]);
+    }
+    public function updateStatusTeacher($teacherID)
+    {
+        $teacher = Teacher::findOrFail($teacherID);
+        if ($teacher->tcr_is_active == false) {
+            $teacher->tcr_is_active = 1;
+        } else {
+            $teacher->tcr_is_active = 0;
         }
+        $teacher->tcr_updated_by = Auth()->user()->usr_id;
+        $teacher->update();
+        return response()->json(['code' => 200, 'message' => 'Status guru berhasil di ubah', 'data' => $teacher], 200);
     }
 }

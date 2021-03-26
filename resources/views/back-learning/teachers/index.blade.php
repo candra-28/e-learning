@@ -5,8 +5,6 @@
 @endpush
 
 @push('styles')
-
-
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
@@ -59,7 +57,7 @@
 <script src="{{URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/misc.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
-<script src="{{ URL::to('vendor/be/assets/dataTable/jquery_datatable.min.js') }}"></script>
+<script src="{{ URL::to('vendor/be/assets/dataTable/jquery_dataTable.min.js') }}"></script>
 <script src="{{ URL::to('vendor/be/assets/dataTable/datatable.js') }}"></script>
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
 <script>

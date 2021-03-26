@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/be/assets/vendors/mdi/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{ asset('vendor/be/assets/vendors/css/vendor.bundle.base.css')}}">
     <link rel="stylesheet" href="{{ asset('vendor/be/assets/css/style.css')}}">
-    <link rel="shortcut icon" href="{{ asset('vendor/be/assets/images/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{ asset('vendor/be/assets/images/logo-atas.png')}}">
 </head>
 
 <body>

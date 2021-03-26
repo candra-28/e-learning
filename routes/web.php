@@ -67,6 +67,7 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::get('teacher/edit/{id}', 'TeacherController@edit');
     Route::post('teacher/edit/{id}', 'TeacherController@update');
     Route::get('teacher/{id}', 'TeacherController@show');
+    Route::post('teacher/edit-status/{teacherID}', 'TeacherController@updateStatusTeacher');
 
     Route::get('log-histories', 'UserLogHistoryController@index');
     Route::post('log-histories', 'UserLogHistoryController@reset');
@@ -77,17 +78,4 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::get('/notification/{announcementID}', 'NotificationController@show');
     Route::post('/notification/edit-status/{notificationID}', 'NotificationController@updateStatusNotification');
     Route::post('/notification/create', 'NotificationController@store');
-});
-
-Route::get('asdf', function () {
-    abort(503);
-});
-
-
-Route::get('b', function () {
-    abort(403);
-});
-
-Route::get('c', function () {
-    abort(419);
 });

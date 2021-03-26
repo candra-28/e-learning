@@ -229,7 +229,11 @@ function students(){
                 data: 'usr_profile_picture',
                 name: 'usr_profile_picture',
                 render: function(data, type, full, meta) {
-                    return "<img src=\"" + data + "\"height=\"50\"/>";
+                    if(data != null){
+                        return "<img src=\"" + data + "\"height=\"50\"/>";
+                    }else{
+                        return "<img src=\"vendor" + "/" + "be" + "/" + "assets" + "/" + "images" + "/" + "profile_picture"+ "/" + "avatar-2.png" + "\"height=\"50\"/>";
+                    }
                 },
                 orderable: true,
                 searchable: true
@@ -419,6 +423,7 @@ function user_log_histories(){
 }
 
 function teachers(){
+    
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
@@ -442,7 +447,11 @@ function teachers(){
                 data: 'usr_profile_picture',
                 name: 'usr_profile_picture',
                 render: function(data, type, full, meta) {
-                    return "<img src=\"" + data + "\"height=\"50\"/>";
+                    if(data != null){
+                        return "<img src=\"" + data + "\"height=\"50\"/>";
+                    }else{
+                        return "<img src=\"vendor" + "/" + "be" + "/" + "assets" + "/" + "images" + "/" + "profile_picture"+ "/" + "avatar-2.png" + "\"height=\"50\"/>";
+                    } 
                 },
                 orderable: true,
                 searchable: true
@@ -487,6 +496,53 @@ function teachers(){
                     "next": "selanjutnya"
                 }
             }
+        });
+
+        $('body').on('click', '.status_teacher', function() {
+            var tcr_id = $(this).data("id");
+            let _token = $('meta[name="csrf-token"]').attr('content');
+            swal({
+                title: "Status Guru",
+                text: 'Apakah anda yakin ingin mengubah status guru?',
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                closeOnClickOutside: false,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'teacher/edit-status/' + tcr_id,
+                        data: {
+                            tcr_id: tcr_id,
+                            _token: _token
+                        },
+                        success: function(data) {
+                            if (data.status != false) {
+                                swal(data.message, {
+                                    button: false,
+                                    icon: "success",
+                                    timer: 1000
+                                });
+                            } else {
+                                swal(data.message, {
+                                    button: false,
+                                    icon: "error",
+                                    timer: 1000
+                                });
+                            }
+                            $('#teachers').DataTable().ajax.reload()
+                        },
+                        error: function(error) {
+                            swal('Terjadi kegagalan sistem', {
+                                button: false,
+                                icon: "error",
+                                timer: 1000
+                            });
+                        }
+                    });
+                }
+            });
         });
     });
 }
