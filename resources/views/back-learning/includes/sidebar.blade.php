@@ -67,10 +67,16 @@ $role = User::getRoles();
       </a>
     </li>
 
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('subjects') }}">
+        <span class="menu-title">Mata Pelajaran</span>
+        <i class="mdi mdi-library-books menu-icon"></i>
+      </a>
+    </li>
 
     <li class="nav-item">
       <a class="nav-link" href="#">
-        <span class="menu-title">Jadwal Mata Pelajaran</span>
+        <span class="menu-title">Jadwal Pelajaran</span>
         <i class="mdi mdi-table-large menu-icon"></i>
       </a>
     </li>

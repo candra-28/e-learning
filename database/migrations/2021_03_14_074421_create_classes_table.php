@@ -20,7 +20,7 @@ class CreateClassesTable extends Migration
             $table->bigInteger('cls_school_year_id')->unsigned();
             $table->integer('cls_number');
             $table->boolean('cls_is_active');
-            
+
             $table->bigInteger('cls_created_by')->unsigned()->nullable();
             $table->bigInteger('cls_updated_by')->unsigned()->nullable();
             $table->bigInteger('cls_deleted_by')->unsigned()->nullable();
@@ -28,12 +28,12 @@ class CreateClassesTable extends Migration
             $table->foreign('cls_grade_level_id')->references('grl_id')->on('grade_levels');
             $table->foreign('cls_major_id')->references('mjr_id')->on('majors');
             $table->foreign('cls_school_year_id')->references('scy_id')->on('school_years');
-            
+
 
             $table->foreign('cls_created_by')->references('usr_id')->on('users')->onDelete('cascade');
             $table->foreign('cls_updated_by')->references('usr_id')->on('users')->onDelete('cascade');
             $table->foreign('cls_deleted_by')->references('usr_id')->on('users')->onDelete('cascade');
-            
+
             $table->timestamp('cls_created_at')->nullable();
             $table->timestamp('cls_updated_at')->nullable();
             $table->timestamp('cls_deleted_at')->nullable();

@@ -16,7 +16,8 @@ class ClassesTableSeeder extends Seeder
 			'cls_school_year_id' => 5,
 			'cls_major_id'	=> 1,
 			'cls_number'	=> 1,
-			'cls_is_active'	=> 1
+			'cls_is_active'	=> 1,
+			'cls_homeroom_teacher_id' => 1
 		]);
 
 		DB::table('classes')->insert([
@@ -24,7 +25,8 @@ class ClassesTableSeeder extends Seeder
 			'cls_school_year_id' => 5,
 			'cls_major_id'	=> 2,
 			'cls_number'	=> 1,
-			'cls_is_active'	=> 1
+			'cls_is_active'	=> 1,
+			'cls_homeroom_teacher_id' => 1
 		]);
 
 		DB::table('classes')->insert([
@@ -32,7 +34,8 @@ class ClassesTableSeeder extends Seeder
 			'cls_school_year_id' => 5,
 			'cls_major_id'	=> 2,
 			'cls_number'	=> 2,
-			'cls_is_active'	=> 1
+			'cls_is_active'	=> 1,
+			'cls_homeroom_teacher_id' => 1
 		]);
 
 		// for ($i = 0; $i < 1000; $i++) {

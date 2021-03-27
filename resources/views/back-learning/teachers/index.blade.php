@@ -25,7 +25,9 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Daftar Guru</h4>
-
+                <div class="text-right">
+                    <a href="{{ url('teacher/create') }}" type="button" class="btn btn-primary btn-sm mb-2"><i class="mdi mdi-plus-box"></i></a>
+                </div>
                 <div class="table-responsive">
                     <table class="table align-items-center table-flush table-hover" id="teachers" style="width:100%">
                         <thead class="text-uppercase" style="background-color: #BF00FF;">
@@ -33,7 +35,7 @@
                                 <th scope="col" class="sort" data-sort="name">No</th>
                                 <th scope="col" class="sort" data-sort="budget">Avatar</th>
                                 <th scope="col" class="sort" data-sort="budget">Nip</th>
-                                <th scope="col" class="sort" data-sort="budget">Name</th>
+                                <th scope="col" class="sort" data-sort="budget">Nama</th>
                                 <th scope="col" class="sort" data-sort="budget">Tahun Masuk</th>
                                 <th scope="col" class="sort">Status</th>
                                 <th scope="col">Action</th>
@@ -44,6 +46,30 @@
                     </table>
                 </div>
             </div>
+
+            <div class="card-body">
+                <h4 class="card-title">Guru Mengajar</h4>
+                <div class="text-right">
+                    <a href="{{ url('teacher/create') }}" type="button" class="btn btn-primary btn-sm mb-2"><i class="mdi mdi-plus-box"></i></a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush table-hover" id="teacher_teaches" style="width:100%">
+                        <thead class="text-uppercase" style="background-color: #BF00FF;">
+                            <tr class="text-white">
+                                <th scope="col" class="sort" data-sort="name">No</th>
+                                <th scope="col" class="sort" data-sort="budget">Nama</th>
+                                <th scope="col" class="sort" data-sort="budget">Kelas</th>
+                                <th scope="col" class="sort" data-sort="budget">Mata Pelajaran</th>
+                                <th scope="col" class="sort">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

@@ -30,7 +30,7 @@ $user_notifications = UserNotification::getNotification();
           <h6 class="p-3 mb-0">Notifikasi</h6>
           <span class="count-symbol bg-danger"></span>
           </a>
-          
+
           @foreach($user_notifications as $user_notification)
           <div class="dropdown-divider"></div>
           <a class="dropdown-item preview-item">
@@ -39,7 +39,7 @@ $user_notifications = UserNotification::getNotification();
                 <i class="mdi mdi-bell-outline"></i>
               </div>
             </div>
-            
+
             <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
               <h6 class="preview-subject font-weight-normal mb-1">{{ $user_notification->not_title }}</h6>
               <p class="text-gray ellipsis mb-0"> {{ $user_notification->not_message }} </p>
@@ -47,7 +47,7 @@ $user_notifications = UserNotification::getNotification();
           </a>
           <div class="dropdown-divider"></div>
           @endforeach
-  
+
           <h6 class="p-3 mb-0 text-center">See all notifications</h6>
         </div>
       </li>
