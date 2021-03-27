@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="{{URL::to('vendor/be/assets/css/style.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ URL::to('vendor/be/assets/dataTable/jquery_dataTable.min.css') }}">
 <script src="{{ URL::to('vendor/be/assets/dataTable/ajax_jquery.js') }}"></script>
+
 @endpush
 
 @section('content')
@@ -55,19 +56,20 @@
                 <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
-                <form name="userForm" class="form-horizontal">
+                <form class="form-horizontal">
                     <input type="hidden" name="sbj_id" id="sbj_id">
+                    <input type="hidden" name="sbj_is_active" id="sbj_is_active">
                     <div class="form-group">
                         <label for="name" class="col-sm-12">Mata pelajaran</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="sbj_name" name="sbj_name" placeholder="Masukan nama mata pelajaran">
+                            <input autocomplete="off" type="text" class="form-control" id="sbj_name" name="sbj_name" placeholder="Masukan nama mata pelajaran">
                             <span id="sbjNameError" class="alert-message text-danger"></span>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" name="btn-save" onclick="createPost()">Save</button>
+                <button type="button" class="btn btn-primary" name="btn-save" onclick="createPost()">Simpan</button>
             </div>
         </div>
     </div>
@@ -107,6 +109,7 @@
                 if (response) {
                     $("#sbj_id").val(response.sbj_id);
                     $("#sbj_name").val(response.sbj_name);
+                    $("#sbj_is_active").val(response.sbj_is_active);
                     $('#post-modal').modal('show');
                 }
             }
@@ -115,8 +118,8 @@
 
     function createPost() {
         var sbj_name = $('#sbj_name').val();
+        var sbj_is_active = $('#sbj_is_active').val();
         var id = $('#sbj_id').val();
-        console.log(sbj_name)
         let _url = `/subject/create`;
         let _token = $('meta[name="csrf-token"]').attr('content');
 
@@ -126,6 +129,7 @@
             data: {
                 sbj_id: id,
                 sbj_name: sbj_name,
+                sbj_is_active: sbj_is_active,
                 _token: _token
             },
 
@@ -133,24 +137,18 @@
                 if (response.code == 200) {
                     $('#sbj_name').val('');
                     $('#post-modal').modal('hide');
+                    swal(response.message, {
+                        button: false,
+                        icon: "success",
+                        timer: 1000
+                    });
                     $('#subjects').DataTable().ajax.reload()
                 }
             },
             error: function(response) {
-                console.log("gagal");
                 $('#sbjNameError').text(response.responseJSON.errors.sbj_name);
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
+            },
 
-                Toast.fire({
-                    type: 'error',
-                    title: 'Post is not successfully'
-                })
-            }
         });
     }
 </script>

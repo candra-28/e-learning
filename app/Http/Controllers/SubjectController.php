@@ -27,10 +27,9 @@ class SubjectController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function ($subject) {
-                    $detail = '<a href="#"  type="button" data-toggle="tooltip" data-original-title="Detail" class="btn btn-warning btn-sm"><i class="mdi mdi-mdi mdi-eye"></i></a>';
                     $edit = '<a href="javascript:void(0)" data-id="' . $subject->sbj_id . '" onclick="editPost(event.target)" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
                     $status = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $subject->sbj_id . '" data-original-title="Delete" class="btn btn-danger btn-sm status_subject"><i class="mdi mdi-information-outline"></i></a>';
-                    return $detail . '&nbsp' . $edit . '&nbsp' . $status;
+                    return $edit . '&nbsp' . $status;
                 })->rawColumns(['action', 'sbj_is_active'])
                 ->make(true);
         }
@@ -44,18 +43,26 @@ class SubjectController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'sbj_name'       => 'required',
-        ]);
+        $request->validate(
+            [
+                'sbj_name'       => 'required|unique:subjects,sbj_name',
+            ],
+            [
+                'sbj_name.required' => 'Nama mata pelajaran harus di isi',
+                'sbj_name.unique'   => 'Mata pelajaran sudah digunakan'
+            ]
+        );
 
-        $subject = Subject::updateOrCreate(['sbj_id' => $request->sbj_id], [
-            'sbj_name' => $request->sbj_name,
-        ]);
-
-        if (empty($request->sbj_id)) {
-            $message = "Mata pelajaran berhasil di buat";
-        } else {
+        if (!empty($request->sbj_id)) {
+            $subject = Subject::updateOrCreate(['sbj_id' => $request->sbj_id], [
+                'sbj_name' => $request->sbj_name, 'sbj_is_active'  => $request->sbj_is_active
+            ]);
             $message = "Mata pelajaran berhasil di ubah";
+        } else {
+            $subject = Subject::updateOrCreate(['sbj_id' => $request->sbj_id], [
+                'sbj_name' => $request->sbj_name, 'sbj_is_active'  => 1
+            ]);
+            $message = "Mata pelajaran berhasil di buat";
         }
         return response()->json(['code' => 200, 'message' => $message, 'data' => $subject], 200);
     }
