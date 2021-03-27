@@ -27,15 +27,34 @@ class SubjectController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function ($subject) {
-                    $detail = '<a href="#"  type="button" data-toggle="tooltip" data-original-title="Detail" class="btn btn-warning btn-sm"><i class="mdi mdi-mdi mdi mdi-eye"></i></a>';
-                    $edit = '<a href="#"  type="button" data-toggle="tooltip" data-original-title="Edit" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
-                    $status = ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $subject->sbj_id . '" data-original-title="Delete" class="btn btn-danger btn-sm status_subject"><i class="mdi mdi-information-outline"></i></a>';
+                    $detail = '<a href="#"  type="button" data-toggle="tooltip" data-original-title="Detail" class="btn btn-warning btn-sm"><i class="mdi mdi-mdi mdi-eye"></i></a>';
+                    $edit = '<a href="javascript:void(0)" data-id="' . $subject->sbj_id . '" onclick="editPost(event.target)" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
+                    $status = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $subject->sbj_id . '" data-original-title="Delete" class="btn btn-danger btn-sm status_subject"><i class="mdi mdi-information-outline"></i></a>';
                     return $detail . '&nbsp' . $edit . '&nbsp' . $status;
                 })->rawColumns(['action', 'sbj_is_active'])
                 ->make(true);
         }
         return view('back-learning.subjects.index');
     }
+    public function show($id)
+    {
+        $subject = Subject::find($id);
+
+        return response()->json($subject);
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'sbj_name'       => 'required',
+        ]);
+
+        $subject = Subject::updateOrCreate(['sbj_id' => $request->sbj_id], [
+            'sbj_name' => $request->sbj_name,
+        ]);
+
+        return response()->json(['code' => 200, 'message' => 'Mata pelajaran berhasil di buat', 'data' => $subject], 200);
+    }
+
     public function updateStatusStudent($studentID)
     {
         $student = Student::findOrFail($studentID);

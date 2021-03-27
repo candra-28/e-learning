@@ -80,4 +80,6 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::post('/notification/create', 'NotificationController@store');
 
     Route::get('/subjects', 'SubjectController@index');
+    Route::get('/subject/{id}', 'SubjectController@show');
+    Route::post('/subject/create', 'SubjectController@store');
 });

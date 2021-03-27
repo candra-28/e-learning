@@ -26,7 +26,7 @@
             <div class="card-body">
                 <h4 class="card-title">Daftar Mata pelajaran</h4>
                 <div class="text-right">
-                    <a href="javascript:void(0)" class="btn btn-primary btn-sm mb-3" id="create-new-notification" onclick="addNotification()"><i class="mdi mdi-plus-box"></i></a></a>
+                    <a href="javascript:void(0)" class="btn btn-success mb-3" id="create-new-post" onclick="addPost()">Add Post</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center table-flush table-hover" id="subjects" style="width:100%">
@@ -37,7 +37,6 @@
                                 <th scope="col" class="sort" data-sort="budget">Status</th>
                                 <th scope="col" class="sort" data-sort="budget">Tanggal dibuat</th>
                                 <th scope="col" class="sort" data-sort="budget">Action</th>
-
                             </tr>
                         </thead>
                         <tbody class="list">
@@ -49,6 +48,30 @@
     </div>
 </div>
 
+<div class="modal fade" id="post-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <form name="userForm" class="form-horizontal">
+                    <input type="hidden" name="sbj_id" id="sbj_id">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-12">Mata pelajaran</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="sbj_name" name="sbj_name" placeholder="Masukan nama mata pelajaran">
+                            <span id="sbjNameError" class="alert-message text-danger"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="createPost()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @push('scripts')
 <script src="{{URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
@@ -64,6 +87,60 @@
     $(document).ready(function() {
         subjects()
     });
+</script>
+<script>
+    function addPost() {
+        $("#sbj_id").val('');
+        $('#post-modal').modal('show');
+    }
+
+    function editPost(event) {
+        var id = $(event).data("id");
+        let _url = `/subject/${id}`;
+        $('#titleError').text('');
+
+        $.ajax({
+            url: _url,
+            type: "GET",
+            success: function(response) {
+                if (response) {
+                    $("#sbj_id").val(response.sbj_id);
+                    $("#sbj_name").val(response.sbj_name);
+                    $('#post-modal').modal('show');
+                }
+            }
+        });
+    }
+
+    function createPost() {
+        var sbj_name = $('#sbj_name').val();
+        var id = $('#sbj_id').val();
+
+        let _url = `/subject/create`;
+        let _token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: _url,
+            type: "POST",
+            data: {
+                sbj_id: id,
+                sbj_name: sbj_name,
+                _token: _token
+            },
+
+            success: function(response) {
+                if (response.code == 200) {
+                    $('#sbj_name').val('');
+                    $('#post-modal').modal('hide');
+                    $('#subjects').DataTable().ajax.reload()
+                }
+            },
+            error: function(response) {
+                console.log("gagal");
+                $('#sbjNameError').text(response.responseJSON.errors.sbj_name);
+            }
+        });
+    }
 </script>
 @endpush
 @endsection
