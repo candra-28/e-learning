@@ -26,7 +26,7 @@
             <div class="card-body">
                 <h4 class="card-title">Daftar Mata pelajaran</h4>
                 <div class="text-right">
-                    <a href="javascript:void(0)" class="btn btn-success mb-3" id="create-new-post" onclick="addPost()">Add Post</a>
+                    <a href="javascript:void(0)" class="btn btn-primary btn-sm mb-3" onclick="addPost()"><i class="mdi mdi-plus-box"></i></a>
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center table-flush table-hover" id="subjects" style="width:100%">
@@ -67,7 +67,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="createPost()">Save</button>
+                <button type="button" class="btn btn-primary" name="btn-save" onclick="createPost()">Save</button>
             </div>
         </div>
     </div>
@@ -92,6 +92,7 @@
     function addPost() {
         $("#sbj_id").val('');
         $('#post-modal').modal('show');
+
     }
 
     function editPost(event) {
@@ -115,7 +116,7 @@
     function createPost() {
         var sbj_name = $('#sbj_name').val();
         var id = $('#sbj_id').val();
-
+        console.log(sbj_name)
         let _url = `/subject/create`;
         let _token = $('meta[name="csrf-token"]').attr('content');
 
@@ -138,6 +139,17 @@
             error: function(response) {
                 console.log("gagal");
                 $('#sbjNameError').text(response.responseJSON.errors.sbj_name);
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                Toast.fire({
+                    type: 'error',
+                    title: 'Post is not successfully'
+                })
             }
         });
     }

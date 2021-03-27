@@ -780,12 +780,12 @@ function subjects(){
                 }
             }
         });
-        $('body').on('click', '.status_class', function() {
-            var cls_id = $(this).data("id");
+        $('body').on('click', '.status_subject', function() {
+            var sbj_id = $(this).data("id");
             let _token = $('meta[name="csrf-token"]').attr('content');
             swal({
-                title: "Status Kelas",
-                text: 'Apakah anda yakin ingin mengubah status kelas?',
+                title: "Status Mata pelajaran",
+                text: 'Apakah anda yakin ingin mengubah status mata pelajaran?',
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -794,9 +794,9 @@ function subjects(){
                 if (willDelete) {
                     $.ajax({
                         type: 'POST',
-                        url: 'class/edit-status/' + cls_id,
+                        url: 'subject/edit-status/' + sbj_id,
                         data: {
-                            cls_id: cls_id,
+                            sbj_id: sbj_id,
                             _token: _token
                         },
                         success: function(data) {
@@ -813,7 +813,7 @@ function subjects(){
                                     timer: 1000
                                 });
                             }
-                            $('#classes').DataTable().ajax.reload()
+                            $('#subjects').DataTable().ajax.reload()
                         },
                         error: function(error) {
                             swal('Terjadi kegagalan sistem', {

@@ -52,27 +52,24 @@ class SubjectController extends Controller
             'sbj_name' => $request->sbj_name,
         ]);
 
-        return response()->json(['code' => 200, 'message' => 'Mata pelajaran berhasil di buat', 'data' => $subject], 200);
+        if (empty($request->sbj_id)) {
+            $message = "Mata pelajaran berhasil di buat";
+        } else {
+            $message = "Mata pelajaran berhasil di ubah";
+        }
+        return response()->json(['code' => 200, 'message' => $message, 'data' => $subject], 200);
     }
 
-    public function updateStatusStudent($studentID)
+    public function updateStatusSubject($subjectID)
     {
-        $student = Student::findOrFail($studentID);
-        if ($student->stu_is_active == false) {
-            $student->stu_is_active = 1;
-            $user = $student->user;
-            $user->usr_is_active = 1;
-            $user->usr_updated_by = Auth()->user()->usr_id;
-            $user->update();
+        $subject = Subject::findOrFail($subjectID);
+        if ($subject->sbj_is_active == false) {
+            $subject->sbj_is_active = 1;
         } else {
-            $student->stu_is_active = 0;
-            $user = $student->user;
-            $user->usr_is_active = 0;
-            $user->usr_updated_by = Auth()->user()->usr_id;
-            $user->update();
+            $subject->sbj_is_active = 0;
         }
-        $student->stu_updated_by = Auth()->user()->usr_id;
-        $student->update();
-        return response()->json(['code' => 200, 'message' => 'Status siswa berhasil di ubah', 'data' => $student], 200);
+        $subject->sbj_updated_by = Auth()->user()->usr_id;
+        $subject->update();
+        return response()->json(['code' => 200, 'message' => 'Status Mata pelajaran berhasil di ubah', 'data' => $subject], 200);
     }
 }

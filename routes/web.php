@@ -82,4 +82,5 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::get('/subjects', 'SubjectController@index');
     Route::get('/subject/{id}', 'SubjectController@show');
     Route::post('/subject/create', 'SubjectController@store');
+    Route::post('/subject/edit-status/{subjectID}', 'SubjectController@updateStatusSubject');
 });
