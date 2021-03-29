@@ -27,7 +27,7 @@ class SubjectController extends Controller
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function ($subject) {
-                    $edit = '<a href="javascript:void(0)" data-id="' . $subject->sbj_id . '" onclick="editPost(event.target)" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
+                    $edit = '<a href="javascript:void(0)" data-id="' . $subject->sbj_id . '" onclick="editSubject(event.target)" class="btn btn-success btn-sm"><i class="mdi mdi-rename-box"></i></a>';
                     $status = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $subject->sbj_id . '" data-original-title="Delete" class="btn btn-danger btn-sm status_subject"><i class="mdi mdi-information-outline"></i></a>';
                     return $edit . '&nbsp' . $status;
                 })->rawColumns(['action', 'sbj_is_active'])

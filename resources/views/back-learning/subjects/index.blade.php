@@ -27,7 +27,7 @@
             <div class="card-body">
                 <h4 class="card-title">Daftar Mata pelajaran</h4>
                 <div class="text-right">
-                    <a href="javascript:void(0)" class="btn btn-primary btn-sm mb-3" onclick="addPost()"><i class="mdi mdi-plus-box"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-primary btn-sm mb-3" onclick="addSubject()"><i class="mdi mdi-plus-box"></i></a>
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center table-flush table-hover" id="subjects" style="width:100%">
@@ -49,14 +49,14 @@
     </div>
 </div>
 
-<div class="modal fade" id="post-modal" aria-hidden="true">
+<div class="modal fade" id="subject-modal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                <form id="form-subject" class="form-horizontal subject-form">
                     <input type="hidden" name="sbj_id" id="sbj_id">
                     <input type="hidden" name="sbj_is_active" id="sbj_is_active">
                     <div class="form-group">
@@ -69,7 +69,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" name="btn-save" onclick="createPost()">Simpan</button>
+                <button type="button" class="btn btn-primary btn-sm a" name="btn-save" onclick="createSubject()">Simpan</button>
+                <button class="btn btn-info btn-sm reset-btn" data-dismiss="modal">Kembali</button>
             </div>
         </div>
     </div>
@@ -84,20 +85,23 @@
 <script src="{{URL::to('vendor/be/assets/js/todolist.js')}}"></script>
 <script src="{{ URL::to('vendor/be/assets/dataTable/jquery_dataTable.min.js') }}"></script>
 <script src="{{ URL::to('vendor/be/assets/dataTable/datatable.js') }}"></script>
+<script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
+
 <script>
     $(document).ready(function() {
         subjects()
     });
 </script>
 <script>
-    function addPost() {
+    function addSubject() {
         $("#sbj_id").val('');
-        $('#post-modal').modal('show');
+        closeOnClickOutside: false,
+            $('#subject-modal').modal('show');
 
     }
 
-    function editPost(event) {
+    function editSubject(event) {
         var id = $(event).data("id");
         let _url = `/subject/${id}`;
         $('#titleError').text('');
@@ -110,13 +114,14 @@
                     $("#sbj_id").val(response.sbj_id);
                     $("#sbj_name").val(response.sbj_name);
                     $("#sbj_is_active").val(response.sbj_is_active);
-                    $('#post-modal').modal('show');
+                    $('#subject-modal').modal('show');
                 }
             }
         });
     }
 
-    function createPost() {
+    function createSubject() {
+
         var sbj_name = $('#sbj_name').val();
         var sbj_is_active = $('#sbj_is_active').val();
         var id = $('#sbj_id').val();
@@ -136,7 +141,7 @@
             success: function(response) {
                 if (response.code == 200) {
                     $('#sbj_name').val('');
-                    $('#post-modal').modal('hide');
+                    $('#subject-modal').modal('hide');
                     swal(response.message, {
                         button: false,
                         icon: "success",
@@ -147,10 +152,17 @@
             },
             error: function(response) {
                 $('#sbjNameError').text(response.responseJSON.errors.sbj_name);
+
             },
 
         });
     }
+
+    $(document).ready(function() {
+        $(".reset-btn").click(function() {
+            $("#form-subject").trigger("reset");
+        });
+    });
 </script>
 @endpush
 @endsection

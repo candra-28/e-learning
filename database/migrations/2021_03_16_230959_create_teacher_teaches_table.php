@@ -18,18 +18,19 @@ class CreateTeacherTeachesTable extends Migration
             $table->bigInteger('tct_teacher_id')->unsigned();
             $table->bigInteger('tct_class_id')->unsigned();
             $table->bigInteger('tct_subject_id')->unsigned();
+            $table->boolean('tct_is_active');
 
             $table->bigInteger('tct_created_by')->unsigned()->nullable();
             $table->bigInteger('tct_updated_by')->unsigned()->nullable();
             $table->bigInteger('tct_deleted_by')->unsigned()->nullable();
-            
+
             $table->foreign('tct_created_by')->references('usr_id')->on('users')->onDelete('cascade');
             $table->foreign('tct_updated_by')->references('usr_id')->on('users')->onDelete('cascade');
             $table->foreign('tct_deleted_by')->references('usr_id')->on('users')->onDelete('cascade');
             $table->foreign('tct_teacher_id')->references('tcr_id')->on('teachers')->onDelete('cascade');
             $table->foreign('tct_class_id')->references('cls_id')->on('classes')->onDelete('cascade');
             $table->foreign('tct_subject_id')->references('sbj_id')->on('subjects')->onDelete('cascade');
-            
+
             $table->timestamp('tct_created_at')->nullable();
             $table->timestamp('tct_updated_at')->nullable();
             $table->timestamp('tct_deleted_at')->nullable();

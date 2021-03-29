@@ -13,8 +13,8 @@ class UsersTableSeeder extends Seeder
 	public function run()
 	{
 		User::create([
-			'usr_name' => 'candra',
-			'usr_email' => 'candra@gmail.com',
+			'usr_name' => 'Ahmad',
+			'usr_email' => 'ahmad@gmail.com',
 			'usr_password' => Hash::make('123'),
 			'usr_phone_number'	=> '082118342147',
 			'usr_otp_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -22,8 +22,8 @@ class UsersTableSeeder extends Seeder
 		]);
 
 		User::create([
-			'usr_name' => 'ahmad',
-			'usr_email' => 'ahmad@gmail.com',
+			'usr_name' => 'Candra',
+			'usr_email' => 'candra@gmail.com',
 			'usr_password' => Hash::make('abc'),
 			'usr_phone_number'	=> '082118342147',
 			'usr_otp_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -39,7 +39,5 @@ class UsersTableSeeder extends Seeder
 			'uhs_user_id'	=> 2,
 			'uhs_role_id'	=> 3,
 		]);
-		
-
 	}
 }

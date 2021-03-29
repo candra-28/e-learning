@@ -61,11 +61,21 @@ $role = User::getRoles();
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="{{ url('teachers')}}">
+      <a class="nav-link" data-toggle="collapse" href="#teacher_teach" aria-expanded="false" aria-controls="general-pages">
         <span class="menu-title">Guru</span>
+        <i class="menu-arrow"></i>
         <i class="mdi mdi-account-card-details menu-icon"></i>
       </a>
+
+      <div class="collapse" id="teacher_teach">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{{ url('teachers')}}"> Daftar Guru </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ url('teacher-teaches')}}"> Guru mengajar </a></li>
+        </ul>
+      </div>
     </li>
+
+
 
     <li class="nav-item">
       <a class="nav-link" href="{{ url('subjects') }}">

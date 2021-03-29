@@ -45,14 +45,13 @@ function classes(){
                 searchable: false
             }, ],
             "language": {
-                // "processing": '<h4 style="font-family: arial;">Mohon Tunggu</h4>',
                 "processing": '<img src="../../../vendor/be/assets/images/3.svg" style="width="20px; height="20px;">',
                 "search": "Cari:",
                 "zeroRecords": "Daftar kelas tidak tersedia",
                 "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
                 "infoEmpty": "Tidak ada daftar kelas",
                 "infoFiltered": "(pencarian dari _MAX_ daftar kelas)",
-                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 baris",
                 "lengthMenu": "Tampilkan _MENU_ baris",
                 "paginate": {
                     "previous": "sebelumnya",
@@ -146,14 +145,13 @@ function majors(){
                 searchable: false
             }, ],
             "language": {
-                // "processing": '<h4 style="font-family: arial;">Mohon Tunggu</h4>',
                 "processing": '<img src="../../../vendor/be/assets/images/3.svg" style="width="20px; height="20px;">',
                 "search": "Cari:",
                 "zeroRecords": "Daftar kelas tidak tersedia",
                 "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
                 "infoEmpty": "Tidak ada daftar kelas",
                 "infoFiltered": "(pencarian dari _MAX_ daftar kelas)",
-                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 baris",
                 "lengthMenu": "Tampilkan _MENU_ baris",
                 "paginate": {
                     "previous": "sebelumnya",
@@ -264,14 +262,13 @@ function students(){
                 searchable: false
             }, ],
             "language": {
-                // "processing": '<h4 style="font-family: arial;">Mohon Tunggu</h4>',
                 "processing": '<img src="../../../vendor/be/assets/images/3.svg" style="width="20px; height="20px;">',
                 "search": "Cari:",
                 "zeroRecords": "Daftar siswa tidak tersedia",
                 "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
                 "infoEmpty": "Tidak ada daftar siswa",
                 "infoFiltered": "(pencarian dari _MAX_ daftar siswa)",
-                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 baris",
                 "lengthMenu": "Tampilkan _MENU_ baris",
                 "paginate": {
                     "previous": "sebelumnya",
@@ -365,14 +362,13 @@ function user_log_histories(){
                 searchable: false
             }, ],
             "language": {
-                // "processing": '<h4 style="font-family: arial;">Mohon Tunggu</h4>',
                 "processing": '<img src="../../../vendor/be/assets/images/3.svg" style="width="20px; height="20px;">',
                 "search": "Cari:",
                 "zeroRecords": "Daftar pengguna login tidak tersedia",
                 "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
                 "infoEmpty": "Tidak ada daftar pengguna login",
                 "infoFiltered": "(pencarian dari _MAX_ daftar pengguna login)",
-                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 baris",
                 "lengthMenu": "Tampilkan _MENU_ baris",
                 "paginate": {
                     "previous": "sebelumnya",
@@ -487,14 +483,13 @@ function teachers(){
                 searchable: false
             }, ],
             "language": {
-                // "processing": '<h4 style="font-family: arial;">Mohon Tunggu</h4>',
                 "processing": '<img src="../../../vendor/be/assets/images/3.svg" style="width="20px; height="20px;">',
                 "search": "Cari:",
                 "zeroRecords": "Daftar guru tidak tersedia",
                 "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
                 "infoEmpty": "Tidak ada daftar guru",
                 "infoFiltered": "(pencarian dari _MAX_ daftar guru)",
-                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 baris",
                 "lengthMenu": "Tampilkan _MENU_ baris",
                 "paginate": {
                     "previous": "sebelumnya",
@@ -647,14 +642,13 @@ function notifications(){
                 searchable: false
             }, ],
             "language": {
-                // "processing": '<h4 style="font-family: arial;">Mohon Tunggu</h4>',
                 "processing": '<img src="../../../vendor/be/assets/images/3.svg" style="width="20px; height="20px;">',
                 "search": "Cari:",
                 "zeroRecords": "Daftar guru tidak tersedia",
                 "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
                 "infoEmpty": "Tidak ada daftar guru",
                 "infoFiltered": "(pencarian dari _MAX_ daftar guru)",
-                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 baris",
                 "lengthMenu": "Tampilkan _MENU_ baris",
                 "paginate": {
                     "previous": "sebelumnya",
@@ -765,14 +759,13 @@ function subjects(){
                 searchable: false
             }, ],
             "language": {
-                // "processing": '<h4 style="font-family: arial;">Mohon Tunggu</h4>',
                 "processing": '<img src="../../../vendor/be/assets/images/3.svg" style="width="20px; height="20px;">',
                 "search": "Cari:",
                 "zeroRecords": "Daftar mata pelajaran tidak tersedia",
                 "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
                 "infoEmpty": "Tidak ada daftar mata pelajaran",
                 "infoFiltered": "(pencarian dari _MAX_ daftar mata pelajaran)",
-                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
+                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 baris",
                 "lengthMenu": "Tampilkan _MENU_ baris",
                 "paginate": {
                     "previous": "sebelumnya",
@@ -827,4 +820,112 @@ function subjects(){
             });
         });
     });      
+}
+
+function teacher_teaches(){
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var table = $('#teacher_teaches').dataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "teacher-teaches",
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, "semua"]
+            ],
+            columns: [{
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex',
+                orderable: false,
+                searchable: false
+            }, {
+                data: 'usr_name',
+                name: 'users.usr_name',
+                orderable: true,
+                searchable: true
+            }, {
+                data: 'sbj_name',
+                name: 'subjects.sbj_name',
+                orderable: true,
+                searchable: true
+            }, {
+                data: 'class_name',
+                name: 'tct_class_id',
+                orderable: true,
+                searchable: true
+            }, {
+                data: 'tct_is_active',
+                name: 'tct_is_active',
+                orderable: false,
+                searchable: false
+            }, {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
+            }, ],
+            "language": {
+                "processing": '<img src="../../../vendor/be/assets/images/3.svg" style="width="20px; height="20px;">',
+                "search": "Cari:",
+                "zeroRecords": "Daftar guru mengajar tidak tersedia",
+                "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
+                "infoEmpty": "Tidak ada daftar guru mengajar",
+                "infoFiltered": "(pencarian dari _MAX_ daftar guru mengajar)",
+                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 baris",
+                "lengthMenu": "Tampilkan _MENU_ baris",
+                "paginate": {
+                    "previous": "sebelumnya",
+                    "next": "selanjutnya"
+                }
+            }
+        });
+        $('body').on('click', '.status_teacher_teach', function() {
+            let _token = $('meta[name="csrf-token"]').attr('content');
+            swal({
+                title: "History Login Pengguna",
+                text: 'Apakah anda yakin ingin mengubah status siswa?',
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                closeOnClickOutside: false,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'log-histories',
+                        data: {
+                            _token: _token
+                        },
+                        success: function(data) {
+                            if (data.status != false) {
+                                swal(data.message, {
+                                    button: false,
+                                    icon: "success",
+                                    timer: 1000
+                                });
+                            } else {
+                                swal(data.message, {
+                                    button: false,
+                                    icon: "error",
+                                    timer: 1000
+                                });
+                            }
+                            $('#teacher_teaches').DataTable().ajax.reload()
+                        },
+                        error: function(error) {
+                            swal('Terjadi kegagalan sistem', {
+                                button: false,
+                                icon: "error",
+                                timer: 1000
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    });
 }
