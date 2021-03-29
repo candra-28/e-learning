@@ -355,20 +355,36 @@ $(function () {
 });
 
 $(function () {
-    $(".abc").validate({
+    $(".add-student").validate({
         rules: {
-            not_title:{
+            usr_name:{
                 required: true,
             },
-            not_to_role_id: "required",
-            not_message: "required"
+            usr_phone_number: {
+                minlength: 10,
+                required: true
+            },
+            stu_nis: "required",
+            usr_email:{
+                required: true,
+                email: true
+            },
+            stu_school_year_id: "required"
         },
         messages: {
-            not_title: {
-                required: "Judul notifikasi harus di isi",
+            usr_name: {
+                required: "Nama lengkap harus di isi",
             },
-            not_to_role_id: "Tujuan notifikasi harus di pilih",
-            not_message: "Pesan notifikasi harus di isi"
+            usr_phone_number:{
+                required: "Nomor telepon harus di isi",
+                minlength: "Minimal 10 digit"
+            },
+            stu_nis: "Nomor induk siswa harus di isi",
+            usr_email: {
+                email: "Email tidak valid",
+                required: "Alamat email harus di isi"
+            },
+            stu_school_year_id: "Tahun ajaran harus di pilih"
         },
     });
 });

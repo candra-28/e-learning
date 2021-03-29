@@ -35,7 +35,7 @@
                 </div>
                 @endif
                 <h4 class="card-title">Buat Siswa Baru</h4>
-                <p class="card-description"> Masukan jurusan yang akan anda buat</p>
+                <p class="card-description"> Masukan data siswa yang akan anda buat</p>
                 <form action="{{ url('student/create') }}" method="post" autocomplete="off" class="add-student" enctype="multipart/form-data">
                     @csrf
                     <div class="row mt-3">
@@ -55,8 +55,13 @@
                         <input type="text" name="usr_name" class="form-control" value="{{ old('usr_name') }}" placeholder="Masukan nama siswa">
                     </div>
                     <div class="form-group">
-                        <label>Nomor telepon</label>
+                        <label>Nomor telepon <span class="text-danger">*</span></label>
                         <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="{{ old('usr_phone_number') }}" type="text" name="usr_phone_number" class="form-control" placeholder="Masukan nomor telepon">
+                    </div>
+
+                    <div class="form-group">
+                        <label>NIS <span class="text-danger">*</span></label>
+                        <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="{{ old('usr_phone_number') }}" type="text" name="stu_nis" class="form-control" placeholder="Masukan nomor induk siswa">
                     </div>
 
                     <div class="form-group">
@@ -104,18 +109,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Kata sandi <span class="text-danger">*</span></label>
-                        <input type="password" name="usr_password" class="form-control" placeholder="Masukan kata sandi">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Ulangi Kata sandi <span class="text-danger">*</span></label>
-                        <input type="password" name="usr_password_confirmed" class="form-control" placeholder="ulangi kata sandi">
-                    </div>
-
-                    <div class="form-group">
                         <label>Tahun Ajaran <span class="text-danger">*</span></label>
-                        <select name="school_year_id" class="form-control" id="school_year">
+                        <select name="stu_school_year_id" class="form-control" id="school_year">
                             <option selected disabled>-- Pilih Tahun ajaran --</option>
                             @foreach($school_years as $school_year)
                             <option value="{{ $school_year->scy_id }}"> {{ $school_year->scy_name }} </option>
@@ -146,6 +141,12 @@
 <script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
 <script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
 <script src="{{ URL::to('vendor/be/assets/vendors/datepicker/datepicker.js') }}"></script>
+<script>
+    $('.date_picker').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+</script>
 
 <script>
     function bacaGambar(input) {
@@ -173,7 +174,7 @@
                 $('#classes').append('<option value="">-- Pilih kelas --</option>');
 
                 $.each(data.classes, function(index, classObj) {
-                    $('#classes').append('<option value="' + classObj.cls_id + '">' + classObj.cls_grade_level_id + classObj.cls_major_id + classObj.cls_number + '</option>');
+                    $('#classes').append('<option value="' + classObj.cls_id + '">' + classObj.grl_name + '&nbsp' + classObj.mjr_name + '&nbsp' + classObj.cls_number + '</option>');
                 });
             });
     });

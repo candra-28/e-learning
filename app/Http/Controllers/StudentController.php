@@ -12,6 +12,11 @@ use App\Models\Classes;
 use Illuminate\Http\Response;
 use App\Models\Major;
 use App\Models\StudentClass;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Carbon;
+use App\Models\UserHasRole;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AddStudent;
 
 class StudentController extends Controller
 {
@@ -50,15 +55,70 @@ class StudentController extends Controller
         return view('back-learning.students.create', compact('classes', 'school_years', 'majors'));
     }
 
-    public function getClasses($school_yearID) // Tanpa (Request $request, $id)
+    public function getClasses($school_yearID)
     {
-        $classes = Classes::where('cls_school_year_id', $school_yearID)->get(); // Sesuaikan dg nama Model Subcategory
+        $classes = Classes::join('majors', 'classes.cls_major_id', '=', 'majors.mjr_id')
+            ->join('grade_levels', 'classes.cls_grade_level_id', '=', 'grade_levels.grl_id')
+            ->where('cls_school_year_id', $school_yearID)
+            ->select('classes.cls_id', 'classes.cls_number', 'grade_levels.grl_name', 'majors.mjr_name')
+            ->get();
+
         return response()->json(compact('classes'));
     }
 
     public function store(Request $request)
     {
-        dd($request);
+        $user = new User;
+        $user->usr_name = $request->usr_name;
+        $user->usr_email = $request->usr_email;
+        $rand_string                = substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 6);
+        $rand_int                   = substr(str_shuffle('0123456789'), 0, 4);
+        $rand_password              = $rand_string . $rand_int;
+        $user->usr_password         = Hash::make($rand_password);
+        $user->usr_phone_number = $request->usr_phone_number;
+        $user->usr_otp_verified_at = Carbon::now()->format('Y-m-d H:i:s');
+        $user->usr_gender = $request->usr_gender;
+        $user->usr_place_of_birth = $request->usr_place_of_birth;
+        $user->usr_date_of_birth = $request->usr_date_of_birth;
+        $user->usr_religion = $request->usr_religion;
+        $user->usr_address = $request->usr_address;
+        $user->usr_is_active = 1;
+        $user->usr_created_by = Auth()->user()->usr_id;
+        Mail::to($user['usr_email'])->send(new AddStudent($user, $rand_password));
+        if ($request->hasFile('usr_profile_picture')) {
+            $files = $request->file('usr_profile_picture');
+            $path = public_path('vendor/be/assets/images/profile_picture');
+            $files_name = 'vendor' . '/' . 'be' . '/' . 'assets' . '/' . 'images' . '/' . 'profile_picture' . '/' . date('Ymd') . '_' . $files->getClientOriginalName();
+            $files->move($path, $files_name);
+            $user->usr_profile_picture = $files_name;
+        }
+
+        if ($user->save()) {
+            $roles = new UserHasRole;
+            $roles->uhs_user_id = $user->usr_id;
+            $roles->uhs_role_id = 4;
+            $roles->uhs_created_by = Auth()->user()->usr_id;
+            $roles->save();
+
+            $student = new Student;
+            $student->stu_user_id = $user->usr_id;
+            $student->stu_nis = $request->stu_nis;
+            $student->stu_school_year_id = $request->stu_school_year_id;
+            $student->stu_is_active = 1;
+            $student->stu_created_at = Auth()->user()->usr_id;
+            $student->save();
+            if ($request->filled('class_id')) {
+                $student_class = new StudentClass;
+                $student_class->stc_student_id = $student->stu_id;
+                $student_class->stc_class_id = $request->class_id;
+                $student_class->stc_is_active = 1;
+                $student_class->stc_created_by = Auth()->user()->usr_id;
+                $student_class->save();
+            }
+        } else {
+            return back()->with('error', 'Siswa gagal ditambahkan, terjadi kesalahan sistem');
+        }
+        return redirect('students')->with('success', 'Siswa berhasil di tambahkan');
     }
     public function edit($studentID)
     {
@@ -105,7 +165,8 @@ class StudentController extends Controller
     public function show($studentID)
     {
         $student = Student::where('stu_id', $studentID)->first();
-        $classes = Classes::join('student_classes', 'student_classes.stc_class_id', '=', 'classes.cls_id')->get();
+        $classes = Classes::join('student_classes', 'student_classes.stc_class_id', '=', 'classes.cls_id')
+            ->where('student_classes.stc_student_id', $student->stu_id)->get();
         return view('back-learning.students.show', ['student' => $student, 'classes' => $classes]);
     }
 
