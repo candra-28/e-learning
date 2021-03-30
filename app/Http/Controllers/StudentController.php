@@ -60,6 +60,7 @@ class StudentController extends Controller
         $classes = Classes::join('majors', 'classes.cls_major_id', '=', 'majors.mjr_id')
             ->join('grade_levels', 'classes.cls_grade_level_id', '=', 'grade_levels.grl_id')
             ->where('cls_school_year_id', $school_yearID)
+            ->where('classes.cls_is_active', true)
             ->select('classes.cls_id', 'classes.cls_number', 'grade_levels.grl_name', 'majors.mjr_name')
             ->get();
 
@@ -105,7 +106,7 @@ class StudentController extends Controller
             $student->stu_nis = $request->stu_nis;
             $student->stu_school_year_id = $request->stu_school_year_id;
             $student->stu_is_active = 1;
-            $student->stu_created_at = Auth()->user()->usr_id;
+            $student->stu_created_by = Auth()->user()->usr_id;
             $student->save();
             if ($request->filled('class_id')) {
                 $student_class = new StudentClass;
@@ -122,52 +123,46 @@ class StudentController extends Controller
     }
     public function edit($studentID)
     {
-        $student = Student::join('users', 'students.user_id', '=', 'users.id')->select(
-            'users.*',
-            'students.*'
-        )->find($studentID);
-        // dd($studentID, $student->id);
-        return view('students.edit', ['student' => $student]);
+        $student = Student::findOrFail($studentID);
+        $classes = Classes::where('cls_is_active', true)->get();
+        $majors = Major::get();
+        $school_years = SchoolYear::where('scy_is_active', true)->get();
+        return view('back-learning.students.edit', compact('student', 'classes', 'majors', 'school_years'));
     }
     public function update(Request $request, $studentID)
     {
-        $request->validate(
-            [
-                'name'  => 'required',
-                'phone_number'  => 'required',
-                'nis'   => 'required'
-            ],
-
-            $message = [
-                'name.required' => 'Nama siswa tidak boleh kosong',
-                'phone_number.required' => 'Nomor telepon tidak boleh kosong',
-                'nis.required'  => 'Nis tidak boleh kosong'
-            ]
-        );
-
-        $student = Student::where('id', $studentID)->first();
-        $student->nis = $request->nis;
+        $request->validate(['stu_nis' => 'unique:students,stu_nis'],['stu_nis.unique' => "Nis Sudah digunakan"]);
+        $student = Student::where('stu_id',$studentID)->firstOrFail();
+        $student->stu_nis = $request->stu_nis;
+        $student->stu_school_year_id = $request->stu_school_year_id;
+        $student->stu_updated_by = Auth()->user()->usr_id;
         $student->update();
 
-        $user = User::where('id', $student->user_id)->firstOrFail();
-        $user->name = $request->name;
-        $user->entry_year = $request->entry_year;
-        $user->phone_number = $request->phone_number;
-        $user->gender = $request->gender;
-        $user->place_of_birth = $request->place_of_birth;
-        $user->date_of_birth = $request->date_of_birth;
-        $user->religion = $request->religion;
-        $user->address = $request->address;
-        $user->is_active = $request->is_active;
+        if ($request->filled('class_id')) {
+            $student_class = StudentClass::where('stc_student_id', $student->stu_id)->where('stc_is_active', true)->first();
+            $student_class->stc_class_id = $request->class_id;
+            $student_class->stc_updated_by = Auth()->user()->usr_id;
+            $student_class->update();
+        }
+
+        $user = User::where('usr_id', $student->stu_user_id)->first();
+        $user->usr_name = $request->usr_name;
+        $user->usr_phone_number = $request->usr_phone_number;
+        $user->usr_gender = $request->usr_gender;
+        $user->usr_place_of_birth = $request->usr_place_of_birth;
+        $user->usr_date_of_birth = $request->usr_date_of_birth;
+        $user->usr_religion = $request->usr_religion;
+        $user->usr_address = $request->usr_address;
+        $user->usr_updated_by = Auth()->user()->usr_id;
+        if ($request->hasFile('usr_profile_picture')) {
+            $files = $request->file('usr_profile_picture');
+            $path = public_path('vendor/be/assets/images/profile_picture');
+            $files_name = 'vendor' . '/' . 'be' . '/' . 'assets' . '/' . 'images' . '/' . 'profile_picture' . '/' . date('Ymd') . '_' . $files->getClientOriginalName();
+            $files->move($path, $files_name);
+            $user->usr_profile_picture = $files_name;
+        }
         $user->update();
-        return redirect('/students');
-    }
-    public function show($studentID)
-    {
-        $student = Student::where('stu_id', $studentID)->first();
-        $classes = Classes::join('student_classes', 'student_classes.stc_class_id', '=', 'classes.cls_id')
-            ->where('student_classes.stc_student_id', $student->stu_id)->get();
-        return view('back-learning.students.show', ['student' => $student, 'classes' => $classes]);
+        return redirect('student/'.$student->stu_id)->with('success', 'Data siswa berhasil diubah');
     }
 
     public function updateStatusStudent($studentID)

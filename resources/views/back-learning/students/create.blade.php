@@ -61,7 +61,7 @@
 
                     <div class="form-group">
                         <label>NIS <span class="text-danger">*</span></label>
-                        <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="{{ old('usr_phone_number') }}" type="text" name="stu_nis" class="form-control" placeholder="Masukan nomor induk siswa">
+                        <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="{{ old('stu_nis') }}" type="text" name="stu_nis" class="form-control" placeholder="Masukan nomor induk siswa">
                     </div>
 
                     <div class="form-group">
@@ -169,7 +169,7 @@
         console.log(e);
         var scy_id = e.target.value;
         $.get('/get/classes/' + scy_id,
-            function(data) { // Ganti bagian ini......
+            function(data) { 
                 $('#classes').empty();
                 $('#classes').append('<option value="">-- Pilih kelas --</option>');
 

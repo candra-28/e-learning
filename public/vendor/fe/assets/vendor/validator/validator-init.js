@@ -388,3 +388,68 @@ $(function () {
         },
     });
 });
+
+
+$(function () {
+    $(".edit-student").validate({
+        rules: {
+            usr_name:{
+                required: true,
+            },
+            usr_phone_number: {
+                minlength: 10,
+                required: true
+            },
+            stu_nis: "required",
+            stu_school_year_id: "required"
+        },
+        messages: {
+            usr_name: {
+                required: "Nama lengkap harus di isi",
+            },
+            usr_phone_number:{
+                required: "Nomor telepon harus di isi",
+                minlength: "Minimal 10 digit"
+            },
+            stu_nis: "Nomor induk siswa harus di isi",
+            stu_school_year_id: "Tahun ajaran harus di pilih"
+        },
+    });
+});
+
+$(function () {
+    $(".add-notification").validate({
+        rules: {
+            not_title:{
+                required: true,
+            },
+            not_to_role_id: {
+                minlength: 10,
+                required: true
+            },
+            not_message: "required",
+        },
+        messages: {
+            not_title: {
+                required: "Judul notifikasi harus di isi",
+            },
+            not_to_role_id:"Tujuan notifikasi harus di pilih",
+            not_message: "Nomor induk siswa harus di isi",
+        },
+    });
+});
+
+$(function () {
+    $(".add-subject").validate({
+        rules: {
+            sbj_name:{
+                required: true,
+            },
+        },
+        messages: {
+            sbj_name: {
+                required: "Nama mata pelajaran harus di isi",
+            },
+        },
+    });
+});

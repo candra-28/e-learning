@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\SchoolYear;
 use App\Models\User;
-
+use App\Models\Classes;
 class Student extends Model
 {
     protected $primaryKey = 'stu_id';
@@ -17,6 +17,10 @@ class Student extends Model
     public function student_classes()
     {
         return $this->hasMany(StudentClass::class, 'stc_student_id')->where('stc_is_active', 1);
+    }
+    public function class()
+    {
+        return $this->student_classes->belongsTo(Classes::class, 'stc_class_id');
     }
     public static function getListStudents($request)
     {

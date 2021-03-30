@@ -49,7 +49,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="subject-modal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="subject-modal" aria-hidden="false" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
