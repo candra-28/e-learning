@@ -125,7 +125,7 @@
         var sbj_name = $('#sbj_name').val();
         var sbj_is_active = $('#sbj_is_active').val();
         var id = $('#sbj_id').val();
-        let _url = `/subject/create`;
+        let _url = "{{URL::to('/')}}/subject/create";
         let _token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({

@@ -41,4 +41,17 @@ class TeacherTeachController extends Controller
         }
         return view('back-learning.teacher_teaches.index');
     }
+
+    public function updateStatusTeacherTeach($teacherTeachID)
+    {
+        $teacher_teach = TeacherTeach::findOrFail($teacherTeachID);
+        if ($teacher_teach->tct_is_active == false) {
+            $teacher_teach->tct_is_active = 1;
+        } else {
+            $teacher_teach->tct_is_active = 0;
+        }
+        $teacher_teach->tct_updated_by = Auth()->user()->usr_id;
+        $teacher_teach->update();
+        return response()->json(['code' => 200, 'message' => 'Status guru mengajar berhasil di ubah', 'data' => $teacher_teach], 200);
+    }
 }

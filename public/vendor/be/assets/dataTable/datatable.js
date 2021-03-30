@@ -821,6 +821,75 @@ function subjects(){
         });
     });      
 }
+function addSubject() {
+        $("#sbj_id").val('');
+        closeOnClickOutside: false,
+            $('#subject-modal').modal('show');
+
+    }
+
+    function editSubject(event) {
+        var id = $(event).data("id");
+        let _url = `/subject/${id}`;
+        $('#titleError').text('');
+
+        $.ajax({
+            url: _url,
+            type: "GET",
+            success: function(response) {
+                if (response) {
+                    $("#sbj_id").val(response.sbj_id);
+                    $("#sbj_name").val(response.sbj_name);
+                    $("#sbj_is_active").val(response.sbj_is_active);
+                    $('#subject-modal').modal('show');
+                }
+            }
+        });
+    }
+
+    function createSubject() {
+
+        var sbj_name = $('#sbj_name').val();
+        var sbj_is_active = $('#sbj_is_active').val();
+        var id = $('#sbj_id').val();
+        let _url = `/subject/create`;
+        let _token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: _url,
+            type: "POST",
+            data: {
+                sbj_id: id,
+                sbj_name: sbj_name,
+                sbj_is_active: sbj_is_active,
+                _token: _token
+            },
+
+            success: function(response) {
+                if (response.code == 200) {
+                    $('#sbj_name').val('');
+                    $('#subject-modal').modal('hide');
+                    swal(response.message, {
+                        button: false,
+                        icon: "success",
+                        timer: 1000
+                    });
+                    $('#subjects').DataTable().ajax.reload()
+                }
+            },
+            error: function(response) {
+                $('#sbjNameError').text(response.responseJSON.errors.sbj_name);
+
+            },
+
+        });
+    }
+
+    $(document).ready(function() {
+        $(".reset-btn").click(function() {
+            $("#form-subject").trigger("reset");
+        });
+    });
 
 function teacher_teaches(){
     $(document).ready(function() {
@@ -884,10 +953,11 @@ function teacher_teaches(){
             }
         });
         $('body').on('click', '.status_teacher_teach', function() {
+            var tct_id = $(this).data("id");
             let _token = $('meta[name="csrf-token"]').attr('content');
             swal({
-                title: "History Login Pengguna",
-                text: 'Apakah anda yakin ingin mengubah status siswa?',
+                title: "Guru mengajar",
+                text: 'Apakah anda yakin ingin mengubah status guru mengajar ini?',
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -896,8 +966,9 @@ function teacher_teaches(){
                 if (willDelete) {
                     $.ajax({
                         type: 'POST',
-                        url: 'log-histories',
+                        url: 'teacher-teach/edit-status/' + tct_id,
                         data: {
+                            tct_id: tct_id,
                             _token: _token
                         },
                         success: function(data) {
