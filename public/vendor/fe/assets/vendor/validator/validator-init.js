@@ -453,3 +453,40 @@ $(function () {
         },
     });
 });
+
+$(function () {
+    $(".add-teacher").validate({
+        rules: {
+            usr_name:{
+                required: true,
+            },
+            usr_phone_number: {
+                minlength: 10,
+                required: true
+            },
+            tcr_nip: "required",
+            usr_email:{
+                required: true,
+                email: true
+            },
+            stu_school_year_id: "required",
+            tcr_entry_year: "required"
+        },
+        messages: {
+            usr_name: {
+                required: "Nama lengkap harus di isi",
+            },
+            usr_phone_number:{
+                required: "Nomor telepon harus di isi",
+                minlength: "Minimal 10 digit"
+            },
+            tcr_nip: "Nomor induk kepegawaian harus di isi",
+            usr_email: {
+                email: "Email tidak valid",
+                required: "Alamat email harus di isi"
+            },
+            stu_school_year_id: "Tahun ajaran harus di pilih",
+            tcr_entry_year: "Tahun masuk harus di isi"
+        },
+    });
+});

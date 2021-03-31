@@ -87,7 +87,7 @@
                                                 <option value="{{ $school_year->scy_id }}">{{ $school_year->scy_name }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('entry_year')
+                                            @error('school_year_id')
                                             <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>

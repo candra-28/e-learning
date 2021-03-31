@@ -66,6 +66,26 @@
     </div>
   </div>
 </div>
+<!-- 
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <div div class="table-responsive">
+          <table class="table table-hover">
+                <h4>Riwayat login pengguna</h4>
+                  @foreach($user_log_histories as $user_log)
+                  <tr>
+                      <td>{{ $user_log->user->usr_name}}</td>
+                      <td>{{ getDateFormatLDFYHIS($user_log->ulh_date) }}</td>
+                  </tr>
+                  @endforeach
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
 @push('scripts')
 <script src="{{URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
 <script src="{{URL::to('vendor/be/assets/vendors/chart.js/Chart.min.js')}}"></script>

@@ -92,13 +92,13 @@ $role = User::getRoles();
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+      <a class="nav-link" data-toggle="collapse" href="#announcement" aria-expanded="false" aria-controls="announcement">
         <span class="menu-title">Pengumuman</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-voice menu-icon"></i>
       </a>
 
-      <div class="collapse" id="general-pages">
+      <div class="collapse" id="announcement">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Pengumuman </a></li>
           <li class="nav-item"> <a class="nav-link" href="{{ url('announcement/create')}}"> Buat Pengumuman </a></li>

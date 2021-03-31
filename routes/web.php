@@ -6,7 +6,7 @@ Route::get('/', function () {
     return view('front-learning.index');
 });
 Route::get('login', 'AuthController@showFormLogin')->name('login');
-Route::post('login', 'AuthController@login');
+Route::post('login', 'AuthController@login')->middleware(["throttle:3|60,1"]);
 Route::get('logout', 'AuthController@logout')->name('logout');
 Route::get('register', 'AuthController@showFormRegister')->name('register');
 Route::post('register', 'AuthController@register');
@@ -63,6 +63,8 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::post('student/edit-status/{studentID}', 'StudentController@updateStatusStudent');
 
     Route::get('teachers', 'TeacherController@index');
+    Route::get('/teacher/create', 'TeacherController@create');
+    Route::post('/teacher/create', 'TeacherController@store');
     Route::get('teacher/edit/{id}', 'TeacherController@edit');
     Route::post('teacher/edit/{id}', 'TeacherController@update');
     Route::get('teacher/{id}', 'TeacherController@show');

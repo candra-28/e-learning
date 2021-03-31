@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class UserLogHistory extends Model
 {
@@ -23,5 +24,8 @@ class UserLogHistory extends Model
         $user_log = UserLogHistory::where('ulh_user_id',Auth()->user()->usr_id)->select('ulh_log_ip', 'ulh_date','ulh_user_agent')->orderBy('ulh_date', 'DESC');
         return $user_log;
     }
-    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'ulh_user_id');
+    }
 }
