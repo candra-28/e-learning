@@ -67,7 +67,7 @@
 
                     <div class="form-group">
                         <label>NIP <span class="text-danger">*</span></label>
-                        <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="{{ old('stu_nis') }}" type="text" name="tcr_nip" class="form-control" placeholder="Masukan Induk kepegawaian">
+                        <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" value="{{ old('tcr_nip') }}" type="text" name="tcr_nip" class="form-control" placeholder="Masukan Induk kepegawaian">
                     </div>
 
                     <div class="form-group">

@@ -94,41 +94,35 @@ class TeacherController extends Controller
 
     public function edit($teacherID)
     {
-        $teacher = Teacher::join('users', 'teachers.user_id', '=', 'users.id')->select('users.*', 'teachers.*')->find($teacherID);
-        return view('teachers.edit', ['teacher' => $teacher]);
+        $teacher = Teacher::where('tcr_id', $teacherID)->firstOrFail();
+        return view('back-learning.teachers.edit',['teacher' => $teacher]);
     }
     public function update(Request $request, $teacherID)
     {
-        $request->validate(
-            [
-                'name'  => 'required',
-                'phone_number'  => 'required',
-                'nip'   => 'required'
-            ],
-
-            $message = [
-                'name.required' => 'Nama siswa tidak boleh kosong',
-                'phone_number.required' => 'Nomor telepon tidak boleh kosong',
-                'nip.required'  => 'Nip tidak boleh kosong'
-            ]
-        );
-
-        $teacher = Teacher::where('id', $teacherID)->first();
-        $teacher->nip = $request->nip;
+        $teacher = Teacher::where('tcr_id', $teacherID)->firstOrFail();
+        $teacher->tcr_nip = $request->tcr_nip;
+        $teacher->tcr_entry_year = $request->tcr_entry_year;
+        $teacher->tcr_updated_by = Auth()->user()->usr_id;
         $teacher->update();
 
-        $user = User::where('id', $teacher->user_id)->firstOrFail();
-        $user->name = $request->name;
-        $user->entry_year = $request->entry_year;
-        $user->phone_number = $request->phone_number;
-        $user->gender = $request->gender;
-        $user->place_of_birth = $request->place_of_birth;
-        $user->date_of_birth = $request->date_of_birth;
-        $user->religion = $request->religion;
-        $user->address = $request->address;
-        $user->is_active = $request->is_active;
+        $user = User::where('usr_id', $teacher->tcr_user_id)->firstOrFail();
+        $user->usr_name = $request->usr_name;
+        $user->usr_phone_number = $request->usr_phone_number;
+        $user->usr_gender = $request->usr_gender;
+        $user->usr_place_of_birth = $request->usr_place_of_birth;
+        $user->usr_date_of_birth = $request->usr_date_of_birth;
+        $user->usr_religion = $request->usr_religion;
+        $user->usr_address = $request->usr_address;
+        $user->usr_updated_by = Auth()->user()->usr_id;
+        if ($request->hasFile('usr_profile_picture')) {
+            $files = $request->file('usr_profile_picture');
+            $path = public_path('vendor/be/assets/images/profile_picture');
+            $files_name = 'vendor' . '/' . 'be' . '/' . 'assets' . '/' . 'images' . '/' . 'profile_picture' . '/' . date('Ymd') . '_' . $files->getClientOriginalName();
+            $files->move($path, $files_name);
+            $user->usr_profile_picture = $files_name;
+        }
         $user->update();
-        return redirect('/teachers');
+        return redirect('/teachers')->with('success', 'Guru berhasil di ubah');
     }
     public function show($teacherID)
     {
