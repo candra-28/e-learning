@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DataTables;
 use App\Models\TeacherTeach;
+use App\Models\Teacher;
+use App\Models\Subject;
+use App\Models\Classes;
 
 class TeacherTeachController extends Controller
 {
@@ -39,7 +42,10 @@ class TeacherTeachController extends Controller
                 ->rawColumns(['action', 'tct_is_active'])
                 ->make(true);
         }
-        return view('back-learning.teacher_teaches.index');
+        $teachers = Teacher::where('tcr_is_active', true)->get();
+        $subjects = Subject::where('sbj_is_active', true)->get();
+        $classes = Classes::where('cls_is_active', true)->get();
+        return view('back-learning.teacher_teaches.index',compact('teachers','subjects','classes'));
     }
 
     public function updateStatusTeacherTeach($teacherTeachID)
@@ -53,5 +59,38 @@ class TeacherTeachController extends Controller
         $teacher_teach->tct_updated_by = Auth()->user()->usr_id;
         $teacher_teach->update();
         return response()->json(['code' => 200, 'message' => 'Status guru mengajar berhasil di ubah', 'data' => $teacher_teach], 200);
+    }
+    public function create()
+    {
+        return view('back-learning.teacher_teaches.create');
+    }
+    public function store(Request $request)
+    {
+        $request->validate(
+            [
+                'tct_teacher_id'       => 'required',
+                'tct_class_id'         => 'required',
+                'tct_subject_id'       => 'required',
+                
+            ],
+            [
+                'tct_teacher_id.required' => 'Guru harus di pilih',
+                'tct_class_id.required' => 'Kelas harus di pilih',
+                'tct_subject_id.required' => 'Mata pelajaran harus di pilih',
+            ]
+        );
+
+        if (!empty($request->tct_id)) {
+            $teacher_teach = TeacherTeach::updateOrCreate(['tct_id' => $request->tct_id], [
+                'tct_teacher_id' => $request->tct_teacher_id, 'tct_class_id' => $request->tct_class_id, 'tct_subject_id' => $request->tct_subject_id, 'tct_is_active'  => $request->tct_is_active
+            ]);
+            $message = "Guru mengajar berhasil di ubah";
+        } else {
+            $teacher_teach = TeacherTeach::updateOrCreate(['tct_id' => $request->tct_id], [
+                'tct_teacher_id' => $request->tct_teacher_id, 'tct_class_id' => $request->tct_class_id, 'tct_subject_id' => $request->tct_subject_id, 'tct_is_active'  => 1
+            ]);
+            $message = "Guru mengajar berhasil di buat";
+        }
+        return response()->json(['code' => 200, 'message' => $message, 'data' => $teacher_teach], 200);
     }
 }

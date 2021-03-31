@@ -86,5 +86,9 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
     Route::post('/subject/edit-status/{subjectID}', 'SubjectController@updateStatusSubject');
 
     Route::get('/teacher-teaches', 'TeacherTeachController@index');
+    Route::get('/teacher-teach/create', 'TeacherTeachController@create');
+    Route::post('/teacher-teach/create', 'TeacherTeachController@store');
+    Route::get('/teacher-teach/edit{teacherTeachID}', 'TeacherTeachController@edit');
+    Route::get('/teacher-teach/edit/{teacherTeachID}', 'TeacherTeachController@update');
     Route::post('/teacher-teach/edit-status/{teacherTeachID}', 'TeacherTeachController@updateStatusTeacherTeach');
 });

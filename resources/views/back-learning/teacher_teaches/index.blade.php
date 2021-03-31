@@ -26,7 +26,7 @@
             <div class="card-body">
                 <h4 class="card-title">Daftar guru mengajar</h4>
                 <div class="text-right">
-                    <a href="{{ url('teacher-teach/create') }}" type="button" class="btn btn-primary btn-sm mb-2"><i class="mdi mdi-plus-box"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-primary btn-sm mb-3" onclick="addTeacherTeach()"><i class="mdi mdi-plus-box"></i></a>
                 </div>
                 <div class="table-responsive">
                     <table class="table align-items-center table-flush table-hover" id="teacher_teaches" style="width:100%">
@@ -49,6 +49,64 @@
     </div>
 </div>
 
+<div class="modal fade" id="subject-modal" aria-hidden="false" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <form id="form-subject" class="form-horizontal subject-form">
+                    <input type="hidden" name="tct_id" id="tct_id">
+                    <input type="hidden" name="tct_is_active" id="tct_is_active">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-12">Nama Guru</label>
+                        <div class="col-sm-12">
+                            <select name="tct_teacher_id" id="tct_teacher_id" class="form-control">
+                            <option value="" selected>-- pilih guru --</option>
+                            @foreach($teachers as $teacher)
+                            <option value="{{ $teacher->tcr_id }}">{{ $teacher->user->usr_name }}</option>
+                            @endforeach
+                            </select>
+                            <span id="tct_teacher_id" class="alert-message text-danger"></span>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-12">Kelas</label>
+                        <div class="col-sm-12">  
+                        <select name="tct_class_id" id="tct_class_id" class="form-control">
+                            <option value="" selected>-- pilih kelas --</option>
+                            @foreach($classes as $class)
+                            <option value="{{ $class->cls_id }}">{{ $class->grade_level->grl_name }} {{ $class->major->mjr_name }} {{ $class->cls_number }}</option>
+                            @endforeach
+                            </select>
+                            <span id="tct_class_id" class="alert-message text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-12">Mata pelajaran</label>
+                        <div class="col-sm-12">
+                        <select name="tct_subject_id" id="tct_subject_id" class="form-control">
+                            <option value="" selected>-- pilih mata pelajaran --</option>
+                            @foreach($subjects as $subject)
+                            <option value="{{ $subject->sbj_id }}">{{ $subject->sbj_name }}</option>
+                            @endforeach
+                            </select>
+                            <span id="tct_subject_id" class="alert-message text-danger"></span>
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-sm a" name="btn-save" onclick="createTeacherTeach()">Simpan</button>
+                <button class="btn btn-info btn-sm reset-btn" data-dismiss="modal">Kembali</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @push('scripts')
 <script src="{{URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
@@ -63,6 +121,86 @@
 <script>
     $(document).ready(function() {
         teacher_teaches()
+    });
+</script>
+
+<script>
+    function addTeacherTeach() {
+        $("#sbj_id").val('');
+        $('#subject-modal').modal('show');
+    }
+
+    // function editSubject(event) {
+    //     var id = $(event).data("id");
+    //     let _url = `/subject/${id}`;
+    //     $('#titleError').text('');
+
+    //     $.ajax({
+    //         url: _url,
+    //         type: "GET",
+    //         success: function(response) {
+    //             if (response) {
+    //                 $("#sbj_id").val(response.sbj_id);
+    //                 $("#sbj_name").val(response.sbj_name);
+    //                 $("#sbj_is_active").val(response.sbj_is_active);
+    //                 $('#subject-modal').modal('show');
+    //             }
+    //         }
+    //     });
+    // }
+
+    function createTeacherTeach() {
+
+        var tct_teacher_id = $('#tct_teacher_id').val();
+        var tct_class_id = $('#tct_class_id').val();
+        var tct_subject_id = $('#tct_subject_id').val();
+        var tct_is_active = $('#tct_is_active').val();
+        var id = $('#tct_id').val();
+        let _url = "{{ URL::to('/') }}/teacher-teach/create";
+        let _token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: _url,
+            type: "POST",
+            data: {
+                tct_id: id,
+                tct_teacher_id: tct_teacher_id,
+                tct_class_id: tct_class_id,
+                tct_subject_id: tct_subject_id,
+                tct_is_active: tct_is_active,
+                _token: _token
+            },
+
+            success: function(response) {
+                if (response.code == 200) {
+                    console.log("ahmad")
+                    $('#tct_teacher_id').val('');
+                    $('#tct_class_id').val('');
+                    $('#tct_subject_id').val('');
+                    $('#tct_is_active').val('');
+                    $('#subject-modal').modal('hide');
+                    swal(response.message, {
+                        button: false,
+                        icon: "success",
+                        timer: 1000
+                    });
+                    $('#teacher_teaches').DataTable().ajax.reload()
+                }
+            },
+            error: function(response) {
+                console.log("asil")
+                $('#tct_teacher_id').text(response.responseJSON.errors.tct_teacher_id);
+                $('#tct_class_id').text(response.responseJSON.errors.tct_class_id);
+                $('#tct_subject_id').text(response.responseJSON.errors.tct_subject_id);
+            },
+
+        });
+    }
+
+    $(document).ready(function() {
+        $(".reset-btn").click(function() {
+            $("#form-subject").trigger("reset");
+        });
     });
 </script>
 @endpush
