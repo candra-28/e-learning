@@ -336,6 +336,10 @@ function user_log_histories(){
             processing: true,
             serverSide: true,
             ajax: "log-histories",
+            columnDefs: [{
+                targets: 4,
+                className: 'd-flex text-wrap',
+            }],
             lengthMenu: [
                 [10, 25, 50, 100, -1],
                 [10, 25, 50, 100, "semua"]
@@ -351,13 +355,18 @@ function user_log_histories(){
                 orderable: true,
                 searchable: true
             }, {
-                data: 'ulh_last_login_ip',
-                name: 'ulh_last_login_ip',
+                data: 'ulh_log_ip',
+                name: 'ulh_log_ip',
+                orderable: true,
+                searchable: true
+            },{
+                data: 'ulh_date',
+                name: 'ulh_date',
                 orderable: true,
                 searchable: true
             }, {
-                data: 'ulh_date',
-                name: 'ulh_date',
+                data: 'ulh_user_agent',
+                name: 'ulh_user_agent',
                 orderable: false,
                 searchable: false
             }, ],
@@ -423,6 +432,63 @@ function user_log_histories(){
     });
 }
 
+function log_login(){
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var table = $('#login_log').dataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "log-login",
+            columnDefs: [{
+                targets: 3,
+                className: 'd-flex text-wrap',
+            }],
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, "semua"]
+            ],
+            columns: [{
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex',
+                orderable: false,
+                searchable: false
+            }, {
+                data: 'ulh_log_ip',
+                name: 'ulh_log_ip',
+                orderable: true,
+                searchable: true
+            },{
+                data: 'ulh_date',
+                name: 'ulh_date',
+                orderable: true,
+                searchable: true
+            }, {
+                data: 'ulh_user_agent',
+                name: 'ulh_user_agent',
+                orderable: false,
+                searchable: false
+            }, ],
+            "language": {
+                "processing": '<img src="../../../vendor/be/assets/images/3.svg" style="width="20px; height="20px;">',
+                "search": "Cari:",
+                "zeroRecords": "Daftar login log tidak tersedia",
+                "info": "Halaman _PAGE_ dari _PAGES_ Lainya",
+                "infoEmpty": "Tidak ada daftar login log",
+                "infoFiltered": "(pencarian dari _MAX_ daftar login log)",
+                "infoEmpty": "Menampilkan 0 sampai 0 dari 0 baris",
+                "lengthMenu": "Tampilkan _MENU_ baris",
+                "paginate": {
+                    "previous": "sebelumnya",
+                    "next": "selanjutnya"
+                }
+            }
+        });
+    });
+}
 function teachers(){
     
     $(document).ready(function() {

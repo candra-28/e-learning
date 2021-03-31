@@ -1,7 +1,7 @@
 @extends('back-learning.layouts.master')
 
 @push('title')
-- Daftar History login pengguna
+- Daftar Login Log
 @endpush
 
 @push('styles')
@@ -17,27 +17,22 @@
     <h3 class="page-title">
         <span class="page-title-icon bg-gradient-primary text-white mr-2">
             <i class="mdi mdi mdi-responsive"></i>
-        </span> History login pengguna
+        </span> Login Log
     </h3>
 </div>
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">History login pengguna</h4>
-                <div class="text-left">
-                    <a href="javascript:void(0)" data-toggle="tooltip" data-id="" class="btn btn-outline-danger btn-sm mb-2 reset_log_histories"><span>Reset </span><i class="mdi mdi-reload btn-icon-prepend"></i></a>
-                </div>
+                <h4 class="card-title">History Login log</h4>
                 <div class="table-responsive">
-                    <table class="table align-items-center table-flush table-hover" id="user_log_histories" style="width:100%">
+                    <table class="table align-items-center table-flush table-hover" id="login_log" style="width:100%">
                         <thead class="text-uppercase" style="background-color: #BF00FF;">
                             <tr class="text-white">
                                 <th scope="col" class="sort" data-sort="name">No</th>
-                                <th scope="col" class="sort" data-sort="budget">Nama</th>
                                 <th scope="col" class="sort" data-sort="budget">IP</th>
                                 <th scope="col" class="sort" data-sort="budget">tanggal</th>
                                 <th scope="col" class="sort" data-sort="budget">Agent</th>
-                                
                             </tr>
                         </thead>
                         <tbody class="list">
@@ -62,7 +57,7 @@
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
 <script>
     $(document).ready(function() {
-        user_log_histories()
+        log_login()
     });
 </script>
 @endpush

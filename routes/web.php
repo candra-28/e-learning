@@ -70,7 +70,7 @@ Route::group(['middleware' => ['accountVerified', 'auth']], function () {
 
     Route::get('log-histories', 'UserLogHistoryController@index');
     Route::post('log-histories', 'UserLogHistoryController@reset');
-
+    Route::get('log-login','UserLogHistoryController@listLog');
     Route::get('/get/classes/{school_yearID}', 'StudentController@getClasses');
 
     Route::get('/notifications', 'NotificationController@index');

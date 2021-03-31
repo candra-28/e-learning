@@ -46,7 +46,8 @@ class AuthController extends Controller
         if (Auth::check()) {
             $user_login_history = new UserLogHistory();
             $user_login_history->ulh_user_id = Auth::user()->usr_id;
-            $user_login_history->ulh_last_login_ip =  $request->ip();
+            $user_login_history->ulh_log_ip =  $request->ip();
+            $user_login_history->ulh_user_agent =  $request->userAgent();
             $user_login_history->ulh_date = Carbon::now();
             if ($user_login_history->save()) {
                 return redirect()->route('dashboard');
@@ -118,7 +119,8 @@ class AuthController extends Controller
                 if ($log_success) {
                     $user_login_history = new UserLogHistory();
                     $user_login_history->ulh_user_id = Auth::user()->usr_id;
-                    $user_login_history->ulh_last_login_ip =  $request->ip();
+                    $user_login_history->ulh_log_ip =  $request->ip();
+                    $user_login_history->ulh_user_agent =  $request->userAgent();
                     $user_login_history->ulh_date = Carbon::now();
                     $user_login_history->save();
                 }

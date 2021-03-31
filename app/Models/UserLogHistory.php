@@ -15,7 +15,13 @@ class UserLogHistory extends Model
     public static function getListUserLogHistories($request)
     {
         $user_log_histories = UserLogHistory::join('users', 'user_log_histories.ulh_user_id', '=', 'users.usr_id')
-            ->select('usr_name', 'ulh_last_login_ip', 'ulh_date')->orderBy('ulh_created_at', 'DESC');
+            ->select('usr_name', 'ulh_log_ip', 'ulh_date','ulh_user_agent')->orderBy('ulh_created_at', 'DESC');
         return $user_log_histories;
     }
+    public static function getlistLog($request)
+    {
+        $user_log = UserLogHistory::where('ulh_user_id',Auth()->user()->usr_id)->select('ulh_log_ip', 'ulh_date','ulh_user_agent')->orderBy('ulh_date', 'DESC');
+        return $user_log;
+    }
+    
 }
