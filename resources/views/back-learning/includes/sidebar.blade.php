@@ -284,11 +284,22 @@ $role = User::getRoles();
     @if($student_class == null)
     @else
     <li class="nav-item">
-      <a class="nav-link" href="{{ url('class')}}">
-        <span class="menu-title">Kelas Ku</span>
-        <i class="mdi mdi-school menu-icon"></i>
+      <a class="nav-link" data-toggle="collapse" href="#my-class" aria-expanded="false" aria-controls="my-class">
+        <span class="menu-title">KelasKu</span>
+        <i class="menu-arrow"></i>
+        <i class="mdi  mdi-school menu-icon"></i>
       </a>
+
+      <div class="collapse" id="my-class">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href=""> Teman Kelas </a></li>
+          <li class="nav-item"> <a class="nav-link" href=""> Materi </a></li>
+          <li class="nav-item"> <a class="nav-link" href=""> Tugas </a></li>
+          
+        </ul>
+      </div>
     </li>
+
     @endif
   </ul>
 </nav>

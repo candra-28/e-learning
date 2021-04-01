@@ -45,6 +45,9 @@
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Nomor Induk Siswa</label>
                                             <input name="nis" value="{{ old('nis') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" type="text" class="form-control" placeholder="NIS">
+                                            @error('nis')
+                                            <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputUsername1">Nama Lengkap <span class="text-danger">*</span></label>

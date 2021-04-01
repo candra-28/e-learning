@@ -165,6 +165,14 @@ class StudentController extends Controller
         return redirect('student/'.$student->stu_id)->with('success', 'Data siswa berhasil diubah');
     }
 
+    public function show($studentID)
+    {
+        $student = Student::where('stu_id', $studentID)->first();
+        $classes = Classes::join('student_classes', 'student_classes.stc_class_id', '=', 'classes.cls_id')
+            ->where('student_classes.stc_student_id', $student->stu_id)->get();
+        return view('back-learning.students.show', ['student' => $student, 'classes' => $classes]);
+    }
+
     public function updateStatusStudent($studentID)
     {
         $student = Student::findOrFail($studentID);

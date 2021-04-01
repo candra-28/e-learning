@@ -968,10 +968,28 @@ function teacher_teaches(){
             processing: true,
             serverSide: true,
             ajax: "teacher-teaches",
+            dom: 'Bfrtip',
+            dom: 
+            "<'row'<'col-sm-3'B'>>" +
+            "<'row'<'col-sm-6 text-left'l><'col-sm-6'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            buttons: [
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'potrait',
+                    pageSize: 'LEGAL'
+                },
+                
+            ],
             lengthMenu: [
                 [10, 25, 50, 100, -1],
                 [10, 25, 50, 100, "semua"]
             ],
+            order: [[1, 'asc']],
+            rowGroup: {
+                dataSrc: 1
+              },
             columns: [{
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex',

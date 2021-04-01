@@ -18,7 +18,8 @@ class StudentClassController extends Controller
             $student_class = StudentClass::join('students', 'student_classes.stc_student_id', '=', 'students.stu_id')
                 ->where('students.stu_user_id', Auth()->user()->usr_id)->first();
             if (is_null($student_class)) {
-                $classes = Classes::join('students', 'students.stu_school_year_id', '=', 'classes.cls_school_year_id')->where('cls_is_active', 1)->orderBy('cls_school_year_id', 'ASC')->get();
+                $classes = Classes::join('students', 'students.stu_school_year_id', '=', 'classes.cls_school_year_id')->where('cls_is_active', 1)->where('stu_user_id',Auth()->user()->usr_id)->orderBy('cls_school_year_id', 'ASC')->get();
+                // dd($classes);
                 return view('back-learning.classes.select-classes', compact('classes'));
             }
             abort(404);

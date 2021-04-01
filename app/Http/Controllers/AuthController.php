@@ -78,7 +78,7 @@ class AuthController extends Controller
     {
         // dd($request);
         if ($request->role == "siswa") {
-            $request->validate(['email' => 'unique:users,usr_email'],['email.unique'  => 'Alamat Email sudah digunakan']);
+            $request->validate(['email' => 'unique:users,usr_email', 'nis' => 'unique:students,stu_nis'],['email.unique'  => 'Alamat Email sudah digunakan', 'nis.unique' => 'NIS sudah digunakan']);
             $user = new User;
             $user->usr_name = $request->name;
             $user->usr_email = $request->email;
