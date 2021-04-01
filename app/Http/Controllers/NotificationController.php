@@ -47,7 +47,15 @@ class NotificationController extends Controller
         // $where = array('not_id' => $announcementID);
         // $notification = Notification::where($where)->first();
         $notification = Notification::where('not_id', $notificationID)->with('user')->with('toRole')->first();
-        return Response::json($notification);
+
+        $created_at = Carbon::parse($notification->not_created_at)->translatedFormat('l, d F Y H:i:s');
+
+        if ($notification->not_is_active == 1) {
+             $status = '<label class="badge badge-success">Aktif</label>';
+        } else {
+             $status = '<label class="badge badge-danger">Non Aktif</label>';
+        }
+        return Response::json(['created_at' => $created_at, 'status' => $status , 'notification' => $notification], 201);
         //return view('users.show',compact('user'));
     }
     public function updateStatusNotification($notificationID)

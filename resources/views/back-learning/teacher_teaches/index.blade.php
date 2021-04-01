@@ -181,7 +181,7 @@
 
             success: function(response) {
                 if (response.code == 200) {
-                    console.log("ahmad")
+                    // console.log("ahmad");
                     $('#tct_teacher_id').val('');
                     $('#tct_class_id').val('');
                     $('#tct_subject_id').val('');
@@ -196,20 +196,16 @@
                 }
             },
             error: function(response) {
-                console.log("asil")
-                $('#tct_teacher_id').text(response.responseJSON.errors.tct_teacher_id);
-                $('#tct_class_id').text(response.responseJSON.errors.tct_class_id);
-                $('#tct_subject_id').text(response.responseJSON.errors.tct_subject_id);
+                swal('Data tidak boleh kosong!', {
+                        button: false,
+                        icon: "error",
+                        timer: 1000
+                    });
             },
 
         });
     }
 
-    $(document).ready(function() {
-        $(".reset-btn").click(function() {
-            $("#form-subject").trigger("reset");
-        });
-    });
 </script>
 @endpush
 @endsection

@@ -94,10 +94,16 @@
     });
 </script>
 <script>
+    function reset()
+    {
+        $("#sbjNameError").html('');
+    }
+    
     function addSubject() {
+        reset();
         $("#sbj_id").val('');
-        closeOnClickOutside: false,
-            $('#subject-modal').modal('show');
+        $('#subject-modal').modal('show');
+            
 
     }
 
@@ -152,17 +158,10 @@
             },
             error: function(response) {
                 $('#sbjNameError').text(response.responseJSON.errors.sbj_name);
-
             },
 
         });
     }
-
-    $(document).ready(function() {
-        $(".reset-btn").click(function() {
-            $("#form-subject").trigger("reset");
-        });
-    });
 </script>
 @endpush
 @endsection

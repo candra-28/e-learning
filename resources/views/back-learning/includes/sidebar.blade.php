@@ -32,7 +32,7 @@ $role = User::getRoles();
     </li>
 
     @if($role->rol_name == "Administrator")
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
       <a class="nav-link" href="{{ url('dashboard') }}">
         <span class="menu-title">Dashboard</span>
         <i class="mdi mdi-home menu-icon"></i>
@@ -46,21 +46,21 @@ $role = User::getRoles();
       </a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('majors') ? 'active' : '' }}">
       <a class="nav-link" href="{{ url('majors')}}">
         <span class="menu-title">Jurusan</span>
         <i class="mdi mdi-school menu-icon"></i>
       </a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('students') || request()->is('student/create') ? 'active' : '' }}">
       <a class="nav-link" href="{{ url('students')}}">
         <span class="menu-title">Siswa</span>
         <i class="mdi mdi-account-card-details menu-icon"></i>
       </a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('teachers') || request()->is('teacher-teaches') ? 'active' : '' }}">
       <a class="nav-link" data-toggle="collapse" href="#teacher_teach" aria-expanded="false" aria-controls="general-pages">
         <span class="menu-title">Guru</span>
         <i class="menu-arrow"></i>
@@ -77,34 +77,36 @@ $role = User::getRoles();
 
 
 
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('subjects') ? 'active' : '' }}">
       <a class="nav-link" href="{{ url('subjects') }}">
         <span class="menu-title">Mata Pelajaran</span>
         <i class="mdi mdi-library-books menu-icon"></i>
       </a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('majors') ? 'active' : '' }}">
       <a class="nav-link" href="#">
         <span class="menu-title">Jadwal Pelajaran</span>
         <i class="mdi mdi-table-large menu-icon"></i>
       </a>
     </li>
 
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#announcement" aria-expanded="false" aria-controls="announcement">
-        <span class="menu-title">Pengumuman</span>
+
+ <li class="nav-item {{ request()->is('announcements') || request()->is('announcement/create') ? 'active' : '' }}">
+      <a class="nav-link" data-toggle="collapse" href="#pengumuman"  aria-expanded="false" aria-controls="general-pages">
+         <span class="menu-title">Pengumuman</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-voice menu-icon"></i>
       </a>
 
-      <div class="collapse" id="announcement">
+      <div class="collapse" id="pengumuman">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Pengumuman </a></li>
-          <li class="nav-item"> <a class="nav-link" href="{{ url('announcement/create')}}"> Buat Pengumuman </a></li>
+            <li class="nav-item "> <a class="nav-link" href="{{ url('announcements')}}"> Pengumuman </a></li>
+          <li class="nav-item "> <a class="nav-link" href="{{ url('announcement/create')}}"> Buat Pengumuman </a></li>
         </ul>
       </div>
     </li>
+
 
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#tugas" aria-expanded="false" aria-controls="general-pages">
@@ -150,7 +152,7 @@ $role = User::getRoles();
       </a>
     </li>
 
-    <li class="nav-item">
+     <li class="nav-item {{ request()->is('students') || request()->is('student/create') ? 'active' : '' }}">
       <a class="nav-link" href="{{ url('students')}}">
         <span class="menu-title">Siswa</span>
         <i class="mdi mdi-account-card-details menu-icon"></i>
@@ -172,21 +174,20 @@ $role = User::getRoles();
       </a>
     </li>
 
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+    <li class="nav-item {{ request()->is('announcements') || request()->is('announcement/create') ? 'active' : '' }}">
+      <a class="nav-link" data-toggle="collapse" href="#announcement" aria-expanded="false" aria-controls="announcement">
         <span class="menu-title">Pengumuman</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-voice menu-icon"></i>
       </a>
 
-      <div class="collapse" id="general-pages">
+      <div class="collapse" id="announcement">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Pengumuman </a></li>
           <li class="nav-item"> <a class="nav-link" href="{{ url('announcement/create')}}"> Buat Pengumuman </a></li>
         </ul>
       </div>
     </li>
-
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#tugas" aria-expanded="false" aria-controls="general-pages">
         <span class="menu-title">Tugas</span>
@@ -225,21 +226,21 @@ $role = User::getRoles();
       </a>
     </li>
 
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+    <li class="nav-item {{ request()->is('announcements') || request()->is('announcement/create') ? 'active' : '' }}">
+      <a class="nav-link" data-toggle="collapse" href="#announcement" aria-expanded="false" aria-controls="announcement">
         <span class="menu-title">Pengumuman</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-voice menu-icon"></i>
       </a>
 
-      <div class="collapse" id="general-pages">
+      <div class="collapse" id="announcement">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{{ url('announcements') }}"> Pengumuman </a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ url('announcements')}}"> Pengumuman </a></li>
           <li class="nav-item"> <a class="nav-link" href="{{ url('announcement/create')}}"> Buat Pengumuman </a></li>
+        </ul>
       </div>
     </li>
-
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('students') || request()->is('student/create') ? 'active' : '' }}">
       <a class="nav-link" href="{{ url('students')}}">
         <span class="menu-title">Daftar Siswa</span>
         <i class="mdi mdi-account-card-details menu-icon"></i>

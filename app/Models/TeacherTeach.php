@@ -21,7 +21,9 @@ class TeacherTeach extends Model
             ->join('grade_levels', 'classes.cls_grade_level_id', '=', 'grade_levels.grl_id')
             ->join('majors', 'classes.cls_major_id', '=', 'majors.mjr_id')
             ->join('school_years', 'classes.cls_school_year_id', '=', 'school_years.scy_id')
-            ->join('subjects', 'teacher_teaches.tct_subject_id', '=', 'subjects.sbj_id');
-        return $teacher_teaches;
+            ->join('subjects', 'teacher_teaches.tct_subject_id', '=', 'subjects.sbj_id')
+            ->groupBy('users.usr_name', 'subjects.sbj_name');
+            return $teacher_teaches;
     }
+
 }
