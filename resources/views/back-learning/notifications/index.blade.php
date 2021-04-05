@@ -157,5 +157,15 @@
 <script src="{{ URL::to('vendor/be/assets/dataTable/jquery_dataTable.min.js') }}"></script>
 <script src="{{ URL::to('vendor/be/assets/dataTable/datatable.js') }}"></script>
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
+<script>
+    function addNotification() {
+        $('#post-modal').modal('show');
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        notifications()
+    });
+</script>
 @endpush
 @endsection

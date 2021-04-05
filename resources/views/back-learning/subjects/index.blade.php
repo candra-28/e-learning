@@ -70,7 +70,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary btn-sm a" name="btn-save" onclick="createSubject()">Simpan</button>
-                <button class="btn btn-info btn-sm reset-btn" onclick="reset()" data-dismiss="modal">Kembali</button>
+                <button class="btn btn-info btn-sm reset-btn" oncl data-dismiss="modal">Kembali</button>
             </div>
         </div>
     </div>
@@ -87,5 +87,66 @@
 <script src="{{ URL::to('vendor/be/assets/dataTable/datatable.js') }}"></script>
 <script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
+<script>
+    function reset()
+    {
+        $("#sbjNameError").html('');
+    }
+    function addSubject() {
+        reset();
+        $("#sbj_id").val('');
+        $('#subject-modal').modal('show');
+    }
+    function editSubject(event) {
+        var id = $(event).data("id");
+        let _url = `/subject/${id}`;
+        $('#titleError').text('');
+        $.ajax({
+            url: _url,
+            type: "GET",
+            success: function(response) {
+                if (response) {
+                    $("#sbj_id").val(response.sbj_id);
+                    $("#sbj_name").val(response.sbj_name);
+                    $("#sbj_is_active").val(response.sbj_is_active);
+                    $('#subject-modal').modal('show');
+                }
+            }
+        });
+    }
+    function createSubject() {
+
+        var sbj_name = $('#sbj_name').val();
+        var sbj_is_active = $('#sbj_is_active').val();
+        var id = $('#sbj_id').val();
+        let _url = "{{URL::to('/')}}/subject/create";
+        let _token = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: _url,
+            type: "POST",
+            data: {
+                sbj_id: id,
+                sbj_name: sbj_name,
+                sbj_is_active: sbj_is_active,
+                _token: _token
+            },
+            success: function(response) {
+                if (response.code == 200) {
+                    $('#sbj_name').val('');
+                    $('#subject-modal').modal('hide');
+                    swal(response.message, {
+                        button: false,
+                        icon: "success",
+                        timer: 1000
+                    });
+                    $('#subjects').DataTable().ajax.reload()
+                }
+            },
+            error: function(response) {
+                $('#sbjNameError').text(response.responseJSON.errors.sbj_name);
+            },
+        });
+    }
+</script>
 @endpush
 @endsection
