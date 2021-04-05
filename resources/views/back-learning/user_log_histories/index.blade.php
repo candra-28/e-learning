@@ -60,10 +60,5 @@
 <script src="{{ URL::to('vendor/be/assets/dataTable/jquery_dataTable.min.js') }}"></script>
 <script src="{{ URL::to('vendor/be/assets/dataTable/datatable.js') }}"></script>
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        user_log_histories()
-    });
-</script>
 @endpush
 @endsection

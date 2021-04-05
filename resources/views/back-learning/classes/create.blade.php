@@ -66,7 +66,16 @@
           </div>
           <div class="form-group">
             <label>Nomor kelas</label>
-            <input type="text" name="cls_number" class="form-control" placeholder="Masukan nomor kelas">
+            <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" type="text" name="cls_number" class="form-control" placeholder="Masukan nomor kelas">
+          </div>
+          <div class="form-group">
+            <label>Wali kelas</label>
+            <select name="cls_homeroom_teacher_id" class="form-control">
+              <option selected disabled>-- Pilih --</option>
+              @foreach($teachers as $teacher)
+              <option value="{{ $teacher->tcr_id  }}">{{ $teacher->user->usr_name }}</option>
+              @endforeach
+            </select>
           </div>
           <button type="submit" class="btn btn-gradient-primary mr-2">Simpan</button>
         </form>

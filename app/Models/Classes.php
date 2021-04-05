@@ -23,7 +23,7 @@ class Classes extends Model
             ->join('majors', 'classes.cls_major_id', '=', 'majors.mjr_id')
             ->join('school_years', 'classes.cls_school_year_id', '=', 'school_years.scy_id')
             ->join('teachers', 'classes.cls_homeroom_teacher_id', '=', 'teachers.tcr_id')
-            ->join('users', 'tcr_user_id', '=', 'users.usr_id')->select('classes.cls_id', 'classes.cls_number', 'classes.cls_is_active', 'grl_name', 'mjr_name', 'scy_name', 'usr_name');
+            ->join('users', 'tcr_user_id', '=', 'users.usr_id')->select('classes.cls_id', 'classes.cls_number', 'classes.cls_is_active', 'grl_name', 'mjr_name', 'scy_name', 'usr_name')->orderBy('scy_name', 'ASC');
         return $classes;
     }
 
@@ -47,4 +47,8 @@ class Classes extends Model
     // {
     //     return $this->homeroom_teacher->belongsTo(User::class, 'tcr_user_id', 'usr_id');
     // }
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class, 'cls_homeroom_teacher_id');
+    }
 }

@@ -1,4 +1,3 @@
-function classes(){
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
@@ -20,7 +19,7 @@ function classes(){
                 searchable: false
             }, {
                 data: 'class_name',
-                name: 'cls_major_id',
+                name: 'cls_number',
                 orderable: true,
                 searchable: true
             }, {
@@ -31,8 +30,8 @@ function classes(){
             }, {
                 data: 'usr_name',
                 name: 'users.usr_name',
-                orderable: false,
-                searchable: false
+                orderable: true,
+                searchable: true
             },{
                 data: 'cls_is_active',
                 name: 'cls_is_active',
@@ -106,9 +105,7 @@ function classes(){
             });
         });
     });      
-}
 
-function majors(){
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
@@ -206,9 +203,7 @@ function majors(){
             });
         });
     });
-}
 
-function students(){
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
@@ -323,9 +318,7 @@ function students(){
             });
         });
     });
-}
 
-function user_log_histories(){
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
@@ -430,9 +423,7 @@ function user_log_histories(){
             });
         });
     });
-}
 
-function log_login(){
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
@@ -488,9 +479,7 @@ function log_login(){
             }
         });
     });
-}
-function teachers(){
-    
+
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
@@ -611,9 +600,7 @@ function teachers(){
             });
         });
     });
-}
 
-function announcements(){
     $('body').on('click', '.status_announcement', function() {
         let _token = $('meta[name="csrf-token"]').attr('content');
         var acm_id = $(this).data("id");
@@ -660,9 +647,7 @@ function announcements(){
             }
         });
     });
-}
 
-function notifications(){
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
@@ -781,9 +766,7 @@ function notifications(){
             });
         });
     });
-}
 
-function subjects(){
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
@@ -886,19 +869,20 @@ function subjects(){
             });
         });
     });      
-}
-function addSubject() {
-        $("#sbj_id").val('');
-        closeOnClickOutside: false,
-            $('#subject-modal').modal('show');
 
+    function reset()
+    {
+        $("#sbjNameError").html('');
     }
-
+    function addSubject() {
+        reset();
+        $("#sbj_id").val('');
+        $('#subject-modal').modal('show');
+    }
     function editSubject(event) {
         var id = $(event).data("id");
         let _url = `/subject/${id}`;
         $('#titleError').text('');
-
         $.ajax({
             url: _url,
             type: "GET",
@@ -912,15 +896,13 @@ function addSubject() {
             }
         });
     }
-
     function createSubject() {
 
         var sbj_name = $('#sbj_name').val();
         var sbj_is_active = $('#sbj_is_active').val();
         var id = $('#sbj_id').val();
-        let _url = `/subject/create`;
+        let _url = "{{URL::to('/')}}/subject/create";
         let _token = $('meta[name="csrf-token"]').attr('content');
-
         $.ajax({
             url: _url,
             type: "POST",
@@ -930,7 +912,6 @@ function addSubject() {
                 sbj_is_active: sbj_is_active,
                 _token: _token
             },
-
             success: function(response) {
                 if (response.code == 200) {
                     $('#sbj_name').val('');
@@ -945,19 +926,15 @@ function addSubject() {
             },
             error: function(response) {
                 $('#sbjNameError').text(response.responseJSON.errors.sbj_name);
-
             },
-
         });
     }
-
     $(document).ready(function() {
         $(".reset-btn").click(function() {
             $("#form-subject").trigger("reset");
         });
     });
 
-function teacher_teaches(){
     $(document).ready(function() {
         $.ajaxSetup({
             headers: {
@@ -980,7 +957,6 @@ function teacher_teaches(){
                     orientation: 'potrait',
                     pageSize: 'LEGAL'
                 },
-                
             ],
             lengthMenu: [
                 [10, 25, 50, 100, -1],
@@ -1083,4 +1059,74 @@ function teacher_teaches(){
             });
         });
     });
-}
+
+    function addTeacherTeach() {
+        $("#sbj_id").val('');
+        $('#subject-modal').modal('show');
+    }
+
+    // function editSubject(event) {
+    //     var id = $(event).data("id");
+    //     let _url = `/subject/${id}`;
+    //     $('#titleError').text('');
+
+    //     $.ajax({
+    //         url: _url,
+    //         type: "GET",
+    //         success: function(response) {
+    //             if (response) {
+    //                 $("#sbj_id").val(response.sbj_id);
+    //                 $("#sbj_name").val(response.sbj_name);
+    //                 $("#sbj_is_active").val(response.sbj_is_active);
+    //                 $('#subject-modal').modal('show');
+    //             }
+    //         }
+    //     });
+    // }
+
+    function createTeacherTeach() {
+        var tct_teacher_id = $('#tct_teacher_id').val();
+        var tct_class_id = $('#tct_class_id').val();
+        var tct_subject_id = $('#tct_subject_id').val();
+        var tct_is_active = $('#tct_is_active').val();
+        var id = $('#tct_id').val();
+        let _url = "teacher-teach/create";
+        let _token = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: _url,
+            type: "POST",
+            data: {
+                tct_id: id,
+                tct_teacher_id: tct_teacher_id,
+                tct_class_id: tct_class_id,
+                tct_subject_id: tct_subject_id,
+                tct_is_active: tct_is_active,
+                _token: _token
+            },
+
+            success: function(response) {
+                if (response.code == 200) {
+                    $('#tct_teacher_id').val('');
+                    $('#tct_class_id').val('');
+                    $('#tct_subject_id').val('');
+                    $('#tct_is_active').val('');
+                    $('#subject-modal').modal('hide');
+                    swal(response.message, {
+                        button: false,
+                        icon: "success",
+                        timer: 1000
+                    });
+                    $('#teacher_teaches').DataTable().ajax.reload()
+                }
+            },
+            error: function(response) {
+                swal('Data tidak boleh kosong!', {
+                        button: false,
+                        icon: "error",
+                        timer: 1000
+                    });
+            },
+
+        });
+    }

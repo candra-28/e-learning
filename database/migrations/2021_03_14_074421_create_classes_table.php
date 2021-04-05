@@ -18,7 +18,7 @@ class CreateClassesTable extends Migration
             $table->bigInteger('cls_grade_level_id')->unsigned();
             $table->bigInteger('cls_major_id')->unsigned();
             $table->bigInteger('cls_school_year_id')->unsigned();
-            $table->integer('cls_number');
+            $table->integer('cls_number')->nullable();
             $table->boolean('cls_is_active');
 
             $table->bigInteger('cls_created_by')->unsigned()->nullable();

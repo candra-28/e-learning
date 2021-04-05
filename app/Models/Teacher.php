@@ -22,4 +22,8 @@ class Teacher extends Model
     {
         return $this->belongsTo(User::class, 'tcr_user_id');
     }
+
+    public function homeroom_teacher(){
+        return $this->hasOne(Classes::class, 'cls_homeroom_teacher_id', 'tcr_id');
+    }
 }

@@ -9,7 +9,7 @@ use App\Models\GradeLevel;
 use App\Models\Major;
 use App\Models\SchoolYear;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Teacher;
 class ClassController extends Controller
 {
     public function index(Request $request)
@@ -37,8 +37,8 @@ class ClassController extends Controller
 
                     return $edit . '&nbsp' . $status;
                 })
-                ->filterColumn('cls_major_id', function ($query, $keyword) {
-                    $query->whereRaw("CONCAT(grade_levels.grl_name,'-',majors.mjr_name,'-', classes.cls_number ) like ?", ["%{$keyword}%"]);
+                ->filterColumn('cls_number', function ($query, $keyword) {
+                    $query->whereRaw("CONCAT(grade_levels.grl_name,'-',majors.mjr_name ) like ?", ["%{$keyword}%"]);
                 })
                 ->rawColumns(['action', 'cls_is_active'])
                 ->make(true);
@@ -48,10 +48,11 @@ class ClassController extends Controller
 
     public function create()
     {
+        $teachers = Teacher::where('tcr_is_active', true)->get();
         $grades = GradeLevel::select('grl_id', 'grl_name')->get();
         $majors = Major::where('mjr_is_active', true)->select('mjr_id', 'mjr_name')->get();
         $school_years = SchoolYear::where('scy_is_active', true)->select('scy_id', 'scy_name')->get();
-        return view('back-learning.classes.create', compact('grades', 'majors', 'school_years'));
+        return view('back-learning.classes.create', compact('grades', 'majors', 'school_years', 'teachers'));
     }
 
     public function store(Request $request)
@@ -66,6 +67,7 @@ class ClassController extends Controller
             $class->cls_major_id = $request->cls_major_id;
             $class->cls_school_year_id = $request->cls_school_year_id;
             $class->cls_number = $request->cls_number;
+            $class->cls_homeroom_teacher_id = $request->cls_homeroom_teacher_id;
             $class->cls_is_active = 1;
             $class->cls_created_by = Auth()->user()->usr_id;
             $class->save();
