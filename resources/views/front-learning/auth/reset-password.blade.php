@@ -28,8 +28,15 @@
                             @csrf
                             <input type="hidden" name="pwr_email" value="{{ $resetPassword->pwr_email }}">
                             <div class="form-group">
-                                <label>Kata sandi baru</label>
-                                <input autocomplete="off" type="password" name="usr_password" id="usr_password" class="form-control" placeholder="Masukan kata sandi baru">
+                                <label>Kata sandi</label>
+                                <div class="input-group mb-3">
+                                  <input placeholder="Masukan kata sandi baru" type="password" class="form-control input-password" name="usr_password" id="usr_password">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">
+                                        <i class="fa show-password fa-eye"></i>
+                                    </span>
+                                  </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Ulangi Kata sandi</label>
@@ -53,7 +60,17 @@
 
 @push('js')
 <script src="{{ URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
-
 <script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
 <script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
+<script>
+    $(".show-password").click(function() {
+      $(this).toggleClass("fa-eye-slash fa-eye");
+      var input = $('.input-password');
+      if (input.attr("type") == "password") {
+        input.attr("type", "text");
+      } else {
+        input.attr("type", "password");
+      }
+    });
+</script>
 @endpush

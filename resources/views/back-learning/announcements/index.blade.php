@@ -33,18 +33,19 @@
 @endif
 
 <div class="form-group">
-  <form class="form-inline" method="GET" action="{{ url('announcement/search') }}">
+  <form class="form-inline" method="GET" action="{{ url('announcement/search') }}" autocomplete="off">
     <div class="input-group">
       <input name="acm_slug" type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
       <div class="input-group-append">
-        <button class="btn btn-sm btn-gradient-primary" type="submit">Search</button>
       </div>
     </div>
   </form>
+  <button id="filter" class="btn btn-sm btn-gradient-primary" type="submit">Search</button>
 </div>
 
 <div class="text-right">
   <a href="{{ url('announcement/create') }}" type="button" data-toggle="tooltip" data-placement="left" title="Tambah Pengumuman" class="btn btn-primary btn-sm mb-2"><i class="mdi mdi-plus-box"></i></a>
+  <a href="{{ url('announcement/trashes') }}" type="button" data-toggle="tooltip" data-placement="top" title="Pengumuman Nonaktif" class="btn btn-danger btn-sm mb-2"><i class="mdi mdi-alert-box"></i></a>
 </div>
 
 <div class="row">
@@ -88,6 +89,22 @@
   $(document).ready(function() {
     announcements()
   });
+</script>
+
+<script type="text/javascript">
+    $(function() {
+        $('#filter').on('click', function(e) {
+          console.log('Ahamd')
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: 'formfilt.php',
+                data: $('#formmatcat').serialize()
+            }).done(function(data) {
+                $('#resultins').html(data);
+            });
+        });
+    });
 </script>
 @endpush
 @endsection

@@ -33,9 +33,17 @@
                                 <label>Alamat Email</label>
                                 <input type="email" name="email" class="form-control" placeholder="Masukan alamat email" name="email">
                             </div>
+
                             <div class="form-group">
                                 <label>Kata sandi</label>
-                                <input type="password" name="password" class="form-control" placeholder="Masukan kata sandi" name="password">
+                                <div class="input-group mb-3">
+                                  <input placeholder="Masukan kata sandi" type="password" class="form-control input-password" name="password">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">
+                                        <i class="fa show-password fa-eye"></i>
+                                    </span>
+                                  </div>
+                                </div>
                             </div>
                             <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                 <div class="form-group mb-0">
@@ -65,10 +73,21 @@
 @endpush
 
 @push('js')
-    <script src="{{ URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
-    <script src="{{ URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
-    <script src="{{ URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
-    <script src="{{ URL::to('vendor/be/assets/js/misc.js')}}"></script>
-    <script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
-    <script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
+<script src="{{ URL::to('vendor/be/assets/vendors/js/vendor.bundle.base.js')}}"></script>
+<script src="{{ URL::to('vendor/be/assets/js/off-canvas.js')}}"></script>
+<script src="{{ URL::to('vendor/be/assets/js/hoverable-collapse.js')}}"></script>
+<script src="{{ URL::to('vendor/be/assets/js/misc.js')}}"></script>
+<script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
+<script src="{{URL::to('vendor/fe/assets/vendor/validator/validator-init.js')}}"></script>
+<script>
+    $(".show-password").click(function() {
+      $(this).toggleClass("fa-eye-slash fa-eye");
+      var input = $('.input-password');
+      if (input.attr("type") == "password") {
+        input.attr("type", "text");
+      } else {
+        input.attr("type", "password");
+      }
+    });
+</script>
 @endpush

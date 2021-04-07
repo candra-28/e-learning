@@ -101,8 +101,9 @@ $role = User::getRoles();
 
       <div class="collapse" id="pengumuman">
         <ul class="nav flex-column sub-menu">
-            <li class="nav-item "> <a class="nav-link" href="{{ url('announcements')}}"> Pengumuman </a></li>
+          <li class="nav-item "> <a class="nav-link" href="{{ url('announcements')}}"> Pengumuman </a></li>
           <li class="nav-item "> <a class="nav-link" href="{{ url('announcement/create')}}"> Buat Pengumuman </a></li>
+        
         </ul>
       </div>
     </li>

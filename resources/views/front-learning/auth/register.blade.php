@@ -70,12 +70,16 @@
                                             <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Kata Sandi <span class="text-danger">*</span></label>
-                                            <input type="password" id="password" name="password" class="form-control" placeholder="Kata Sandi">
-                                            @error('password')
-                                            <div class="text-danger">{{ $message }}</div>
-                                            @enderror
+                                         <div class="form-group">
+                                            <label>Kata sandi</label>
+                                            <div class="input-group mb-3">
+                                              <input id="password" placeholder="Masukan kata sandi" type="password" class="form-control input-password" name="password" id="inputPassword">
+                                              <div class="input-group-append">
+                                                <span class="input-group-text" id="basic-addon2">
+                                                    <i class="fa show-password fa-eye"></i>
+                                                </span>
+                                              </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputConfirmPassword1">Ulangi Kata Sandi <span class="text-danger">*</span></label>
@@ -175,12 +179,16 @@
                                             <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Kata Sandi <span class="text-danger">*</span></label>
-                                            <input type="password" id="password-teacher" name="password" class="form-control" placeholder="Kata Sandi">
-                                            @error('password')
-                                            <div class="text-danger">{{ $message }}</div>
-                                            @enderror
+                                         <div class="form-group">
+                                            <label>Kata sandi</label>
+                                            <div class="input-group mb-3">
+                                              <input placeholder="Masukan kata sandi" type="password" class="form-control input-password" name="password" id="password-teacher">
+                                              <div class="input-group-append">
+                                                <span class="input-group-text" id="basic-addon2">
+                                                    <i class="fa show-password fa-eye"></i>
+                                                </span>
+                                              </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputConfirmPassword1">Ulangi Kata Sandi <span class="text-danger">*</span></label>
@@ -270,5 +278,15 @@
         todayHighlight: true
     });
 </script>
-
+<script>
+    $(".show-password").click(function() {
+      $(this).toggleClass("fa-eye-slash fa-eye");
+      var input = $('.input-password');
+      if (input.attr("type") == "password") {
+        input.attr("type", "text");
+      } else {
+        input.attr("type", "password");
+      }
+    });
+</script>
 @endpush

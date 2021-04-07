@@ -970,17 +970,12 @@ function teacher_teaches(){
             ajax: "teacher-teaches",
             dom: 'Bfrtip',
             dom: 
-            "<'row'<'col-sm-3'B'>>" +
+            "<'row'<'col-sm-12'B'>>" +
             "<'row'<'col-sm-6 text-left'l><'col-sm-6'f>>" +
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
-                {
-                    extend: 'pdfHtml5',
-                    orientation: 'potrait',
-                    pageSize: 'LEGAL'
-                },
-                
+                'copy', 'csv', 'excel', 'pdf', 'print'
             ],
             lengthMenu: [
                 [10, 25, 50, 100, -1],

@@ -88,6 +88,11 @@
 <script src="{{URL::to('vendor/fe/assets/vendor/validator/jquery.validate.js')}}"></script>
 <script src="{{ URL::to('vendor/be/assets/js/sweetalert.min.js') }}"></script>
 <script>
+    $(document).ready(function() {
+        subjects()
+    });
+</script>
+<script>
     function reset()
     {
         $("#sbjNameError").html('');
