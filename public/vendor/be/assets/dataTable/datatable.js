@@ -20,7 +20,7 @@ function classes(){
                 searchable: false
             }, {
                 data: 'class_name',
-                name: 'cls_major_id',
+                name: 'cls_number',
                 orderable: true,
                 searchable: true
             }, {
@@ -232,6 +232,7 @@ function students(){
                 data: 'usr_profile_picture',
                 name: 'usr_profile_picture',
                 render: function(data, type, full, meta) {
+                    console.log(data, type, full, meta)
                     if(data != null){
                         return "<img src=\"" + data + "\"height=\"50\"/>";
                     }else{

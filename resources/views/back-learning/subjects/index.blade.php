@@ -25,7 +25,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Daftar Mata pelajaran</h4>
+                <h4 class="card-title">Daftar Mata Pelajaran</h4>
                 <div class="text-right">
                     <a href="javascript:void(0)" class="btn btn-primary btn-sm mb-3" onclick="addSubject()"><i class="mdi mdi-plus-box"></i></a>
                 </div>
