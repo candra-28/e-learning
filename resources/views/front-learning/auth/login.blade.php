@@ -57,6 +57,15 @@
                                     <span>Lupa sandi?</span><a href="{{ url('forgot-password') }}" class="text-primary"> klik disini</a>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label>Captcha</label>
+                                <div class="input-group mb-3">
+                                     {!! NoCaptcha::renderJs() !!}
+                                     {!! NoCaptcha::display() !!}
+                                </div>
+                            </div>
+
                             <div class="text-center">
                                 <button type="submit" class="btn btn-success btn-block waves-effect">Login</button>
                             </div>
